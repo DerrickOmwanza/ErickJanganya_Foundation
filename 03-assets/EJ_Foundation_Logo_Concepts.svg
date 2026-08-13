@@ -1,0 +1,59 @@
+<svg viewBox="0 0 800 880" xmlns="http://www.w3.org/2000/svg">
+<rect x="0" y="0" width="800" height="880" fill="#F7F6F2"/>
+<g>
+<rect x="40" y="40" width="340" height="380" rx="14" fill="#ffffff" stroke="#E4E2DA" stroke-width="1.5"/>
+<circle cx="210.0" cy="185" r="100" fill="#0A3F27"/>
+<circle cx="210.0" cy="185" r="100" fill="none" stroke="#C89B3C" stroke-width="4"/>
+<circle cx="210.0" cy="185" r="87" fill="none" stroke="#C89B3C" stroke-width="1.5" opacity="0.6"/>
+<polygon points="177.55,155.40 191.85,155.40 191.85,234.60 177.55,234.60" fill="#C89B3C"/>
+    <polygon points="177.55,155.40 223.75,155.40 223.75,169.70 177.55,169.70" fill="#C89B3C"/>
+    <polygon points="177.55,187.85 214.95,187.85 214.95,202.15 177.55,202.15" fill="#C89B3C"/>
+    <polygon points="177.55,220.30 223.75,220.30 223.75,234.60 177.55,234.60" fill="#C89B3C"/>
+    <polygon points="228.15,155.40 242.45,155.40 242.45,210.40 228.15,210.40" fill="#C89B3C"/>
+    <path d="M235.30,203.80 C235.30,212.60 224.30,234.60 211.10,234.60" fill="none" stroke="#C89B3C" stroke-width="14.30" stroke-linecap="round"/>
+<text x="210.0" y="374" text-anchor="middle" font-family="Georgia, serif" font-size="17" font-weight="bold" fill="#15191B">A — The Seal</text>
+<text x="210.0" y="396" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#6B7176">Civic medallion — clean icon, pairs with wordmark</text>
+</g>
+<g>
+<rect x="420" y="40" width="340" height="380" rx="14" fill="#ffffff" stroke="#E4E2DA" stroke-width="1.5"/>
+<rect x="532.0" y="86" width="116" height="116" rx="24" fill="#0A3F27"/>
+<polygon points="571.12,116.96 579.44,116.96 579.44,163.04 571.12,163.04" fill="#C89B3C"/>
+    <polygon points="571.12,116.96 598.00,116.96 598.00,125.28 571.12,125.28" fill="#C89B3C"/>
+    <polygon points="571.12,135.84 592.88,135.84 592.88,144.16 571.12,144.16" fill="#C89B3C"/>
+    <polygon points="571.12,154.72 598.00,154.72 598.00,163.04 571.12,163.04" fill="#C89B3C"/>
+    <polygon points="600.56,116.96 608.88,116.96 608.88,148.96 600.56,148.96" fill="#C89B3C"/>
+    <path d="M604.72,145.12 C604.72,150.24 598.32,163.04 590.64,163.04" fill="none" stroke="#C89B3C" stroke-width="8.32" stroke-linecap="round"/>
+<rect x="552.0" y="180" width="76" height="4" rx="2" fill="#C89B3C"/>
+<text x="590.0" y="242" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#0A3F27" font-weight="bold">Erick Janganya</text>
+<text x="590.0" y="262" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" letter-spacing="3" fill="#96721F">FOUNDATION</text>
+<text x="590.0" y="374" text-anchor="middle" font-family="Georgia, serif" font-size="17" font-weight="bold" fill="#15191B">B — Modern Mark</text>
+<text x="590.0" y="396" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#6B7176">Standalone icon + wordmark lockup</text>
+</g>
+<g>
+<rect x="40" y="460" width="340" height="380" rx="14" fill="#ffffff" stroke="#E4E2DA" stroke-width="1.5"/>
+<path d="M155.75,536.80 Q155.75,527.50 165.05,527.50 L254.95,527.50 Q264.25,527.50 264.25,536.80 L264.25,601.90 C264.25,648.40 233.25,671.65 210.00,682.50 C186.75,671.65 155.75,648.40 155.75,601.90 Z" fill="#0A3F27" stroke="#C89B3C" stroke-width="3.5"/>
+<polygon points="181.97,560.80 194.32,560.80 194.32,629.20 181.97,629.20" fill="#C89B3C"/>
+    <polygon points="181.97,560.80 221.88,560.80 221.88,573.15 181.97,573.15" fill="#C89B3C"/>
+    <polygon points="181.97,588.83 214.28,588.83 214.28,601.17 181.97,601.17" fill="#C89B3C"/>
+    <polygon points="181.97,616.85 221.88,616.85 221.88,629.20 181.97,629.20" fill="#C89B3C"/>
+    <polygon points="225.68,560.80 238.03,560.80 238.03,608.30 225.68,608.30" fill="#C89B3C"/>
+    <path d="M231.85,602.60 C231.85,610.20 222.35,629.20 210.95,629.20" fill="none" stroke="#C89B3C" stroke-width="12.35" stroke-linecap="round"/>
+<circle cx="210.00" cy="673.20" r="6.5" fill="#C89B3C"/>
+<text x="210.0" y="794" text-anchor="middle" font-family="Georgia, serif" font-size="17" font-weight="bold" fill="#15191B">C — The Crest</text>
+<text x="210.0" y="816" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#6B7176">Shield emblem, institutional gravitas</text>
+</g>
+<g>
+<rect x="420" y="460" width="340" height="380" rx="14" fill="#ffffff" stroke="#E4E2DA" stroke-width="1.5"/>
+<polygon points="551.65,544.20 568.55,544.20 568.55,637.80 551.65,637.80" fill="#0A3F27"/>
+    <polygon points="551.65,544.20 606.25,544.20 606.25,561.10 551.65,561.10" fill="#0A3F27"/>
+    <polygon points="551.65,582.55 595.85,582.55 595.85,599.45 551.65,599.45" fill="#0A3F27"/>
+    <polygon points="551.65,620.90 606.25,620.90 606.25,637.80 551.65,637.80" fill="#0A3F27"/>
+    <polygon points="611.45,544.20 628.35,544.20 628.35,609.20 611.45,609.20" fill="#0A3F27"/>
+    <path d="M619.90,601.40 C619.90,611.80 606.90,637.80 591.30,637.80" fill="none" stroke="#0A3F27" stroke-width="16.90" stroke-linecap="round"/>
+<line x1="515.0" y1="661" x2="665.0" y2="661" stroke="#C89B3C" stroke-width="4" stroke-linecap="round"/>
+<line x1="530.0" y1="677" x2="650.0" y2="677" stroke="#C89B3C" stroke-width="4" stroke-linecap="round"/>
+<line x1="545.0" y1="693" x2="635.0" y2="693" stroke="#C89B3C" stroke-width="4" stroke-linecap="round"/>
+<text x="590.0" y="794" text-anchor="middle" font-family="Georgia, serif" font-size="17" font-weight="bold" fill="#15191B">D — Open Record</text>
+<text x="590.0" y="816" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#6B7176">Monogram over ledger lines — the record, literally</text>
+</g>
+</svg>

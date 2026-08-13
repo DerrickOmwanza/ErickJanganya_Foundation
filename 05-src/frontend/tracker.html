@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Progress Tracker — Erick Janganya Foundation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/png" href="img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="img/favicon-64.png">
+<link rel="apple-touch-icon" href="img/logo-seal-1024.png">
+</head>
+<body>
+
+<header class="site-header header--solid">
+  <div class="header-inner">
+    <a class="logo" href="index.html" aria-label="Erick Janganya Foundation — home">
+      <span class="logo-ej">E&middot;J</span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html" data-nav="index.html">Home</a>
+      <div class="nav-drop"><a href="#">About ▾</a><div class="nav-drop-menu">
+        <a href="about.html">About Erick</a>
+        <a href="foundation.html">The Foundation</a>
+        <a href="vision.html">Vision</a>
+      </div></div>
+      <div class="nav-drop"><a href="#">Progress ▾</a><div class="nav-drop-menu">
+        <a href="tracker.html">Development Tracker</a>
+        <a href="promises.html">Promise Scorecard</a>
+      </div></div>
+      <a href="community.html">Community</a>
+      <div class="nav-drop"><a href="#">Media ▾</a><div class="nav-drop-menu">
+        <a href="media.html">Media Centre</a>
+        <a href="news.html">News &amp; Press</a>
+      </div></div>
+      <a href="events.html">Events</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="nav-search" aria-label="Search" onclick="toggleSearch()"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <a class="btn btn-primary" href="index.html#stay-updated"><i class="fa-solid fa-bell"></i> Stay updated</a>
+      <button class="nav-toggle" aria-label="Open menu" onclick="toggleDrawer(true)"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-drawer" id="mobile-drawer">
+  <div class="mobile-drawer-inner">
+    <button class="mobile-drawer-close" aria-label="Close menu" onclick="toggleDrawer(false)"><i class="fa-solid fa-xmark"></i></button>
+    <a href="index.html">Home</a>
+    <a href="about.html">About Erick</a>
+    <a href="foundation.html">The Foundation</a>
+    <a href="vision.html">Vision</a>
+    <a href="tracker.html">Development Tracker</a>
+    <a href="promises.html">Promise Scorecard</a>
+    <a href="community.html">Community</a>
+    <a href="media.html">Media Centre</a>
+    <a href="news.html">News &amp; Press</a>
+    <a href="events.html">Events</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</div>
+
+<!-- Search overlay: click the header search icon to open. Obama.org-style — replaces the header with a
+     big inline search field over the top of the hero, closes via the X or Escape. -->
+<div class="search-overlay" id="search-overlay" aria-hidden="true">
+  <div class="search-overlay-top">
+    <span class="logo-ej">E&middot;J</span>
+    <button class="search-overlay-close" aria-label="Close search" onclick="toggleSearch(false)"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <form class="search-overlay-form" role="search" onsubmit="return false;">
+    <input type="text" class="search-overlay-input" placeholder="Search" autocomplete="off">
+    <button type="submit" class="search-overlay-submit" aria-label="Submit search"><i class="fa-solid fa-arrow-right"></i></button>
+  </form>
+</div>
+
+<main>
+  <div class="container stub-wrap">
+    <span class="eyebrow">Progress Tracker</span>
+    <h1>The tracker is coming soon.</h1>
+    <p>This is where every development project will be logged, ward by ward, with dated proof. It launches once the first real projects are ready to document.</p>
+    <a class="btn btn-secondary" href="index.html#stay-updated"><i class="fa-solid fa-bell"></i> Notify me</a>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="margin-bottom:14px;"><span class="logo-ej">E&middot;J</span></div>
+        <p>Documenting real work in Embakasi South, ward by ward, as it happens.</p>
+        <div class="social-row">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="about.html">About Erick</a>
+        <a href="foundation.html">The Foundation</a>
+        <a href="vision.html">Vision</a>
+        <a href="tracker.html">Progress Tracker</a>
+        <a href="community.html">Community</a>
+      </div>
+      <div>
+        <h4>Get involved</h4>
+        <a href="involve.html">Ways to help</a>
+        <a href="index.html#stay-updated">Stay updated</a>
+        <a href="contact.html">Contact us</a>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p>Embakasi South, Nairobi</p>
+        <p>hello@erickjanganyafoundation.org</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Erick Janganya Foundation. All rights reserved.</span>
+      <span>erickjanganyafoundation.org</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

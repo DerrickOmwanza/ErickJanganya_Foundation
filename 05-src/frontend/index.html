@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Erick Janganya Foundation — Embakasi South</title>
+<meta name="description" content="The Erick Janganya Foundation documents real development work, promises and community engagement in Embakasi South, ward by ward, as it happens.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/png" href="img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="img/favicon-64.png">
+<link rel="apple-touch-icon" href="img/logo-seal-1024.png">
+</head>
+<body>
+
+<!-- Top announcement banner, Obama.org-style: static (no scrolling), sits above the header while the page is
+     unscrolled (over the hero), fades out the moment the page scrolls, at which point the white solid header
+     takes over the top of the viewport. REVIEW: swap in the real latest headline/summary once the update feed exists. -->
+<div class="top-banner" role="region" aria-label="Latest update">
+  <div class="container top-banner-inner">
+    <div class="top-banner-text">
+      <h3>[Auto-pulled headline of most recent development update or press mention]</h3>
+      <p>[One-line summary of the update, pulled the same way as the headline above.]</p>
+    </div>
+    <a class="top-banner-link" href="index.html#stay-updated">Get notified <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="index.html" aria-label="Erick Janganya Foundation — home">
+      <span class="logo-ej">E&middot;J</span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html" data-nav="index.html">Home</a>
+      <div class="nav-drop"><a href="#">About ▾</a><div class="nav-drop-menu">
+        <a href="about.html">About Erick</a>
+        <a href="foundation.html">The Foundation</a>
+        <a href="vision.html">Vision</a>
+      </div></div>
+      <div class="nav-drop"><a href="#">Progress ▾</a><div class="nav-drop-menu">
+        <a href="tracker.html">Development Tracker</a>
+        <a href="promises.html">Promise Scorecard</a>
+      </div></div>
+      <a href="community.html">Community</a>
+      <div class="nav-drop"><a href="#">Media ▾</a><div class="nav-drop-menu">
+        <a href="media.html">Media Centre</a>
+        <a href="news.html">News &amp; Press</a>
+      </div></div>
+      <a href="events.html">Events</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="nav-search" aria-label="Search" onclick="toggleSearch()"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <a class="btn btn-primary" href="involve.html"><i class="fa-solid fa-heart"></i> Support the cause</a>
+      <button class="nav-toggle" aria-label="Open menu" onclick="toggleDrawer(true)"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-drawer" id="mobile-drawer">
+  <div class="mobile-drawer-inner">
+    <button class="mobile-drawer-close" aria-label="Close menu" onclick="toggleDrawer(false)"><i class="fa-solid fa-xmark"></i></button>
+    <a href="index.html">Home</a>
+    <a href="about.html">About Erick</a>
+    <a href="foundation.html">The Foundation</a>
+    <a href="vision.html">Vision</a>
+    <a href="tracker.html">Development Tracker</a>
+    <a href="promises.html">Promise Scorecard</a>
+    <a href="community.html">Community</a>
+    <a href="media.html">Media Centre</a>
+    <a href="news.html">News &amp; Press</a>
+    <a href="events.html">Events</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</div>
+
+<!-- Search overlay: click the header search icon to open. Obama.org-style — replaces the header with a
+     big inline search field over the top of the hero, closes via the X or Escape. -->
+<div class="search-overlay" id="search-overlay" aria-hidden="true">
+  <div class="search-overlay-top">
+    <span class="logo-ej">E&middot;J</span>
+    <button class="search-overlay-close" aria-label="Close search" onclick="toggleSearch(false)"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <form class="search-overlay-form" role="search" onsubmit="return false;">
+    <input type="text" class="search-overlay-input" placeholder="Search" autocomplete="off">
+    <button type="submit" class="search-overlay-submit" aria-label="Submit search"><i class="fa-solid fa-arrow-right"></i></button>
+  </form>
+</div>
+
+<main>
+
+  <!-- REVIEW WITH ERICK: confirm rotating-word list and tone before this page goes live — AI-generated placeholder photos are wired in below; swap for real ground photos the moment Erick provides them (same filenames in img/, or update the data-image paths). -->
+  <!-- Full-bleed rotating hero: word + background image are driven together by rotateHero() in main.js. -->
+  <section class="hero hero-full" id="hero" data-interval="3800">
+    <div class="hero-bg">
+      <img class="hero-slide-img" id="heroSlideImg" src="img/hero-roads.jpeg" alt="">
+      <div class="hero-scrim"></div>
+    </div>
+    <div class="container hero-content">
+      <h1 class="hero-rotate">
+        <span class="hero-rotate-word" id="heroRotateWord">Roads</span>
+        <span class="hero-rotate-fixed">— tracked, dated, open to check.</span>
+      </h1>
+    </div>
+    <ul class="hero-slides" hidden>
+      <li data-word="Roads" data-image="img/hero-roads.jpeg"></li>
+      <li data-word="Clinics" data-image="img/hero-clinics.jpeg"></li>
+      <li data-word="Water" data-image="img/hero-water.jpeg"></li>
+      <li data-word="Schools" data-image="img/hero-schools.jpeg"></li>
+      <li data-word="Markets" data-image="img/hero-markets.jpeg"></li>
+    </ul>
+  </section>
+
+  <!-- Asymmetric flat "Visit"-style duo: one large image + one small image, bold heading, one calm line, outlined button. Deliberately understated, service-toned copy — no election framing this close to the hero. -->
+  <section class="section">
+    <div class="container">
+      <div class="visit-duo">
+        <div class="visit-primary">
+          <!-- REVIEW: AI-generated placeholder — replace with a real tracker/project-site photo once supplied -->
+          <img class="visit-img-primary" src="img/tracker-preview.jpg" alt="Community development project underway in Embakasi South">
+          <h3>Development Tracker</h3>
+          <p>Every project happening in Embakasi South right now — dated, budgeted, and open for anyone to check.</p>
+          <a class="btn btn-outline" href="tracker.html">See the progress tracker</a>
+        </div>
+        <div class="visit-secondary">
+          <!-- Real photo, from Erick's Facebook, confirmed cleared for use -->
+          <img class="visit-img-secondary" src="img/erick-portrait.jpg" alt="Erick Janganya in the field in Embakasi South">
+          <h3>Who's behind it</h3>
+          <p>Erick founded this foundation to hold every promise made in Embakasi South to the same standard the tracker above does — dated, budgeted, checkable.</p>
+          <a class="btn btn-outline" href="about.html">Erick's story</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission statement, Obama.org-style: big bold line between two thick black bars, words (and photo
+       chips) revealed one after another the first time this section scrolls into view. -->
+  <section class="section-tight mission-section" id="mission">
+    <div class="container">
+      <p class="mission-line" id="missionLine"><span class="reveal-word" style="transition-delay:0ms">Our</span> <span class="reveal-word" style="transition-delay:45ms">mission</span> <span class="reveal-word" style="transition-delay:90ms">is</span> <span class="reveal-word" style="transition-delay:135ms">to</span> <span class="reveal-word" style="transition-delay:180ms">track</span> <span class="reveal-word" style="transition-delay:225ms">every</span> <span class="reveal-word" style="transition-delay:270ms">promise,</span> <span class="chip-photo ph reveal-word" style="transition-delay:315ms"><i class="fa-solid fa-image"></i></span> <span class="reveal-word" style="transition-delay:360ms">verify</span> <span class="reveal-word" style="transition-delay:405ms">every</span> <span class="reveal-word" style="transition-delay:450ms">claim,</span> <span class="chip-photo ph reveal-word" style="transition-delay:495ms"><i class="fa-solid fa-image"></i></span> <span class="reveal-word" style="transition-delay:540ms">and</span> <span class="reveal-word" style="transition-delay:585ms">keep</span> <span class="reveal-word" style="transition-delay:630ms">Embakasi</span> <span class="reveal-word" style="transition-delay:675ms">South's</span> <span class="reveal-word" style="transition-delay:720ms">progress</span> <span class="chip-photo ph reveal-word" style="transition-delay:765ms"><i class="fa-solid fa-image"></i></span> <span class="reveal-word" style="transition-delay:810ms">open</span> <span class="reveal-word" style="transition-delay:855ms">for</span> <span class="reveal-word" style="transition-delay:900ms">anyone</span> <span class="reveal-word" style="transition-delay:945ms">to</span> <span class="reveal-word" style="transition-delay:990ms">check.</span></p>
+    </div>
+  </section>
+
+  <!-- "Why this foundation" — Obama.org "Programs" pattern, mirrored: a 2x2 grid of value cards on the
+       left, a colored statement box (yellow, matching their Programs panel) on the right. Unlike the
+       full-bleed "Latest" panel below, Obama's Programs box is contained — sized to its own text, sitting
+       inset on a plain background rather than stretched to fill the column — so this section is laid out
+       with its own padded container instead of reusing the edge-to-edge .split-section grid. -->
+  <section class="section-tight value-split">
+    <div class="container value-split-grid">
+      <div class="value-grid">
+        <div class="value-card">
+          <!-- REVIEW: replace with a real photo illustrating transparency (e.g. a resident reviewing a project record) once supplied -->
+          <img class="value-card-img" src="img/value-transparency.jpg" alt="Residents reviewing a project record together">
+          <h3>Radical transparency</h3>
+          <p>Every project, photo and shilling logged for anyone to verify.</p>
+          <a class="value-card-link" href="foundation.html">Learn more <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="value-card">
+          <!-- REVIEW: AI-generated placeholder — replace with a real community/ward meeting photo once supplied -->
+          <img class="value-card-img" src="img/value-community.jpg" alt="Community members gathered for a ward meeting">
+          <h3>Community-led</h3>
+          <p>Priorities set from what residents of the five wards actually need.</p>
+          <a class="value-card-link" href="community.html">Learn more <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="value-card">
+          <!-- REVIEW: AI-generated placeholder — replace with a real progress-tracker-in-use photo once supplied -->
+          <img class="value-card-img" src="img/value-tracker.jpg" alt="Checking project progress data on a phone at a project site">
+          <h3>Measurable delivery</h3>
+          <p>Progress tracked with dates, budgets and completion percentages.</p>
+          <a class="value-card-link" href="tracker.html">Learn more <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="value-card">
+          <!-- REVIEW: AI-generated placeholder — replace with a real diaspora/local-support photo once supplied -->
+          <img class="value-card-img" src="img/value-diaspora.jpg" alt="Staying connected with Embakasi South from afar">
+          <h3>Open to everyone</h3>
+          <p>Locals and diaspora alike can see, support and hold the work accountable.</p>
+          <a class="value-card-link" href="involve.html">Learn more <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="value-panel-wrap">
+        <div class="split-panel split-panel--yellow">
+          <span class="eyebrow">Why this foundation</span>
+          <h3 class="split-panel-statement">Accountability you can see. Every claim made here carries proof — a date, a location, a photo — that anyone can check.</h3>
+          <a class="split-panel-link" href="foundation.html">See our approach <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- "Latest" development-update section: solid-color panel (heading + link) on the left, vertically-scrollable card list on the right — same reusable template Obama.org uses for both their "Latest" and "Programs" sections, just recolored to our palette with our own pattern instead of theirs.
+       Given the same contained/boxed treatment as the "Why this foundation" panel above (rounded corners,
+       gradient, bigger heading, breathing room off the page edge) instead of sitting full-bleed — structure
+       unchanged: text card stays on the left, project cards stay on the right. -->
+  <section class="section-tight tracker-split">
+    <div class="container tracker-split-grid">
+      <div class="split-panel split-panel--sky">
+        <span class="eyebrow">Development tracker</span>
+        <h3>Projects in motion, verified as they happen.</h3>
+        <a class="split-panel-link" href="tracker.html">View full tracker <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="split-cards">
+        <!-- REVIEW: when a real photo exists, replace each .ph div's contents with <img class="proj-photo" src="..." alt="..."> — the thumbnail's aspect-ratio/crop is already set so it will drop in without breaking layout. -->
+        <a class="split-card" href="tracker.html">
+          <div class="ph split-card-img"><i class="fa-solid fa-image"></i></div>
+          <div class="split-card-body">
+            <span class="tag-plain">Imara Daima <i class="fa-solid fa-circle"></i> Health</span>
+            <h4>[Project name 1]</h4>
+            <p>[One-line summary of what this project delivers and why it matters.]</p>
+            <div class="progress-track"><div class="progress-fill" data-progress="100"></div></div>
+            <span class="latest-meta">Completed · [Updated 2 days ago] · Foundation-funded</span>
+          </div>
+        </a>
+        <a class="split-card" href="tracker.html">
+          <div class="ph split-card-img"><i class="fa-solid fa-image"></i></div>
+          <div class="split-card-body">
+            <span class="tag-plain">Kwa Njenga <i class="fa-solid fa-circle"></i> Education</span>
+            <h4>[Project name 2]</h4>
+            <p>[One-line summary of what this project delivers and why it matters.]</p>
+            <div class="progress-track"><div class="progress-fill" data-progress="55"></div></div>
+            <span class="latest-meta">Ongoing · [Updated 3 days ago] · Government (NG-CDF)</span>
+          </div>
+        </a>
+        <a class="split-card" href="tracker.html">
+          <div class="ph split-card-img"><i class="fa-solid fa-image"></i></div>
+          <div class="split-card-body">
+            <span class="tag-plain">Pipeline <i class="fa-solid fa-circle"></i> Water &amp; sanitation</span>
+            <h4>[Project name 3]</h4>
+            <p>[One-line summary of what this project delivers and why it matters.]</p>
+            <div class="progress-track"><div class="progress-fill" data-progress="0"></div></div>
+            <span class="latest-meta">Planned · [Updated 4 days ago] · Partner-funded</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><span class="eyebrow">Field work</span><h2>Recent moments</h2></div>
+      <!-- Manual carousel — no autoplay. Arrows/swipe advance one clip at a time via native scroll-snap.
+           REVIEW: 6 placeholder tiles here just to demonstrate the scroll; drop real video/photo files in
+           as .media-tile > <img>/<video> and add or remove tiles freely, the carousel adapts either way. -->
+      <div class="media-carousel">
+        <button class="carousel-arrow carousel-arrow--prev" aria-label="Previous moments"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="media-track-wrap" id="mediaTrackWrap">
+          <div class="media-track">
+            <div class="media-tile"><div class="ph" style="height:100%;"><i class="fa-solid fa-image"></i><span class="play"><i class="fa-solid fa-play"></i></span></div></div>
+            <div class="media-tile"><div class="ph" style="height:100%;"><i class="fa-solid fa-image"></i><span class="play"><i class="fa-solid fa-play"></i></span></div></div>
+            <div class="media-tile"><div class="ph" style="height:100%;"><i class="fa-solid fa-image"></i><span class="play"><i class="fa-solid fa-play"></i></span></div></div>
+            <div class="media-tile"><div class="ph" style="height:100%;"><i class="fa-solid fa-image"></i><span class="play"><i class="fa-solid fa-play"></i></span></div></div>
+            <div class="media-tile"><div class="ph" style="height:100%;"><i class="fa-solid fa-image"></i><span class="play"><i class="fa-solid fa-play"></i></span></div></div>
+            <div class="media-tile"><div class="ph" style="height:100%;"><i class="fa-solid fa-image"></i><span class="play"><i class="fa-solid fa-play"></i></span></div></div>
+          </div>
+        </div>
+        <button class="carousel-arrow carousel-arrow--next" aria-label="Next moments"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight cta-band">
+    <div class="container cta-band-inner">
+      <div>
+        <h2>Help move Embakasi South forward</h2>
+        <p>Cash, goods, or time — from anywhere in the world, it reaches Embakasi South and goes straight onto the tracker.</p>
+      </div>
+      <a class="btn btn-outline cta-band-btn" href="involve.html"><i class="fa-solid fa-heart"></i> Support the cause</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="margin-bottom:14px;"><span class="logo-ej">E&middot;J</span></div>
+        <p>Documenting real work in Embakasi South, ward by ward, as it happens.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="about.html">About Erick</a>
+        <a href="foundation.html">The Foundation</a>
+        <a href="vision.html">Vision</a>
+        <a href="tracker.html">Progress Tracker</a>
+        <a href="community.html">Community</a>
+      </div>
+      <div>
+        <h4>Get involved</h4>
+        <a href="involve.html">Donate cash</a>
+        <a href="involve.html">Donate goods</a>
+        <a href="involve.html">Volunteer</a>
+        <a href="involve.html">Partner with us</a>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <!-- REVIEW: confirm office address and phone number once available -->
+        <p>Embakasi South, Nairobi</p>
+        <p>hello@erickjanganyafoundation.org</p>
+      </div>
+      <div>
+        <h4>Stay Connected</h4>
+        <!-- REVIEW: swap # for the real handles once these accounts are created and linked to the foundation. -->
+        <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i> Instagram</a>
+        <a href="#" class="social-link"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+        <a href="#" class="social-link"><i class="fa-brands fa-facebook-f"></i> Facebook</a>
+        <a href="#" class="social-link"><i class="fa-brands fa-youtube"></i> YouTube</a>
+        <a href="#" class="social-link"><i class="fa-brands fa-linkedin-in"></i> LinkedIn</a>
+        <a href="#" class="social-link"><i class="fa-brands fa-x-twitter"></i> X</a>
+        <a href="#" class="social-link"><i class="fa-brands fa-threads"></i> Threads</a>
+        <a href="#" class="social-link"><i class="fa-brands fa-bluesky"></i> Bluesky</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Erick Janganya Foundation. All rights reserved.</span>
+      <span>erickjanganyafoundation.org</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

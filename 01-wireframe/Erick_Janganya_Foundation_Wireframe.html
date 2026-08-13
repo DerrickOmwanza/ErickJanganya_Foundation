@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Erick Janganya Foundation — Wireframe Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --green:#0F5C38; --green-dark:#0A3F27; --green-light:#E7F1EC;
+  --red:#C1272D; --gold:#C89B3C; --gold-deep:#96721F; --gold-light:#FBF3E1;
+  --ink:#15191B; --ink-soft:#454E53; --ink-mute:#6B7176;
+  --bg:#FFFFFF; --bg-soft:#F7F6F2; --line:#E4E2DA;
+  --ph-bg:#ECE9E0; --ph-line:#DAD6C9; --ph-text:#9B978A;
+  --radius:10px; --shadow:0 2px 6px rgba(15,20,15,.10), 0 1px 2px rgba(15,20,15,.06);
+  --gloss:linear-gradient(180deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,0) 45%);
+  --font-h:'Playfair Display',Georgia,serif; --font-b:'Inter',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-b);color:var(--ink);background:var(--bg-soft);line-height:1.5;-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4{font-family:var(--font-h);font-weight:700;color:var(--green-dark);line-height:1.2;}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+.ph{background:repeating-linear-gradient(45deg,var(--ph-bg),var(--ph-bg) 9px,#e2ded2 9px,#e2ded2 18px);border:1px solid var(--ph-line);border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--ph-text);font-size:12.5px;text-align:center;gap:6px;padding:8px;}
+.ph i{font-size:20px;opacity:.7;}
+.container{max-width:1180px;margin:0 auto;padding:0 32px;}
+.eyebrow{text-transform:uppercase;letter-spacing:.08em;font-size:12px;font-weight:700;color:var(--gold-deep);}
+.btn{position:relative;display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:6px;font-weight:600;font-size:14.5px;border:1.5px solid transparent;cursor:pointer;transition:.15s;white-space:nowrap;overflow:hidden;}
+.btn::after{content:"";position:absolute;inset:0;background:var(--gloss);pointer-events:none;}
+.btn-primary{background:linear-gradient(180deg,#d13a40 0%,var(--red) 55%,#a31f24 100%);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.25), 0 1px 2px rgba(0,0,0,.12);}
+.btn-primary:hover{background:linear-gradient(180deg,#b92e34 0%,#a31f24 55%,#8c1a1e 100%);}
+.btn-secondary{background:linear-gradient(180deg,#147248 0%,var(--green) 55%,var(--green-dark) 100%);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.22), 0 1px 2px rgba(0,0,0,.12);}
+.btn-secondary:hover{background:linear-gradient(180deg,#0d5c39 0%,var(--green-dark) 55%,#062c1b 100%);}
+.btn-outline{border-color:var(--line);color:var(--ink);background:#fff;}
+.btn-outline:hover{border-color:var(--gold-deep);color:var(--gold-deep);}
+.btn-outline-light{border-color:rgba(255,255,255,.5);color:#fff;background:transparent;}
+.badge{display:inline-block;padding:4px 11px;border-radius:20px;font-size:11.5px;font-weight:600;letter-spacing:.02em;}
+.badge-ongoing{background:var(--gold-light);color:#8a6a1c;}
+.badge-complete{background:var(--green-light);color:var(--green-dark);}
+.badge-planned{background:#EEF0F2;color:#5b6570;}
+.badge-delivered{background:var(--green-light);color:var(--green-dark);}
+.badge-progress{background:var(--gold-light);color:#8a6a1c;}
+.badge-notyet{background:#FBEAEA;color:#a3282d;}
+.card{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:40%;background:var(--gloss);pointer-events:none;}
+.section{padding:64px 0;}
+.section-tight{padding:44px 0;}
+.section-head{max-width:640px;margin-bottom:36px;}
+.section-head h2{font-size:30px;margin:6px 0 10px;}
+.section-head p{color:var(--ink-soft);font-size:15.5px;}
+.grid{display:grid;gap:22px;}
+.grid-3{grid-template-columns:repeat(3,1fr);}
+.grid-4{grid-template-columns:repeat(4,1fr);}
+.grid-2{grid-template-columns:repeat(2,1fr);}
+
+/* ===== prototype toolbar ===== */
+.proto-bar{position:sticky;top:0;z-index:999;background:#0B0D0E;color:#cfd3d6;font-family:var(--font-b);}
+.proto-row1{display:flex;align-items:center;gap:14px;padding:9px 18px;border-bottom:1px solid #23262a;flex-wrap:wrap;}
+.proto-row1 strong{color:#fff;font-size:12.5px;letter-spacing:.03em;}
+.proto-tag{font-size:11px;background:#C89B3C;color:#221a08;padding:2px 8px;border-radius:4px;font-weight:700;}
+.proto-mode{margin-left:auto;display:flex;gap:6px;}
+.proto-mode button{font-size:12px;padding:5px 12px;border-radius:5px;border:1px solid #33373b;background:transparent;color:#cfd3d6;cursor:pointer;}
+.proto-mode button.active{background:#fff;color:#0B0D0E;border-color:#fff;}
+.proto-row2{display:flex;gap:4px;padding:8px 18px;overflow-x:auto;}
+.proto-row2 button{flex:none;font-size:12px;padding:6px 13px;border-radius:16px;border:1px solid #23262a;background:#16181a;color:#9fa4a8;cursor:pointer;white-space:nowrap;}
+.proto-row2 button.active{background:var(--green);border-color:var(--green);color:#fff;}
+.proto-row2 button:hover:not(.active){color:#fff;border-color:#3c4045;}
+
+.screen{display:none;}
+.screen.active{display:block;}
+
+/* ===== public site chrome ===== */
+.site-header{background:linear-gradient(180deg,#0F3524 0%,#0A2A1B 100%);border-bottom:2px solid var(--gold);position:sticky;top:65px;z-index:50;}
+.header-inner{max-width:1180px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;gap:28px;}
+.logo{display:flex;align-items:center;gap:10px;margin-right:auto;}
+.logo-mark{width:38px;height:38px;border-radius:50%;background:linear-gradient(145deg,#147248,var(--green-dark));border:1.5px solid var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-weight:700;font-size:15px;box-shadow:inset 0 1px 1px rgba(255,255,255,.3);}
+.logo-text b{display:block;font-family:var(--font-h);font-size:15px;color:#fff;line-height:1.1;}
+.logo-text span{display:block;font-size:10.5px;letter-spacing:.12em;color:var(--gold);}
+.nav-links{display:flex;gap:22px;font-size:13.5px;font-weight:600;color:#d9e3dc;}
+.nav-links a:hover{color:var(--gold);}
+.nav-drop{position:relative;}
+.nav-drop-menu{display:none;position:absolute;top:26px;left:-14px;background:#fff;border:1px solid var(--line);border-top:2px solid var(--gold);border-radius:8px;box-shadow:0 8px 20px rgba(20,25,20,.18);padding:8px;min-width:190px;z-index:60;}
+.nav-drop:hover .nav-drop-menu{display:block;}
+.nav-drop-menu a{display:block;padding:8px 10px;border-radius:6px;font-size:13px;color:var(--ink);}
+.nav-drop-menu a:hover{background:var(--gold-light);color:var(--gold-deep);}
+.source-chip{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;margin-top:8px;}
+.source-fnd{background:#E3F3EA;color:#1F6D42;}
+.source-gov{background:#E7EEF9;color:#2453A6;}
+.source-partner{background:#FBF0DE;color:#8A5A17;}
+.source-adv{background:#F1EFEA;color:#6B6558;}
+.legend-box{display:flex;gap:18px;flex-wrap:wrap;align-items:center;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;margin-bottom:22px;font-size:12px;color:var(--ink-soft);}
+.legend-box b{color:var(--ink);font-size:12px;}
+.legend-dot{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:20px;font-weight:600;}
+.trust-line{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--green-dark);background:var(--green-light);padding:6px 14px;border-radius:20px;margin-bottom:14px;font-variant-numeric:tabular-nums;}
+.hero-stats b,.stat-strip b,.metric-card b,.event-date b,table.admin-table td,.proj-meta span,.trust-line{font-variant-numeric:tabular-nums;}
+.nav-toggle{display:none;width:38px;height:38px;border-radius:6px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.06);align-items:center;justify-content:center;color:#fff;cursor:pointer;font-size:16px;}
+.mobile-drawer{display:none;position:fixed;inset:0;background:rgba(10,15,12,.55);z-index:300;}
+.mobile-drawer.open{display:block;}
+.mobile-drawer-inner{position:absolute;top:0;right:0;width:80%;max-width:320px;height:100%;background:#fff;padding:22px 20px;overflow-y:auto;}
+.mobile-drawer-close{background:none;border:none;font-size:20px;color:var(--ink-mute);cursor:pointer;margin-bottom:16px;}
+.mobile-drawer-inner a{display:block;padding:13px 4px;border-bottom:1px solid var(--line);font-size:14.5px;font-weight:600;color:var(--ink);}
+.quote-card{padding:22px;}
+.quote-card .qhead{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.quote-card .avatar-ph{width:42px;height:42px;border-radius:50%;background:var(--ph-bg);display:flex;align-items:center;justify-content:center;color:var(--ph-text);font-size:13px;flex:none;}
+.quote-card p{font-size:13.5px;color:var(--ink-soft);font-style:italic;}
+.quote-card .who{margin-top:12px;font-size:12px;color:var(--ink-mute);font-style:normal;}
+.site-footer{background:var(--green-dark);color:#cfe0d6;padding:52px 0 22px;margin-top:20px;border-top:3px solid var(--gold);}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;}
+.footer-grid h4{color:#fff;font-family:var(--font-b);font-size:13px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px;}
+.footer-grid a,.footer-grid p{color:#a9c2b4;font-size:13.5px;display:block;margin-bottom:9px;}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:36px;padding-top:18px;display:flex;justify-content:space-between;font-size:12.5px;color:#8fac9c;flex-wrap:wrap;gap:10px;}
+.social-row{display:flex;gap:10px;}
+.social-row a{width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;color:#fff;}
+
+/* ===== hero ===== */
+.hero{background:linear-gradient(180deg,var(--green-light) 0%,#fff 100%);padding:60px 0 20px;}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;}
+.hero h1{font-size:44px;margin:14px 0 16px;}
+.hero p.lead{font-size:16.5px;color:var(--ink-soft);max-width:480px;margin-bottom:26px;}
+.hero-cta{display:flex;gap:12px;margin-bottom:28px;}
+.hero-stats{display:flex;gap:28px;padding-top:18px;border-top:1px solid var(--line);}
+.hero-stats div b{display:block;font-family:var(--font-h);font-size:24px;color:var(--gold-deep);}
+.hero-stats div b .cnt{font-size:34px;font-weight:700;}
+.hero-stats div span{font-size:12px;color:var(--ink-mute);}
+.hero-media .ph{height:360px;}
+
+.pillar-card{padding:26px 22px;text-align:left;}
+.pillar-card i{width:42px;height:42px;border-radius:9px;background:linear-gradient(145deg,var(--green-light),#d3e8dc);box-shadow:inset 0 1px 1px rgba(255,255,255,.7),0 1px 2px rgba(15,20,15,.08);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:14px;}
+.pillar-card h3{font-size:17px;margin-bottom:6px;}
+.pillar-card p{font-size:13.5px;color:var(--ink-soft);}
+
+.ticker{background:var(--green-dark);color:#fff;padding:10px 0;font-size:13px;}
+.ticker .container{display:flex;gap:10px;align-items:center;}
+.ticker b{color:var(--gold);}
+
+/* project / news / media / event cards */
+.proj-card .ph{height:150px;border-radius:0;}
+.proj-body{padding:16px 18px;}
+.proj-body .ward{font-size:11.5px;color:var(--ink-mute);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;}
+.proj-body h4{font-size:16px;margin-bottom:8px;}
+.proj-meta{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:12px;color:var(--ink-mute);}
+.progress-track{height:6px;background:#EDEBE3;border-radius:6px;overflow:hidden;margin-top:10px;}
+.progress-fill{height:100%;background:var(--green);}
+.follow-btn{margin-top:10px;width:100%;display:flex;align-items:center;justify-content:center;gap:7px;padding:8px;border-radius:6px;border:1px solid var(--line);background:#fff;font-size:12px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:.15s;}
+.follow-btn:hover{border-color:var(--green);color:var(--green-dark);}
+.follow-btn.following{background:var(--green-light);border-color:var(--green);color:var(--green-dark);}
+
+.ba-wrap{margin-top:40px;}
+.ba-frame{position:relative;height:280px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);}
+.ba-frame .ph{position:absolute;inset:0;border-radius:0;}
+.ba-before{clip-path:inset(0 50% 0 0);z-index:2;}
+.ba-tag{position:absolute;top:12px;font-size:11px;font-weight:700;background:rgba(255,255,255,.92);padding:4px 10px;border-radius:20px;z-index:3;letter-spacing:.03em;text-transform:uppercase;color:var(--ink);}
+.ba-tag.before-tag{left:12px;}
+.ba-tag.after-tag{right:12px;}
+.ba-handle-line{position:absolute;top:0;bottom:0;width:0;z-index:4;pointer-events:none;}
+.ba-handle-line::before{content:"";position:absolute;top:0;bottom:0;left:-1px;width:3px;background:#fff;}
+.ba-handle-line i{position:absolute;top:50%;left:0;transform:translate(-50%,-50%);width:32px;height:32px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.25);font-size:13px;}
+.ba-range{width:100%;margin-top:14px;}
+
+.filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px;align-items:center;}
+.filter-bar select,.filter-bar input{font-size:13px;padding:9px 12px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink-soft);}
+.filter-bar input{flex:1;min-width:180px;}
+
+.tab-row{display:flex;gap:6px;border-bottom:1px solid var(--line);margin-bottom:28px;}
+.tab-row button{padding:10px 4px;margin-right:22px;background:none;border:none;border-bottom:2px solid transparent;font-weight:600;font-size:14px;color:var(--ink-mute);cursor:pointer;}
+.tab-row button.active{color:var(--green-dark);border-color:var(--red);}
+
+.timeline{border-left:2px solid var(--line);margin-left:10px;}
+.tl-item{position:relative;padding:0 0 34px 30px;}
+.tl-item::before{content:"";position:absolute;left:-7px;top:2px;width:12px;height:12px;border-radius:50%;background:var(--green);border:3px solid var(--green-light);}
+.tl-item .yr{font-size:12px;font-weight:700;color:var(--gold-deep);text-transform:uppercase;letter-spacing:.05em;}
+.tl-item h4{font-size:16px;margin:4px 0 6px;}
+.tl-item p{font-size:13.5px;color:var(--ink-soft);}
+
+.stat-strip{display:flex;gap:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff;}
+.stat-strip div{flex:1;text-align:center;padding:22px 10px;border-right:1px solid var(--line);}
+.stat-strip div:last-child{border-right:none;}
+.stat-strip b{display:block;font-family:var(--font-h);font-size:26px;color:var(--gold-deep);}
+.stat-strip b .cnt{font-size:36px;font-weight:700;}
+.stat-strip span{font-size:12px;color:var(--ink-mute);}
+
+.score-row{display:flex;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);}
+.score-row:last-child{border-bottom:none;}
+.score-row .idx{font-family:var(--font-h);color:var(--ink-mute);font-size:14px;width:22px;}
+.score-row .txt{flex:1;}
+.score-row .txt b{display:block;font-size:14.5px;}
+.score-row .txt span{font-size:12.5px;color:var(--ink-mute);}
+
+.media-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.media-tile .ph{aspect-ratio:1/1;position:relative;}
+.media-tile .play{position:absolute;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center;color:var(--green-dark);}
+
+.news-card .ph{height:170px;}
+.news-body{padding:16px 18px;}
+.news-body .date{font-size:11.5px;color:var(--ink-mute);margin-bottom:6px;}
+.news-body h4{font-size:16.5px;margin-bottom:6px;}
+.news-body p{font-size:13px;color:var(--ink-soft);}
+
+.event-row{display:flex;gap:18px;padding:18px 0;border-bottom:1px solid var(--line);align-items:center;}
+.event-date{width:64px;text-align:center;flex:none;}
+.event-date b{display:block;font-family:var(--font-h);font-size:22px;color:var(--red);}
+.event-date span{font-size:11px;text-transform:uppercase;color:var(--ink-mute);}
+.event-info h4{font-size:15px;margin-bottom:4px;}
+.event-info span{font-size:12.5px;color:var(--ink-mute);}
+
+.give-card{padding:28px 24px;text-align:center;border-top:4px solid var(--gold);}
+.give-card i{font-size:26px;color:var(--green);margin-bottom:14px;}
+.give-card h3{font-size:17px;margin-bottom:8px;}
+.give-card p{font-size:13.5px;color:var(--ink-soft);margin-bottom:18px;}
+.pay-strip{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px;}
+.pay-chip{font-size:11.5px;border:1px solid var(--line);border-radius:5px;padding:5px 10px;color:var(--ink-mute);}
+
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+.form-field{margin-bottom:16px;}
+.form-field label{display:block;font-size:12.5px;font-weight:600;margin-bottom:6px;color:var(--ink-soft);}
+.form-field input,.form-field textarea{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:6px;font-family:var(--font-b);font-size:14px;}
+
+/* ===== admin shell ===== */
+#admin-shell{display:flex;min-height:calc(100vh - 65px);}
+.admin-sidebar{width:230px;flex:none;background:#11201A;color:#cdd9d1;padding:22px 16px;}
+.admin-logo{display:flex;align-items:center;gap:9px;margin-bottom:26px;padding:0 6px;}
+.admin-logo b{font-family:var(--font-h);font-size:14px;color:#fff;}
+.admin-nav a{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:7px;font-size:13.5px;font-weight:500;color:#a9bcb1;margin-bottom:2px;}
+.admin-nav a i{width:16px;text-align:center;}
+.admin-nav a.active{background:var(--green);color:#fff;box-shadow:inset 3px 0 0 var(--gold);}
+.admin-main{flex:1;background:#F4F3EE;min-width:0;}
+.admin-topbar{background:#fff;border-bottom:1px solid var(--line);padding:14px 28px;display:flex;align-items:center;}
+.admin-topbar h2{font-family:var(--font-b);font-size:17px;font-weight:700;color:var(--ink);}
+.admin-topbar .who{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:13px;}
+.admin-topbar .avatar{width:32px;height:32px;border-radius:50%;background:var(--gold-light);color:#8a6a1c;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;}
+.admin-body{padding:26px 28px;}
+.admin-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:26px;}
+.metric-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;}
+.metric-card span{font-size:12px;color:var(--ink-mute);}
+.metric-card b{display:block;font-family:var(--font-h);font-size:26px;margin:6px 0 2px;color:var(--gold-deep);}
+.metric-card .delta{font-size:11.5px;color:var(--green);}
+.admin-panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;margin-bottom:20px;}
+.admin-panel h3{font-family:var(--font-b);font-size:15px;font-weight:700;margin-bottom:16px;}
+table.admin-table{width:100%;border-collapse:collapse;font-size:13px;}
+table.admin-table th{text-align:left;color:var(--ink-mute);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em;padding:8px 10px;border-bottom:1px solid var(--line);}
+table.admin-table td{padding:11px 10px;border-bottom:1px solid #F0EEE7;}
+table.admin-table tr:last-child td{border-bottom:none;}
+.icon-btn{width:30px;height:30px;border-radius:6px;border:1px solid var(--line);background:#fff;display:inline-flex;align-items:center;justify-content:center;color:var(--ink-soft);cursor:pointer;}
+.admin-form{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.admin-form .full{grid-column:1/-1;}
+.upload-box{border:1.5px dashed var(--ph-line);border-radius:var(--radius);padding:34px;text-align:center;color:var(--ph-text);background:var(--bg-soft);}
+.upload-box i{font-size:22px;margin-bottom:8px;display:block;}
+
+@media(max-width:960px){
+  .grid-4{grid-template-columns:repeat(2,1fr);}
+  .grid-3{grid-template-columns:repeat(2,1fr);}
+  .hero-grid,.footer-grid,.contact-grid,.admin-form,.admin-metrics{grid-template-columns:1fr;}
+  .nav-links{display:none;}
+  .nav-toggle{display:flex;}
+}
+</style>
+</head>
+<body>
+
+<div class="proto-bar">
+  <div class="proto-row1">
+    <strong>ERICK JANGANYA FOUNDATION</strong>
+    <span class="proto-tag">WIREFRAME · NO LIVE CONTENT</span>
+    <span style="font-size:11.5px;color:#7d8286;">Prototype navigator — for internal review only, not part of the live site</span>
+    <div class="proto-mode">
+      <button id="mode-public" class="active" onclick="setMode('public')">Public site</button>
+      <button id="mode-admin" onclick="setMode('admin')">Admin / CMS</button>
+    </div>
+  </div>
+  <div class="proto-row2" id="public-tabs"></div>
+  <div class="proto-row2" id="admin-tabs" style="display:none;"></div>
+</div>
+
+<!-- ============ PUBLIC SITE ============ -->
+<div id="public-shell">
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-mark">EJ</div>
+        <div class="logo-text"><b>Erick Janganya</b><span>FOUNDATION</span></div>
+      </div>
+      <nav class="nav-links">
+        <a href="#" onclick="jump('home');return false;">Home</a>
+        <div class="nav-drop"><a href="#">About ▾</a><div class="nav-drop-menu">
+          <a href="#" onclick="jump('about');return false;">About Erick</a>
+          <a href="#" onclick="jump('foundation');return false;">The Foundation</a>
+          <a href="#" onclick="jump('vision');return false;">Vision</a>
+        </div></div>
+        <div class="nav-drop"><a href="#">Progress ▾</a><div class="nav-drop-menu">
+          <a href="#" onclick="jump('tracker');return false;">Development Tracker</a>
+          <a href="#" onclick="jump('promises');return false;">Promise Scorecard</a>
+        </div></div>
+        <a href="#" onclick="jump('community');return false;">Community</a>
+        <div class="nav-drop"><a href="#">Media ▾</a><div class="nav-drop-menu">
+          <a href="#" onclick="jump('media');return false;">Media Centre</a>
+          <a href="#" onclick="jump('news');return false;">News &amp; Press</a>
+        </div></div>
+        <a href="#" onclick="jump('events');return false;">Events</a>
+        <a href="#" onclick="jump('contact');return false;">Contact</a>
+      </nav>
+      <a class="btn btn-primary" href="#"><i class="fa-solid fa-heart"></i> Support the cause</a>
+      <button class="nav-toggle" aria-label="Open menu" onclick="toggleDrawer(true)"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </header>
+
+  <div class="mobile-drawer" id="mobile-drawer">
+    <div class="mobile-drawer-inner">
+      <button class="mobile-drawer-close" aria-label="Close menu" onclick="toggleDrawer(false)"><i class="fa-solid fa-xmark"></i></button>
+      <div id="drawer-links"></div>
+    </div>
+  </div>
+
+  <main id="public-content">
+
+  <!-- HOME -->
+  <section class="screen active" id="screen-home">
+    <div class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="trust-line"><i class="fa-solid fa-circle-check"></i> [24] projects tracked · [68%] promises delivered · last updated [12 Aug 2026]</div>
+          <span class="eyebrow">Embakasi South · MP Aspirant 2027</span>
+          <h1>[Campaign headline goes here]</h1>
+          <p class="lead">[One to two sentence mission statement — what the foundation stands for and the change it is driving in Embakasi South.]</p>
+          <div class="hero-cta">
+            <a class="btn btn-secondary" href="#"><i class="fa-solid fa-chart-line"></i> See the progress tracker</a>
+            <a class="btn btn-outline" href="#"><i class="fa-solid fa-user"></i> Erick's story</a>
+          </div>
+          <div class="hero-stats">
+            <div><b>[<span class="cnt" data-target="24">0</span>]</b><span>Projects tracked</span></div>
+            <div><b>[<span class="cnt" data-target="5">0</span>]</b><span>Wards covered</span></div>
+            <div><b>[<span class="cnt" data-target="68">0</span>%]</b><span>Promises delivered</span></div>
+            <div><b>[<span class="cnt" data-target="120">0</span>+]</b><span>Community events</span></div>
+          </div>
+        </div>
+        <div class="hero-media"><div class="ph"><i class="fa-solid fa-image"></i>Hero photo / video placeholder<br>(Erick in the field)</div></div>
+      </div>
+    </div>
+
+    <div class="ticker"><div class="container"><i class="fa-solid fa-bolt"></i> <b>Latest:</b> [Auto-pulled headline of most recent development update or press mention will appear here]</div></div>
+
+    <div class="section">
+      <div class="container">
+        <div class="section-head"><span class="eyebrow">Why this foundation</span><h2>Accountability you can see</h2>
+        <p>[Explain the accountability premise: every project, promise and shilling is tracked publicly so residents can verify what is actually happening on the ground.]</p></div>
+        <div class="grid grid-4" id="pillars-home"></div>
+      </div>
+    </div>
+
+    <div class="section-tight" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+      <div class="container">
+        <div class="section-head" style="display:flex;justify-content:space-between;align-items:flex-end;max-width:none;">
+          <div><span class="eyebrow">Development tracker</span><h2 style="font-size:24px;margin:6px 0 0;">Projects in motion right now</h2></div>
+          <a class="btn btn-outline" href="#" onclick="jump('tracker')">View full tracker →</a>
+        </div>
+        <div class="grid grid-3" id="home-projects"></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="container">
+        <div class="section-head"><span class="eyebrow">Erick in the field</span><h2>Recent moments</h2></div>
+        <div class="media-grid" id="home-media"></div>
+      </div>
+    </div>
+
+    <div class="section-tight" style="background:var(--green-dark);color:#fff;">
+      <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;">
+        <div><h2 style="color:#fff;font-size:26px;">Help move Embakasi South forward</h2>
+        <p style="color:#bcd6c8;font-size:14.5px;">[Short line inviting cash, goods, or volunteer support from anywhere in the world.]</p></div>
+        <a class="btn btn-primary" href="#" onclick="jump('involve')">Get involved →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="screen" id="screen-about">
+    <div class="section" style="padding-top:44px;">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">About Erick Janganya</span>
+          <h1 style="font-size:34px;">[Full name / preferred public name]</h1>
+          <p class="lead">[Two-line personal introduction — who he is, where he's from, and why he's running.]</p>
+          <div style="display:flex;gap:10px;">
+            <a class="btn btn-outline" href="#"><i class="fa-solid fa-file-lines"></i> Download full profile</a>
+          </div>
+        </div>
+        <div class="ph" style="height:320px;"><i class="fa-solid fa-image"></i>Portrait photo placeholder</div>
+      </div>
+    </div>
+    <div class="section-tight"><div class="container">
+      <div class="section-head"><span class="eyebrow">The journey</span><h2>From Embakasi South to the ballot</h2></div>
+      <div class="timeline" id="about-timeline"></div>
+    </div></div>
+    <div class="section-tight" style="background:#fff;border-top:1px solid var(--line);"><div class="container">
+      <div class="section-head"><span class="eyebrow">In his words</span><h2>Vision for the constituency</h2></div>
+      <div class="grid grid-3" id="about-vision"></div>
+    </div></div>
+  </section>
+
+  <!-- FOUNDATION -->
+  <section class="screen" id="screen-foundation">
+    <div class="section" style="padding-top:44px;"><div class="container">
+      <span class="eyebrow">The Foundation</span>
+      <h1 style="max-width:640px;">[Foundation name] — the record of what's really happening in Embakasi South</h1>
+      <p class="lead" style="max-width:640px;margin-top:12px;">[Explain what the foundation is: a public, continuously-updated archive of field work, media appearances and development progress, open for anyone — resident or investor — to verify.]</p>
+    </div></div>
+    <div class="section-tight"><div class="container">
+      <div class="section-head"><span class="eyebrow">Core principles</span><h2>What this foundation stands for</h2></div>
+      <div class="grid grid-4" id="foundation-principles"></div>
+    </div></div>
+    <div class="section-tight" style="background:#fff;border-top:1px solid var(--line);"><div class="container">
+      <div class="section-head"><span class="eyebrow">Focus areas</span><h2>Where the work is concentrated</h2></div>
+      <div class="grid grid-3" id="foundation-focus"></div>
+    </div></div>
+  </section>
+
+  <!-- VISION -->
+  <section class="screen" id="screen-vision">
+    <div class="section" style="padding-top:44px;"><div class="container">
+      <span class="eyebrow">Vision for Embakasi South</span>
+      <h1 style="max-width:640px;">The Embakasi South we're building toward</h1>
+      <p class="lead" style="max-width:640px;margin-top:12px;">[Forward-looking statement — where the constituency should be in five to ten years, beyond the priorities of a single term.]</p>
+    </div></div>
+    <div class="section-tight"><div class="container">
+      <div class="section-head"><span class="eyebrow">Priorities</span><h2>What guides the long-term plan</h2></div>
+      <div class="grid grid-4" id="vision-priorities"></div>
+    </div></div>
+    <div class="section-tight" style="background:#fff;border-top:1px solid var(--line);"><div class="container">
+      <div class="section-head"><span class="eyebrow">Beyond the election</span><h2>A platform built to outlast one campaign</h2></div>
+      <p style="max-width:640px;color:var(--ink-soft);font-size:14.5px;">[Explain that this platform is designed to evolve — from candidate platform, to campaign platform, to MP accountability platform, to a long-term constituency development record — regardless of the election outcome.]</p>
+    </div></div>
+  </section>
+
+  <!-- TRACKER -->
+  <section class="screen" id="screen-tracker">
+    <div class="section-tight"><div class="container">
+      <span class="eyebrow">Progress tracker</span>
+      <h1 style="font-size:32px;margin:8px 0 6px;">Development, out in the open</h1>
+      <p style="color:var(--ink-soft);max-width:640px;margin-bottom:24px;">[Explain: every project below is logged by the foundation team with dated photo/video proof, budget notes and status — updated as work happens, not at election time.]</p>
+      <div class="stat-strip" style="margin-bottom:28px;">
+        <div><b>[<span class="cnt" data-target="24">0</span>]</b><span>Total projects</span></div>
+        <div><b>[<span class="cnt" data-target="9">0</span>]</b><span>Completed</span></div>
+        <div><b>[<span class="cnt" data-target="11">0</span>]</b><span>Ongoing</span></div>
+        <div><b>[<span class="cnt" data-target="4">0</span>]</b><span>Planned</span></div>
+        <div><b>[<span class="cnt" data-target="5">0</span>]</b><span>Wards</span></div>
+      </div>
+      <div class="tab-row" id="ward-tabs">
+        <button class="active" onclick="filterWard(this,'All')">All wards</button><button onclick="filterWard(this,'Imara Daima')">Imara Daima</button><button onclick="filterWard(this,'Kwa Njenga')">Kwa Njenga</button><button onclick="filterWard(this,'Kwa Reuben')">Kwa Reuben</button><button onclick="filterWard(this,'Pipeline')">Pipeline</button><button onclick="filterWard(this,'Kware')">Kware</button>
+      </div>
+      <div class="filter-bar">
+        <input placeholder="Search a project or location…">
+        <select><option>Category: all</option><option>Health</option><option>Education</option><option>Water &amp; sanitation</option><option>Roads &amp; infrastructure</option><option>Youth &amp; jobs</option></select>
+        <select><option>Status: all</option><option>Completed</option><option>Ongoing</option><option>Planned</option></select>
+      </div>
+      <div class="ph" style="height:220px;margin-bottom:28px;"><i class="fa-solid fa-map-location-dot"></i>Interactive ward map placeholder — pins colour-coded by project status</div>
+      <div class="legend-box">
+        <b>Funding source key:</b>
+        <span class="legend-dot source-fnd"><i class="fa-solid fa-building-columns"></i> Foundation-funded</span>
+        <span class="legend-dot source-gov"><i class="fa-solid fa-landmark"></i> Government (NG-CDF)</span>
+        <span class="legend-dot source-partner"><i class="fa-solid fa-handshake"></i> Partner-funded</span>
+        <span class="legend-dot source-adv"><i class="fa-solid fa-bullhorn"></i> Advocated, not directly funded</span>
+        <span style="margin-left:auto;font-style:italic;">[Every project is labelled honestly so credit is never overstated.]</span>
+      </div>
+      <div class="grid grid-3" id="tracker-projects"></div>
+
+      <div class="ba-wrap">
+        <div class="section-head" style="max-width:640px;"><span class="eyebrow">Preview</span><h2 style="font-size:22px;">Every project will carry proof like this</h2>
+        <p style="font-size:13.5px;color:var(--ink-soft);">[Demo only — the real cards will use dated before/after photos per project. Drag the slider to compare.]</p></div>
+        <div class="ba-frame">
+          <span class="ba-tag before-tag">Before</span>
+          <span class="ba-tag after-tag">After</span>
+          <div class="ph"><i class="fa-solid fa-image"></i>After photo placeholder</div>
+          <div class="ph ba-before" id="ba-before" style="background:repeating-linear-gradient(45deg,#dedad0,#dedad0 9px,#d1cdc0 9px,#d1cdc0 18px);"><i class="fa-solid fa-image"></i>Before photo placeholder</div>
+          <div class="ba-handle-line" id="ba-handle" style="left:50%;"><i class="fa-solid fa-arrows-left-right"></i></div>
+        </div>
+        <input type="range" class="ba-range" min="0" max="100" value="50" id="ba-range" oninput="baUpdate(this.value)">
+      </div>
+    </div></div>
+  </section>
+
+  <!-- PROMISES -->
+  <section class="screen" id="screen-promises">
+    <div class="section-tight"><div class="container">
+      <span class="eyebrow">Promise &amp; accountability scorecard</span>
+      <h1 style="font-size:32px;margin:8px 0 6px;">What was promised. What's been delivered.</h1>
+      <p style="color:var(--ink-soft);max-width:640px;margin-bottom:24px;">[Every public commitment Erick makes is logged here with a delivery status — first 100 days, short-term, medium-term and long-term — so the record speaks for itself.]</p>
+      <div class="tab-row">
+        <button class="active">All promises</button><button>First 100 days</button><button>Short-term</button><button>Medium-term</button><button>Long-term</button>
+      </div>
+      <div class="card" style="padding:6px 22px;">
+        <div id="promise-rows"></div>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- COMMUNITY -->
+  <section class="screen" id="screen-community">
+    <div class="section-tight"><div class="container">
+      <span class="eyebrow">Community</span>
+      <h1 style="font-size:32px;margin:8px 0 6px;">Embakasi South, in its own words</h1>
+      <p style="color:var(--ink-soft);max-width:640px;margin-bottom:28px;">[This page puts residents at the centre of the story — their experiences, feedback and needs — rather than Erick alone.]</p>
+      <div class="grid grid-3" id="community-voices"></div>
+    </div></div>
+    <div class="section-tight" style="background:#fff;border-top:1px solid var(--line);"><div class="container">
+      <div class="section-head" style="max-width:640px;"><span class="eyebrow">Tell us what's needed</span><h2 style="font-size:24px;">Submit a community need or piece of feedback</h2>
+      <p>[Any resident can flag a gap — a broken borehole, an unsafe road — that feeds directly into the development tracker for review.]</p></div>
+      <div class="card" style="max-width:640px;padding:24px;">
+        <div class="form-field"><label>Your name (optional)</label><input placeholder="[Name]"></div>
+        <div class="form-field"><label>Ward</label><input placeholder="[Select ward]"></div>
+        <div class="form-field"><label>What needs attention?</label><textarea rows="3" placeholder="[Describe the issue or need]"></textarea></div>
+        <a class="btn btn-secondary" href="#">Submit to the foundation</a>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- MEDIA -->
+  <section class="screen" id="screen-media">
+    <div class="section-tight"><div class="container">
+      <span class="eyebrow">Media centre</span>
+      <h1 style="font-size:32px;margin:8px 0 6px;">Watch, listen, read &amp; see the record</h1>
+      <p style="color:var(--ink-soft);max-width:640px;margin-bottom:24px;">[Every photo, video, audio clip and document the admin team uploads lands here — organised by category so each piece tells part of the story.]</p>
+      <div class="tab-row">
+        <button class="active">All</button><button>Watch (video)</button><button>Listen (audio)</button><button>Field visits</button><button>Interviews &amp; panels</button><button>Press</button><button>Documents &amp; reports</button>
+      </div>
+      <div class="media-grid" id="media-full"></div>
+    </div></div>
+  </section>
+
+  <!-- NEWS -->
+  <section class="screen" id="screen-news">
+    <div class="section-tight"><div class="container">
+      <span class="eyebrow">News &amp; press</span>
+      <h1 style="font-size:32px;margin:8px 0 20px;">Latest updates</h1>
+      <div class="grid grid-3" id="news-full"></div>
+    </div></div>
+  </section>
+
+  <!-- EVENTS -->
+  <section class="screen" id="screen-events">
+    <div class="section-tight"><div class="container">
+      <span class="eyebrow">Events &amp; community outreach</span>
+      <h1 style="font-size:32px;margin:8px 0 20px;">Where to meet Erick next</h1>
+      <div class="grid" style="grid-template-columns:2fr 1fr;gap:40px;">
+        <div class="card" style="padding:6px 22px;"><div id="events-list"></div></div>
+        <div class="ph" style="height:100%;min-height:320px;"><i class="fa-solid fa-calendar"></i>Calendar view placeholder</div>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- GET INVOLVED -->
+  <section class="screen" id="screen-involve">
+    <div class="section-tight"><div class="container">
+      <span class="eyebrow">Get involved</span>
+      <h1 style="font-size:32px;margin:8px 0 6px;">Support Embakasi South, from anywhere</h1>
+      <p style="color:var(--ink-soft);max-width:640px;margin-bottom:32px;">[Explain the three ways people locally and abroad can contribute, and reassure them every contribution is logged against a specific, trackable project.]</p>
+      <div class="grid grid-3">
+        <div class="card give-card">
+          <i class="fa-solid fa-hand-holding-dollar"></i><h3>Give cash</h3>
+          <p>[One-time or recurring monetary support directed to an active project of your choice.]</p>
+          <a class="btn btn-secondary" href="#" style="width:100%;justify-content:center;">Donate now</a>
+          <div class="pay-strip"><span class="pay-chip">M-Pesa</span><span class="pay-chip">Card</span><span class="pay-chip">Bank transfer</span><span class="pay-chip">PayPal (diaspora)</span></div>
+        </div>
+        <div class="card give-card">
+          <i class="fa-solid fa-shirt"></i><h3>Give goods</h3>
+          <p>[Clothes, shoes, school supplies and other in-kind donations — with drop-off points and shipping guidance for diaspora donors.]</p>
+          <a class="btn btn-outline" href="#" style="width:100%;justify-content:center;">See what's needed</a>
+        </div>
+        <div class="card give-card">
+          <i class="fa-solid fa-people-group"></i><h3>Volunteer / partner</h3>
+          <p>[Individuals, companies and organisations can register to volunteer time or partner on a specific initiative.]</p>
+          <a class="btn btn-outline" href="#" style="width:100%;justify-content:center;">Register interest</a>
+        </div>
+      </div>
+      <div class="card" style="margin-top:32px;padding:24px 26px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+        <div><h3 style="font-family:var(--font-b);font-size:15px;margin-bottom:4px;"><i class="fa-solid fa-shield-halved" style="color:var(--green);"></i> Every gift is tracked publicly</h3>
+        <p style="font-size:13px;color:var(--ink-soft);">[Reassurance line: donations link to a project on the tracker page so givers can see the outcome, reinforcing transparency.]</p></div>
+        <a class="btn btn-outline" href="#" onclick="jump('tracker')">View the tracker →</a>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="screen" id="screen-contact">
+    <div class="section-tight"><div class="container contact-grid">
+      <div>
+        <span class="eyebrow">Contact</span>
+        <h1 style="font-size:30px;margin:8px 0 16px;">Get in touch</h1>
+        <p style="color:var(--ink-soft);margin-bottom:26px;">[Short line inviting residents, press and partners to reach out directly.]</p>
+        <div class="form-field"><label>Full name</label><input placeholder="[Your name]"></div>
+        <div class="form-field"><label>Email</label><input placeholder="[you@email.com]"></div>
+        <div class="form-field"><label>I am a…</label><input placeholder="[Resident / Journalist / Partner / Donor]"></div>
+        <div class="form-field"><label>Message</label><textarea rows="4" placeholder="[Your message]"></textarea></div>
+        <a class="btn btn-secondary" href="#">Send message</a>
+      </div>
+      <div>
+        <div class="card" style="padding:22px;margin-bottom:16px;">
+          <h4 style="font-family:var(--font-b);font-size:14px;margin-bottom:12px;">Constituency office</h4>
+          <p style="font-size:13.5px;color:var(--ink-soft);line-height:1.8;">[Office address]<br>[Phone number]<br>[Office hours]</p>
+        </div>
+        <div class="card" style="padding:22px;margin-bottom:16px;">
+          <h4 style="font-family:var(--font-b);font-size:14px;margin-bottom:12px;">Press &amp; media</h4>
+          <p style="font-size:13.5px;color:var(--ink-soft);">[Press contact name and email for interview or comment requests.]</p>
+        </div>
+        <div class="ph" style="height:180px;"><i class="fa-solid fa-map-pin"></i>Office location map placeholder</div>
+      </div>
+    </div></div>
+  </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div><div class="logo" style="margin-bottom:14px;"><div class="logo-mark">EJ</div><div class="logo-text"><b style="color:#fff;">Erick Janganya</b><span style="color:#a9c2b4;">FOUNDATION</span></div></div>
+        <p>[Short mission line repeated in the footer for reinforcement.]</p>
+        <div class="social-row"><a href="#"><i class="fa-brands fa-facebook-f"></i></a><a href="#"><i class="fa-brands fa-x-twitter"></i></a><a href="#"><i class="fa-brands fa-instagram"></i></a><a href="#"><i class="fa-brands fa-youtube"></i></a><a href="#"><i class="fa-brands fa-tiktok"></i></a></div></div>
+        <div><h4>Explore</h4><a href="#">About Erick</a><a href="#">The Foundation</a><a href="#">Vision</a><a href="#">Progress Tracker</a><a href="#">Promises</a><a href="#">Community</a><a href="#">Media Centre</a></div>
+        <div><h4>Get involved</h4><a href="#">Donate cash</a><a href="#">Donate goods</a><a href="#">Volunteer</a><a href="#">Partner with us</a></div>
+        <div><h4>Contact</h4><p>[Office address]</p><p>[Phone]</p><p>[Email]</p></div>
+      </div>
+      <div class="footer-bottom"><span>© [Year] Erick Janganya Foundation. All rights reserved.</span><span>[Privacy policy]  ·  [Terms]</span></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ============ ADMIN / CMS ============ -->
+<div id="admin-shell" style="display:none;">
+  <aside class="admin-sidebar">
+    <div class="admin-logo"><div class="logo-mark">EJ</div><b>Foundation CMS</b></div>
+    <nav class="admin-nav" id="admin-nav-list"></nav>
+  </aside>
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <h2 id="admin-title">Dashboard</h2>
+      <div class="who"><span>[Admin name]</span><div class="avatar">EJ</div></div>
+    </div>
+    <div class="admin-body">
+
+      <section class="screen active" id="screen-admin-dashboard">
+        <div class="admin-metrics">
+          <div class="metric-card"><span>Total projects</span><b>[24]</b><span class="delta">+3 this month</span></div>
+          <div class="metric-card"><span>Media files</span><b>[318]</b><span class="delta">+42 this month</span></div>
+          <div class="metric-card"><span>Promises tracked</span><b>[16]</b><span class="delta">68% delivered</span></div>
+          <div class="metric-card"><span>Supporter sign-ups</span><b>[1,204]</b><span class="delta">+87 this month</span></div>
+        </div>
+        <div class="admin-panel">
+          <h3>Recent activity</h3>
+          <table class="admin-table">
+            <tr><th>Item</th><th>Type</th><th>Ward</th><th>Status</th><th>Updated</th><th></th></tr>
+            <tr><td>[Project name]</td><td>Project update</td><td>Kwa Njenga</td><td><span class="badge badge-ongoing">Ongoing</span></td><td>[2 days ago]</td><td><span class="icon-btn"><i class="fa-solid fa-pen"></i></span></td></tr>
+            <tr><td>[Interview clip title]</td><td>Media upload</td><td>—</td><td><span class="badge badge-complete">Published</span></td><td>[3 days ago]</td><td><span class="icon-btn"><i class="fa-solid fa-pen"></i></span></td></tr>
+            <tr><td>[Press release title]</td><td>News post</td><td>—</td><td><span class="badge badge-planned">Draft</span></td><td>[5 days ago]</td><td><span class="icon-btn"><i class="fa-solid fa-pen"></i></span></td></tr>
+            <tr><td>[Promise text]</td><td>Promise update</td><td>Pipeline</td><td><span class="badge badge-progress">In progress</span></td><td>[1 week ago]</td><td><span class="icon-btn"><i class="fa-solid fa-pen"></i></span></td></tr>
+          </table>
+        </div>
+        <div class="admin-panel">
+          <h3>Quick actions</h3>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <a class="btn btn-secondary" href="#" onclick="jumpAdmin('admin-project')"><i class="fa-solid fa-plus"></i> Log new project update</a>
+            <a class="btn btn-outline" href="#"><i class="fa-solid fa-upload"></i> Upload media</a>
+            <a class="btn btn-outline" href="#"><i class="fa-solid fa-newspaper"></i> Write news post</a>
+            <a class="btn btn-outline" href="#"><i class="fa-solid fa-flag"></i> Update a promise</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-admin-project">
+        <div class="admin-panel">
+          <h3>Log a project update</h3>
+          <div class="admin-form">
+            <div class="form-field"><label>Project name</label><input placeholder="[e.g. Kwa Njenga Primary School Library]"></div>
+            <div class="form-field"><label>Ward</label><input placeholder="[Select ward]"></div>
+            <div class="form-field"><label>Category</label><input placeholder="[Health / Education / Water / Roads / Youth]"></div>
+            <div class="form-field"><label>Status</label><input placeholder="[Planned / Ongoing / Completed]"></div>
+            <div class="form-field"><label>Budget (optional)</label><input placeholder="[KES amount]"></div>
+            <div class="form-field"><label>Completion %</label><input placeholder="[0–100]"></div>
+            <div class="form-field full"><label>Description</label><textarea rows="3" placeholder="[What is happening and why it matters]"></textarea></div>
+            <div class="form-field full">
+              <label>Photo / video evidence</label>
+              <div class="upload-box"><i class="fa-solid fa-cloud-arrow-up"></i>Drag files here or click to upload — dated and geo-tagged automatically</div>
+            </div>
+            <div class="full" style="display:flex;gap:10px;">
+              <a class="btn btn-secondary" href="#">Publish update</a>
+              <a class="btn btn-outline" href="#">Save as draft</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-admin-analytics">
+        <div class="admin-metrics">
+          <div class="metric-card"><span>Unique visitors (30d)</span><b>[8,940]</b><span class="delta">+14% vs prior month</span></div>
+          <div class="metric-card"><span>Most viewed page</span><b>Tracker</b><span class="delta">[3,120] views</span></div>
+          <div class="metric-card"><span>Diaspora traffic</span><b>[22%]</b><span class="delta">Top: UK, USA, UAE</span></div>
+          <div class="metric-card"><span>Community submissions</span><b>[57]</b><span class="delta">+9 this month</span></div>
+        </div>
+        <div class="admin-panel">
+          <h3>Engagement over time</h3>
+          <div class="ph" style="height:200px;"><i class="fa-solid fa-chart-line"></i>Traffic / engagement chart placeholder</div>
+        </div>
+        <div class="admin-panel">
+          <h3>Most engaged content</h3>
+          <table class="admin-table">
+            <tr><th>Content</th><th>Type</th><th>Views</th><th>Avg. time</th></tr>
+            <tr><td>[Project name]</td><td>Tracker entry</td><td>[1,204]</td><td>[1m 40s]</td></tr>
+            <tr><td>[Interview title]</td><td>Video</td><td>[980]</td><td>[3m 05s]</td></tr>
+            <tr><td>[Promise text]</td><td>Scorecard entry</td><td>[712]</td><td>[0m 55s]</td></tr>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const wards=["Imara Daima","Kwa Njenga","Kwa Reuben","Pipeline","Kware"];
+const cats=["Health","Education","Water & sanitation","Roads & infrastructure","Youth & jobs"];
+const statuses=[["Completed","badge-complete",100],["Ongoing","badge-ongoing",55],["Planned","badge-planned",0]];
+const sources=[["fa-building-columns","Foundation-funded","source-fnd"],["fa-landmark","Government (NG-CDF)","source-gov"],["fa-handshake","Partner-funded","source-partner"],["fa-bullhorn","Advocated, not directly funded","source-adv"]];
+
+function projCard(i){
+  const s=statuses[i%3];
+  const f=sources[i%4];
+  const w=wards[i%5];
+  return `<div class="card proj-card" data-ward="${w}"><div class="ph"><i class="fa-solid fa-image"></i>Project photo</div>
+  <div class="proj-body"><div class="ward">${w} · ${cats[i%5]}</div>
+  <h4>[Project name ${i+1}]</h4>
+  <div class="proj-meta"><span class="badge ${s[1]}">${s[0]}</span><span>[Updated ${i+2} days ago]</span></div>
+  <div class="progress-track"><div class="progress-fill" style="width:${s[2]}%"></div></div>
+  <div class="source-chip ${f[2]}"><i class="fa-solid ${f[0]}"></i>${f[1]}</div>
+  <button class="follow-btn" onclick="toggleFollow(this)"><i class="fa-regular fa-bell"></i><span>Follow updates</span></button></div></div>`;
+}
+document.getElementById('home-projects').innerHTML=[0,1,2].map(projCard).join('');
+document.getElementById('tracker-projects').innerHTML=[0,1,2,3,4,5,6,7,8].map(projCard).join('');
+
+const pillars=[["fa-eye","Radical transparency","Every project, photo and shilling logged for anyone to verify."],
+["fa-people-group","Community-led","Priorities set from what residents of the five wards actually need."],
+["fa-chart-line","Measurable delivery","Progress tracked with dates, budgets and completion percentages."],
+["fa-hand-holding-heart","Open to everyone","Locals and diaspora alike can see, support and hold the work accountable."]];
+document.getElementById('pillars-home').innerHTML=pillars.map(p=>`<div class="card pillar-card"><i class="fa-solid ${p[0]}"></i><h3>${p[1]}</h3><p>${p[2]}</p></div>`).join('');
+
+const principles=[["fa-scale-balanced","Accountability","[Principle description]"],["fa-magnifying-glass","Transparency","[Principle description]"],["fa-seedling","Sustainable development","[Principle description]"],["fa-handshake","Integrity","[Principle description]"]];
+document.getElementById('foundation-principles').innerHTML=principles.map(p=>`<div class="card pillar-card"><i class="fa-solid ${p[0]}"></i><h3>${p[1]}</h3><p>${p[2]}</p></div>`).join('');
+
+const focus=[["fa-kit-medical","Health","[Focus area description — clinics, maternal health, sanitation.]"],["fa-graduation-cap","Education","[Focus area description — schools, bursaries, libraries.]"],["fa-road","Infrastructure","[Focus area description — roads, drainage, housing.]"]];
+document.getElementById('foundation-focus').innerHTML=focus.map(p=>`<div class="card pillar-card"><i class="fa-solid ${p[0]}"></i><h3>${p[1]}</h3><p>${p[2]}</p></div>`).join('');
+
+const tl=[["2010–2014","[Early career milestone]","[Short description of what happened and its relevance.]"],
+["2015–2019","[Community work / civic engagement]","[Short description.]"],
+["2020–2023","[Formal entry into public service or organising]","[Short description.]"],
+["2024–2026","[Foundation launched / campaign preparation]","[Short description.]"],
+["2027 (planned)","[MP election, Embakasi South]","[The tracker becomes the public record of delivery against every promise made.]"],
+["Beyond","[The journey continues]","[This timeline stays open — each term adds to the record rather than replacing it.]"]];
+document.getElementById('about-timeline').innerHTML=tl.map(t=>`<div class="tl-item"><span class="yr">${t[0]}</span><h4>${t[1]}</h4><p>${t[2]}</p></div>`).join('');
+
+document.getElementById('about-vision').innerHTML=["Economy & jobs","Health & sanitation","Education & youth"].map(v=>`<div class="card pillar-card"><h3>${v}</h3><p>[Erick's specific position and plan for this issue in Embakasi South.]</p></div>`).join('');
+
+const visionPriorities=[["fa-kit-medical","Healthcare","[Priority description — access, facilities, maternal care.]"],["fa-graduation-cap","Education","[Priority description — schools, bursaries, digital literacy.]"],["fa-house-chimney","Housing & infrastructure","[Priority description — slum upgrading, roads, drainage.]"],["fa-briefcase","Youth & employment","[Priority description — jobs, skills training, enterprise support.]"]];
+document.getElementById('vision-priorities').innerHTML=visionPriorities.map(p=>`<div class="card pillar-card"><i class="fa-solid ${p[0]}"></i><h3>${p[1]}</h3><p>${p[2]}</p></div>`).join('');
+
+const voices=[["Resident","Kwa Njenga","[Quote placeholder — a resident describing how a project or engagement affected them.]"],["Resident","Pipeline","[Quote placeholder — before-and-after style testimonial.]"],["Community leader","Kware","[Quote placeholder — a local leader's perspective on the foundation's presence.]"]];
+document.getElementById('community-voices').innerHTML=voices.map(v=>`<div class="card quote-card"><div class="qhead"><div class="avatar-ph"><i class="fa-solid fa-user"></i></div><div><b style="font-size:13.5px;">${v[0]}</b><div style="font-size:11.5px;color:var(--ink-mute);">${v[1]} Ward</div></div></div><p>"${v[2]}"</p></div>`).join('');
+
+const promiseData=[["First 100 days","[Promise text]","badge-progress","In progress"],
+["First 100 days","[Promise text]","badge-delivered","Delivered"],
+["Short-term","[Promise text]","badge-notyet","Not yet started"],
+["Short-term","[Promise text]","badge-progress","In progress"],
+["Medium-term","[Promise text]","badge-notyet","Not yet started"],
+["Long-term","[Promise text]","badge-notyet","Not yet started"]];
+document.getElementById('promise-rows').innerHTML=promiseData.map((p,i)=>`<div class="score-row"><span class="idx">${String(i+1).padStart(2,'0')}</span><div class="txt"><b>${p[1]}</b><span>${p[0]}</span></div><span class="badge ${p[2]}">${p[3]}</span></div>`).join('');
+
+function mediaTile(){return `<div class="media-tile"><div class="ph" style="height:100%;"><i class="fa-solid fa-image"></i><span class="play"><i class="fa-solid fa-play"></i></span></div></div>`;}
+const mediaTypes=[["fa-image","fa-play"],["fa-image","fa-play"],["fa-waveform-lines",null],["fa-file-lines",null]];
+function mediaTileVaried(i){
+  const t=mediaTypes[i%4];
+  const overlay=t[1]?`<span class="play"><i class="fa-solid ${t[1]}"></i></span>`:'';
+  return `<div class="media-tile"><div class="ph" style="height:100%;"><i class="fa-solid ${t[0]}"></i>${overlay}</div></div>`;
+}
+document.getElementById('home-media').innerHTML=Array(4).fill(0).map(mediaTile).join('');
+document.getElementById('media-full').innerHTML=Array(12).fill(0).map((_,i)=>mediaTileVaried(i)).join('');
+
+const newsData=[["[Date]","[Headline about a press interview or media panel]"],["[Date]","[Headline about a field visit or community event]"],["[Date]","[Headline about a project milestone reached]"]];
+function newsGrid(){return newsData.map(n=>`<div class="card news-card"><div class="ph"><i class="fa-solid fa-image"></i>Article photo</div><div class="news-body"><div class="date">${n[0]}</div><h4>${n[1]}</h4><p>[Short excerpt of the article goes here, two lines max.]</p></div></div>`).join('');}
+document.getElementById('news-full').innerHTML=newsGrid();
+
+const eventData=[["12","Aug","[Community baraza — Kwa Njenga]","[Venue, time]"],["19","Aug","[Youth empowerment forum]","[Venue, time]"],["02","Sep","[Foundation media day]","[Venue, time]"],["14","Sep","[Health outreach camp — Pipeline]","[Venue, time]"]];
+document.getElementById('events-list').innerHTML=eventData.map(e=>`<div class="event-row"><div class="event-date"><b>${e[0]}</b><span>${e[1]}</span></div><div class="event-info"><h4>${e[2]}</h4><span>${e[3]}</span></div></div>`).join('');
+
+const adminNav=[["fa-gauge","admin-dashboard","Dashboard"],["fa-diagram-project","admin-project","Projects"],["fa-photo-film","admin-media","Media library"],["fa-newspaper","admin-news","News posts"],["fa-flag-checkered","admin-promises","Promises"],["fa-comments","admin-community","Community"],["fa-calendar-days","admin-events","Events"],["fa-users","admin-supporters","Supporters"],["fa-chart-simple","admin-analytics","Analytics"],["fa-gear","admin-settings","Settings"]];
+document.getElementById('admin-nav-list').innerHTML=adminNav.map((a,i)=>`<a href="#" class="${i===0?'active':''}" onclick="jumpAdmin('${a[1]}');return false;"><i class="fa-solid ${a[0]}"></i>${a[2]}</a>`).join('');
+
+const publicScreens=["home","about","foundation","vision","tracker","promises","community","media","news","events","involve","contact"];
+const publicLabels=["Home","About Erick","The Foundation","Vision","Progress tracker","Promises","Community","Media","News","Events","Get involved","Contact"];
+document.getElementById('public-tabs').innerHTML=publicScreens.map((s,i)=>`<button class="${i===0?'active':''}" onclick="jump('${s}')" id="tab-${s}">${publicLabels[i]}</button>`).join('');
+document.getElementById('drawer-links').innerHTML=publicScreens.map((s,i)=>`<a href="#" onclick="jump('${s}');toggleDrawer(false);return false;">${publicLabels[i]}</a>`).join('');
+
+const adminScreens=["admin-dashboard","admin-project","admin-analytics"];
+const adminLabels=["Dashboard","Log project (CMS form)","Analytics"];
+document.getElementById('admin-tabs').innerHTML=adminScreens.map((s,i)=>`<button class="${i===0?'active':''}" onclick="jumpAdmin('${s}')" id="tabA-${s}">${adminLabels[i]}</button>`).join('');
+
+function jump(id){
+  document.querySelectorAll('#public-content .screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('screen-'+id).classList.add('active');
+  document.querySelectorAll('#public-tabs button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  window.scrollTo({top:0,behavior:'instant'});
+  animateCounters(document.getElementById('screen-'+id));
+}
+
+function filterWard(btn,wardName){
+  document.querySelectorAll('#ward-tabs button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#tracker-projects .proj-card').forEach(card=>{
+    const show=wardName==='All'||card.dataset.ward===wardName;
+    card.style.display=show?'':'none';
+  });
+}
+
+function toggleFollow(btn){
+  const following=btn.classList.toggle('following');
+  const icon=btn.querySelector('i');
+  const label=btn.querySelector('span');
+  icon.className=following?'fa-solid fa-bell':'fa-regular fa-bell';
+  label.textContent=following?'Following':'Follow updates';
+}
+
+function baUpdate(v){
+  document.getElementById('ba-before').style.clipPath=`inset(0 ${100-v}% 0 0)`;
+  document.getElementById('ba-handle').style.left=v+'%';
+}
+
+function animateCounters(scope){
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const counters=(scope||document).querySelectorAll('.cnt:not([data-done])');
+  counters.forEach(el=>{
+    const target=parseInt(el.dataset.target,10);
+    el.setAttribute('data-done','1');
+    if(reduce){el.textContent=target.toLocaleString();return;}
+    const dur=900;const t0=performance.now();
+    function tick(now){
+      const p=Math.min((now-t0)/dur,1);
+      el.textContent=Math.round(target*p).toLocaleString();
+      if(p<1)requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+animateCounters(document.getElementById('screen-home'));
+function jumpAdmin(id){
+  document.querySelectorAll('#admin-body-screens').forEach(()=>{});
+  document.querySelectorAll('.admin-body .screen').forEach(s=>s.classList.remove('active'));
+  const target=document.getElementById('screen-'+id);
+  if(target){target.classList.add('active');}
+  document.querySelectorAll('#admin-tabs button').forEach(b=>b.classList.remove('active'));
+  const tab=document.getElementById('tabA-'+id);
+  if(tab)tab.classList.add('active');
+  document.querySelectorAll('.admin-nav a').forEach(a=>a.classList.remove('active'));
+  const navIdx=adminNav.findIndex(a=>a[1]===id);
+  if(navIdx>-1)document.querySelectorAll('.admin-nav a')[navIdx].classList.add('active');
+  const found=adminNav.find(a=>a[1]===id);
+  document.getElementById('admin-title').textContent=found?found[2]:id;
+}
+function toggleDrawer(open){
+  document.getElementById('mobile-drawer').classList.toggle('open',open);
+}
+function setMode(m){
+  const isPublic=m==='public';
+  document.getElementById('public-shell').style.display=isPublic?'block':'none';
+  document.getElementById('admin-shell').style.display=isPublic?'none':'flex';
+  document.getElementById('public-tabs').style.display=isPublic?'flex':'none';
+  document.getElementById('admin-tabs').style.display=isPublic?'none':'flex';
+  document.getElementById('mode-public').classList.toggle('active',isPublic);
+  document.getElementById('mode-admin').classList.toggle('active',!isPublic);
+}
+</script>
+</body>
+</html>
