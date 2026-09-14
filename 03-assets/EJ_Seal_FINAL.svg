@@ -1,8 +1,0 @@
-<svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Erick Janganya Foundation seal">
-<circle cx="120" cy="120" r="112" fill="#0A3F27"/>
-<circle cx="120" cy="120" r="110" fill="none" stroke="#C89B3C" stroke-width="4"/>
-<circle cx="120" cy="120" r="100" fill="none" stroke="#C89B3C" stroke-width="1.5" opacity="0.65"/>
-<text x="104" y="156" text-anchor="middle" font-family="Liberation Serif, Georgia, 'Times New Roman', 'Playfair Display', serif" font-weight="700" font-size="112" letter-spacing="-2" fill="#C89B3C">E</text>
-<text x="160" y="158" text-anchor="middle" font-family="Liberation Serif, Georgia, 'Times New Roman', 'Playfair Display', serif" font-weight="700" font-size="112" fill="#C89B3C">J</text>
-<path d="M114,128 C130,118 136,106 150,100" stroke="#C89B3C" stroke-width="5" stroke-linecap="round" fill="none"/>
-</svg>

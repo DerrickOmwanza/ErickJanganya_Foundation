@@ -8,16 +8,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <link rel="stylesheet" href="css/style.css">
-<link rel="icon" type="image/png" href="img/favicon-32.png">
-<link rel="icon" type="image/png" sizes="64x64" href="img/favicon-64.png">
-<link rel="apple-touch-icon" href="img/logo-seal-1024.png">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 </head>
 <body>
 
 <header class="site-header header--solid">
   <div class="header-inner">
     <a class="logo" href="index.html" aria-label="Erick Janganya Foundation — home">
-      <span class="logo-ej">E&middot;J</span>
+      <img class="logo-mark" src="img/ej-mark.svg" alt="" width="48" height="28">
+      <span class="logo-wordmark">EJ Foundation</span>
     </a>
     <nav class="nav-links">
       <a href="index.html" data-nav="index.html">Home</a>
@@ -67,7 +67,7 @@
      big inline search field over the top of the hero, closes via the X or Escape. -->
 <div class="search-overlay" id="search-overlay" aria-hidden="true">
   <div class="search-overlay-top">
-    <span class="logo-ej">E&middot;J</span>
+    <img class="logo-seal" src="img/ej-mark.svg" alt="Erick Janganya Foundation" width="180" height="105">
     <button class="search-overlay-close" aria-label="Close search" onclick="toggleSearch(false)"><i class="fa-solid fa-xmark"></i></button>
   </div>
   <form class="search-overlay-form" role="search" onsubmit="return false;">
@@ -77,27 +77,285 @@
 </div>
 
 <main>
-  <div class="container stub-wrap">
-    <span class="eyebrow">About Erick</span>
-    <h1>This page is being built next.</h1>
-    <p>We're writing Erick's story — from Embakasi South to the ballot — with the same accuracy standard as everything else on this site. Check back soon, or get notified the moment it's live.</p>
-    <a class="btn btn-secondary" href="index.html#stay-updated"><i class="fa-solid fa-bell"></i> Notify me</a>
-  </div>
+
+  <!-- Intro — uses the real, cleared-for-use portrait already live on the homepage. Everything else on
+       this page that's a specific biographical fact is bracketed as a placeholder on purpose: this is
+       the one page where content has to be Erick's real story, not mock/sample data like the rest of
+       the site currently uses. Fill each bracket in once confirmed, then remove the bracket itself. -->
+  <section class="section" style="padding-top:150px;">
+    <div class="container about-hero-grid">
+      <div class="reveal-up">
+        <span class="eyebrow">About Erick Janganya</span>
+        <h1>[Erick Janganya — full public name]</h1>
+        <p class="lead">I am Erick Janganya — [one placeholder line: current role / where based / what he does now] — and I'm running to represent Embakasi South in the 2027 general election because [placeholder: the core reason, in his own words].</p>
+      </div>
+      <div class="about-portrait reveal-up">
+        <img src="img/erick-portrait.jpg" alt="Erick Janganya">
+      </div>
+    </div>
+  </section>
+
+  <!-- Pull-quote — a single strong personal beat between the hero and the timeline. Original line,
+       written in Erick's voice; not attributed to anyone else. He can swap it for his own exact wording
+       later, but it's written to align with the site's core "verify everything" mission either way. -->
+  <section class="section-tight">
+    <div class="container">
+      <div class="section-rule"></div>
+      <div class="pull-quote-panel reveal-up">
+        <p class="pull-quote-text">A leader who cannot be checked cannot be trusted. So check me — every promise dated, every project budgeted, every claim left open for anyone in Embakasi South to verify.</p>
+        <span class="pull-quote-cite">Erick Janganya, Founder — Erick Janganya Foundation</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- The journey — sequential life-story timeline, birth to present. Each stage: a year/age-range
+       label, a title, a short passage, and a photo slot. Stages 1–4 (birth through civic work) are
+       pure biography we don't have yet, so every specific fact is bracketed. Stages 5–7 reuse language
+       already established and approved elsewhere on the site (the foundation's stated mission, the
+       2027 MP-aspirant framing, and the wireframe's own "open record" closing line), so those read as
+       finished copy rather than placeholders. -->
+  <section class="section-tight">
+    <div class="container">
+      <div class="section-rule"></div>
+      <div class="section-head journey-head reveal-up">
+        <span class="eyebrow">The Journey</span>
+        <h2>From Embakasi South to the ballot</h2>
+        <p>[One framing sentence introducing the storyline — e.g. what shaped the decision to run.]</p>
+      </div>
+
+      <div class="story-spine">
+
+        <div class="story-stage reveal-up">
+          <div class="story-stage-media">
+            <div class="ph"><i class="fa-solid fa-image"></i><span>Childhood photo coming soon</span></div>
+          </div>
+          <div class="story-stage-body story-panel story-panel--yellow">
+            <span class="story-stage-year">[Birth year]</span>
+            <h3>Born and Raised</h3>
+            <p>I am Erick Janganya, born on [date of birth] in [place of birth], to [parents' names and occupations]. [One more sentence about early family life, siblings, or the community he grew up in.]</p>
+          </div>
+          <div class="story-stage-dot"></div>
+        </div>
+
+        <div class="story-stage reveal-up">
+          <div class="story-stage-media">
+            <div class="ph"><i class="fa-solid fa-image"></i><span>School photo coming soon</span></div>
+          </div>
+          <div class="story-stage-body story-panel story-panel--blue">
+            <span class="story-stage-year">[Childhood / school years]</span>
+            <h3>Foundations</h3>
+            <p>[He/I] attended [primary school name], then [secondary school name], where [a formative early lesson, achievement, or interest that shaped what came later].</p>
+          </div>
+          <div class="story-stage-dot"></div>
+        </div>
+
+        <div class="story-stage reveal-up">
+          <div class="story-stage-media">
+            <div class="ph"><i class="fa-solid fa-image"></i><span>Early career photo coming soon</span></div>
+          </div>
+          <div class="story-stage-body story-panel story-panel--yellow">
+            <span class="story-stage-year">[Years]</span>
+            <h3>Finding a Path</h3>
+            <p>[He/I] went on to study [field of study] at [institution], then began [his/my] career as [role/title] at [organization] — [one line on what that work involved].</p>
+          </div>
+          <div class="story-stage-dot"></div>
+        </div>
+
+        <div class="story-stage reveal-up">
+          <div class="story-stage-media">
+            <div class="ph"><i class="fa-solid fa-image"></i><span>Community work photo coming soon</span></div>
+          </div>
+          <div class="story-stage-body story-panel story-panel--blue">
+            <span class="story-stage-year">[Years]</span>
+            <h3>Serving the Community</h3>
+            <p>[Description of the grassroots or civic work that came next — specific initiatives, roles held, and what it revealed about Embakasi South's needs.]</p>
+          </div>
+          <div class="story-stage-dot"></div>
+        </div>
+
+        <div class="story-stage reveal-up">
+          <div class="story-stage-media">
+            <div class="ph"><i class="fa-solid fa-image"></i><span>Foundation launch photo coming soon</span></div>
+          </div>
+          <div class="story-stage-body story-panel story-panel--yellow">
+            <span class="story-stage-year">[Year founded]</span>
+            <h3>Building the Foundation</h3>
+            <p>In [year], I founded the Erick Janganya Foundation — to track every promise, verify every claim, and keep Embakasi South's progress open for anyone to check.</p>
+          </div>
+          <div class="story-stage-dot"></div>
+        </div>
+
+        <div class="story-stage reveal-up">
+          <div class="story-stage-media">
+            <div class="ph"><i class="fa-solid fa-image"></i><span>Campaign photo coming soon</span></div>
+          </div>
+          <div class="story-stage-body story-panel story-panel--blue">
+            <span class="story-stage-year">2026 – 2027</span>
+            <h3>Running for Embakasi South</h3>
+            <p>I'm now seeking to represent Embakasi South in Parliament in the 2027 general election — bringing the same standard of accountability built into this foundation's tracker to the office itself.</p>
+          </div>
+          <div class="story-stage-dot"></div>
+        </div>
+
+        <div class="story-stage reveal-up">
+          <div class="story-stage-media">
+            <div class="ph"><i class="fa-solid fa-image"></i><span>The road ahead</span></div>
+          </div>
+          <div class="story-stage-body story-panel story-panel--yellow">
+            <span class="story-stage-year">Beyond</span>
+            <h3>An Open Record</h3>
+            <p>This story doesn't end at an election. Whatever happens in 2027, the record stays open — every term, every promise, added here rather than replacing what came before.</p>
+          </div>
+          <div class="story-stage-dot"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Why I'm Running — the personal motivation behind the campaign, separate from the policy positions
+       below. Written in Erick's voice, general/thematic rather than tied to specific unconfirmed personal
+       events, and consistent with language already established elsewhere on the site. Deliberately
+       text-forward — no photo slot — so the page reads as substantive rather than image-plus-caption. -->
+  <section class="section">
+    <div class="container">
+      <div class="section-rule"></div>
+      <div class="section-head reveal-up">
+        <span class="eyebrow">Why I'm Running</span>
+        <h2>The record has to be honest first</h2>
+      </div>
+      <div class="why-running-grid">
+        <div class="why-running-body reveal-up">
+          <p>I didn't set out to be a politician. I set out to fix a pattern I kept seeing repeat itself across Embakasi South — a borehole promised at a rally and never dug, a road resurfaced only where the cameras could see it, a youth fund announced with fanfare and never actually disbursed. The pattern wasn't a lack of good ideas. It was a lack of anyone checking whether the ideas ever became real.</p>
+          <p>That's the gap the Erick Janganya Foundation exists to close — tracking every project and every promise made to this constituency, dated and open for any resident to verify, whether or not I'm the one who made it. Running for this seat is the next step of that same work, not a departure from it.</p>
+          <p>Embakasi South doesn't need another name on a ballot promising things will be different this time. It needs a representative willing to be checked the same way everyone else already is on this site — and that's exactly what I'm asking for the chance to be.</p>
+        </div>
+        <div class="why-running-excerpt reveal-up">
+          <blockquote>&ldquo;The pattern wasn't a lack of good ideas. It was a lack of anyone checking whether the ideas ever became real.&rdquo;</blockquote>
+          <span class="why-running-excerpt-cite">Erick Janganya</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values — four short, non-biographical statements we can write with confidence today (they restate
+       the foundation's already-established mission), rather than waiting on Erick's personal history. -->
+  <section class="section-tight" style="background:#fff;">
+    <div class="container">
+      <div class="section-rule"></div>
+      <div class="section-head reveal-up">
+        <span class="eyebrow">What Guides This</span>
+        <h2>Four things that don't move</h2>
+      </div>
+      <div class="grid grid-4">
+        <div class="card pillar-card reveal-up">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <h3>Transparency</h3>
+          <p>Every project and promise carries a date, a budget line, and a status — nothing claimed without proof attached.</p>
+        </div>
+        <div class="card pillar-card reveal-up">
+          <i class="fa-solid fa-scale-balanced"></i>
+          <h3>Accountability</h3>
+          <p>Progress is measured against what was actually promised, not against what's convenient to say afterward.</p>
+        </div>
+        <div class="card pillar-card reveal-up">
+          <i class="fa-solid fa-map-location-dot"></i>
+          <h3>Presence</h3>
+          <p>Imara Daima, Kwa Njenga, Kwa Reuben, Pipeline, and Kware — tracked individually, not blurred into one average.</p>
+        </div>
+        <div class="card pillar-card reveal-up">
+          <i class="fa-solid fa-arrows-rotate"></i>
+          <h3>Continuity</h3>
+          <p>The record doesn't reset on election day. Whatever happens in 2027, the tracker keeps running.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- In his words — three policy-stance cards. Left fully bracketed on purpose: these are specific
+       positions attributed to Erick, not operational data, so nothing here should read as a real
+       claim until he's confirmed the actual wording. -->
+  <section class="section-tight" style="background:#fff;">
+    <div class="container">
+      <div class="section-rule"></div>
+      <div class="section-head reveal-up">
+        <span class="eyebrow">In His Words</span>
+        <h2>Vision for the constituency</h2>
+      </div>
+      <div class="grid grid-3">
+        <div class="card pillar-card reveal-up">
+          <i class="fa-solid fa-briefcase"></i>
+          <h3>Economy &amp; Jobs</h3>
+          <p>[Erick's specific position and plan for economy and employment in Embakasi South.]</p>
+        </div>
+        <div class="card pillar-card reveal-up">
+          <i class="fa-solid fa-kit-medical"></i>
+          <h3>Health &amp; Sanitation</h3>
+          <p>[Erick's specific position and plan for health and sanitation in Embakasi South.]</p>
+        </div>
+        <div class="card pillar-card reveal-up">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <h3>Education &amp; Youth</h3>
+          <p>[Erick's specific position and plan for education and youth in Embakasi South.]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Explore Further — keeps the page from dead-ending into a single CTA; connects it back to the rest
+       of the site instead of reading as an isolated bio. -->
+  <section class="section-tight">
+    <div class="container">
+      <div class="section-rule"></div>
+      <div class="section-head reveal-up">
+        <span class="eyebrow">Explore Further</span>
+        <h2>The rest of the record</h2>
+        <p>Erick's story is one part of a connected site — see the foundation's approach, the vision behind it, and what residents are saying.</p>
+      </div>
+      <div class="grid grid-3">
+        <a href="foundation.html" class="card pillar-card explore-card reveal-up">
+          <i class="fa-solid fa-landmark"></i>
+          <h3>The Foundation</h3>
+          <p>The principles and focus areas behind every project on the tracker.</p>
+          <span class="value-card-link">See the approach <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+        <a href="vision.html" class="card pillar-card explore-card reveal-up">
+          <i class="fa-solid fa-flag"></i>
+          <h3>The Vision</h3>
+          <p>What Erick is prioritising for Embakasi South, beyond the election itself.</p>
+          <span class="value-card-link">Read the vision <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+        <a href="community.html" class="card pillar-card explore-card reveal-up">
+          <i class="fa-solid fa-people-group"></i>
+          <h3>Community</h3>
+          <p>Voices from Embakasi South residents on what's working and what isn't.</p>
+          <span class="value-card-link">Hear from residents <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight cta-band">
+    <div class="container">
+      <div class="section-rule" style="background:#fff;"></div>
+      <div class="cta-band-inner">
+        <div>
+          <h2>See the record behind the story</h2>
+          <p>Every claim made on this page is checkable against the same tracker as everything else.</p>
+        </div>
+        <a class="btn btn-outline cta-band-btn" href="tracker.html"><i class="fa-solid fa-chart-line"></i> View the tracker</a>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
       <div>
-        <div class="logo" style="margin-bottom:14px;"><span class="logo-ej">E&middot;J</span></div>
+        <div class="logo" style="margin-bottom:14px;"><img class="logo-seal" src="img/ej-mark-on-blue.svg" alt="Erick Janganya Foundation" width="180" height="105"></div>
         <p>Documenting real work in Embakasi South, ward by ward, as it happens.</p>
-        <div class="social-row">
-          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="#" aria-label="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>
-          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-          <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-        </div>
       </div>
       <div>
         <h4>Explore</h4>
@@ -109,14 +367,27 @@
       </div>
       <div>
         <h4>Get involved</h4>
-        <a href="involve.html">Ways to help</a>
-        <a href="index.html#stay-updated">Stay updated</a>
-        <a href="contact.html">Contact us</a>
+        <a href="involve.html">Donate cash</a>
+        <a href="involve.html">Donate goods</a>
+        <a href="involve.html">Volunteer</a>
+        <a href="involve.html">Partner with us</a>
       </div>
       <div>
         <h4>Contact</h4>
         <p>Embakasi South, Nairobi</p>
         <p>hello@erickjanganyafoundation.org</p>
+      </div>
+      <div>
+        <h4>Stay Connected</h4>
+        <!-- REVIEW: swap # for the real handles once these accounts are created and linked to the foundation. -->
+        <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i> Instagram</a>
+        <a href="#" class="social-link"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+        <a href="#" class="social-link"><i class="fa-brands fa-facebook-f"></i> Facebook</a>
+        <a href="#" class="social-link"><i class="fa-brands fa-youtube"></i> YouTube</a>
+        <a href="#" class="social-link"><i class="fa-brands fa-linkedin-in"></i> LinkedIn</a>
+        <a href="#" class="social-link"><i class="fa-brands fa-x-twitter"></i> X</a>
+        <a href="#" class="social-link"><i class="fa-brands fa-threads"></i> Threads</a>
+        <a href="#" class="social-link"><i class="fa-brands fa-bluesky"></i> Bluesky</a>
       </div>
     </div>
     <div class="footer-bottom">

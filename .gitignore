@@ -4,3 +4,8 @@ node_modules/
 *.log
 .vscode/
 .idea/
+
+# Backend
+.env
+05-src/backend/node_modules/
+05-src/backend/generated/

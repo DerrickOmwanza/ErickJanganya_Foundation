@@ -24,9 +24,13 @@ img{max-width:100%;display:block;}
 .eyebrow{text-transform:uppercase;letter-spacing:.08em;font-size:12px;font-weight:700;color:var(--red);}
 .section{padding:72px 0;}
 .section-tight{padding:48px 0;}
+/* Thick black rule at the top of a section's own content — sits inside .container (so it's inset from
+   the viewport edges, matching Obama.org's own section-break rule rather than a full-bleed border on the
+   section itself) rather than stretching edge to edge. */
+.section-rule{height:7px;background:var(--ink-black);margin-bottom:44px;}
 .section-head{max-width:640px;margin-bottom:36px;}
-.section-head h2{font-size:36px;margin:6px 0 10px;}
-.section-head p{color:var(--ink-soft);font-size:15.5px;}
+.section-head h2{font-size:clamp(30px,4.2vw,52px);margin:6px 0 10px;line-height:1.08;}
+.section-head p{color:var(--ink-soft);font-size:16.5px;}
 .grid{display:grid;gap:22px;}
 .grid-3{grid-template-columns:repeat(3,1fr);}
 .grid-4{grid-template-columns:repeat(4,1fr);}
@@ -54,8 +58,13 @@ img{max-width:100%;display:block;}
 .site-header{background:transparent;border-bottom:1px solid transparent;position:fixed;top:0;left:0;right:0;z-index:50;transition:background .25s ease, border-color .25s ease, box-shadow .25s ease, top .3s ease;}
 .header-inner{max-width:1180px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;gap:28px;}
 .logo{display:flex;align-items:center;gap:10px;}
-.logo-mark{width:40px;height:40px;display:block;object-fit:contain;flex-shrink:0;}
-.logo-ej{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:30px;letter-spacing:.08em;color:#fff;line-height:1;transition:color .25s ease;}
+/* Scorecard-arc mark — five segments, one per ward, ending on the site's red accent. Full colour, so
+   unlike the old ring-mark it doesn't need to swap between header states; only the wordmark does. */
+.logo-mark{width:48px;height:28px;display:block;object-fit:contain;flex-shrink:0;}
+/* Same mark, used solo (no adjacent wordmark) in the search overlay and footer. */
+.logo-seal{width:79px;height:46px;display:block;object-fit:contain;flex-shrink:0;}
+.logo-wordmark{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:.01em;color:#fff;line-height:1;white-space:nowrap;transition:color .25s ease;}
+.site-header.header--solid .logo-wordmark{color:var(--ink-black);}
 .nav-links{display:flex;gap:20px;font-size:16.5px;font-weight:700;color:#fff;}
 .nav-links a{transition:color .25s ease;}
 .nav-links a:hover, .nav-links a.current{color:var(--blue);}
@@ -70,7 +79,6 @@ img{max-width:100%;display:block;}
 .nav-toggle{display:none;width:38px;height:38px;border-radius:6px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.06);align-items:center;justify-content:center;color:#fff;cursor:pointer;font-size:16px;transition:color .25s ease, border-color .25s ease, background .25s ease;}
 
 .site-header.header--solid{background:#fff;border-bottom-color:var(--line);box-shadow:0 2px 14px rgba(0,0,0,.07);}
-.site-header.header--solid .logo-ej{color:var(--ink-black);}
 .site-header.header--solid .nav-links{color:var(--ink-black);}
 .site-header.header--solid .nav-search{color:var(--ink-black);}
 .site-header.header--solid .nav-search:hover{background:rgba(0,0,0,.06);}
@@ -86,7 +94,6 @@ img{max-width:100%;display:block;}
 .search-overlay{position:fixed;top:0;left:0;right:0;z-index:65;background:var(--bg-soft);padding:26px 32px 56px;opacity:0;visibility:hidden;transform:translateY(-14px);transition:opacity .25s ease, transform .25s ease, visibility 0s linear .25s;}
 .search-overlay.open{opacity:1;visibility:visible;transform:translateY(0);transition:opacity .25s ease, transform .25s ease;}
 .search-overlay-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:64px;}
-.search-overlay-top .logo-ej{color:var(--ink-black);}
 .search-overlay-close{width:44px;height:44px;border-radius:50%;border:none;background:transparent;display:flex;align-items:center;justify-content:center;font-size:19px;color:var(--ink-black);cursor:pointer;transition:background .2s ease;}
 .search-overlay-close:hover{background:rgba(0,0,0,.06);}
 .search-overlay-form{display:flex;align-items:center;gap:24px;border-bottom:5px solid var(--ink-black);padding-bottom:18px;max-width:1100px;margin:0 auto;}
@@ -100,8 +107,8 @@ img{max-width:100%;display:block;}
    this is the site's main ask (support/donate) and deserves to be the loudest text on the page. */
 .cta-band{background:var(--blue);color:#fff;}
 .cta-band-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:28px;}
-.cta-band h2{color:#fff;font-size:42px;line-height:1.12;max-width:640px;}
-.cta-band p{color:rgba(255,255,255,.94);font-size:17px;font-weight:700;margin-top:10px;max-width:520px;}
+.cta-band h2{color:#fff;font-size:clamp(30px,4.6vw,56px);line-height:1.1;max-width:680px;}
+.cta-band p{color:rgba(255,255,255,.94);font-size:16.5px;font-weight:400;line-height:1.6;margin-top:10px;max-width:520px;}
 .cta-band-btn{font-size:17px;font-weight:700;padding:16px 30px;}
 
 /* No margin-top here on purpose — the CTA band right above (also var(--blue)) needs to run straight
@@ -115,6 +122,7 @@ img{max-width:100%;display:block;}
 .footer-grid > div:first-child p{font-size:15px;font-weight:400;max-width:260px;}
 .footer-grid .social-link{display:flex;align-items:center;gap:11px;font-size:18px;}
 .footer-grid .social-link i{width:18px;text-align:center;font-size:16px;flex-shrink:0;}
+.footer-grid .logo-seal{width:106px;height:62px;}
 .footer-bottom{border-top:1px solid rgba(255,255,255,.28);margin-top:40px;padding-top:20px;display:flex;justify-content:space-between;font-size:14px;color:rgba(255,255,255,.75);flex-wrap:wrap;gap:10px;}
 
 /* ===== hero (full-bleed, minimal — rotating word + fixed phrase over a photo/video background) ===== */
@@ -127,10 +135,18 @@ img{max-width:100%;display:block;}
 /* Full-width spread layout, Obama.org-style: the rotating word sits lower-left, the fixed phrase sits upper-right —
    two blocks spread across the whole hero rather than one stacked, centered column. */
 .hero-content{position:relative;z-index:1;padding:0 48px 64px;width:100%;max-width:none;display:flex;flex-direction:column;justify-content:flex-end;min-height:100vh;}
+.hero-kicker{align-self:flex-start;color:var(--yellow);text-transform:uppercase;letter-spacing:.16em;font-weight:700;font-size:clamp(11px,1.1vw,14px);margin-bottom:16px;opacity:0;transform:translateY(10px);animation:heroFadeIn .7s ease .15s forwards;}
 .hero-rotate{display:flex;flex-direction:column;width:100%;}
-.hero-rotate-word{font-family:var(--font-display);color:#fff;font-weight:600;font-size:112px;line-height:.96;letter-spacing:-.01em;transition:opacity .35s ease, transform .35s ease;align-self:flex-start;}
+.hero-rotate-word{font-family:var(--font-display);color:#fff;font-weight:600;font-size:clamp(56px,12vw,176px);line-height:.94;letter-spacing:-.01em;transition:opacity .35s ease, transform .35s ease;align-self:flex-start;opacity:0;transform:translateY(16px);animation:heroFadeIn .8s ease .3s forwards;}
 .hero-rotate-word.is-swapping{opacity:0;transform:translateY(10px);}
-.hero-rotate-fixed{font-family:var(--font-display);color:#fff;font-weight:600;font-size:64px;line-height:1.05;letter-spacing:-.01em;align-self:flex-end;text-align:right;max-width:640px;margin-top:8px;}
+.hero-rotate-fixed{font-family:var(--font-display);color:#fff;font-weight:600;font-size:clamp(26px,5.2vw,80px);line-height:1.05;letter-spacing:-.01em;align-self:flex-end;text-align:right;max-width:680px;margin-top:8px;opacity:0;transform:translateY(16px);animation:heroFadeIn .8s ease .5s forwards;}
+@keyframes heroFadeIn{to{opacity:1;transform:translateY(0);}}
+.hero-scroll-cue{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:1;color:rgba(255,255,255,.7);font-size:17px;animation:heroScrollBounce 2.2s ease-in-out infinite;}
+@keyframes heroScrollBounce{0%,100%{transform:translate(-50%,0);opacity:.55;}50%{transform:translate(-50%,8px);opacity:1;}}
+@media (prefers-reduced-motion: reduce){
+  .hero-kicker,.hero-rotate-word,.hero-rotate-fixed{animation:none;opacity:1;transform:none;}
+  .hero-scroll-cue{animation:none;}
+}
 
 .launch-strip{display:inline-flex;align-items:center;gap:10px;font-size:12.5px;font-weight:600;color:var(--red);background:var(--red-light);padding:7px 16px;border-radius:20px;margin-bottom:16px;border:1px solid rgba(206,34,39,.25);}
 .launch-strip i{color:var(--red);}
@@ -139,15 +155,18 @@ img{max-width:100%;display:block;}
 
 /* asymmetric flat "Visit"-style duo — one large image, one small, no card boxes/shadows, bold heading + one line + outlined button */
 .visit-duo{display:grid;grid-template-columns:1.8fr 1fr;gap:40px;align-items:start;}
-.visit-primary h3, .visit-secondary h3{font-family:var(--font-display);font-weight:600;font-size:30px;color:var(--ink-black);margin:18px 0 10px;letter-spacing:-.01em;}
-.visit-primary p, .visit-secondary p{font-size:15px;color:var(--ink-soft);margin-bottom:18px;max-width:480px;}
-.visit-img-primary{aspect-ratio:16/8;border-radius:0;width:100%;height:auto;font-size:13px;object-fit:cover;display:block;}
+.visit-primary h3, .visit-secondary h3{font-family:var(--font-display);font-weight:600;font-size:clamp(26px,3.4vw,42px);line-height:1.05;color:var(--ink-black);margin:18px 0 10px;letter-spacing:-.01em;}
+.visit-primary p, .visit-secondary p{font-size:16.5px;font-weight:400;line-height:1.6;color:var(--ink-soft);margin-bottom:18px;max-width:480px;}
+/* Deliberately taller than the portrait beside it — full width, but stretched to a longer aspect
+   ratio so its own bottom edge naturally sits lower than the secondary photo's, rather than the two
+   ever lining up at the same level. */
+.visit-img-primary{aspect-ratio:16/11;border-radius:0;width:100%;height:auto;font-size:13px;object-fit:cover;display:block;}
 .visit-img-secondary{aspect-ratio:4/3;border-radius:0;width:100%;height:auto;font-size:12px;object-fit:cover;object-position:center top;display:block;}
 
 /* standalone mission line, Obama.org-style big statement with inline photo chips */
-.mission-section{background:#fff;border-top:6px solid var(--ink-black);border-bottom:6px solid var(--ink-black);padding:56px 0;}
-.mission-line{font-family:var(--font-h);font-weight:700;font-size:37px;line-height:1.45;color:var(--ink-black);max-width:1020px;margin-top:12px;}
-.mission-line .chip-photo{display:inline-flex;width:64px;height:44px;border-radius:4px;vertical-align:middle;margin:0 8px;overflow:hidden;position:relative;top:-3px;padding:0;font-size:11px;flex-shrink:0;background:var(--ph-bg);}
+.mission-section{background:#fff;padding:56px 0;}
+.mission-line{font-family:var(--font-h);font-weight:700;font-size:clamp(26px,4.6vw,52px);line-height:1.36;color:var(--ink-black);max-width:1120px;margin-top:12px;}
+.mission-line .chip-photo{display:inline-flex;width:clamp(64px,7vw,92px);height:clamp(44px,4.8vw,62px);border-radius:6px;vertical-align:middle;margin:0 10px;overflow:hidden;position:relative;top:-4px;padding:0;font-size:11px;flex-shrink:0;background:var(--ph-bg);}
 .mission-line .chip-photo img{width:100%;height:100%;object-fit:cover;display:block;}
 .reveal-word{display:inline-block;opacity:0;transform:translateY(16px);transition:opacity .5s ease, transform .5s ease;}
 .mission-line.in-view .reveal-word{opacity:1;transform:translateY(0);}
@@ -172,7 +191,7 @@ img{max-width:100%;display:block;}
 .split-panel--sky::before{content:"";position:absolute;top:-50px;right:-70px;width:230px;height:230px;background:repeating-linear-gradient(45deg, rgba(255,255,255,.32) 0 3px, transparent 3px 16px);transform:rotate(14deg);pointer-events:none;z-index:0;}
 .split-panel--sky::after{content:'\2726  \2727  \2726';position:absolute;top:26px;right:34px;font-size:15px;letter-spacing:9px;color:rgba(255,255,255,.6);pointer-events:none;z-index:0;}
 .split-panel--sky .eyebrow{font-size:13px;padding-bottom:12px;margin-bottom:6px;border-bottom:2px solid rgba(0,0,0,.2);display:inline-block;}
-.split-panel--sky h3{font-size:46px;max-width:420px;}
+.split-panel--sky h3{font-size:clamp(34px,4.6vw,56px);line-height:1.06;max-width:460px;}
 .split-panel--sky .split-panel-link{font-size:16px;}
 
 .split-cards{max-height:600px;overflow-y:auto;padding:14px;background:var(--bg-soft);border:1px solid var(--line);border-radius:18px;scrollbar-width:thin;scrollbar-color:var(--red) transparent;}
@@ -181,24 +200,147 @@ img{max-width:100%;display:block;}
 .split-card{display:flex;gap:16px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:14px;margin-bottom:10px;transition:transform .25s ease, box-shadow .25s ease;}
 .split-card:last-child{margin-bottom:0;}
 .split-card:hover{transform:translateX(4px);box-shadow:0 10px 22px rgba(0,0,0,.14);}
-.split-card-img{width:110px;height:92px;flex:none;border-radius:6px;font-size:11px;}
+.split-card-img{width:126px;height:106px;flex:none;border-radius:6px;font-size:11px;}
 .split-card-body{flex:1;min-width:0;}
-.split-card-body h4{font-size:15.5px;margin:6px 0 6px;font-family:var(--font-h);color:var(--ink-black);}
-.split-card-body p{font-size:12.5px;color:var(--ink-soft);margin-bottom:8px;}
-.tag-plain{display:inline-flex;align-items:center;gap:7px;font-size:11px;color:var(--ink-mute);text-transform:uppercase;letter-spacing:.04em;}
+.split-card-body h4{font-size:19px;margin:7px 0 7px;font-family:var(--font-h);color:var(--ink-black);line-height:1.2;}
+.split-card-body p{font-size:14.5px;color:var(--ink-soft);margin-bottom:10px;line-height:1.5;}
+.tag-plain{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--ink-mute);text-transform:uppercase;letter-spacing:.04em;font-weight:600;}
 .tag-plain i{font-size:3px;}
-.latest-meta{display:block;font-size:12px;color:var(--ink-mute);margin-top:8px;}
+.latest-meta{display:block;font-size:13.5px;color:var(--ink-mute);margin-top:8px;}
+.split-card-badges{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px;}
+.split-card-badges .source-chip{margin-top:0;}
+.split-cards .data-state{padding:30px 4px;font-size:13px;}
 
-/* Top announcement banner — index.html only, static (no scroll/marquee), big and bold like Obama.org's
-   "Museum Ticket Availability" strip. Fixed above the (initially transparent) header; fades out the moment
-   the page scrolls, at which point the solid white header takes over the top of the viewport. */
-.top-banner{background:var(--yellow);color:#000;padding:30px 0;position:fixed;top:0;left:0;right:0;z-index:56;transition:opacity .3s ease, transform .3s ease;}
+/* Skeleton loading state — shimmering placeholder cards shown while live data is being fetched, in
+   place of a spinner. Shapes match the real cards so nothing jumps once data arrives. */
+.skeleton-line{position:relative;overflow:hidden;height:12px;border-radius:6px;background:var(--ph-bg);margin-bottom:10px;}
+.skeleton-line--tag{width:50%;height:10px;}
+.skeleton-line--title{width:78%;height:19px;margin-top:8px;}
+.skeleton-line--text{width:100%;}
+.skeleton-line--text.short{width:60%;}
+.skeleton-line--pill{width:100px;height:24px;border-radius:20px;margin-top:6px;margin-bottom:0;}
+.skeleton-img{position:relative;overflow:hidden;background:var(--ph-bg);}
+.skeleton-proj-card .skeleton-img{aspect-ratio:16/10;}
+.skeleton-line::after, .skeleton-img::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg, transparent, rgba(255,255,255,.6), transparent);transform:translateX(-100%);animation:skeletonSweep 1.6s ease-in-out infinite;}
+@keyframes skeletonSweep{100%{transform:translateX(100%);}}
+@media (prefers-reduced-motion: reduce){
+  .skeleton-line::after, .skeleton-img::after{animation:none;}
+}
+.skeleton-split{display:flex;gap:16px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:14px;margin-bottom:10px;}
+.skeleton-split:last-child{margin-bottom:0;}
+.skeleton-split .skeleton-img{width:126px;height:106px;flex:none;border-radius:6px;}
+.skeleton-split .skeleton-body{flex:1;min-width:0;padding-top:4px;}
+
+/* About Erick — hero intro */
+.about-hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;}
+.about-hero-grid .eyebrow{font-size:clamp(20px,2.6vw,32px);letter-spacing:.02em;}
+.journey-head .eyebrow{font-size:clamp(20px,2.6vw,32px);letter-spacing:.02em;}
+.about-hero-grid h1{font-size:clamp(36px,4.6vw,58px);line-height:1.05;margin:10px 0 16px;}
+.about-hero-grid .lead{font-size:17.5px;color:var(--ink-soft);line-height:1.6;max-width:520px;}
+.about-portrait{aspect-ratio:4/5;border-radius:var(--radius);overflow:hidden;}
+.about-portrait img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
+
+/* About Erick — sequential life-story timeline. A vertical spine runs down the center (left edge on
+   mobile) connecting every stage; media and text alternate sides so it reads as a deliberate visual
+   narrative rather than a repeating list. Photo slots use .ph until real family/childhood photos are
+   supplied — never a stand-in stock photo, since this page is specifically about real biography. */
+.story-spine{position:relative;margin-top:8px;}
+.story-spine::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--line);transform:translateX(-1px);}
+.story-stage{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;padding:52px 0;}
+.story-stage-media{aspect-ratio:4/3;}
+.story-stage-media .ph{height:100%;}
+.story-stage-media img{width:100%;height:100%;object-fit:cover;display:block;}
+.story-stage-year{display:inline-block;font-family:var(--font-display);font-weight:600;font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
+.story-stage-body h3{font-size:clamp(27px,2.9vw,36px);margin-bottom:14px;line-height:1.1;}
+.story-stage-body p{font-size:17px;color:var(--ink-soft);line-height:1.65;max-width:480px;}
+.story-stage-dot{position:absolute;top:50%;left:50%;width:16px;height:16px;border-radius:50%;background:var(--blue);border:4px solid #fff;box-shadow:0 0 0 2px var(--blue);transform:translate(-50%,-50%);z-index:2;}
+.story-stage:nth-child(even) .story-stage-media{order:2;}
+.story-stage:nth-child(even) .story-stage-body{order:1;text-align:right;}
+.story-stage:nth-child(even) .story-stage-body p{margin-left:auto;}
+.story-stage:first-child{padding-top:0;}
+.story-stage:last-child{padding-bottom:0;}
+
+/* Colored story panels — alternating yellow/blue background behind each stage's text, the same
+   gradient treatment as the "Why this foundation" panel on the homepage, so the timeline reads as a
+   sequence of distinct, deliberate moments rather than plain text next to a photo. */
+.story-panel{position:relative;overflow:hidden;border-radius:18px;padding:36px 40px;box-shadow:0 14px 32px rgba(0,0,0,.09);}
+.story-panel .story-stage-year, .story-panel h3, .story-panel p{position:relative;z-index:1;}
+.story-panel--yellow{background:linear-gradient(148deg,#FFD24D 0%,var(--yellow) 45%,#F2A900 100%);}
+.story-panel--yellow .story-stage-year{color:rgba(0,0,0,.55);}
+.story-panel--yellow h3{color:#000;}
+.story-panel--yellow p{color:rgba(0,0,0,.72);}
+.story-panel--blue{background:linear-gradient(148deg,#2E86FF 0%,var(--blue) 55%,var(--blue-deep) 100%);}
+.story-panel--blue .story-stage-year{color:rgba(255,255,255,.75);}
+.story-panel--blue h3{color:#fff;}
+.story-panel--blue p{color:rgba(255,255,255,.88);}
+
+/* Decorative art on each panel — a rotated diagonal-stripe square plus a small cluster of stars,
+   tucked in the top corner, same technique as the tracker panel on the homepage but mirrored/recolored
+   per side so it works with both the alternating panel color and the alternating left/right layout. */
+.story-panel::before{content:"";position:absolute;top:-46px;width:210px;height:210px;background-repeat:no-repeat;transform:rotate(14deg);pointer-events:none;z-index:0;}
+.story-panel::after{position:absolute;top:24px;font-size:15px;letter-spacing:9px;pointer-events:none;z-index:0;}
+.story-panel--yellow::before{right:-62px;background:repeating-linear-gradient(45deg, rgba(0,0,0,.12) 0 3px, transparent 3px 16px);}
+.story-panel--yellow::after{content:'\2726  \2727  \2726';right:30px;color:rgba(0,0,0,.28);}
+.story-panel--blue::before{left:-62px;transform:rotate(-14deg);background:repeating-linear-gradient(45deg, rgba(255,255,255,.28) 0 3px, transparent 3px 16px);}
+.story-panel--blue::after{content:'\2726  \2727  \2726';left:30px;color:rgba(255,255,255,.55);}
+
+/* About Erick — pull-quote panel. Same contained/rounded panel language as the story panels above, but
+   ink-black with an oversized translucent quote mark, used as a single strong personal beat between the
+   hero and the journey timeline rather than another chronology block. */
+.pull-quote-panel{position:relative;overflow:hidden;background:var(--ink-black);border-radius:18px;padding:76px 64px;text-align:center;}
+.pull-quote-panel::before{content:'"';position:absolute;top:-96px;left:50%;transform:translateX(-50%);font-family:var(--font-h);font-size:340px;font-weight:700;color:rgba(255,255,255,.06);line-height:1;pointer-events:none;z-index:0;}
+.pull-quote-panel::after{content:'\2726  \2727  \2726';position:absolute;bottom:22px;left:50%;transform:translateX(-50%);font-size:14px;letter-spacing:9px;color:rgba(255,255,255,.18);pointer-events:none;z-index:0;}
+.pull-quote-text{position:relative;z-index:1;color:#fff;font-family:var(--font-h);font-weight:700;font-size:clamp(25px,3.3vw,40px);line-height:1.4;max-width:840px;margin:0 auto;}
+.pull-quote-cite{position:relative;z-index:1;display:block;margin-top:26px;color:var(--yellow);font-family:var(--font-b);font-weight:700;font-size:13.5px;letter-spacing:.07em;text-transform:uppercase;}
+
+/* About Erick — "Why I'm Running": deliberately text-forward (no photo slot) editorial block. Instead of
+   leaving the right side of the container empty, a magazine-style pull-quote excerpt (lifted from the
+   body copy itself) sits alongside the paragraphs — a classic editorial op-ed layout rather than another
+   image-plus-caption block. */
+.why-running-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:64px;align-items:start;}
+.why-running-body{font-size:18px;line-height:1.8;color:var(--ink-soft);border-left:4px solid var(--red);padding-left:32px;}
+.why-running-body p{margin-bottom:20px;}
+.why-running-body p:last-child{margin-bottom:0;color:var(--ink-black);font-weight:600;}
+.why-running-excerpt{position:sticky;top:130px;border-left:4px solid var(--blue);padding-left:28px;}
+.why-running-excerpt blockquote{font-family:var(--font-h);font-weight:700;font-size:clamp(21px,2vw,28px);line-height:1.44;color:var(--ink-black);}
+.why-running-excerpt-cite{display:block;margin-top:16px;font-family:var(--font-b);font-weight:700;font-size:12.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--blue);}
+
+/* About Erick — "Explore Further" cards reuse .pillar-card's look but are real links (whole card
+   clickable) rather than static info cards, so they need pointer cursor + block display. */
+.explore-card{display:block;cursor:pointer;}
+.explore-card .value-card-link{margin-top:12px;}
+
+/* Top announcement banner — index.html only. Obama.org's own taller, two-row "Museum Ticket Availability"
+   pattern: a fixed bold black category title on top, the actual update content (still a scrolling
+   marquee, per an earlier request) below it — rather than one single scrolling line. Fixed above the
+   (initially transparent) header; fades out the moment the page scrolls, at which point the solid white
+   header takes over the top of the viewport. */
+.top-banner{background:var(--yellow);color:#000;padding:26px 0 28px;position:fixed;top:0;left:0;right:0;z-index:56;transition:opacity .3s ease, transform .3s ease;overflow:hidden;}
 .top-banner.is-hidden{opacity:0;transform:translateY(-12px);pointer-events:none;}
-.top-banner-inner{display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;}
-.top-banner-text h3{font-family:var(--font-display);font-weight:600;font-size:30px;line-height:1.15;letter-spacing:-.005em;margin-bottom:8px;}
-.top-banner-text p{font-size:16.5px;color:rgba(0,0,0,.78);max-width:760px;}
-.top-banner-link{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;color:#000;white-space:nowrap;transition:gap .2s ease;flex-shrink:0;}
-.top-banner-link:hover{gap:12px;}
+.top-banner-inner{display:block;}
+.top-banner-content{min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:8px;}
+.top-banner-title{font-family:var(--font-display);font-weight:800;font-size:clamp(22px,2.4vw,30px);line-height:1.05;letter-spacing:-.005em;color:#000;}
+.top-banner-row{width:100%;display:flex;align-items:center;justify-content:space-between;gap:32px;}
+
+/* Continuous right-to-left marquee — the headline/summary track is duplicated back-to-back and
+   scrolled exactly half its own width on an infinite loop, so the seam between the two copies is
+   never visible and the motion never stutters or resets. The "Get notified" link sits outside the
+   scrolling track entirely, so it never moves. Pauses on hover so it can actually be read if wanted. */
+.top-banner-marquee{flex:1;min-width:0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent);mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent);}
+.top-banner-track{display:flex;width:max-content;animation:bannerScroll 20s linear infinite;}
+.top-banner-marquee:hover .top-banner-track{animation-play-state:paused;}
+.top-banner-item{display:flex;align-items:baseline;white-space:nowrap;padding-right:56px;}
+.top-banner-item .headline{font-family:var(--font-b);font-weight:700;font-size:17px;letter-spacing:0;color:#000;}
+.top-banner-item .sep{margin:0 14px;font-size:15px;opacity:.5;}
+.top-banner-item .summary{font-size:17px;font-weight:400;color:rgba(0,0,0,.75);}
+@keyframes bannerScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@media (prefers-reduced-motion: reduce){.top-banner-track{animation:none;}}
+
+/* "Get notified" — sits bottom-right, on the same row as (and vertically centered against) the
+   scrolling content, matching Obama.org's own layout. Bolder/bigger than the original single-line
+   version so it still reads as a clear call to action. */
+.top-banner-link{display:inline-flex;align-items:center;gap:10px;font-weight:800;font-size:18px;color:#000;white-space:nowrap;transition:gap .2s ease;flex-shrink:0;}
+.top-banner-link:hover{gap:14px;}
 
 .proj-card{transition:transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease;}
 .proj-card:hover, .proj-card:focus-within{transform:translateY(-8px); box-shadow:0 22px 40px rgba(0,0,0,.18), 0 2px 8px rgba(0,0,0,.08);}
@@ -209,7 +351,7 @@ img{max-width:100%;display:block;}
 .proj-body .ward{font-size:11.5px;color:var(--ink-mute);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;}
 .proj-body h4{font-size:16px;margin-bottom:8px;font-family:var(--font-h);color:var(--ink-black);}
 .proj-meta{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:12px;color:var(--ink-mute);font-variant-numeric:tabular-nums;}
-.badge{display:inline-flex;align-items:center;gap:5px;padding:4px 11px;border-radius:20px;font-size:11.5px;font-weight:600;letter-spacing:.02em;}
+.badge{display:inline-flex;align-items:center;gap:5px;padding:5px 13px;border-radius:20px;font-size:13px;font-weight:600;letter-spacing:.02em;}
 .badge i{font-size:10px;}
 .badge-ongoing{background:var(--yellow-light);color:var(--yellow-deep);}
 .badge-complete{background:var(--green-light);color:var(--green);}
@@ -219,27 +361,115 @@ img{max-width:100%;display:block;}
 @media (prefers-reduced-motion: reduce){
   .proj-card, .proj-card .ph img, .proj-card img.proj-photo, .progress-fill{transition:none;}
 }
-.source-chip{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;margin-top:8px;}
+.source-chip{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;padding:5px 12px;border-radius:20px;margin-top:8px;}
 .source-fnd{background:var(--red-light);color:var(--red);}
 .source-gov{background:#E7EEF9;color:#2453A6;}
 .source-partner{background:var(--yellow-light);color:var(--yellow-deep);}
 .source-adv{background:#F1EFEA;color:#6B6558;}
+.proj-body p{font-size:13px;color:var(--ink-soft);margin:0 0 10px;line-height:1.5;}
+.proj-body .evidence-note{font-size:12px;color:var(--ink-mute);margin-top:10px;display:flex;align-items:flex-start;gap:6px;}
+.proj-body .evidence-note i{margin-top:2px;flex-shrink:0;}
+.proj-body .linked-chip{margin-left:8px;}
 
-/* "Recent moments" carousel — manual only, no autoplay. Native horizontal scroll-snap does the sliding;
-   the arrow buttons just nudge it one tile at a time, and it's swipeable on touch out of the box. */
-.media-carousel{display:flex;align-items:center;gap:14px;}
-.carousel-arrow{flex:none;width:46px;height:46px;border-radius:50%;border:1.5px solid var(--line);background:#fff;color:var(--ink-black);display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;transition:background .2s ease, color .2s ease, border-color .2s ease, opacity .2s ease;}
-.carousel-arrow:hover:not(:disabled){background:var(--ink-black);color:#fff;border-color:var(--ink-black);}
-.carousel-arrow:disabled{opacity:.32;cursor:not-allowed;}
-.media-track-wrap{flex:1;min-width:0;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-ms-overflow-style:none;}
-.media-track-wrap::-webkit-scrollbar{display:none;}
-.media-track{display:flex;gap:14px;}
-.media-tile{flex:0 0 260px;width:260px;scroll-snap-align:start;}
-.media-tile .ph{aspect-ratio:1/1;position:relative;height:auto;}
-.media-tile .play{position:absolute;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center;color:var(--ink-black);}
+/* Filter bar used on the Development Tracker and Promise Scorecard pages */
+.filter-bar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:32px;}
+.filter-bar select{padding:10px 18px;border:1.5px solid var(--line);border-radius:24px;font-family:var(--font-b);font-size:13.5px;font-weight:600;color:var(--ink);background:#fff;cursor:pointer;transition:border-color .2s ease, color .2s ease;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23454E53' stroke-width='1.5' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:34px;}
+.filter-bar select:hover, .filter-bar select:focus{border-color:var(--blue);color:var(--blue);outline:none;}
+
+.data-state{color:var(--ink-mute);font-size:14.5px;padding:60px 0;text-align:center;}
+.data-state i{display:block;font-size:22px;margin-bottom:10px;opacity:.6;}
+
+/* Form fields — contact form, newsletter signup */
+.field{margin-bottom:18px;}
+.field label{display:block;font-size:13px;font-weight:700;color:var(--ink);margin-bottom:7px;}
+.field input, .field textarea{width:100%;padding:13px 16px;border:1.5px solid var(--line);border-radius:8px;font-family:var(--font-b);font-size:14.5px;color:var(--ink);background:#fff;transition:border-color .2s ease;}
+.field input:focus, .field textarea:focus{outline:none;border-color:var(--blue);}
+.field textarea{resize:vertical;min-height:130px;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+
+.form-note{font-size:13.5px;margin-top:16px;padding:12px 16px;border-radius:8px;font-weight:600;}
+.form-note--success{background:var(--green-light);color:var(--green);}
+.form-note--error{background:var(--red-light);color:var(--red);}
+
+/* Contact page: form + direct-contact sidebar */
+.contact-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:56px;align-items:start;}
+.contact-side{background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius);padding:28px;}
+.contact-side h4{font-size:15px;margin-bottom:14px;}
+.contact-side p{font-size:14.5px;color:var(--ink-soft);margin-bottom:10px;display:flex;align-items:center;gap:10px;}
+.contact-side p i{color:var(--red);width:16px;text-align:center;flex-shrink:0;}
+.contact-side .social-row{display:flex;gap:10px;}
+.contact-side .social-row a{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--ink);transition:background .2s ease, color .2s ease, border-color .2s ease;}
+.contact-side .social-row a:hover{background:var(--blue);color:#fff;border-color:var(--blue);}
+
+/* Newsletter signup — id="stay-updated", the actual target of every "Stay updated" link site-wide.
+   Matches the Obama Foundation's own "Be an insider" section field-for-field: full-bleed cream section,
+   generous top/bottom padding so the block reads as broad/tall the way theirs does, big bold heading +
+   one line of copy on the left, individually labeled underline-only fields stacked on the right — no
+   boxed inputs, no rounded card. Reuses --ph-bg (the off-white already used for placeholder art). */
+.insider-section{background:var(--ph-bg);padding:88px 0 96px;}
+.insider-box{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;padding:12px 0 4px;}
+.insider-copy h2{font-size:clamp(34px,4.4vw,58px);line-height:1.05;margin-bottom:18px;}
+.insider-copy p{font-size:16.5px;font-weight:400;color:var(--ink-soft);max-width:440px;line-height:1.6;}
+.insider-form{max-width:480px;}
+.insider-field{margin-bottom:44px;}
+.insider-field label{display:block;font-weight:700;font-size:15px;color:var(--ink-black);margin-bottom:10px;}
+.insider-field input{width:100%;border:none;border-bottom:2px solid var(--ink-black);background:transparent;padding:8px 2px;font-size:16.5px;color:var(--ink-black);font-family:var(--font-b);border-radius:0;}
+.insider-field input:focus{outline:none;border-bottom-color:var(--blue);}
+.insider-field input::placeholder{color:var(--ink-mute);}
+.insider-disclaimer{font-size:13px;line-height:1.6;color:var(--ink-mute);margin-bottom:28px;}
+.insider-disclaimer a{color:var(--ink-black);text-decoration:underline;text-underline-offset:2px;}
+.insider-disclaimer a:hover{color:var(--blue);}
+.insider-consent-row{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+.insider-checkbox{display:flex;align-items:center;gap:10px;font-size:14.5px;color:var(--ink-black);cursor:pointer;}
+.insider-checkbox input{width:18px;height:18px;flex-shrink:0;accent-color:var(--blue);cursor:pointer;}
+.insider-checkbox a{color:var(--ink-black);text-decoration:underline;text-underline-offset:2px;}
+.insider-checkbox a:hover{color:var(--blue);}
+.insider-submit{border-color:var(--ink-black);flex-shrink:0;}
+.insider-submit:hover{border-color:var(--blue);color:var(--blue);}
+.insider-form .form-note{margin-top:18px;}
+.insider-form .form-note--success{color:var(--green);}
+.insider-form .form-note--error{color:var(--red);}
+
+/* Full-bleed "impact so far" stat strip — live counts pulled from the API, count up when scrolled
+   into view. Red on purpose: distinct from the black hero above and the blue CTA/footer further down,
+   so the page reads as a sequence of deliberate color blocks rather than white-with-cards throughout. */
+.impact-strip{background:var(--red);}
+.impact-strip-inner{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+.impact-stat{text-align:center;padding:6px 12px;border-right:1px solid rgba(255,255,255,.25);}
+.impact-stat:last-child{border-right:none;}
+.impact-stat b{display:block;font-family:var(--font-h);font-size:clamp(30px,4vw,46px);color:#fff;line-height:1;font-variant-numeric:tabular-nums;}
+.impact-stat span{display:block;margin-top:8px;font-size:12.5px;color:rgba(255,255,255,.88);text-transform:uppercase;letter-spacing:.06em;font-weight:700;}
+
+/* Generic scroll-triggered reveal, applied selectively to section heads and key panels/cards so the
+   page feels alive as you scroll rather than everything just being present on load. */
+.reveal-up{opacity:0;transform:translateY(26px);transition:opacity .65s ease, transform .65s cubic-bezier(.22,.7,.3,1);}
+.reveal-up.in-view{opacity:1;transform:translateY(0);}
+.value-grid .reveal-up:nth-child(1){transition-delay:0ms;}
+.value-grid .reveal-up:nth-child(2){transition-delay:80ms;}
+.value-grid .reveal-up:nth-child(3){transition-delay:160ms;}
+.value-grid .reveal-up:nth-child(4){transition-delay:240ms;}
+.impact-strip-inner .reveal-up:nth-child(1){transition-delay:0ms;}
+.impact-strip-inner .reveal-up:nth-child(2){transition-delay:90ms;}
+.impact-strip-inner .reveal-up:nth-child(3){transition-delay:180ms;}
+.impact-strip-inner .reveal-up:nth-child(4){transition-delay:270ms;}
 @media (prefers-reduced-motion: reduce){
-  .media-track-wrap{scroll-behavior:auto;}
+  .reveal-up{transition:none;opacity:1;transform:none;}
 }
+
+/* "Recent moments" — Obama.org "Experience the Center" pattern: a static 3-column grid with thin
+   vertical rules between columns (not cards), image on top, bold heading, one line of copy, and an
+   underlined "Learn more"-style link. Images only, no carousel/video. */
+.field-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:8px;}
+.field-item{padding:0 32px;}
+.field-item:first-child{padding-left:0;}
+.field-item:last-child{padding-right:0;}
+.field-item:not(:first-child){border-left:1px solid var(--line);}
+.field-item-media{aspect-ratio:4/3;margin-bottom:24px;}
+.field-item-media .ph{height:100%;}
+.field-item h3{font-size:clamp(20px,2vw,26px);margin-bottom:10px;line-height:1.15;}
+.field-item p{font-size:16.5px;font-weight:400;color:var(--ink-soft);line-height:1.6;margin-bottom:16px;}
+.field-item-link{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14px;color:var(--ink-black);text-decoration:underline;text-underline-offset:3px;transition:color .2s ease, gap .2s ease;}
+.field-item-link:hover{color:var(--blue);gap:12px;}
 
 /* "Why this foundation" — Obama.org "Programs" pattern, mirrored: 2x2 value-card grid on the left, a
    contained yellow statement box on the right. Obama's Programs box isn't full-bleed — it's sized to its
@@ -253,9 +483,9 @@ img{max-width:100%;display:block;}
 .split-panel--yellow{background:linear-gradient(148deg,#FFD24D 0%,var(--yellow) 45%,#F2A900 100%);border-radius:18px;max-width:600px;width:100%;padding:64px 56px;}
 .split-panel--yellow::before{content:'"';position:absolute;top:-64px;right:16px;font-family:var(--font-h);font-size:260px;font-weight:700;color:rgba(0,0,0,.08);line-height:1;pointer-events:none;z-index:0;}
 .split-panel--yellow .eyebrow{color:#000;font-size:13px;position:relative;z-index:1;display:inline-block;padding-bottom:12px;margin-bottom:6px;border-bottom:2px solid rgba(0,0,0,.22);}
-.split-panel--yellow .split-panel-statement{max-width:none;font-size:34px;line-height:1.38;}
+.split-panel--yellow .split-panel-statement{max-width:none;font-size:clamp(28px,3.6vw,44px);line-height:1.28;}
 .split-panel--yellow .split-panel-link{font-size:16px;position:relative;z-index:1;}
-.split-panel-statement{color:#000;font-family:var(--font-h);font-weight:700;font-size:28px;line-height:1.42;margin:14px 0 24px;max-width:440px;position:relative;z-index:1;}
+.split-panel-statement{color:#000;font-family:var(--font-h);font-weight:700;font-size:clamp(24px,2.8vw,32px);line-height:1.34;margin:14px 0 24px;max-width:460px;position:relative;z-index:1;}
 
 .value-grid{display:grid;grid-template-columns:repeat(2,1fr);}
 .value-card{padding:34px;}
@@ -268,8 +498,8 @@ img{max-width:100%;display:block;}
   .value-card-img{transition:none;}
   .value-card:hover .value-card-img{transform:none;}
 }
-.value-card h3{font-size:19px;margin-bottom:9px;}
-.value-card p{font-size:13.5px;color:var(--ink-soft);margin-bottom:14px;line-height:1.5;}
+.value-card h3{font-size:clamp(20px,1.9vw,25px);margin-bottom:9px;line-height:1.15;}
+.value-card p{font-size:16.5px;font-weight:400;color:var(--ink-soft);margin-bottom:14px;line-height:1.6;}
 .value-card-link{display:inline-flex;align-items:center;gap:7px;font-weight:700;font-size:13.5px;color:var(--ink-black);text-decoration:underline;text-underline-offset:3px;transition:color .2s ease, gap .2s ease;}
 .value-card-link:hover{color:var(--red);gap:11px;}
 
@@ -311,25 +541,29 @@ img{max-width:100%;display:block;}
 @media(max-width:960px){
   .grid-4{grid-template-columns:repeat(2,1fr);}
   .grid-3{grid-template-columns:repeat(2,1fr);}
-  .media-tile{flex-basis:220px;width:220px;}
-  .carousel-arrow{width:40px;height:40px;font-size:13px;}
+  .field-grid{grid-template-columns:1fr 1fr;gap:28px 0;}
+  .field-item{padding:0 20px;}
+  .field-item:nth-child(2n+1){border-left:none;padding-left:0;}
   .footer-grid{grid-template-columns:repeat(2,1fr);}
-  .cta-band h2{font-size:32px;}
   .cta-band-inner{gap:20px;}
   .nav-links{display:none;}
   .nav-toggle{display:flex;}
   .header-inner{gap:14px;padding:12px 20px;}
   .header-actions{gap:8px;}
   .nav-search{display:none;}
-  .logo-ej{font-size:24px;}
+  .logo-seal{width:65px;height:38px;}
+  .logo-mark{width:38px;height:22px;}
+  .logo-wordmark{font-size:16px;}
   .header-actions .btn-primary{padding:9px 14px;font-size:13px;}
   .hero-content{padding:0 28px 44px;min-height:100vh;}
-  .hero-rotate-word{font-size:74px;}
-  .hero-rotate-fixed{font-size:40px;max-width:100%;}
+  .hero-rotate-fixed{max-width:100%;}
+  .impact-strip-inner{grid-template-columns:repeat(2,1fr);}
+  .impact-stat{border-right:none !important;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:20px;}
+  .impact-stat:nth-last-child(-n+2){border-bottom:none;}
   .visit-duo,.tracker-split-grid{grid-template-columns:1fr;}
   .split-panel{padding:40px 28px;}
   .split-panel--sky{padding:40px 28px;}
-  .split-panel--sky h3{font-size:34px;max-width:100%;}
+  .split-panel--sky h3{max-width:100%;}
   .split-panel--sky::before{width:170px;height:170px;top:-36px;right:-56px;}
   .split-panel--sky::after{top:20px;right:26px;font-size:13px;letter-spacing:7px;}
   .split-cards{max-height:440px;}
@@ -338,15 +572,41 @@ img{max-width:100%;display:block;}
   .value-card{padding:24px;}
   .split-panel--yellow{max-width:100%;padding:40px 32px;}
   .split-panel--yellow::before{font-size:180px;top:-46px;}
+  .contact-grid{grid-template-columns:1fr;gap:32px;}
+  .insider-section{padding:56px 0 64px;}
+  .insider-box{grid-template-columns:1fr;gap:32px;}
+  .insider-consent-row{flex-direction:column;align-items:flex-start;gap:18px;}
+  .insider-submit{width:100%;justify-content:center;}
+  .story-panel::before{width:160px;height:160px;top:-34px;}
+  .story-panel--yellow::before{right:-46px;}
+  .story-panel--blue::before{left:-46px;}
+  .about-hero-grid{grid-template-columns:1fr;gap:32px;}
+  .about-hero-grid .about-portrait{max-width:360px;}
+  .story-stage{grid-template-columns:1fr;gap:22px;padding-left:44px;padding-top:36px;padding-bottom:36px;}
+  .story-spine::before{left:16px;}
+  .story-stage-dot{left:16px;top:30px;}
+  .story-stage:nth-child(even) .story-stage-media{order:0;}
+  .story-stage:nth-child(even) .story-stage-body{order:0;text-align:left;}
+  .story-stage:nth-child(even) .story-stage-body p{margin-left:0;}
+  .story-panel{padding:26px 24px;}
+  .story-panel::before{width:120px;height:120px;top:-24px;}
+  .story-panel--yellow::before{right:-34px;}
+  .story-panel--blue::before{left:-34px;}
+  .story-panel::after{font-size:11px;letter-spacing:5px;top:16px;}
+  .pull-quote-panel{padding:48px 28px;}
+  .pull-quote-panel::before{font-size:180px;top:-46px;}
+  .why-running-grid{grid-template-columns:1fr;gap:32px;}
+  .why-running-body{padding-left:20px;border-left-width:3px;font-size:16.5px;}
+  .why-running-excerpt{position:static;padding-left:20px;border-left-width:3px;}
+  .section-rule{height:6px;margin-bottom:30px;}
 }
 @media(max-width:640px){
   .grid-4,.grid-3{grid-template-columns:1fr;}
-  .media-tile{flex-basis:180px;width:180px;}
-  .carousel-arrow{display:none;}
+  .field-grid{grid-template-columns:1fr;gap:32px;}
+  .field-item{padding:0;border-left:none !important;}
   .footer-grid{grid-template-columns:1fr;}
   .footer-grid h4{font-size:21px;}
   .footer-grid a,.footer-grid p{font-size:17px;}
-  .cta-band h2{font-size:26px;}
   .cta-band-btn{width:100%;justify-content:center;}
   /* On phones, keep the unscrolled header a solid dark bar instead of transparent-over-photo —
      white text on a busy hero image is harder to read at this size, and Obama.org does the same on mobile. */
@@ -356,28 +616,30 @@ img{max-width:100%;display:block;}
   .search-overlay-input{font-size:30px;}
   .search-overlay-form{gap:14px;padding-bottom:12px;border-bottom-width:3px;}
   .search-overlay-submit{width:46px;height:46px;font-size:15px;}
-  .top-banner{padding:22px 0;}
-  .top-banner-text h3{font-size:22px;}
-  .top-banner-text p{font-size:14.5px;}
+  .top-banner{padding:18px 0 20px;}
+  .top-banner-content{gap:6px;}
+  .top-banner-item .headline{font-size:15px;}
+  .top-banner-item .sep{margin:0 10px;font-size:13px;}
+  .top-banner-item .summary{font-size:14px;}
+  .top-banner-link{font-size:15px;}
   .hero-content{padding:0 20px 32px;min-height:100vh;}
-  .hero-rotate-word{font-size:48px;}
-  .hero-rotate-fixed{font-size:24px;align-self:flex-start;text-align:left;max-width:100%;margin-top:6px;}
+  .hero-rotate-fixed{align-self:flex-start;text-align:left;max-width:100%;margin-top:6px;}
+  .hero-scroll-cue{display:none;}
   .value-grid{grid-template-columns:1fr;}
   .value-card{border-right:none !important;border-bottom:1px solid var(--line) !important;padding:22px 0 !important;}
   .value-card:first-child{padding-top:0 !important;}
   .value-card:last-child{border-bottom:none !important;}
-  .split-panel-statement{font-size:22px;max-width:100%;}
-  .split-panel--yellow .split-panel-statement{font-size:21px;}
+  .split-panel-statement{max-width:100%;}
   .split-panel--yellow{padding:32px 26px;}
   .split-panel--yellow::before{font-size:130px;top:-30px;right:4px;}
   .split-panel--sky{padding:32px 26px;}
-  .split-panel--sky h3{font-size:27px;}
   .split-panel--sky::before{width:130px;height:130px;top:-24px;right:-40px;}
   .split-panel--sky::after{top:16px;right:20px;font-size:11px;letter-spacing:5px;}
-  .mission-section{padding:40px 0;border-width:4px;}
-  .mission-line{font-size:24px;}
+  .mission-section{padding:40px 0;}
   .mission-line .chip-photo{width:48px;height:34px;margin:0 5px;}
   .signup-card{flex-direction:column;align-items:flex-start;}
+  .field-row{grid-template-columns:1fr;gap:0;}
+  .insider-field{margin-bottom:32px;}
 }
 @media (prefers-reduced-motion: reduce){
   .hero-rotate-word{transition:none;}

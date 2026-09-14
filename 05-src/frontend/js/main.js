@@ -174,6 +174,28 @@ function initMediaCarousel() {
   updateArrows();
 }
 
+// Generic scroll-triggered reveal (fade + rise) applied to any element carrying .reveal-up —
+// section heads, value cards, split panels, the subscribe band, the impact stat tiles. Keeps the
+// page feeling alive as you scroll instead of everything just being present on load.
+function initScrollReveals() {
+  var els = document.querySelectorAll('.reveal-up');
+  if (!els.length) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)) {
+    els.forEach(function (el) { el.classList.add('in-view'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries, obs) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  els.forEach(function (el) { io.observe(el); });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   // mark current nav item
   var path = window.location.pathname.split('/').pop() || 'index.html';
@@ -186,4 +208,5 @@ document.addEventListener('DOMContentLoaded', function () {
   rotateHero();
   initHeaderScroll();
   initMediaCarousel();
+  initScrollReveals();
 });

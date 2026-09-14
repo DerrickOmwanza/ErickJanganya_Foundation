@@ -9,29 +9,47 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <link rel="stylesheet" href="css/style.css">
-<link rel="icon" type="image/png" href="img/favicon-32.png">
-<link rel="icon" type="image/png" sizes="64x64" href="img/favicon-64.png">
-<link rel="apple-touch-icon" href="img/logo-seal-1024.png">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 </head>
 <body>
 
-<!-- Top announcement banner, Obama.org-style: static (no scrolling), sits above the header while the page is
-     unscrolled (over the hero), fades out the moment the page scrolls, at which point the white solid header
-     takes over the top of the viewport. REVIEW: swap in the real latest headline/summary once the update feed exists. -->
+<!-- Top announcement banner — Obama.org's own taller, two-row "Museum Ticket Availability" pattern:
+     a fixed bold black category title on top, the actual (still-scrolling) update content below it.
+     Sits above the header while the page is unscrolled (over the hero), fades out the moment the page
+     scrolls, at which point the white solid header takes over the top of the viewport. REVIEW: swap in
+     the real latest headline/summary once the update feed exists. The track below is duplicated on
+     purpose — see the .top-banner-track comment in style.css. -->
 <div class="top-banner" role="region" aria-label="Latest update">
   <div class="container top-banner-inner">
-    <div class="top-banner-text">
-      <h3>[Auto-pulled headline of most recent development update or press mention]</h3>
-      <p>[One-line summary of the update, pulled the same way as the headline above.]</p>
+    <div class="top-banner-content">
+      <span class="top-banner-title">Latest Update</span>
+      <div class="top-banner-row">
+        <div class="top-banner-marquee">
+          <div class="top-banner-track" aria-hidden="false">
+            <span class="top-banner-item">
+              <span class="headline">[Auto-pulled headline of most recent development update or press mention]</span>
+              <span class="sep">&bull;</span>
+              <span class="summary">[One-line summary of the update, pulled the same way as the headline above.]</span>
+            </span>
+            <span class="top-banner-item" aria-hidden="true">
+              <span class="headline">[Auto-pulled headline of most recent development update or press mention]</span>
+              <span class="sep">&bull;</span>
+              <span class="summary">[One-line summary of the update, pulled the same way as the headline above.]</span>
+            </span>
+          </div>
+        </div>
+        <a class="top-banner-link" href="index.html#stay-updated"><span>Get notified</span> <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
     </div>
-    <a class="top-banner-link" href="index.html#stay-updated">Get notified <i class="fa-solid fa-arrow-right"></i></a>
   </div>
 </div>
 
 <header class="site-header">
   <div class="header-inner">
     <a class="logo" href="index.html" aria-label="Erick Janganya Foundation — home">
-      <span class="logo-ej">E&middot;J</span>
+      <img class="logo-mark" src="img/ej-mark.svg" alt="" width="48" height="28">
+      <span class="logo-wordmark">EJ Foundation</span>
     </a>
     <nav class="nav-links">
       <a href="index.html" data-nav="index.html">Home</a>
@@ -81,7 +99,7 @@
      big inline search field over the top of the hero, closes via the X or Escape. -->
 <div class="search-overlay" id="search-overlay" aria-hidden="true">
   <div class="search-overlay-top">
-    <span class="logo-ej">E&middot;J</span>
+    <img class="logo-seal" src="img/ej-mark.svg" alt="Erick Janganya Foundation" width="180" height="105">
     <button class="search-overlay-close" aria-label="Close search" onclick="toggleSearch(false)"><i class="fa-solid fa-xmark"></i></button>
   </div>
   <form class="search-overlay-form" role="search" onsubmit="return false;">
@@ -100,11 +118,13 @@
       <div class="hero-scrim"></div>
     </div>
     <div class="container hero-content">
+      <span class="hero-kicker">Embakasi South &middot; Foundation</span>
       <h1 class="hero-rotate">
         <span class="hero-rotate-word" id="heroRotateWord">Roads</span>
         <span class="hero-rotate-fixed">— tracked, dated, open to check.</span>
       </h1>
     </div>
+    <div class="hero-scroll-cue" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></div>
     <ul class="hero-slides" hidden>
       <li data-word="Roads" data-image="img/hero-roads.jpeg"></li>
       <li data-word="Clinics" data-image="img/hero-clinics.jpeg"></li>
@@ -114,18 +134,31 @@
     </ul>
   </section>
 
+  <!-- Full-bleed "impact so far" stat strip — real counts pulled live from the API (not hardcoded),
+       count up when scrolled into view. See js/impact-stats.js. Hides itself gracefully if the API
+       can't be reached rather than showing broken zeros. -->
+  <section class="section-tight impact-strip" id="impactStats" hidden>
+    <div class="container impact-strip-inner">
+      <div class="impact-stat reveal-up"><b class="cnt" id="statProjects" data-target="0">0</b><span>Projects tracked</span></div>
+      <div class="impact-stat reveal-up"><b class="cnt" id="statWards" data-target="0">0</b><span>Wards covered</span></div>
+      <div class="impact-stat reveal-up"><b class="cnt" id="statPromises" data-target="0">0</b><span>Promises tracked</span></div>
+      <div class="impact-stat reveal-up"><b class="cnt" id="statEvents" data-target="0">0</b><span>Upcoming events</span></div>
+    </div>
+  </section>
+
   <!-- Asymmetric flat "Visit"-style duo: one large image + one small image, bold heading, one calm line, outlined button. Deliberately understated, service-toned copy — no election framing this close to the hero. -->
   <section class="section">
     <div class="container">
+      <div class="section-rule"></div>
       <div class="visit-duo">
-        <div class="visit-primary">
+        <div class="visit-primary reveal-up">
           <!-- REVIEW: AI-generated placeholder — replace with a real tracker/project-site photo once supplied -->
           <img class="visit-img-primary" src="img/tracker-preview.jpg" alt="Community development project underway in Embakasi South">
           <h3>Development Tracker</h3>
           <p>Every project happening in Embakasi South right now — dated, budgeted, and open for anyone to check.</p>
           <a class="btn btn-outline" href="tracker.html">See the progress tracker</a>
         </div>
-        <div class="visit-secondary">
+        <div class="visit-secondary reveal-up">
           <!-- Real photo, from Erick's Facebook, confirmed cleared for use -->
           <img class="visit-img-secondary" src="img/erick-portrait.jpg" alt="Erick Janganya in the field in Embakasi South">
           <h3>Who's behind it</h3>
@@ -136,10 +169,44 @@
     </div>
   </section>
 
+  <!-- Field work — Obama.org "Experience the Center" pattern: a static 3-column grid, thin vertical
+       rules between columns, image + bold heading + one line of description + underlined link. Images
+       only, no video/carousel. Moved here (between the Visit duo and the mission statement) per request.
+       Captions describe the TYPE of activity the tracker documents rather than any specific dated event,
+       consistent with not asserting unconfirmed facts — swap the .ph slots for real field photos once
+       supplied, same as the other placeholder images on this page. -->
+  <section class="section">
+    <div class="container">
+      <div class="section-rule"></div>
+      <div class="section-head reveal-up"><span class="eyebrow">Field work</span><h2>Recent moments</h2></div>
+      <div class="field-grid">
+        <div class="field-item reveal-up">
+          <div class="field-item-media"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo coming soon</span></div></div>
+          <h3>Ground Visits</h3>
+          <p>Every project on the tracker gets a site visit before it's marked verified — photographed, dated, and logged.</p>
+          <a class="field-item-link" href="tracker.html">See the tracker <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="field-item reveal-up">
+          <div class="field-item-media"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo coming soon</span></div></div>
+          <h3>Community Meetings</h3>
+          <p>Ward-level gatherings where residents flag needs and review progress directly with the team.</p>
+          <a class="field-item-link" href="community.html">Meet the community <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="field-item reveal-up">
+          <div class="field-item-media"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo coming soon</span></div></div>
+          <h3>Verification in Practice</h3>
+          <p>What "open for anyone to check" looks like on the ground — proof behind every claim on this site.</p>
+          <a class="field-item-link" href="foundation.html">How it works <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Mission statement, Obama.org-style: big bold line between two thick black bars, words (and photo
        chips) revealed one after another the first time this section scrolls into view. -->
   <section class="section-tight mission-section" id="mission">
     <div class="container">
+      <div class="section-rule"></div>
       <!-- REVIEW: chip photos are the same AI-generated placeholders used elsewhere on the page — swap
            each <img> for a real ground photo once Erick supplies one (same filename in img/, or repoint the src). -->
       <p class="mission-line" id="missionLine"><span class="reveal-word" style="transition-delay:0ms">Our</span> <span class="reveal-word" style="transition-delay:45ms">mission</span> <span class="reveal-word" style="transition-delay:90ms">is</span> <span class="reveal-word" style="transition-delay:135ms">to</span> <span class="reveal-word" style="transition-delay:180ms">track</span> <span class="reveal-word" style="transition-delay:225ms">every</span> <span class="reveal-word" style="transition-delay:270ms">promise,</span> <span class="chip-photo reveal-word" style="transition-delay:315ms"><img src="img/tracker-preview.jpg" alt=""></span> <span class="reveal-word" style="transition-delay:360ms">verify</span> <span class="reveal-word" style="transition-delay:405ms">every</span> <span class="reveal-word" style="transition-delay:450ms">claim,</span> <span class="chip-photo reveal-word" style="transition-delay:495ms"><img src="img/value-transparency.jpg" alt=""></span> <span class="reveal-word" style="transition-delay:540ms">and</span> <span class="reveal-word" style="transition-delay:585ms">keep</span> <span class="reveal-word" style="transition-delay:630ms">Embakasi</span> <span class="reveal-word" style="transition-delay:675ms">South's</span> <span class="reveal-word" style="transition-delay:720ms">progress</span> <span class="chip-photo reveal-word" style="transition-delay:765ms"><img src="img/value-tracker.jpg" alt=""></span> <span class="reveal-word" style="transition-delay:810ms">open</span> <span class="reveal-word" style="transition-delay:855ms">for</span> <span class="reveal-word" style="transition-delay:900ms">anyone</span> <span class="reveal-word" style="transition-delay:945ms">to</span> <span class="reveal-word" style="transition-delay:990ms">check.</span></p>
@@ -152,30 +219,33 @@
        inset on a plain background rather than stretched to fill the column — so this section is laid out
        with its own padded container instead of reusing the edge-to-edge .split-section grid. -->
   <section class="section-tight value-split">
+    <div class="container">
+      <div class="section-rule"></div>
+    </div>
     <div class="container value-split-grid">
       <div class="value-grid">
-        <div class="value-card">
+        <div class="value-card reveal-up">
           <!-- REVIEW: replace with a real photo illustrating transparency (e.g. a resident reviewing a project record) once supplied -->
           <div class="value-card-img-wrap"><img class="value-card-img" src="img/value-transparency.jpg" alt="Residents reviewing a project record together"></div>
           <h3>Radical transparency</h3>
           <p>Every project, photo and shilling logged for anyone to verify.</p>
           <a class="value-card-link" href="foundation.html">Learn more <i class="fa-solid fa-arrow-right"></i></a>
         </div>
-        <div class="value-card">
+        <div class="value-card reveal-up">
           <!-- REVIEW: AI-generated placeholder — replace with a real community/ward meeting photo once supplied -->
           <div class="value-card-img-wrap"><img class="value-card-img" src="img/value-community.jpg" alt="Community members gathered for a ward meeting"></div>
           <h3>Community-led</h3>
           <p>Priorities set from what residents of the five wards actually need.</p>
           <a class="value-card-link" href="community.html">Learn more <i class="fa-solid fa-arrow-right"></i></a>
         </div>
-        <div class="value-card">
+        <div class="value-card reveal-up">
           <!-- REVIEW: AI-generated placeholder — replace with a real progress-tracker-in-use photo once supplied -->
           <div class="value-card-img-wrap"><img class="value-card-img" src="img/value-tracker.jpg" alt="Checking project progress data on a phone at a project site"></div>
           <h3>Measurable delivery</h3>
           <p>Progress tracked with dates, budgets and completion percentages.</p>
           <a class="value-card-link" href="tracker.html">Learn more <i class="fa-solid fa-arrow-right"></i></a>
         </div>
-        <div class="value-card">
+        <div class="value-card reveal-up">
           <!-- REVIEW: AI-generated placeholder — replace with a real diaspora/local-support photo once supplied -->
           <div class="value-card-img-wrap"><img class="value-card-img" src="img/value-diaspora.jpg" alt="Staying connected with Embakasi South from afar"></div>
           <h3>Open to everyone</h3>
@@ -184,11 +254,61 @@
         </div>
       </div>
       <div class="value-panel-wrap">
-        <div class="split-panel split-panel--yellow">
+        <div class="split-panel split-panel--yellow reveal-up">
           <span class="eyebrow">Why this foundation</span>
           <h3 class="split-panel-statement">Accountability you can see. Every claim made here carries proof — a date, a location, a photo — that anyone can check.</h3>
           <a class="split-panel-link" href="foundation.html">See our approach <i class="fa-solid fa-arrow-right"></i></a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter signup — matches the Obama Foundation's own "Be an insider" pattern field-for-field:
+       full-bleed cream box, one big bold heading + line of copy on the left, individually labeled
+       underline-only fields stacked on the right (no boxed inputs), SMS-consent disclaimer, and a
+       Terms-of-Service checkbox next to the submit button. Backend model/route (NewsletterSubscriber,
+       POST /api/newsletter) and forms.js were extended to match this same field set.
+       REVIEW: privacy.html/terms.html don't exist yet — links below are placeholders until those pages
+       are built; same "#" placeholder pattern used for the footer's social links. -->
+  <section class="section-tight insider-section" id="stay-updated">
+    <div class="container">
+      <div class="section-rule"></div>
+      <div class="insider-box">
+        <div class="insider-copy reveal-up">
+          <h2>Stay updated</h2>
+          <p>Sign up to receive the latest updates on tracker projects, promise updates, and events across Embakasi South.</p>
+        </div>
+        <form class="insider-form reveal-up" id="newsletterForm" novalidate>
+          <div class="insider-field">
+            <label for="nl-first">First name</label>
+            <input type="text" id="nl-first" name="firstName" required>
+          </div>
+          <div class="insider-field">
+            <label for="nl-last">Last name</label>
+            <input type="text" id="nl-last" name="lastName" required>
+          </div>
+          <div class="insider-field">
+            <label for="nl-email">Email</label>
+            <input type="email" id="nl-email" name="email" required>
+          </div>
+          <div class="insider-field">
+            <label for="nl-zip">Zip Code (optional)</label>
+            <input type="text" id="nl-zip" name="zip">
+          </div>
+          <div class="insider-field">
+            <label for="nl-phone">Phone number (optional)</label>
+            <input type="tel" id="nl-phone" name="phone">
+          </div>
+          <p class="insider-disclaimer">By providing a phone number, you confirm that you are an adult and consent to receive automated marketing and informational SMS messages from the Erick Janganya Foundation at the phone number you provided. To learn more about how the Foundation would use your information, read our <a href="#">Privacy Statement</a>. Message and data rates may apply. Message frequency varies. You may opt out at any time by texting &ldquo;STOP&rdquo; to [SMS short code]. Consent is not a condition of purchase or service.</p>
+          <div class="insider-consent-row">
+            <label class="insider-checkbox">
+              <input type="checkbox" name="agreedToTerms" required>
+              <span>Yes, I agree to the <a href="#">Terms of Service</a></span>
+            </label>
+            <button type="submit" class="btn btn-outline insider-submit">Submit</button>
+          </div>
+          <p class="form-note" id="newsletterNote" hidden></p>
+        </form>
       </div>
     </div>
   </section>
@@ -198,78 +318,36 @@
        gradient, bigger heading, breathing room off the page edge) instead of sitting full-bleed — structure
        unchanged: text card stays on the left, project cards stay on the right. -->
   <section class="section-tight tracker-split">
+    <div class="container">
+      <div class="section-rule"></div>
+    </div>
     <div class="container tracker-split-grid">
-      <div class="split-panel split-panel--sky">
+      <div class="split-panel split-panel--sky reveal-up">
         <span class="eyebrow">Development tracker</span>
         <h3>Projects in motion, verified as they happen.</h3>
         <a class="split-panel-link" href="tracker.html">View full tracker <i class="fa-solid fa-arrow-right"></i></a>
       </div>
-      <div class="split-cards">
-        <!-- REVIEW: when a real photo exists, replace each .ph div's contents with <img class="proj-photo" src="..." alt="..."> — the thumbnail's aspect-ratio/crop is already set so it will drop in without breaking layout. -->
-        <a class="split-card" href="tracker.html">
-          <div class="ph split-card-img"><i class="fa-solid fa-image"></i></div>
-          <div class="split-card-body">
-            <span class="tag-plain">Imara Daima <i class="fa-solid fa-circle"></i> Health</span>
-            <h4>[Project name 1]</h4>
-            <p>[One-line summary of what this project delivers and why it matters.]</p>
-            <div class="progress-track"><div class="progress-fill" data-progress="100"></div></div>
-            <span class="latest-meta">Completed · [Updated 2 days ago] · Foundation-funded</span>
-          </div>
-        </a>
-        <a class="split-card" href="tracker.html">
-          <div class="ph split-card-img"><i class="fa-solid fa-image"></i></div>
-          <div class="split-card-body">
-            <span class="tag-plain">Kwa Njenga <i class="fa-solid fa-circle"></i> Education</span>
-            <h4>[Project name 2]</h4>
-            <p>[One-line summary of what this project delivers and why it matters.]</p>
-            <div class="progress-track"><div class="progress-fill" data-progress="55"></div></div>
-            <span class="latest-meta">Ongoing · [Updated 3 days ago] · Government (NG-CDF)</span>
-          </div>
-        </a>
-        <a class="split-card" href="tracker.html">
-          <div class="ph split-card-img"><i class="fa-solid fa-image"></i></div>
-          <div class="split-card-body">
-            <span class="tag-plain">Pipeline <i class="fa-solid fa-circle"></i> Water &amp; sanitation</span>
-            <h4>[Project name 3]</h4>
-            <p>[One-line summary of what this project delivers and why it matters.]</p>
-            <div class="progress-track"><div class="progress-fill" data-progress="0"></div></div>
-            <span class="latest-meta">Planned · [Updated 4 days ago] · Partner-funded</span>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="section-head"><span class="eyebrow">Field work</span><h2>Recent moments</h2></div>
-      <!-- Manual carousel — no autoplay. Arrows/swipe advance one clip at a time via native scroll-snap.
-           REVIEW: 6 placeholder tiles here just to demonstrate the scroll; drop real video/photo files in
-           as .media-tile > <img>/<video> and add or remove tiles freely, the carousel adapts either way. -->
-      <div class="media-carousel">
-        <button class="carousel-arrow carousel-arrow--prev" aria-label="Previous moments"><i class="fa-solid fa-chevron-left"></i></button>
-        <div class="media-track-wrap" id="mediaTrackWrap">
-          <div class="media-track">
-            <div class="media-tile"><div class="ph" style="height:100%;"><i class="fa-solid fa-image"></i><span class="play"><i class="fa-solid fa-play"></i></span></div></div>
-            <div class="media-tile"><div class="ph" style="height:100%;"><i class="fa-solid fa-image"></i><span class="play"><i class="fa-solid fa-play"></i></span></div></div>
-            <div class="media-tile"><div class="ph" style="height:100%;"><i class="fa-solid fa-image"></i><span class="play"><i class="fa-solid fa-play"></i></span></div></div>
-            <div class="media-tile"><div class="ph" style="height:100%;"><i class="fa-solid fa-image"></i><span class="play"><i class="fa-solid fa-play"></i></span></div></div>
-            <div class="media-tile"><div class="ph" style="height:100%;"><i class="fa-solid fa-image"></i><span class="play"><i class="fa-solid fa-play"></i></span></div></div>
-            <div class="media-tile"><div class="ph" style="height:100%;"><i class="fa-solid fa-image"></i><span class="play"><i class="fa-solid fa-play"></i></span></div></div>
-          </div>
-        </div>
-        <button class="carousel-arrow carousel-arrow--next" aria-label="Next moments"><i class="fa-solid fa-chevron-right"></i></button>
+      <!-- Populated live from the API by js/home-tracker-preview.js — see that file for the card
+           markup (badge + funding chip, matching tracker.html's own cards) and the fallback/loading
+           states so this never shows literal placeholder brackets. -->
+      <div class="split-cards" id="homeTrackerCards">
+        <div class="skeleton-split"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line skeleton-line--tag"></div><div class="skeleton-line skeleton-line--title"></div><div class="skeleton-line skeleton-line--text"></div><div class="skeleton-line skeleton-line--pill"></div></div></div>
+        <div class="skeleton-split"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line skeleton-line--tag"></div><div class="skeleton-line skeleton-line--title"></div><div class="skeleton-line skeleton-line--text"></div><div class="skeleton-line skeleton-line--pill"></div></div></div>
+        <div class="skeleton-split"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line skeleton-line--tag"></div><div class="skeleton-line skeleton-line--title"></div><div class="skeleton-line skeleton-line--text"></div><div class="skeleton-line skeleton-line--pill"></div></div></div>
       </div>
     </div>
   </section>
 
   <section class="section-tight cta-band">
-    <div class="container cta-band-inner">
-      <div>
-        <h2>Help move Embakasi South forward</h2>
-        <p>Cash, goods, or time — from anywhere in the world, it reaches Embakasi South and goes straight onto the tracker.</p>
+    <div class="container">
+      <div class="section-rule" style="background:#fff;"></div>
+      <div class="cta-band-inner">
+        <div>
+          <h2>Help move Embakasi South forward</h2>
+          <p>Cash, goods, or time — from anywhere in the world, it reaches Embakasi South and goes straight onto the tracker.</p>
+        </div>
+        <a class="btn btn-outline cta-band-btn" href="involve.html"><i class="fa-solid fa-heart"></i> Support the cause</a>
       </div>
-      <a class="btn btn-outline cta-band-btn" href="involve.html"><i class="fa-solid fa-heart"></i> Support the cause</a>
     </div>
   </section>
 
@@ -279,7 +357,7 @@
   <div class="container">
     <div class="footer-grid">
       <div>
-        <div class="logo" style="margin-bottom:14px;"><span class="logo-ej">E&middot;J</span></div>
+        <div class="logo" style="margin-bottom:14px;"><img class="logo-seal" src="img/ej-mark-on-blue.svg" alt="Erick Janganya Foundation" width="180" height="105"></div>
         <p>Documenting real work in Embakasi South, ward by ward, as it happens.</p>
       </div>
       <div>
@@ -323,6 +401,10 @@
   </div>
 </footer>
 
+<script src="js/api.js"></script>
 <script src="js/main.js"></script>
+<script src="js/forms.js"></script>
+<script src="js/impact-stats.js"></script>
+<script src="js/home-tracker-preview.js"></script>
 </body>
 </html>
