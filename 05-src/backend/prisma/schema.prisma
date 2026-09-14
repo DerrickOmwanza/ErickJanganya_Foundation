@@ -1,0 +1,145 @@
+// Prisma schema for the Erick Janganya Foundation API.
+// Database: Postgres (managed instance — e.g. Supabase or Neon).
+// Run `npm run prisma:migrate` after setting DATABASE_URL in .env.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Real, persistent admin accounts — lives in Postgres, not the app's filesystem,
+// so accounts survive app restarts/redeploys.
+model AdminUser {
+  id           Int       @id @default(autoincrement())
+  email        String    @unique
+  passwordHash String    @map("password_hash")
+  name         String?
+  createdAt    DateTime  @default(now()) @map("created_at")
+  lastLoginAt  DateTime? @map("last_login_at")
+
+  @@map("admin_users")
+}
+
+model TrackerProject {
+  id              Int       @id @default(autoincrement())
+  title           String
+  ward            String
+  category        String
+  status          String // Completed | Ongoing | Planned
+  progressPercent Int?      @default(0) @map("progress_percent")
+  budgetKes       Int?      @map("budget_kes")
+  fundingSource   String?   @map("funding_source") // Foundation-funded | Government (NG-CDF) | Partner-funded
+  summary         String?
+  location        String?
+  photoUrl        String?   @map("photo_url")
+  startedOn       DateTime? @map("started_on") @db.Date
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+
+  promises PromisePledge[]
+
+  @@index([status])
+  @@index([ward])
+  @@index([category])
+  @@map("tracker_projects")
+}
+
+// Named PromisePledge (not "Promise") because Prisma Client would otherwise
+// generate a type literally called `Promise`, colliding with the built-in
+// JS/TS Promise type. Table name in Postgres is still "promises".
+model PromisePledge {
+  id              Int       @id @default(autoincrement())
+  title           String
+  category        String
+  status          String // Kept | In progress | Not started
+  dateMade        DateTime? @map("date_made") @db.Date
+  targetDate      DateTime? @map("target_date") @db.Date
+  description     String?
+  evidenceNote    String?   @map("evidence_note")
+  linkedProjectId Int?      @map("linked_project_id")
+  linkedProject   TrackerProject? @relation(fields: [linkedProjectId], references: [id], onDelete: SetNull)
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+
+  @@index([status])
+  @@index([category])
+  @@map("promises")
+}
+
+model NewsPost {
+  id          Int      @id @default(autoincrement())
+  title       String
+  summary     String?
+  body        String?
+  publishedOn DateTime @map("published_on") @db.Date
+  sourceType  String   @map("source_type") // Foundation | Press | Statement
+  externalUrl String?  @map("external_url")
+  imageUrl    String?  @map("image_url")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@index([sourceType])
+  @@index([publishedOn])
+  @@map("news_posts")
+}
+
+model Event {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  eventDate   DateTime @map("event_date") @db.Date
+  eventTime   String?  @map("event_time")
+  location    String?
+  ward        String?
+  rsvpUrl     String?  @map("rsvp_url")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@index([ward])
+  @@index([eventDate])
+  @@map("events")
+}
+
+model MediaItem {
+  id           Int       @id @default(autoincrement())
+  type         String // photo | video
+  caption      String?
+  mediaUrl     String    @map("media_url")
+  thumbnailUrl String?   @map("thumbnail_url")
+  tags         String?
+  takenOn      DateTime? @map("taken_on") @db.Date
+  createdAt    DateTime  @default(now()) @map("created_at")
+
+  @@index([type])
+  @@map("media_items")
+}
+
+model ContactSubmission {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("contact_submissions")
+}
+
+model NewsletterSubscriber {
+  id            Int      @id @default(autoincrement())
+  email         String   @unique
+  firstName     String?  @map("first_name")
+  lastName      String?  @map("last_name")
+  zip           String?
+  phone         String?
+  agreedToTerms Boolean  @default(false) @map("agreed_to_terms")
+  ward          String?
+  subscribedAt  DateTime @default(now()) @map("subscribed_at")
+
+  @@map("newsletter_subscribers")
+}

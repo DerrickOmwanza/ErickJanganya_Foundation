@@ -1,0 +1,27 @@
+{
+  "name": "erick-janganya-foundation-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Backend API for the Erick Janganya Foundation website (tracker, promises, news, events, media, contact, newsletter, admin auth).",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js",
+    "prisma:generate": "node node_modules/prisma/build/index.js generate",
+    "prisma:migrate": "node node_modules/prisma/build/index.js migrate dev",
+    "prisma:studio": "node node_modules/prisma/build/index.js studio",
+    "seed": "node seed/seed.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.20.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "prisma": "^5.20.0"
+  }
+}
