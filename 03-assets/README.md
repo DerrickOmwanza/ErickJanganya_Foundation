@@ -1,75 +1,39 @@
-# EJ Foundation logo assets
+# EJ Foundation mark
 
-**Scorecard arc** — a gauge in five segments, one per ward of Embakasi South, ending on a
-single accent color. Colors are pulled directly from `05-src/frontend/css/style.css` `:root`
-— nothing here is a new hex value.
+**Ascending** — three rising bars, one solid colour. Retired the five-segment scorecard-arc kit
+(2026-09-16): fewer, more deliberate placements this time, and the arc read as too close to the
+site's tracker-progress iconography to work as a standalone identity. This mark works on a
+different principle instead — one shape, no literal metaphor to explain, legible at 16px.
 
-## Files
+## Where it lives — on purpose, nowhere else
+
+Per direct instruction: the mark appears **only** in the site's nav bar and as the favicon/home
+screen icon. No footer seal, no search-overlay seal, no wordmark lockup, no colour variants. The
+site's brand presence is deliberately understated — public-feeling first, personality-driven
+second.
 
 | File | Use |
 | --- | --- |
-| `ej-mark.svg` | Symbol only, full color. Default. |
-| `ej-mark-on-blue.svg` | Symbol only, for placement on the site's own `--blue` (`#0064F0`) — segment 1 swaps to `--blue-deep` (`#0047AD`) so it doesn't disappear into a same-color background. Used in the footer. |
-| `ej-mark-reversed.svg` | Symbol only, for dark backgrounds (structural segment swaps to white). |
-| `ej-mark-mono.svg` | Symbol only, one color via `currentColor` — for favicons, inline text, or any context too small for five colors to read. |
-| `ej-lockup-horizontal.svg` | Symbol + wordmark, for headers. |
-| `ej-lockup-horizontal-reversed.svg` | Same, on dark. |
-| `ej-lockup-stacked.svg` | Symbol above wordmark, for narrow space. |
-| `favicon.svg` | Square accent-color tile with a mono mark, for tabs and app icons. |
+| `ej-ascend.svg` | Source file — solid black, transparent background. |
 
-## Colors
+That's the whole kit. In the actual site:
 
-Pulled from the site's existing palette — none introduced for this mark.
+- **Nav bar** (`05-src/frontend/*.html`) — inlined directly as `<svg class="logo-mark">` rather
+  than an `<img>`, so `fill: currentColor` lets `style.css` swap it white-on-transparent-header to
+  ink-on-solid-header the same way the old wordmark text used to swap, with no second file needed.
+- **Favicon** — `05-src/frontend/img/favicon.svg` (same shape, transparent background) and
+  `apple-touch-icon.png` (180×180, white background, generated via Inkscape from this same file).
 
-| Role | Segment | Hex |
-| --- | --- | --- |
-| Structural | 1 | Blue `#0064F0` |
-| Structural | 2 | Sky `#8EDDFF` |
-| Structural | 3 | Yellow `#FFBD12` |
-| Structural | 4 | Ink `#15191B` (→ white `#FFFFFF` on dark) |
-| **Accent** | 5 | Red `#CE2227` |
+## Colour
 
-Four structural segments carry the "five wards, one instrument" idea; red is the site's
-existing accent color (already used for the launch strip, trust line, and eyebrow text) and
-carries the emphasis here too — same role as any other accent use on the site.
-
-## Type
-
-Wordmark is set in **Oswald 700**, already loaded site-wide as `--font-display`
-(`05-src/frontend/css/style.css:16`) — no new typeface added. Tagline is Oswald 500.
-
-## Integration
-
-Inline in a header (recommended — lets CSS recolor `ej-mark-mono.svg` via `color`):
-
-```html
-<img src="img/ej-mark.svg" alt="" width="48" height="28">
-```
-
-Favicon:
-
-```html
-<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
-```
+Black (`#000000`) on transparent. No brand-palette version exists for this mark — it's meant to
+read as a plain mark, not another place the blue/red/yellow/sky system shows up.
 
 ## Rules
 
-- Minimum size: mark 20px tall, horizontal lockup 140px wide. Below that, use `ej-mark-mono.svg`
-  or `favicon.svg` instead of the full-color mark — the segment gaps stop reading at small sizes.
-- Clear space: one segment's width on all sides (roughly 1/6 of the mark's height).
-- Don't rotate, outline, add shadows, or recolor the four structural segments individually —
-  the accent segment is the only one that may shift (e.g. to a status color elsewhere on the
-  site) without redrawing the whole mark.
-- Use the `-reversed` variant on dark surfaces rather than placing the default mark on a dark
-  background — the ink segment (`#15191B`) disappears otherwise.
-- Use `-on-blue` rather than the default mark on any surface using the site's own `--blue`
-  (footer, CTA band) — segment 1 is the same blue as those backgrounds and vanishes otherwise.
-
-## Retired
-
-The previous mark (dark green-and-gold civic medallion, `EJ_Seal_FINAL*`) and its working
-files have been removed — they were never wired into any page. A third mark (a crowned
-blackletter "EJ" monogram) is still live in `05-src/frontend/img/` — referenced in the
-header, footer, search overlay, and favicon links across every page. That one hasn't been
-touched yet; swapping it for this kit is a separate follow-up since it means editing every
-HTML page.
+- Minimum size: 16px (favicon). Below that, the gap between bars starts to close — don't go
+  smaller.
+- Don't recolour individual bars, don't add a background tile, don't pair it with a wordmark.
+- If a new placement is ever considered (letterhead, social avatar, print), redraw from
+  `ej-ascend.svg` rather than stretching a screenshot of it — it's small enough that fidelity
+  matters more than convenience.

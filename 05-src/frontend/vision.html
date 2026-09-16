@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vision — Erick Janganya Foundation</title>
+<meta name="description" content="Where Embakasi South should be in five to ten years — healthcare, education, housing and infrastructure, and youth and employment, beyond a single term in office.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
@@ -16,8 +17,11 @@
 <header class="site-header header--solid">
   <div class="header-inner">
     <a class="logo" href="index.html" aria-label="Erick Janganya Foundation — home">
-      <img class="logo-mark" src="img/ej-mark.svg" alt="" width="48" height="28">
-      <span class="logo-wordmark">EJ Foundation</span>
+      <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+        <rect x="12" y="60" width="20" height="30" rx="7"/>
+        <rect x="40" y="40" width="20" height="50" rx="7"/>
+        <rect x="68" y="16" width="20" height="74" rx="7"/>
+      </svg>
     </a>
     <nav class="nav-links">
       <a href="index.html" data-nav="index.html">Home</a>
@@ -67,7 +71,6 @@
      big inline search field over the top of the hero, closes via the X or Escape. -->
 <div class="search-overlay" id="search-overlay" aria-hidden="true">
   <div class="search-overlay-top">
-    <img class="logo-seal" src="img/ej-mark.svg" alt="Erick Janganya Foundation" width="180" height="105">
     <button class="search-overlay-close" aria-label="Close search" onclick="toggleSearch(false)"><i class="fa-solid fa-xmark"></i></button>
   </div>
   <form class="search-overlay-form" role="search" onsubmit="return false;">
@@ -77,19 +80,98 @@
 </div>
 
 <main>
-  <div class="container stub-wrap">
-    <span class="eyebrow">Vision</span>
-    <h1>This page is being built next.</h1>
-    <p>We're finishing the long-term vision for Embakasi South — what success looks like beyond a single term. Check back soon, or get notified the moment it's live.</p>
-    <a class="btn btn-secondary" href="index.html#stay-updated"><i class="fa-solid fa-bell"></i> Notify me</a>
-  </div>
+
+  <!-- Built on the same architecture as foundation.html: mega-header + dek, section-rule dividers,
+       photo-led .feature-row-list for the priorities grid. Scope kept deliberately tight — three
+       sections, matching the platform's own original spec (01-wireframe #screen-vision, 02-docs
+       manual §3.4): intro, a 4-priority grid, and the "beyond the election" note. Vision's priorities
+       (Healthcare, Education, Housing & Infrastructure, Youth & Employment) are the manual's own list,
+       distinct on purpose from Foundation's Core Principles and Focus Areas — long-term outcomes here,
+       not current operating categories, even where the subject overlaps (health, youth). -->
+
+  <section class="section" style="padding-top:150px;padding-bottom:0;">
+    <div class="container">
+      <h1 class="mega-header reveal-up">Vision</h1>
+      <p class="mega-header-dek reveal-up">The Embakasi South we're building toward — where the constituency should be in five to ten years, beyond the priorities of a single term.</p>
+    </div>
+  </section>
+  <section class="section-tight" style="padding-top:32px;">
+    <div class="container">
+      <div class="ph reveal-up" style="aspect-ratio:21/9;border-radius:var(--radius);">
+        <i class="fa-solid fa-image"></i><span>Hero photo — Embakasi South, a wide shot</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-rule"></div>
+      <h2 class="mega-header reveal-up" style="font-size:clamp(34px,5.4vw,64px);">Priorities</h2>
+      <p class="mega-header-dek reveal-up">What guides the long-term plan, beyond any single term in office.</p>
+      <div class="feature-row-list">
+        <div class="feature-row reveal-up">
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Priority photo — Healthcare</span></div>
+          <div>
+            <h3>Healthcare</h3>
+            <p>Every ward with reliable access to a functioning clinic — not just outreach camps, but permanent care residents can count on.</p>
+          </div>
+        </div>
+        <div class="feature-row reveal-up">
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Priority photo — Education</span></div>
+          <div>
+            <h3>Education</h3>
+            <p>Schools, bursaries, and digital literacy that give every child in Embakasi South a real shot, not just a nearby classroom.</p>
+          </div>
+        </div>
+        <div class="feature-row reveal-up">
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Priority photo — Housing &amp; Infrastructure</span></div>
+          <div>
+            <h3>Housing &amp; Infrastructure</h3>
+            <p>Upgraded settlements, roads that hold up through a rainy season, and drainage that doesn't flood the same streets every year.</p>
+          </div>
+        </div>
+        <div class="feature-row reveal-up">
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Priority photo — Youth &amp; Employment</span></div>
+          <div>
+            <h3>Youth &amp; Employment</h3>
+            <p>Jobs and enterprise support that don't require leaving the constituency to find real opportunity.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Beyond the election — the one idea that separates this from an ordinary campaign site, per the
+       manual. Reuses the pull-quote-panel component (about.html) rather than a new one, since it's a
+       single stated position, not a list. -->
+  <section class="section-tight" style="background:#fff;border-top:1px solid var(--line);">
+    <div class="container">
+      <div class="section-rule"></div>
+      <div class="pull-quote-panel reveal-up">
+        <p class="pull-quote-text">This platform doesn't end at an election. It evolves — from candidate site, to campaign platform, to MP accountability record, to a standing account of Embakasi South's progress, whatever the outcome in 2027.</p>
+        <span class="pull-quote-cite">Erick Janganya Foundation</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight cta-band">
+    <div class="container">
+      <div class="cta-band-inner">
+        <div>
+          <h2>See where this stands today</h2>
+          <p>The vision is long-term — the tracker is what's actually happening right now, dated and checkable.</p>
+        </div>
+        <a class="btn btn-outline cta-band-btn" href="tracker.html"><i class="fa-solid fa-chart-line"></i> View the tracker</a>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
       <div>
-        <div class="logo" style="margin-bottom:14px;"><img class="logo-seal" src="img/ej-mark-on-blue.svg" alt="Erick Janganya Foundation" width="180" height="105"></div>
         <p>Documenting real work in Embakasi South, ward by ward, as it happens.</p>
       </div>
       <div>
