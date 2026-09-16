@@ -111,132 +111,105 @@
     </div>
   </section>
 
-  <!-- The journey — sequential life-story timeline, birth to present. Each stage: a year/age-range
-       label, a title, a short passage, and a photo slot. Stages 1–4 (birth through civic work) are
-       pure biography we don't have yet, so every specific fact is bracketed. Stages 5–7 reuse language
-       already established and approved elsewhere on the site (the foundation's stated mission, the
-       2027 MP-aspirant framing, and the wireframe's own "open record" closing line), so those read as
-       finished copy rather than placeholders. -->
+  <!-- The journey — rebuilt 2026-09-16 as a horizontal scroll-snap rail per direct request: shorter
+       (5 stops instead of 7, starting at campus rather than birth), numbered because chronology is
+       real information here, connected by a single line so it still reads as one story while
+       swipeable/scrollable on its own — no framework, just CSS scroll-snap + a few lines of vanilla JS
+       (initJourneyRail in main.js) matching how every other interactive bit on this site is built.
+       Stop 3 is the one fully-real addition: the 2022 result is public record (kenyatally.com /
+       transtally.co.ke), confirmed directly by Erick — written as finished copy, not bracketed. -->
   <section class="section-tight">
     <div class="container">
       <div class="section-rule"></div>
       <div class="section-head journey-head reveal-up">
         <span class="eyebrow">The Journey</span>
-        <h2>From Embakasi South to the ballot</h2>
+        <h2>From campus to a second run at Embakasi South</h2>
         <p>[One framing sentence introducing the storyline — e.g. what shaped the decision to run.]</p>
       </div>
 
-      <div class="story-spine">
+      <div class="journey-rail-wrap reveal-up">
+        <div class="journey-rail-scroll" id="journeyRail">
+          <div class="journey-rail">
+            <div class="journey-rail-track"></div>
 
-        <div class="story-stage reveal-up">
-          <div class="story-stage-media">
-            <div class="ph"><i class="fa-solid fa-image"></i><span>Childhood photo coming soon</span></div>
+            <div class="journey-stop">
+              <span class="journey-stop-num">1</span>
+              <div class="ph"><i class="fa-solid fa-image"></i><span>Campus photo coming soon</span></div>
+              <span class="journey-stop-year">[University years]</span>
+              <h3>Campus</h3>
+              <p>[He/I] studied [field of study] at the University of Nairobi — [one line on what shaped him there].</p>
+            </div>
+
+            <div class="journey-stop">
+              <span class="journey-stop-num">2</span>
+              <div class="ph"><i class="fa-solid fa-image"></i><span>Career photo coming soon</span></div>
+              <span class="journey-stop-year">[Years]</span>
+              <h3>Career Path</h3>
+              <p>[Role/title at organization after campus — one line on what that work involved and what it revealed about Embakasi South's needs.]</p>
+            </div>
+
+            <div class="journey-stop">
+              <span class="journey-stop-num">3</span>
+              <div class="ph"><i class="fa-solid fa-image"></i><span>2022 campaign photo coming soon</span></div>
+              <span class="journey-stop-year">2022</span>
+              <h3>2022 Campaign</h3>
+              <p>Erick ran as an independent candidate for the Embakasi South parliamentary seat, placing second with 17,917 votes (21.81%) behind Julius Mawathe of WDM-K.</p>
+            </div>
+
+            <div class="journey-stop">
+              <span class="journey-stop-num">4</span>
+              <div class="ph"><i class="fa-solid fa-image"></i><span>Foundation launch photo coming soon</span></div>
+              <span class="journey-stop-year">[Year founded]</span>
+              <h3>Foundation</h3>
+              <p>In [year], Erick founded the Erick Janganya Foundation — to track every promise, verify every claim, and keep Embakasi South's progress open for anyone to check.</p>
+            </div>
+
+            <div class="journey-stop">
+              <span class="journey-stop-num">5</span>
+              <!-- Real photo, from Erick's Facebook — campaign trail, Embakasi South. -->
+              <img src="img/campaign-trail.jpg" alt="Erick Janganya on the campaign trail in Embakasi South">
+              <span class="journey-stop-year">2026 – 2027</span>
+              <h3>2027 Campaign</h3>
+              <p>Erick is running for Embakasi South a second time — bringing the same standard of accountability built into the foundation's tracker to the office itself.</p>
+            </div>
+
           </div>
-          <div class="story-stage-body story-panel story-panel--yellow">
-            <span class="story-stage-year">[Birth year]</span>
-            <h3>Born and Raised</h3>
-            <p>I am Erick Janganya, born on [date of birth] in [place of birth], to [parents' names and occupations]. [One more sentence about early family life, siblings, or the community he grew up in.]</p>
-          </div>
-          <div class="story-stage-dot"></div>
         </div>
-
-        <div class="story-stage reveal-up">
-          <div class="story-stage-media">
-            <div class="ph"><i class="fa-solid fa-image"></i><span>School photo coming soon</span></div>
-          </div>
-          <div class="story-stage-body story-panel story-panel--blue">
-            <span class="story-stage-year">[Childhood / school years]</span>
-            <h3>Foundations</h3>
-            <p>[He/I] attended [primary school name], then St. Anthony's Boys High School in Kitale, where [a formative early lesson, achievement, or interest that shaped what came later].</p>
-          </div>
-          <div class="story-stage-dot"></div>
+        <div class="journey-rail-arrows">
+          <button class="journey-arrow" id="journeyPrev" aria-label="Previous stage"><i class="fa-solid fa-chevron-left"></i></button>
+          <button class="journey-arrow" id="journeyNext" aria-label="Next stage"><i class="fa-solid fa-chevron-right"></i></button>
         </div>
-
-        <div class="story-stage reveal-up">
-          <div class="story-stage-media">
-            <div class="ph"><i class="fa-solid fa-image"></i><span>Early career photo coming soon</span></div>
-          </div>
-          <div class="story-stage-body story-panel story-panel--yellow">
-            <span class="story-stage-year">[Years]</span>
-            <h3>Finding a Path</h3>
-            <p>[He/I] went on to study [field of study] at the University of Nairobi, then began [his/my] career as [role/title] at [organization] — [one line on what that work involved].</p>
-          </div>
-          <div class="story-stage-dot"></div>
-        </div>
-
-        <div class="story-stage reveal-up">
-          <div class="story-stage-media">
-            <div class="ph"><i class="fa-solid fa-image"></i><span>Community work photo coming soon</span></div>
-          </div>
-          <div class="story-stage-body story-panel story-panel--blue">
-            <span class="story-stage-year">[Years]</span>
-            <h3>Serving the Community</h3>
-            <p>[Description of the grassroots or civic work that came next — specific initiatives, roles held, and what it revealed about Embakasi South's needs.]</p>
-          </div>
-          <div class="story-stage-dot"></div>
-        </div>
-
-        <div class="story-stage reveal-up">
-          <div class="story-stage-media">
-            <div class="ph"><i class="fa-solid fa-image"></i><span>Foundation launch photo coming soon</span></div>
-          </div>
-          <div class="story-stage-body story-panel story-panel--yellow">
-            <span class="story-stage-year">[Year founded]</span>
-            <h3>Building the Foundation</h3>
-            <p>In [year], I founded the Erick Janganya Foundation — to track every promise, verify every claim, and keep Embakasi South's progress open for anyone to check.</p>
-          </div>
-          <div class="story-stage-dot"></div>
-        </div>
-
-        <div class="story-stage reveal-up">
-          <div class="story-stage-media">
-            <!-- Real photo, from Erick's Facebook — campaign trail, Embakasi South. -->
-            <img src="img/campaign-trail.jpg" alt="Erick Janganya on the campaign trail in Embakasi South">
-          </div>
-          <div class="story-stage-body story-panel story-panel--blue">
-            <span class="story-stage-year">2026 – 2027</span>
-            <h3>Running for Embakasi South</h3>
-            <p>I'm now seeking to represent Embakasi South in Parliament in the 2027 general election — bringing the same standard of accountability built into this foundation's tracker to the office itself.</p>
-          </div>
-          <div class="story-stage-dot"></div>
-        </div>
-
-        <div class="story-stage reveal-up">
-          <div class="story-stage-media">
-            <div class="ph"><i class="fa-solid fa-image"></i><span>The road ahead</span></div>
-          </div>
-          <div class="story-stage-body story-panel story-panel--yellow">
-            <span class="story-stage-year">Beyond</span>
-            <h3>An Open Record</h3>
-            <p>This story doesn't end at an election. Whatever happens in 2027, the record stays open — every term, every promise, added here rather than replacing what came before.</p>
-          </div>
-          <div class="story-stage-dot"></div>
-        </div>
-
       </div>
     </div>
   </section>
 
-  <!-- Why I'm Running — the personal motivation behind the campaign, separate from the policy positions
-       below. Written in Erick's voice, general/thematic rather than tied to specific unconfirmed personal
-       events, and consistent with language already established elsewhere on the site. Deliberately
-       text-forward — no photo slot — so the page reads as substantive rather than image-plus-caption. -->
+  <!-- Why I'm Running — was three unbroken paragraphs, then three colour-blocked story-panels (flagged
+       2026-09-16 as a deviation from Obama.org's own approach: text stays on a plain white ground there,
+       photos carry the visual interest, not colour). Same three beats, now plain white pillar-cards with
+       a top photo each instead. -->
   <section class="section">
     <div class="container">
       <div class="section-rule"></div>
       <div class="section-head reveal-up">
         <span class="eyebrow">Why I'm Running</span>
         <h2>The record has to be honest first</h2>
+        <p>Three things this campaign comes down to.</p>
       </div>
-      <div class="why-running-grid">
-        <div class="why-running-body reveal-up">
-          <p>I didn't set out to be a politician. I set out to fix a pattern I kept seeing repeat itself across Embakasi South — a borehole promised at a rally and never dug, a road resurfaced only where the cameras could see it, a youth fund announced with fanfare and never actually disbursed. The pattern wasn't a lack of good ideas. It was a lack of anyone checking whether the ideas ever became real.</p>
-          <p>That's the gap the Erick Janganya Foundation exists to close — tracking every project and every promise made to this constituency, dated and open for any resident to verify, whether or not I'm the one who made it. Running for this seat is the next step of that same work, not a departure from it.</p>
-          <p>Embakasi South doesn't need another name on a ballot promising things will be different this time. It needs a representative willing to be checked the same way everyone else already is on this site — and that's exactly what I'm asking for the chance to be.</p>
+      <div class="grid grid-3">
+        <div class="card pillar-card reveal-up">
+          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo — an unfinished or stalled project site</span></div></div>
+          <h3>A pattern, not a lack of ideas</h3>
+          <p>A borehole promised at a rally, never dug. A road resurfaced only where the cameras could see it. A youth fund announced, never disbursed. The problem was never short on ideas — it was that nobody checked whether they became real.</p>
         </div>
-        <div class="why-running-excerpt reveal-up">
-          <blockquote>&ldquo;The pattern wasn't a lack of good ideas. It was a lack of anyone checking whether the ideas ever became real.&rdquo;</blockquote>
-          <span class="why-running-excerpt-cite">Erick Janganya</span>
+        <div class="card pillar-card reveal-up">
+          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo — Erick reviewing tracker records on site</span></div></div>
+          <h3>The same standard, applied to me</h3>
+          <p>That's the gap the foundation exists to close — every project and promise made to this constituency, dated and open to verify, whether or not I made it. This campaign is the next step of that work, not a departure from it.</p>
+        </div>
+        <div class="card pillar-card reveal-up">
+          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo — Erick speaking directly with residents</span></div></div>
+          <h3>What I'm asking for</h3>
+          <p>Not another name promising it'll be different this time. A representative willing to be checked the same way everyone else already is on this site — that's the only thing I'm asking the chance to be.</p>
         </div>
       </div>
     </div>
@@ -253,21 +226,25 @@
       </div>
       <div class="grid grid-4">
         <div class="card pillar-card reveal-up">
+          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo — a resident reviewing a project record</span></div></div>
           <i class="fa-solid fa-magnifying-glass"></i>
           <h3>Transparency</h3>
           <p>Every project and promise carries a date, a budget line, and a status — nothing claimed without proof attached.</p>
         </div>
         <div class="card pillar-card reveal-up">
+          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo — a completed project compared to what was promised</span></div></div>
           <i class="fa-solid fa-scale-balanced"></i>
           <h3>Accountability</h3>
           <p>Progress is measured against what was actually promised, not against what's convenient to say afterward.</p>
         </div>
         <div class="card pillar-card reveal-up">
+          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo — a ward visit, any of the five</span></div></div>
           <i class="fa-solid fa-map-location-dot"></i>
           <h3>Presence</h3>
           <p>Imara Daima, Kwa Njenga, Kwa Reuben, Pipeline, and Kware — tracked individually, not blurred into one average.</p>
         </div>
         <div class="card pillar-card reveal-up">
+          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo — a returning site visit, same project over time</span></div></div>
           <i class="fa-solid fa-arrows-rotate"></i>
           <h3>Continuity</h3>
           <p>The record doesn't reset on election day. Whatever happens in 2027, the tracker keeps running.</p>
@@ -276,9 +253,11 @@
     </div>
   </section>
 
-  <!-- In his words — three policy-stance cards. Left fully bracketed on purpose: these are specific
-       positions attributed to Erick, not operational data, so nothing here should read as a real
-       claim until he's confirmed the actual wording. -->
+  <!-- In his words — was three plain icon cards; upgraded to the photo-left/text-right row pattern
+       built for foundation.html (.feature-row-list), reused here for cross-page consistency and to
+       give each position room to grow past one bracketed line once Erick confirms the real wording.
+       Left fully bracketed on purpose: these are specific positions attributed to Erick, not
+       operational data, so nothing here should read as a real claim until he's confirmed it. -->
   <section class="section-tight" style="background:#fff;">
     <div class="container">
       <div class="section-rule"></div>
@@ -286,21 +265,27 @@
         <span class="eyebrow">In His Words</span>
         <h2>Vision for the constituency</h2>
       </div>
-      <div class="grid grid-3">
-        <div class="card pillar-card reveal-up">
-          <i class="fa-solid fa-briefcase"></i>
-          <h3>Economy &amp; Jobs</h3>
-          <p>[Erick's specific position and plan for economy and employment in Embakasi South.]</p>
+      <div class="feature-row-list">
+        <div class="feature-row reveal-up">
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Photo — Economy &amp; Jobs</span></div>
+          <div>
+            <h3>Economy &amp; Jobs</h3>
+            <p>[Erick's specific position and plan for economy and employment in Embakasi South.]</p>
+          </div>
         </div>
-        <div class="card pillar-card reveal-up">
-          <i class="fa-solid fa-kit-medical"></i>
-          <h3>Health &amp; Sanitation</h3>
-          <p>[Erick's specific position and plan for health and sanitation in Embakasi South.]</p>
+        <div class="feature-row reveal-up">
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Photo — Health &amp; Sanitation</span></div>
+          <div>
+            <h3>Health &amp; Sanitation</h3>
+            <p>[Erick's specific position and plan for health and sanitation in Embakasi South.]</p>
+          </div>
         </div>
-        <div class="card pillar-card reveal-up">
-          <i class="fa-solid fa-graduation-cap"></i>
-          <h3>Education &amp; Youth</h3>
-          <p>[Erick's specific position and plan for education and youth in Embakasi South.]</p>
+        <div class="feature-row reveal-up">
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Photo — Education &amp; Youth</span></div>
+          <div>
+            <h3>Education &amp; Youth</h3>
+            <p>[Erick's specific position and plan for education and youth in Embakasi South.]</p>
+          </div>
         </div>
       </div>
     </div>
@@ -318,23 +303,38 @@
       </div>
       <div class="grid grid-3">
         <a href="foundation.html" class="card pillar-card explore-card reveal-up">
+          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo — foundation team or flagship project</span></div></div>
           <i class="fa-solid fa-landmark"></i>
           <h3>The Foundation</h3>
           <p>The principles and focus areas behind every project on the tracker.</p>
           <span class="value-card-link">See the approach <i class="fa-solid fa-arrow-right"></i></span>
         </a>
         <a href="vision.html" class="card pillar-card explore-card reveal-up">
+          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo — a wide shot of Embakasi South</span></div></div>
           <i class="fa-solid fa-flag"></i>
           <h3>The Vision</h3>
           <p>What Erick is prioritising for Embakasi South, beyond the election itself.</p>
           <span class="value-card-link">Read the vision <i class="fa-solid fa-arrow-right"></i></span>
         </a>
         <a href="community.html" class="card pillar-card explore-card reveal-up">
+          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo — a community gathering or ward meeting</span></div></div>
           <i class="fa-solid fa-people-group"></i>
           <h3>Community</h3>
           <p>Voices from Embakasi South residents on what's working and what isn't.</p>
           <span class="value-card-link">Hear from residents <i class="fa-solid fa-arrow-right"></i></span>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing echo of the top pull-quote, per direct request (2026-09-16) — the same line landing again
+       right before the reader leaves the page, not just once at the top. -->
+  <section class="section-tight">
+    <div class="container">
+      <div class="section-rule"></div>
+      <div class="pull-quote-panel reveal-up">
+        <p class="pull-quote-text">A leader who cannot be checked cannot be trusted. So check me — every promise dated, every project budgeted, every claim left open for anyone in Embakasi South to verify.</p>
+        <span class="pull-quote-cite">Erick Janganya, Founder — Erick Janganya Foundation</span>
       </div>
     </div>
   </section>

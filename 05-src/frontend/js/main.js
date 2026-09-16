@@ -174,6 +174,36 @@ function initMediaCarousel() {
   updateArrows();
 }
 
+// Journey rail (About page): arrows nudge the scroll-snap strip one stop at a time — same
+// interaction as the media carousel above (click, native arrow keys, or touch swipe; arrows
+// disable at either end). Uses behavior:'auto' rather than 'smooth' — tested and confirmed
+// 'smooth' silently fights this container's scroll-snap-type:x mandatory and the scroll never
+// actually moves; 'auto' is instant but reliable, and satisfies prefers-reduced-motion by default.
+function initJourneyRail() {
+  var wrap = document.getElementById('journeyRail');
+  if (!wrap) return;
+  var rail = wrap.querySelector('.journey-rail');
+  var stop = wrap.querySelector('.journey-stop');
+  var prevBtn = document.getElementById('journeyPrev');
+  var nextBtn = document.getElementById('journeyNext');
+  if (!rail || !stop) return;
+
+  function step() {
+    var gap = parseFloat(getComputedStyle(rail).columnGap || getComputedStyle(rail).gap || 28);
+    return stop.getBoundingClientRect().width + gap;
+  }
+  function updateArrows() {
+    var max = wrap.scrollWidth - wrap.clientWidth - 6;
+    if (prevBtn) prevBtn.disabled = wrap.scrollLeft <= 6;
+    if (nextBtn) nextBtn.disabled = max <= 6 || wrap.scrollLeft >= max;
+  }
+  if (prevBtn) prevBtn.addEventListener('click', function () { wrap.scrollBy({ left: -step(), behavior: 'auto' }); updateArrows(); });
+  if (nextBtn) nextBtn.addEventListener('click', function () { wrap.scrollBy({ left: step(), behavior: 'auto' }); updateArrows(); });
+  wrap.addEventListener('scroll', updateArrows, { passive: true });
+  window.addEventListener('resize', updateArrows);
+  updateArrows();
+}
+
 // Generic scroll-triggered reveal (fade + rise) applied to any element carrying .reveal-up —
 // section heads, value cards, split panels, the subscribe band, the impact stat tiles. Keeps the
 // page feeling alive as you scroll instead of everything just being present on load.
@@ -208,5 +238,6 @@ document.addEventListener('DOMContentLoaded', function () {
   rotateHero();
   initHeaderScroll();
   initMediaCarousel();
+  initJourneyRail();
   initScrollReveals();
 });

@@ -240,49 +240,29 @@ img{max-width:100%;display:block;}
 .about-portrait{aspect-ratio:4/5;border-radius:var(--radius);overflow:hidden;}
 .about-portrait img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
 
-/* About Erick — sequential life-story timeline. A vertical spine runs down the center (left edge on
-   mobile) connecting every stage; media and text alternate sides so it reads as a deliberate visual
-   narrative rather than a repeating list. Photo slots use .ph until real family/childhood photos are
-   supplied — never a stand-in stock photo, since this page is specifically about real biography. */
-.story-spine{position:relative;margin-top:8px;}
-.story-spine::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--line);transform:translateX(-1px);}
-.story-stage{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;padding:52px 0;}
-.story-stage-media{aspect-ratio:4/3;}
-.story-stage-media .ph{height:100%;}
-.story-stage-media img{width:100%;height:100%;object-fit:cover;display:block;}
-.story-stage-year{display:inline-block;font-family:var(--font-display);font-weight:600;font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
-.story-stage-body h3{font-size:clamp(27px,2.9vw,36px);margin-bottom:14px;line-height:1.1;}
-.story-stage-body p{font-size:17px;color:var(--ink-soft);line-height:1.65;max-width:480px;}
-.story-stage-dot{position:absolute;top:50%;left:50%;width:16px;height:16px;border-radius:50%;background:var(--blue);border:4px solid #fff;box-shadow:0 0 0 2px var(--blue);transform:translate(-50%,-50%);z-index:2;}
-.story-stage:nth-child(even) .story-stage-media{order:2;}
-.story-stage:nth-child(even) .story-stage-body{order:1;text-align:right;}
-.story-stage:nth-child(even) .story-stage-body p{margin-left:auto;}
-.story-stage:first-child{padding-top:0;}
-.story-stage:last-child{padding-bottom:0;}
-
-/* Colored story panels — alternating yellow/blue background behind each stage's text, the same
-   gradient treatment as the "Why this foundation" panel on the homepage, so the timeline reads as a
-   sequence of distinct, deliberate moments rather than plain text next to a photo. */
-.story-panel{position:relative;overflow:hidden;border-radius:18px;padding:36px 40px;box-shadow:0 14px 32px rgba(0,0,0,.09);}
-.story-panel .story-stage-year, .story-panel h3, .story-panel p{position:relative;z-index:1;}
-.story-panel--yellow{background:linear-gradient(148deg,#FFD24D 0%,var(--yellow) 45%,#F2A900 100%);}
-.story-panel--yellow .story-stage-year{color:rgba(0,0,0,.55);}
-.story-panel--yellow h3{color:#000;}
-.story-panel--yellow p{color:rgba(0,0,0,.72);}
-.story-panel--blue{background:linear-gradient(148deg,#2E86FF 0%,var(--blue) 55%,var(--blue-deep) 100%);}
-.story-panel--blue .story-stage-year{color:rgba(255,255,255,.75);}
-.story-panel--blue h3{color:#fff;}
-.story-panel--blue p{color:rgba(255,255,255,.88);}
-
-/* Decorative art on each panel — a rotated diagonal-stripe square plus a small cluster of stars,
-   tucked in the top corner, same technique as the tracker panel on the homepage but mirrored/recolored
-   per side so it works with both the alternating panel color and the alternating left/right layout. */
-.story-panel::before{content:"";position:absolute;top:-46px;width:210px;height:210px;background-repeat:no-repeat;transform:rotate(14deg);pointer-events:none;z-index:0;}
-.story-panel::after{position:absolute;top:24px;font-size:15px;letter-spacing:9px;pointer-events:none;z-index:0;}
-.story-panel--yellow::before{right:-62px;background:repeating-linear-gradient(45deg, rgba(0,0,0,.12) 0 3px, transparent 3px 16px);}
-.story-panel--yellow::after{content:'\2726  \2727  \2726';right:30px;color:rgba(0,0,0,.28);}
-.story-panel--blue::before{left:-62px;transform:rotate(-14deg);background:repeating-linear-gradient(45deg, rgba(255,255,255,.28) 0 3px, transparent 3px 16px);}
-.story-panel--blue::after{content:'\2726  \2727  \2726';left:30px;color:rgba(255,255,255,.55);}
+/* About Erick — journey rail. Horizontal scroll-snap strip, chosen over the old vertical spine
+   (2026-09-16) for a shorter, more modern sequence: pure CSS scroll-snap, no framework, native touch
+   swipe on mobile. .journey-rail-scroll is the actual overflow:auto container; .journey-rail inside
+   it is width:max-content so the connecting track (absolutely positioned, width:100% of THAT box) spans
+   every stop correctly regardless of scroll position — sized against the scroll container itself, the
+   track would only ever cover the visible viewport. Numbered because order is real information
+   (chronology), not decoration. Photo slots use .ph until real photos are supplied. */
+.journey-rail-wrap{position:relative;margin-top:8px;}
+.journey-rail-scroll{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px;}
+.journey-rail-scroll::-webkit-scrollbar{display:none;}
+.journey-rail{display:flex;gap:28px;width:max-content;position:relative;padding:38px 4px 4px;}
+.journey-rail-track{position:absolute;top:54px;left:4px;width:calc(100% - 8px);height:2px;background:var(--line);z-index:0;}
+.journey-stop{scroll-snap-align:start;flex:0 0 clamp(230px,25vw,290px);position:relative;z-index:1;}
+.journey-stop-num{position:relative;z-index:1;width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:600;font-size:14px;margin-bottom:16px;box-shadow:0 0 0 6px var(--bg-soft);}
+.journey-stop .ph, .journey-stop img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:var(--radius);margin-bottom:16px;}
+.journey-stop-year{display:block;font-family:var(--font-display);font-weight:600;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--red);margin-bottom:6px;}
+.journey-stop h3{font-size:19px;margin-bottom:8px;line-height:1.2;}
+.journey-stop p{font-size:14.5px;color:var(--ink-soft);line-height:1.6;}
+.journey-rail-arrows{display:flex;justify-content:flex-end;gap:10px;margin-top:16px;}
+.journey-arrow{width:40px;height:40px;flex:none;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--ink-black);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:background .2s ease, color .2s ease, border-color .2s ease;}
+.journey-arrow:hover{background:var(--ink-black);color:#fff;border-color:var(--ink-black);}
+.journey-arrow:disabled{opacity:.35;cursor:default;}
+.journey-arrow:disabled:hover{background:#fff;color:var(--ink-black);border-color:var(--line);}
 
 /* About Erick — pull-quote panel. Same contained/rounded panel language as the story panels above, but
    ink-black with an oversized translucent quote mark, used as a single strong personal beat between the
@@ -472,6 +452,29 @@ img{max-width:100%;display:block;}
 .field-item-link{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14px;color:var(--ink-black);text-decoration:underline;text-underline-offset:3px;transition:color .2s ease, gap .2s ease;}
 .field-item-link:hover{color:var(--blue);gap:12px;}
 
+/* Mega-header section dividers — Obama.org "Programs" page pattern: a huge condensed headline
+   introducing each block of content, reusing the same display font as the homepage hero word
+   (hero-rotate-word) but static, black-on-white, and left-aligned instead of white-on-photo. */
+.mega-header{font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:clamp(42px,7.4vw,92px);line-height:.94;letter-spacing:-.01em;color:var(--ink-black);margin:0 0 14px;}
+.mega-header-dek{font-size:17px;color:var(--ink-soft);max-width:640px;}
+
+/* Feature pair — two equal-width flagship tiles (Obama's "My Brother's Keeper / Girls Opportunity
+   Alliance" pattern): tall photo, display-font heading, one line, a field-item-link. */
+.feature-pair{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:8px;}
+.feature-pair-item .ph{aspect-ratio:4/5;margin-bottom:22px;}
+.feature-pair-item h3{font-family:var(--font-display);font-weight:600;font-size:clamp(24px,2.6vw,34px);letter-spacing:-.01em;margin-bottom:10px;}
+.feature-pair-item p{color:var(--ink-soft);font-size:16px;line-height:1.6;margin-bottom:14px;max-width:420px;}
+
+/* Feature row list — Obama's "Global Leadership Programs" pattern: photo-left, text-right rows,
+   thin top rule between them instead of card chrome. Reused for principles, focus areas, process
+   steps, and leadership bios so the page doesn't need a new component per section. */
+.feature-row-list{margin-top:8px;}
+.feature-row{display:grid;grid-template-columns:200px 1fr;gap:30px;align-items:start;padding:30px 0;border-top:1px solid var(--line);}
+.feature-row:first-child{border-top:none;padding-top:8px;}
+.feature-row .ph{aspect-ratio:4/3;height:auto;}
+.feature-row h3{font-family:var(--font-h);font-size:22px;margin-bottom:8px;line-height:1.2;}
+.feature-row p{color:var(--ink-soft);font-size:15.5px;line-height:1.6;margin-bottom:10px;}
+
 /* "Why this foundation" — Obama.org "Programs" pattern, mirrored: 2x2 value-card grid on the left, a
    contained yellow statement box on the right. Obama's Programs box isn't full-bleed — it's sized to its
    own text and sits inset on a plain background — so this section uses its own padded container/grid
@@ -505,6 +508,12 @@ img{max-width:100%;display:block;}
 .value-card-link:hover{color:var(--red);gap:11px;}
 
 .pillar-card{padding:26px 22px;text-align:left;cursor:default;transition:transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .28s ease, border-color .28s ease;}
+/* Top image on an otherwise-icon pillar-card — Obama.org keeps every card photo-led on a plain
+   white ground rather than colour-blocked; this bleeds a photo to the card's own edges (undoing
+   the card's padding just for the image) with the icon/heading/text still in the normal flow below. */
+.pillar-card-img{aspect-ratio:4/3;margin:-26px -22px 20px;border-radius:var(--radius) var(--radius) 0 0;overflow:hidden;}
+.pillar-card-img .ph, .pillar-card-img img{height:100%;width:100%;border-radius:0;}
+.pillar-card-img img{object-fit:cover;display:block;}
 .pillar-card:hover, .pillar-card:focus-visible{transform:translateY(-7px); box-shadow:0 18px 34px rgba(0,0,0,.18), 0 2px 6px rgba(0,0,0,.08); border-color:var(--red); outline:none;}
 .pillar-card i{width:42px;height:42px;border-radius:9px;background:linear-gradient(145deg,var(--yellow-light),#FFE7A6);box-shadow:inset 0 1px 1px rgba(255,255,255,.7),0 1px 2px rgba(15,20,15,.08);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:14px;transition:transform .28s cubic-bezier(.2,.8,.2,1), background .28s ease, color .28s ease, box-shadow .28s ease;}
 .pillar-card:hover i, .pillar-card:focus-visible i{background:linear-gradient(145deg,var(--red),var(--red-deep));color:var(--yellow);transform:scale(1.1) rotate(-4deg);box-shadow:inset 0 1px 1px rgba(255,255,255,.25),0 6px 14px rgba(0,0,0,.28);}
@@ -545,6 +554,9 @@ img{max-width:100%;display:block;}
   .field-grid{grid-template-columns:1fr 1fr;gap:28px 0;}
   .field-item{padding:0 20px;}
   .field-item:nth-child(2n+1){border-left:none;padding-left:0;}
+  .feature-pair{grid-template-columns:1fr;gap:36px;}
+  .feature-row{grid-template-columns:1fr;gap:16px;}
+  .feature-row .ph{aspect-ratio:16/10;}
   .footer-grid{grid-template-columns:repeat(2,1fr);}
   .cta-band-inner{gap:20px;}
   .nav-links{display:none;}
@@ -578,22 +590,9 @@ img{max-width:100%;display:block;}
   .insider-box{grid-template-columns:1fr;gap:32px;}
   .insider-consent-row{flex-direction:column;align-items:flex-start;gap:18px;}
   .insider-submit{width:100%;justify-content:center;}
-  .story-panel::before{width:160px;height:160px;top:-34px;}
-  .story-panel--yellow::before{right:-46px;}
-  .story-panel--blue::before{left:-46px;}
   .about-hero-grid{grid-template-columns:1fr;gap:32px;}
   .about-hero-grid .about-portrait{max-width:360px;}
-  .story-stage{grid-template-columns:1fr;gap:22px;padding-left:44px;padding-top:36px;padding-bottom:36px;}
-  .story-spine::before{left:16px;}
-  .story-stage-dot{left:16px;top:30px;}
-  .story-stage:nth-child(even) .story-stage-media{order:0;}
-  .story-stage:nth-child(even) .story-stage-body{order:0;text-align:left;}
-  .story-stage:nth-child(even) .story-stage-body p{margin-left:0;}
-  .story-panel{padding:26px 24px;}
-  .story-panel::before{width:120px;height:120px;top:-24px;}
-  .story-panel--yellow::before{right:-34px;}
-  .story-panel--blue::before{left:-34px;}
-  .story-panel::after{font-size:11px;letter-spacing:5px;top:16px;}
+  .journey-stop{flex-basis:78vw;}
   .pull-quote-panel{padding:48px 28px;}
   .pull-quote-panel::before{font-size:180px;top:-46px;}
   .why-running-grid{grid-template-columns:1fr;gap:32px;}

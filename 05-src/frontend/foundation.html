@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Foundation — Erick Janganya Foundation</title>
+<meta name="description" content="The mission, core principles, and focus areas behind every project on the Erick Janganya Foundation's development tracker.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
@@ -77,12 +78,321 @@
 </div>
 
 <main>
-  <div class="container stub-wrap">
-    <span class="eyebrow">The Foundation</span>
-    <h1>This page is being built next.</h1>
-    <p>We're finishing the foundation's mission, principles and focus areas — the institutional heart of this platform. Check back soon, or get notified the moment it's live.</p>
-    <a class="btn btn-secondary" href="index.html#stay-updated"><i class="fa-solid fa-bell"></i> Notify me</a>
-  </div>
+
+  <!-- Rebuilt on the Obama Foundation's "Programs" page rhythm (obama.org/programs), per direct
+       reference/screenshots: a huge display-font section headline + one-line dek, then content, then
+       a black section-rule, repeated — rather than a handful of small card grids and done scrolling.
+       Content shape reused three ways down the page: .feature-pair (two big tiles), .field-grid (the
+       homepage's existing 3-column divided story grid), and .feature-row-list (photo-left/text-right
+       rows) — so nothing new was invented per section, just recombined. Mission/principles/focus areas/
+       how-it-works still trace back to the platform's original spec (01-wireframe #screen-foundation,
+       02-docs manual §3.3) and the live tracker categories (seed.js/tracker.js), same as before — this
+       pass changes the FORM, not the underlying facts. Foundation Stories, the leadership row, and
+       every step under "How verification works" are illustrative mock content, same convention as the
+       tracker/promise seed data elsewhere on the site. All photos are left as .ph placeholders per
+       instruction — real images to be dropped in against the same slots. -->
+
+  <section class="section" style="padding-top:150px;padding-bottom:0;">
+    <div class="container">
+      <h1 class="mega-header reveal-up">The Foundation</h1>
+      <p class="mega-header-dek reveal-up">The public record behind every project, promise, and ward the Erick Janganya Foundation works in — Embakasi South, documented as it happens.</p>
+    </div>
+  </section>
+  <section class="section-tight" style="padding-top:32px;">
+    <div class="container">
+      <div class="ph reveal-up" style="aspect-ratio:21/9;border-radius:var(--radius);">
+        <i class="fa-solid fa-image"></i><span>Hero photo — foundation team or flagship project on site</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Flagship platforms — Obama's "My Brother's Keeper Alliance / Girls Opportunity Alliance" two-tile
+       pattern. The foundation's own two flagship platforms are the natural fit here. -->
+  <section class="section">
+    <div class="container">
+      <div class="section-rule"></div>
+      <div class="feature-pair">
+        <div class="feature-pair-item reveal-up">
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Development Tracker preview photo</span></div>
+          <h3>Development Tracker</h3>
+          <p>Every project across Embakasi South's five wards — dated, budgeted, and status-checked as work happens, not at election time.</p>
+          <a class="field-item-link" href="tracker.html">See the tracker <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="feature-pair-item reveal-up">
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Promise Scorecard preview photo</span></div>
+          <h3>Promise Scorecard</h3>
+          <p>Every commitment Erick has made, tracked against what's actually been delivered — kept, in progress, or not yet started.</p>
+          <a class="field-item-link" href="promises.html">See the scorecard <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Foundation Stories — reuses the homepage's existing 3-column .field-grid exactly (Obama's
+       "Program stories" grid), just with different content. Mock stories for now. -->
+  <section class="section-tight" style="background:#fff;border-top:1px solid var(--line);">
+    <div class="container">
+      <div class="section-rule"></div>
+      <h2 class="mega-header reveal-up" style="font-size:clamp(34px,5.4vw,64px);">Foundation Stories</h2>
+      <p class="mega-header-dek reveal-up" style="margin-bottom:28px;">Dispatches from the ground — project updates, ward visits, and the people behind the numbers on the tracker.</p>
+      <div class="field-grid">
+        <div class="field-item reveal-up">
+          <div class="field-item-media"><div class="ph"><i class="fa-solid fa-image"></i><span>Story photo — Imara Daima footbridge</span></div></div>
+          <span class="eyebrow">Infrastructure · Imara Daima</span>
+          <h3>Inside the Imara Daima footbridge repair</h3>
+          <p>A look at the crew, the timeline, and what's left before the crossing reopens for good.</p>
+          <a class="field-item-link" href="news.html">Read the update <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="field-item reveal-up">
+          <div class="field-item-media"><div class="ph"><i class="fa-solid fa-image"></i><span>Story photo — Kware medical camp</span></div></div>
+          <span class="eyebrow">Health · Kware</span>
+          <h3>What a Kware medical camp actually looks like</h3>
+          <p>Screenings, referrals, and the residents who showed up on a Tuesday morning.</p>
+          <a class="field-item-link" href="news.html">Read the update <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="field-item reveal-up">
+          <div class="field-item-media"><div class="ph"><i class="fa-solid fa-image"></i><span>Story photo — Kwa Njenga skills hub</span></div></div>
+          <span class="eyebrow">Youth &amp; Employment · Kwa Njenga</span>
+          <h3>Inside the Kwa Njenga skills hub, mid-build</h3>
+          <p>Concrete's poured, equipment's ordered — a progress check on the training space.</p>
+          <a class="field-item-link" href="news.html">Read the update <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mid-page newsletter break — Obama interleaves a signup band between content sections rather than
+       only at the very end. Links to the homepage's real signup form instead of duplicating it here,
+       since forms.js only wires up the one on index.html. -->
+  <section class="section-tight" style="background:var(--yellow-light);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+    <div class="container cta-band-inner" style="flex-wrap:wrap;">
+      <div>
+        <h2 style="color:var(--ink-black);font-size:clamp(26px,3.6vw,40px);">Get the updates as they happen</h2>
+        <p style="color:var(--ink-soft);margin-top:10px;max-width:480px;">New tracker entries, verified promises, and ward-level news — straight to your inbox.</p>
+      </div>
+      <a class="btn btn-primary cta-band-btn" href="index.html#stay-updated"><i class="fa-solid fa-bell"></i> Stay updated</a>
+    </div>
+  </section>
+
+  <!-- Core Principles — Obama's "Global Leadership Programs" photo-left/text-right row pattern. -->
+  <section class="section">
+    <div class="container">
+      <div class="section-rule"></div>
+      <h2 class="mega-header reveal-up" style="font-size:clamp(34px,5.4vw,64px);">Core Principles</h2>
+      <p class="mega-header-dek reveal-up">Four things every project on this site has to answer to before it's marked verified.</p>
+      <div class="feature-row-list">
+        <div class="feature-row reveal-up">
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Principle photo — Accountability</span></div>
+          <div>
+            <h3>Accountability</h3>
+            <p>Every claim traces back to a project record anyone can check — nothing stands on reputation alone.</p>
+            <a class="field-item-link" href="tracker.html">See it on the tracker <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="feature-row reveal-up">
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Principle photo — Transparency</span></div>
+          <div>
+            <h3>Transparency</h3>
+            <p>Budgets, funding sources, and progress are published as work happens, not summarised after the fact.</p>
+            <a class="field-item-link" href="tracker.html">See funding sources <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="feature-row reveal-up">
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Principle photo — Sustainable Development</span></div>
+          <div>
+            <h3>Sustainable Development</h3>
+            <p>Projects are chosen to outlast a single term — built to serve Embakasi South well beyond one election cycle.</p>
+            <a class="field-item-link" href="vision.html">Read the vision <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="feature-row reveal-up">
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Principle photo — Integrity</span></div>
+          <div>
+            <h3>Integrity</h3>
+            <p>Credit is only claimed for work the foundation actually delivered — never overstated, never borrowed.</p>
+            <a class="field-item-link" href="about.html">Read Erick's story <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Focus areas were "Health, Education, Infrastructure" in the original wireframe (pre-dates the
+       backend). Swapped in the four categories the tracker actually uses today (see seed.js /
+       tracker.js) so this page stays consistent with what's live elsewhere rather than a stale list. -->
+  <section class="section-tight" style="background:#fff;border-top:1px solid var(--line);">
+    <div class="container">
+      <div class="section-rule"></div>
+      <h2 class="mega-header reveal-up" style="font-size:clamp(34px,5.4vw,64px);">Focus Areas</h2>
+      <p class="mega-header-dek reveal-up">The same categories used on the Development Tracker — every project maps to one of these.</p>
+      <div class="feature-row-list">
+        <div class="feature-row reveal-up">
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Focus area photo — Infrastructure</span></div>
+          <div>
+            <h3>Infrastructure</h3>
+            <p>Roads, drainage, footbridges, and public works that hold up under daily use.</p>
+            <a class="field-item-link" href="tracker.html">See infrastructure projects <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="feature-row reveal-up">
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Focus area photo — Health</span></div>
+          <div>
+            <h3>Health</h3>
+            <p>Outreach camps, maternal health checks, and improved access to basic care.</p>
+            <a class="field-item-link" href="tracker.html">See health projects <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="feature-row reveal-up">
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Focus area photo — Water &amp; Sanitation</span></div>
+          <div>
+            <h3>Water &amp; Sanitation</h3>
+            <p>Public water points and sanitation upgrades in the wards that need them most.</p>
+            <a class="field-item-link" href="tracker.html">See water projects <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="feature-row reveal-up">
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Focus area photo — Youth &amp; Employment</span></div>
+          <div>
+            <h3>Youth &amp; Employment</h3>
+            <p>Skills training and small-business support so opportunity doesn't require leaving the constituency.</p>
+            <a class="field-item-link" href="tracker.html">See youth projects <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How verification works — same row pattern, used as a numbered process instead of a topic list. -->
+  <section class="section">
+    <div class="container">
+      <div class="section-rule"></div>
+      <h2 class="mega-header reveal-up" style="font-size:clamp(34px,5.4vw,64px);">How Verification Works</h2>
+      <p class="mega-header-dek reveal-up">What separates a claim from a checked fact on this site.</p>
+      <div class="feature-row-list">
+        <div class="feature-row reveal-up">
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Process photo — site visit</span></div>
+          <div>
+            <h3>Step 1 — Site visit logged</h3>
+            <p>A team member visits in person and photographs the project as it stands, dated on arrival.</p>
+          </div>
+        </div>
+        <div class="feature-row reveal-up">
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Process photo — status check</span></div>
+          <div>
+            <h3>Step 2 — Status set</h3>
+            <p>Marked Planned, Ongoing, or Completed based on what's actually there — not what was announced.</p>
+          </div>
+        </div>
+        <div class="feature-row reveal-up">
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Process photo — budget records</span></div>
+          <div>
+            <h3>Step 3 — Budget &amp; funding source attached</h3>
+            <p>Every project is labelled honestly: Foundation-funded, Government (NG-CDF), or Partner-funded.</p>
+          </div>
+        </div>
+        <div class="feature-row reveal-up">
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Process photo — public record</span></div>
+          <div>
+            <h3>Step 4 — Public record updated</h3>
+            <p>The tracker and, where linked, the Promise Scorecard both update — visible to anyone, immediately.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Structure & leadership — real names/roles are still unconfirmed, so those stay bracketed (same
+       convention as about.html) even though the row layout itself is finished. Legal status likewise. -->
+  <section class="section-tight" style="background:#fff;border-top:1px solid var(--line);">
+    <div class="container">
+      <div class="section-rule"></div>
+      <h2 class="mega-header reveal-up" style="font-size:clamp(34px,5.4vw,64px);">Structure &amp; Leadership</h2>
+      <p class="mega-header-dek reveal-up" style="margin-bottom:8px;">Who runs this, in their own right — not just Erick.</p>
+      <div class="feature-row-list">
+        <div class="feature-row reveal-up">
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Leadership photo</span></div>
+          <div>
+            <h3>[Name]</h3>
+            <p>[Role — e.g. Founder &amp; Executive Director]</p>
+          </div>
+        </div>
+        <div class="feature-row reveal-up">
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Leadership photo</span></div>
+          <div>
+            <h3>[Name]</h3>
+            <p>[Role — e.g. Programs Lead]</p>
+          </div>
+        </div>
+        <div class="feature-row reveal-up">
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Leadership photo</span></div>
+          <div>
+            <h3>[Name]</h3>
+            <p>[Role — e.g. Community Liaison, Kware Ward]</p>
+          </div>
+        </div>
+      </div>
+      <p class="reveal-up" style="font-size:15.5px;line-height:1.7;color:var(--ink-soft);max-width:640px;margin-top:8px;">[Legal status — e.g. registered as a CBO/NGO/trust, registration number if the foundation wants it displayed publicly, or a plain statement that formal registration is in progress.]</p>
+    </div>
+  </section>
+
+  <section class="section-tight cta-band">
+    <div class="container">
+      <div class="section-rule" style="background:#fff;"></div>
+      <div class="cta-band-inner">
+        <div>
+          <h2>See the principles in practice</h2>
+          <p>Every focus area above maps directly onto the projects already logged on the tracker.</p>
+        </div>
+        <a class="btn btn-outline cta-band-btn" href="tracker.html"><i class="fa-solid fa-chart-line"></i> View the tracker</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Same newsletter form as the homepage (index.html#stay-updated) — same IDs, same forms.js/API
+       wiring, so this one is fully functional here too, not just a repeated visual. -->
+  <section class="section-tight insider-section" id="stay-updated">
+    <div class="container">
+      <div class="section-rule"></div>
+      <div class="insider-box">
+        <div class="insider-copy reveal-up">
+          <h2>Stay updated</h2>
+          <p>Sign up to receive the latest updates on tracker projects, promise updates, and events across Embakasi South.</p>
+        </div>
+        <form class="insider-form reveal-up" id="newsletterForm" novalidate>
+          <div class="insider-field">
+            <label for="nl-first">First name</label>
+            <input type="text" id="nl-first" name="firstName" required>
+          </div>
+          <div class="insider-field">
+            <label for="nl-last">Last name</label>
+            <input type="text" id="nl-last" name="lastName" required>
+          </div>
+          <div class="insider-field">
+            <label for="nl-email">Email</label>
+            <input type="email" id="nl-email" name="email" required>
+          </div>
+          <div class="insider-field">
+            <label for="nl-zip">Zip Code (optional)</label>
+            <input type="text" id="nl-zip" name="zip">
+          </div>
+          <div class="insider-field">
+            <label for="nl-phone">Phone number (optional)</label>
+            <input type="tel" id="nl-phone" name="phone">
+          </div>
+          <p class="insider-disclaimer">By providing a phone number, you confirm that you are an adult and consent to receive automated marketing and informational SMS messages from the Erick Janganya Foundation at the phone number you provided. To learn more about how the Foundation would use your information, read our <a href="#">Privacy Statement</a>. Message and data rates may apply. Message frequency varies. You may opt out at any time by texting &ldquo;STOP&rdquo; to [SMS short code]. Consent is not a condition of purchase or service.</p>
+          <div class="insider-consent-row">
+            <label class="insider-checkbox">
+              <input type="checkbox" name="agreedToTerms" required>
+              <span>Yes, I agree to the <a href="#">Terms of Service</a></span>
+            </label>
+            <button type="submit" class="btn btn-outline insider-submit">Submit</button>
+          </div>
+          <p class="form-note" id="newsletterNote" hidden></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer class="site-footer">
@@ -132,6 +442,8 @@
   </div>
 </footer>
 
+<script src="js/api.js"></script>
 <script src="js/main.js"></script>
+<script src="js/forms.js"></script>
 </body>
 </html>
