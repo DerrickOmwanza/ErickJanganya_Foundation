@@ -9,3 +9,8 @@ node_modules/
 .env
 05-src/backend/node_modules/
 05-src/backend/generated/
+
+# Raw social media export — 80MB+, mostly unreviewed. Curated picks actually used on the
+# site are copied into 05-src/frontend/img/ and tracked normally; see 04-content/social-media/README.md.
+04-content/social-media/facebook/
+04-content/social-media/instagram/
