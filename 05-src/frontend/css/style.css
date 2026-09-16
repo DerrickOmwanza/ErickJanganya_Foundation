@@ -266,11 +266,21 @@ img{max-width:100%;display:block;}
 /* About Erick — pull-quote panel. Same contained/rounded panel language as the story panels above, but
    ink-black with an oversized translucent quote mark, used as a single strong personal beat between the
    hero and the journey timeline rather than another chronology block. */
-.pull-quote-panel{position:relative;overflow:hidden;background:var(--ink-black);border-radius:18px;padding:76px 64px;text-align:center;}
-.pull-quote-panel::before{content:'"';position:absolute;top:-96px;left:50%;transform:translateX(-50%);font-family:var(--font-h);font-size:340px;font-weight:700;color:rgba(255,255,255,.06);line-height:1;pointer-events:none;z-index:0;}
-.pull-quote-panel::after{content:'\2726  \2727  \2726';position:absolute;bottom:22px;left:50%;transform:translateX(-50%);font-size:14px;letter-spacing:9px;color:rgba(255,255,255,.18);pointer-events:none;z-index:0;}
-.pull-quote-text{position:relative;z-index:1;color:#fff;font-family:var(--font-h);font-weight:700;font-size:clamp(25px,3.3vw,40px);line-height:1.4;max-width:840px;margin:0 auto;}
-.pull-quote-cite{position:relative;z-index:1;display:block;margin-top:26px;color:var(--yellow);font-family:var(--font-b);font-weight:700;font-size:13.5px;letter-spacing:.07em;text-transform:uppercase;}
+/* Editorial pull-quote — was a black card (background:var(--ink-black)); dropped per direct
+   instruction (2026-09-17): text stays on the page's own white ground, no boxed/coloured card.
+   The oversized quotation mark now does the visual weight a background used to, at low enough
+   contrast (var(--line)) to read as texture, not a shout. One shared component, so this fixes
+   every instance at once — About's two quotes and Vision's — without touching any HTML. */
+.pull-quote-panel{position:relative;padding-left:38px;border-left:4px solid var(--red);margin:28px 0 12px;}
+.pull-quote-panel::before{content:'"';position:absolute;top:-22px;left:-6px;font-family:var(--font-h);font-size:150px;font-weight:700;color:var(--line);line-height:1;pointer-events:none;z-index:0;}
+.pull-quote-text{position:relative;z-index:1;color:var(--ink-black);font-family:var(--font-h);font-weight:700;font-size:clamp(24px,3.1vw,36px);line-height:1.42;}
+.pull-quote-cite{position:relative;z-index:1;display:block;color:var(--red);font-family:var(--font-b);font-weight:700;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;}
+/* Attribution row — optional: a small round portrait next to the citation, tying a quote to the
+   real person saying it without repeating the hero's side-by-side photo treatment. Wraps the cite
+   even where there's no avatar (e.g. Vision's institutional-voice quote), so the margin-top that
+   used to live on .pull-quote-cite now lives here instead — no layout shift either way. */
+.pull-quote-attribution{display:flex;align-items:center;gap:12px;margin-top:20px;}
+.pull-quote-avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:none;position:relative;z-index:1;}
 
 /* About Erick — "Why I'm Running": deliberately text-forward (no photo slot) editorial block. Instead of
    leaving the right side of the container empty, a magazine-style pull-quote excerpt (lifted from the
@@ -283,6 +293,14 @@ img{max-width:100%;display:block;}
 .why-running-excerpt{position:sticky;top:130px;border-left:4px solid var(--blue);padding-left:28px;}
 .why-running-excerpt blockquote{font-family:var(--font-h);font-weight:700;font-size:clamp(21px,2vw,28px);line-height:1.44;color:var(--ink-black);}
 .why-running-excerpt-cite{display:block;margin-top:16px;font-family:var(--font-b);font-weight:700;font-size:12.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--blue);}
+
+/* Editorial CTA — a statement + supporting text/link split, white ground, divided by a rule rather
+   than a coloured card (replaces .split-panel--sky on "Partner With Us", 2026-09-17: card-on-card
+   design was fighting the same white-background principle the pull-quote rework just addressed). */
+.editorial-cta{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;}
+.editorial-cta-lead h3{font-family:var(--font-h);font-weight:700;font-size:clamp(28px,3.4vw,42px);line-height:1.18;color:var(--ink-black);margin-top:10px;}
+.editorial-cta-body{border-left:1px solid var(--line);padding-left:40px;}
+.editorial-cta-body p{font-size:16px;color:var(--ink-soft);line-height:1.7;margin-bottom:20px;max-width:440px;}
 
 /* About Erick — "Explore Further" cards reuse .pillar-card's look but are real links (whole card
    clickable) rather than static info cards, so they need pointer cursor + block display. */
@@ -590,10 +608,12 @@ img{max-width:100%;display:block;}
   .about-hero-grid{grid-template-columns:1fr;gap:32px;}
   .about-hero-grid .about-portrait{max-width:360px;}
   .journey-stop{flex-basis:78vw;}
-  .pull-quote-panel{padding:48px 28px;}
-  .pull-quote-panel::before{font-size:180px;top:-46px;}
+  .pull-quote-panel{padding-left:22px;border-left-width:3px;}
+  .pull-quote-panel::before{font-size:90px;top:-24px;left:-2px;}
   .why-running-grid{grid-template-columns:1fr;gap:32px;}
   .why-running-body{padding-left:20px;border-left-width:3px;font-size:16.5px;}
+  .editorial-cta{grid-template-columns:1fr;gap:24px;}
+  .editorial-cta-body{padding-left:20px;}
   .why-running-excerpt{position:static;padding-left:20px;border-left-width:3px;}
   .section-rule{height:6px;margin-bottom:30px;}
 }

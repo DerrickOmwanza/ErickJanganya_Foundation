@@ -174,34 +174,38 @@ function initMediaCarousel() {
   updateArrows();
 }
 
-// Journey rail (About page): arrows nudge the scroll-snap strip one stop at a time — same
-// interaction as the media carousel above (click, native arrow keys, or touch swipe; arrows
-// disable at either end). Uses behavior:'auto' rather than 'smooth' — tested and confirmed
-// 'smooth' silently fights this container's scroll-snap-type:x mandatory and the scroll never
-// actually moves; 'auto' is instant but reliable, and satisfies prefers-reduced-motion by default.
+// Journey/Horizon rail: arrows nudge a scroll-snap strip one stop at a time — same interaction as
+// the media carousel above (click, native arrow keys, or touch swipe; arrows disable at either
+// end). Generalized (2026-09-17) to run on every .journey-rail-wrap on the page, scoped by
+// .closest/.querySelector rather than a single hardcoded id, since the Vision page reuses this
+// same component for its own roadmap alongside About's timeline. Uses behavior:'auto' rather than
+// 'smooth' — tested and confirmed 'smooth' silently fights this container's
+// scroll-snap-type:x mandatory and the scroll never actually moves; 'auto' is instant but
+// reliable, and satisfies prefers-reduced-motion by default.
 function initJourneyRail() {
-  var wrap = document.getElementById('journeyRail');
-  if (!wrap) return;
-  var rail = wrap.querySelector('.journey-rail');
-  var stop = wrap.querySelector('.journey-stop');
-  var prevBtn = document.getElementById('journeyPrev');
-  var nextBtn = document.getElementById('journeyNext');
-  if (!rail || !stop) return;
+  document.querySelectorAll('.journey-rail-wrap').forEach(function (wrapEl) {
+    var scroller = wrapEl.querySelector('.journey-rail-scroll');
+    var rail = wrapEl.querySelector('.journey-rail');
+    var stop = wrapEl.querySelector('.journey-stop');
+    var prevBtn = wrapEl.querySelector('.journey-prev');
+    var nextBtn = wrapEl.querySelector('.journey-next');
+    if (!scroller || !rail || !stop) return;
 
-  function step() {
-    var gap = parseFloat(getComputedStyle(rail).columnGap || getComputedStyle(rail).gap || 28);
-    return stop.getBoundingClientRect().width + gap;
-  }
-  function updateArrows() {
-    var max = wrap.scrollWidth - wrap.clientWidth - 6;
-    if (prevBtn) prevBtn.disabled = wrap.scrollLeft <= 6;
-    if (nextBtn) nextBtn.disabled = max <= 6 || wrap.scrollLeft >= max;
-  }
-  if (prevBtn) prevBtn.addEventListener('click', function () { wrap.scrollBy({ left: -step(), behavior: 'auto' }); updateArrows(); });
-  if (nextBtn) nextBtn.addEventListener('click', function () { wrap.scrollBy({ left: step(), behavior: 'auto' }); updateArrows(); });
-  wrap.addEventListener('scroll', updateArrows, { passive: true });
-  window.addEventListener('resize', updateArrows);
-  updateArrows();
+    function step() {
+      var gap = parseFloat(getComputedStyle(rail).columnGap || getComputedStyle(rail).gap || 28);
+      return stop.getBoundingClientRect().width + gap;
+    }
+    function updateArrows() {
+      var max = scroller.scrollWidth - scroller.clientWidth - 6;
+      if (prevBtn) prevBtn.disabled = scroller.scrollLeft <= 6;
+      if (nextBtn) nextBtn.disabled = max <= 6 || scroller.scrollLeft >= max;
+    }
+    if (prevBtn) prevBtn.addEventListener('click', function () { scroller.scrollBy({ left: -step(), behavior: 'auto' }); updateArrows(); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { scroller.scrollBy({ left: step(), behavior: 'auto' }); updateArrows(); });
+    scroller.addEventListener('scroll', updateArrows, { passive: true });
+    window.addEventListener('resize', updateArrows);
+    updateArrows();
+  });
 }
 
 // Generic scroll-triggered reveal (fade + rise) applied to any element carrying .reveal-up —

@@ -81,13 +81,18 @@
 
 <main>
 
-  <!-- Built on the same architecture as foundation.html: mega-header + dek, section-rule dividers,
-       photo-led .feature-row-list for the priorities grid. Scope kept deliberately tight — three
-       sections, matching the platform's own original spec (01-wireframe #screen-vision, 02-docs
-       manual §3.4): intro, a 4-priority grid, and the "beyond the election" note. Vision's priorities
-       (Healthcare, Education, Housing & Infrastructure, Youth & Employment) are the manual's own list,
-       distinct on purpose from Foundation's Core Principles and Focus Areas — long-term outcomes here,
-       not current operating categories, even where the subject overlaps (health, youth). -->
+  <!-- Expanded 2026-09-17: the client's own framing is that this is a global-facing platform, not a
+       traditional constituency site — built to be legible to diaspora, international partners, and
+       future investors once the foundation is formally registered, not just local residents. Four
+       sections added on that basis (Where This Is, Aligned with Global Standards, The Horizon, Partner
+       With Us), each held to the same honesty standard as the rest of the site: legitimate frameworks
+       (UN SDGs — a real, citable mapping, not a claim of endorsement) and a forward invitation to
+       partner rather than any claim of existing investors/partnerships that don't exist yet. The
+       original three sections (intro, priorities, "beyond the election") are unchanged in substance;
+       "beyond the election" is merged into a single broader closing pull-quote rather than sitting
+       next to a near-duplicate new one. The Horizon reuses the About page's journey-rail component
+       (see main.js initJourneyRail, generalized to run on more than one rail per page) rather than a
+       new pattern — a sequential roadmap and a sequential life story are the same shape of content. -->
 
   <section class="section" style="padding-top:150px;padding-bottom:0;">
     <div class="container">
@@ -99,6 +104,38 @@
     <div class="container">
       <div class="ph reveal-up" style="aspect-ratio:21/9;border-radius:var(--radius);">
         <i class="fa-solid fa-image"></i><span>Hero photo — Embakasi South, a wide shot</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Where This Is — orientation for a reader who isn't already local: a real embedded map (OpenStreetMap,
+       no API key/billing needed) plus plain, verifiable geography. Exists because "global platform" only
+       works if an outside reader can place this constituency on a map in five seconds. Coordinates are an
+       approximate area centred on Embakasi South's wards, not a claimed precise boundary — captioned as
+       such rather than implying more precision than a locator map actually has. -->
+  <section class="section-tight" style="padding-top:8px;">
+    <div class="container">
+      <div class="reveal-up" style="border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);margin-bottom:14px;">
+        <iframe
+          src="https://www.openstreetmap.org/export/embed.html?bbox=36.835%2C-1.39%2C36.955%2C-1.29&amp;layer=mapnik&amp;marker=-1.34%2C36.895"
+          style="width:100%;height:340px;border:0;display:block;"
+          loading="lazy"
+          title="Map showing the approximate area of Embakasi South constituency, Nairobi, Kenya"></iframe>
+      </div>
+      <p style="font-size:12.5px;color:var(--ink-mute);margin-bottom:24px;">Approximate area — Embakasi South constituency, Nairobi County, Kenya. <a href="https://www.openstreetmap.org/?mlat=-1.34&amp;mlon=36.895#map=12/-1.34/36.895" target="_blank" rel="noopener" style="color:var(--blue);">View larger map ↗</a></p>
+      <div class="grid grid-3 reveal-up" style="gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;">
+        <div style="background:#fff;padding:24px 22px;">
+          <span class="eyebrow" style="display:block;margin-bottom:8px;">Where</span>
+          <p style="font-weight:700;font-size:16px;margin:0;">Nairobi County, Kenya</p>
+        </div>
+        <div style="background:#fff;padding:24px 22px;">
+          <span class="eyebrow" style="display:block;margin-bottom:8px;">Wards</span>
+          <p style="font-weight:700;font-size:16px;margin:0;">Imara Daima · Kwa Njenga · Kwa Reuben · Pipeline · Kware</p>
+        </div>
+        <div style="background:#fff;padding:24px 22px;">
+          <span class="eyebrow" style="display:block;margin-bottom:8px;">Seat</span>
+          <p style="font-weight:700;font-size:16px;margin:0;">Embakasi South Constituency, National Assembly of Kenya</p>
+        </div>
       </div>
     </div>
   </section>
@@ -141,15 +178,129 @@
     </div>
   </section>
 
-  <!-- Beyond the election — the one idea that separates this from an ordinary campaign site, per the
-       manual. Reuses the pull-quote-panel component (about.html) rather than a new one, since it's a
-       single stated position, not a list. -->
+  <!-- Aligned with Global Standards — maps the same four priorities onto their UN Sustainable
+       Development Goals. This is a legitimate, citable framework (anyone can map local work onto the
+       SDGs), not a claim of UN endorsement or partnership — worth being precise about if this copy
+       is ever questioned. -->
   <section class="section-tight" style="background:#fff;border-top:1px solid var(--line);">
     <div class="container">
       <div class="section-rule"></div>
+      <h2 class="mega-header reveal-up" style="font-size:clamp(34px,5.4vw,64px);">Aligned with Global Standards</h2>
+      <p class="mega-header-dek reveal-up">Local priorities, framed against the same development goals the international community already tracks — because accountability shouldn't need translation.</p>
+      <div class="feature-row-list">
+        <div class="feature-row reveal-up">
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Photo — a clinic visit</span></div>
+          <div>
+            <span class="eyebrow">UN SDG 3</span>
+            <h3>Good Health and Well-Being</h3>
+            <p>Embakasi South's healthcare priority — permanent clinics, not just outreach camps — sits inside this same global goal.</p>
+          </div>
+        </div>
+        <div class="feature-row reveal-up">
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Photo — a classroom</span></div>
+          <div>
+            <span class="eyebrow">UN SDG 4</span>
+            <h3>Quality Education</h3>
+            <p>Schools, bursaries, and digital literacy for every child here map directly onto this target.</p>
+          </div>
+        </div>
+        <div class="feature-row reveal-up">
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Photo — a ward road or settlement</span></div>
+          <div>
+            <span class="eyebrow">UN SDG 9 &amp; 11</span>
+            <h3>Infrastructure &amp; Sustainable Communities</h3>
+            <p>Roads, drainage, and upgraded settlements — the same standard the UN sets for cities worldwide, applied ward by ward.</p>
+          </div>
+        </div>
+        <div class="feature-row reveal-up">
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Photo — a youth enterprise or training session</span></div>
+          <div>
+            <span class="eyebrow">UN SDG 8</span>
+            <h3>Decent Work and Economic Growth</h3>
+            <p>Jobs and enterprise support that keep opportunity inside the constituency, not just passing through it.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Horizon — reuses the About page's journey-rail component (same CSS, same generalized JS)
+       for a forward-looking roadmap instead of a backward-looking life story. Clearly framed as a
+       plan/aspiration throughout ("the plan"), not a claim that any phase is already complete. -->
+  <section class="section">
+    <div class="container">
+      <div class="section-rule"></div>
+      <h2 class="mega-header reveal-up" style="font-size:clamp(34px,5.4vw,64px);">The Horizon</h2>
+      <p class="mega-header-dek reveal-up">Three phases, from a verified baseline to a record built to outlast any one term.</p>
+      <div class="journey-rail-wrap reveal-up">
+        <div class="journey-rail-scroll">
+          <div class="journey-rail">
+            <div class="journey-rail-track"></div>
+
+            <div class="journey-stop">
+              <span class="journey-stop-num">1</span>
+              <div class="ph"><i class="fa-solid fa-image"></i><span>Photo — a site visit in progress</span></div>
+              <span class="journey-stop-year">2026 – 2027</span>
+              <h3>Verified Baseline</h3>
+              <p>Every ward's current infrastructure, health, education, and water access status documented and published before the 2027 election.</p>
+            </div>
+
+            <div class="journey-stop">
+              <span class="journey-stop-num">2</span>
+              <div class="ph"><i class="fa-solid fa-image"></i><span>Photo — a completed project</span></div>
+              <span class="journey-stop-year">2027 – 2030</span>
+              <h3>Delivery Under Watch</h3>
+              <p>Every project promised during the term tracked to completion, or explained, in public, in real time.</p>
+            </div>
+
+            <div class="journey-stop">
+              <span class="journey-stop-num">3</span>
+              <div class="ph"><i class="fa-solid fa-image"></i><span>Photo — the tracker, in use</span></div>
+              <span class="journey-stop-year">2030 and beyond</span>
+              <h3>A Standing Record</h3>
+              <p>Embakasi South's permanent, independent development record — open to residents, researchers, and partners alike, regardless of who holds the seat.</p>
+            </div>
+
+          </div>
+        </div>
+        <div class="journey-rail-arrows">
+          <button class="journey-arrow journey-prev" aria-label="Previous phase"><i class="fa-solid fa-chevron-left"></i></button>
+          <button class="journey-arrow journey-next" aria-label="Next phase"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Merged "beyond the election" + "global reach" into one closing statement rather than two
+       near-identical pull-quote sections back to back. -->
+  <section class="section" style="background:#fff;border-top:1px solid var(--line);">
+    <div class="container">
+      <div class="section-rule"></div>
       <div class="pull-quote-panel reveal-up">
-        <p class="pull-quote-text">This platform doesn't end at an election. It evolves — from candidate site, to campaign platform, to MP accountability record, to a standing account of Embakasi South's progress, whatever the outcome in 2027.</p>
-        <span class="pull-quote-cite">Erick Janganya Foundation</span>
+        <p class="pull-quote-text">This platform doesn't end at Embakasi South's border, and it doesn't end at an election either. It's built to outlast one term and reach anyone watching — resident, diaspora, or partner — wherever they are.</p>
+        <div class="pull-quote-attribution">
+          <span class="pull-quote-cite">Erick Janganya Foundation</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partner With Us — honest forward invitation, not a claim of existing partners. Was a blue
+       gradient card (.split-panel--sky); moved to the same white-ground editorial-cta split used
+       nowhere else yet but built from the same language as why-running-grid, per direct instruction
+       to stop reaching for coloured cards as the default way to give a section visual weight. -->
+  <section class="section-tight" style="border-top:1px solid var(--line);">
+    <div class="container">
+      <div class="section-rule"></div>
+      <div class="editorial-cta">
+        <div class="editorial-cta-lead reveal-up">
+          <span class="eyebrow">Partner With Us</span>
+          <h3>Verified work deserves verified partners.</h3>
+        </div>
+        <div class="editorial-cta-body reveal-up">
+          <p>The foundation is preparing for formal registration. Once complete, it opens to partnership with diaspora groups, development organisations, and mission-aligned investors who want to back real, ward-level work — not press-release development.</p>
+          <a class="split-panel-link" href="contact.html">Start a conversation <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
       </div>
     </div>
   </section>
