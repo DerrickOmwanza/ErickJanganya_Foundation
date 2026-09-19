@@ -51,18 +51,35 @@
 
 <div class="mobile-drawer" id="mobile-drawer">
   <div class="mobile-drawer-inner">
-    <button class="mobile-drawer-close" aria-label="Close menu" onclick="toggleDrawer(false)"><i class="fa-solid fa-xmark"></i></button>
-    <a href="index.html">Home</a>
-    <a href="about.html">About Erick</a>
-    <a href="foundation.html">The Foundation</a>
-    <a href="vision.html">Vision</a>
-    <a href="tracker.html">Development Tracker</a>
-    <a href="promises.html">Promise Scorecard</a>
-    <a href="community.html">Community</a>
-    <a href="media.html">Media Centre</a>
-    <a href="news.html">News &amp; Press</a>
-    <a href="events.html">Events</a>
-    <a href="contact.html">Contact</a>
+    <div class="mobile-drawer-top">
+      <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+        <rect x="12" y="60" width="20" height="30" rx="7"/>
+        <rect x="40" y="40" width="20" height="50" rx="7"/>
+        <rect x="68" y="16" width="20" height="74" rx="7"/>
+      </svg>
+      <button class="mobile-drawer-close" aria-label="Close menu" onclick="toggleDrawer(false)"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <nav class="mobile-drawer-nav">
+      <a href="index.html">Home</a>
+      <span class="mobile-drawer-label">About</span>
+      <a href="about.html">About Erick</a>
+      <a href="foundation.html">The Foundation</a>
+      <a href="vision.html">Vision</a>
+      <span class="mobile-drawer-label">Progress</span>
+      <a href="tracker.html">Development Tracker</a>
+      <a href="promises.html">Promise Scorecard</a>
+      <span class="mobile-drawer-label">Get involved</span>
+      <a href="community.html">Community</a>
+      <a href="events.html">Events</a>
+      <span class="mobile-drawer-label">Media</span>
+      <a href="media.html">Media Centre</a>
+      <a href="news.html">News &amp; Press</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="mobile-drawer-foot">
+      <a class="btn btn-primary" href="involve.html">Donate</a>
+      <button type="button" class="mobile-drawer-search" onclick="toggleDrawer(false);toggleSearch(true)"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+    </div>
   </div>
 </div>
 
@@ -91,8 +108,8 @@
     <div class="container about-hero-grid">
       <div class="reveal-up">
         <span class="eyebrow">About Erick Janganya</span>
-        <h1>[Erick Janganya — full public name]</h1>
-        <p class="lead">I am Erick Janganya — an aspiring Member of Parliament for Embakasi South, based in Nairobi — and I'm running to represent Embakasi South in the 2027 general election because [placeholder: the core reason, in his own words].</p>
+        <h1>[Erick Janganya, full public name]</h1>
+        <p class="lead">I am Erick Janganya, an aspiring Member of Parliament for Embakasi South, based in Nairobi, and I'm running to represent Embakasi South in the 2027 general election because [placeholder: the core reason, in his own words].</p>
       </div>
       <div class="about-portrait reveal-up">
         <img src="img/erick-portrait.jpg" alt="Erick Janganya">
@@ -111,9 +128,9 @@
     <div class="container">
       <div class="section-rule"></div>
       <div class="section-head journey-head reveal-up">
-        <span class="eyebrow">The Journey</span>
-        <h2>From campus to a second run at Embakasi South</h2>
-        <p>[One framing sentence introducing the storyline — e.g. what shaped the decision to run.]</p>
+        <h2 class="mega-header section-mega-head">The Journey</h2>
+        <p class="section-dek">From campus to a second run at Embakasi South</p>
+        <p>[One framing sentence introducing the storyline, e.g. what shaped the decision to run.]</p>
       </div>
 
       <div class="journey-rail-wrap reveal-up">
@@ -126,7 +143,7 @@
               <div class="ph"><i class="fa-solid fa-image"></i><span>Campus photo coming soon</span></div>
               <span class="journey-stop-year">[University years]</span>
               <h3>Campus</h3>
-              <p>[He/I] studied [field of study] at the University of Nairobi — [one line on what shaped him there].</p>
+              <p>[He/I] studied [field of study] at the University of Nairobi: [one line on what shaped him there].</p>
             </div>
 
             <div class="journey-stop">
@@ -134,7 +151,7 @@
               <div class="ph"><i class="fa-solid fa-image"></i><span>Career photo coming soon</span></div>
               <span class="journey-stop-year">[Years]</span>
               <h3>Career Path</h3>
-              <p>[Role/title at organization after campus — one line on what that work involved and what it revealed about Embakasi South's needs.]</p>
+              <p>[Role/title at organization after campus: one line on what that work involved and what it revealed about Embakasi South's needs.]</p>
             </div>
 
             <div class="journey-stop">
@@ -150,7 +167,7 @@
               <div class="ph"><i class="fa-solid fa-image"></i><span>Foundation launch photo coming soon</span></div>
               <span class="journey-stop-year">[Year founded]</span>
               <h3>Foundation</h3>
-              <p>In [year], Erick founded the Erick Janganya Foundation — to track every promise, verify every claim, and keep Embakasi South's progress open for anyone to check.</p>
+              <p>In [year], Erick founded the Erick Janganya Foundation, to track every promise, verify every claim, and keep Embakasi South's progress open for anyone to check.</p>
             </div>
 
             <div class="journey-stop">
@@ -159,7 +176,7 @@
               <img src="img/campaign-trail.jpg" alt="Erick Janganya on the campaign trail in Embakasi South">
               <span class="journey-stop-year">2026 – 2027</span>
               <h3>2027 Campaign</h3>
-              <p>Erick is running for Embakasi South a second time — bringing the same standard of accountability built into the foundation's tracker to the office itself.</p>
+              <p>Erick is running for Embakasi South a second time, bringing the same standard of accountability built into the foundation's tracker to the office itself.</p>
             </div>
 
           </div>
@@ -180,25 +197,25 @@
     <div class="container">
       <div class="section-rule"></div>
       <div class="section-head reveal-up">
-        <span class="eyebrow">Why I'm Running</span>
-        <h2>The record has to be honest first</h2>
+        <h2 class="mega-header section-mega-head">Why I'm Running</h2>
+        <p class="section-dek">The record has to be honest first</p>
         <p>Three things this campaign comes down to.</p>
       </div>
       <div class="grid grid-3">
         <div class="card pillar-card reveal-up">
-          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo — an unfinished or stalled project site</span></div></div>
+          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: an unfinished or stalled project site</span></div></div>
           <h3>A pattern, not a lack of ideas</h3>
-          <p>A borehole promised at a rally, never dug. A road resurfaced only where the cameras could see it. A youth fund announced, never disbursed. The problem was never short on ideas — it was that nobody checked whether they became real.</p>
+          <p>A borehole promised at a rally, never dug. A road resurfaced only where the cameras could see it. A youth fund announced, never disbursed. The problem was never short on ideas. It was that nobody checked whether they became real.</p>
         </div>
         <div class="card pillar-card reveal-up">
-          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo — Erick reviewing tracker records on site</span></div></div>
+          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: Erick reviewing tracker records on site</span></div></div>
           <h3>The same standard, applied to me</h3>
-          <p>That's the gap the foundation exists to close — every project and promise made to this constituency, dated and open to verify, whether or not I made it. This campaign is the next step of that work, not a departure from it.</p>
+          <p>That's the gap the foundation exists to close: every project and promise made to this constituency, dated and open to verify, whether or not I made it. This campaign is the next step of that work, not a departure from it.</p>
         </div>
         <div class="card pillar-card reveal-up">
-          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo — Erick speaking directly with residents</span></div></div>
+          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: Erick speaking directly with residents</span></div></div>
           <h3>What I'm asking for</h3>
-          <p>Not another name promising it'll be different this time. A representative willing to be checked the same way everyone else already is on this site — that's the only thing I'm asking the chance to be.</p>
+          <p>Not another name promising it'll be different this time. A representative willing to be checked the same way everyone else already is on this site. That's the only thing I'm asking the chance to be.</p>
         </div>
       </div>
     </div>
@@ -210,30 +227,30 @@
     <div class="container">
       <div class="section-rule"></div>
       <div class="section-head reveal-up">
-        <span class="eyebrow">What Guides This</span>
-        <h2>Four things that don't move</h2>
+        <h2 class="mega-header section-mega-head">What Guides This</h2>
+        <p class="section-dek">Four things that don't move</p>
       </div>
       <div class="grid grid-4">
         <div class="card pillar-card reveal-up">
-          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo — a resident reviewing a project record</span></div></div>
+          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: a resident reviewing a project record</span></div></div>
           <i class="fa-solid fa-magnifying-glass"></i>
           <h3>Transparency</h3>
-          <p>Every project and promise carries a date, a budget line, and a status — nothing claimed without proof attached.</p>
+          <p>Every project and promise carries a date, a budget line, and a status, with nothing claimed without proof attached.</p>
         </div>
         <div class="card pillar-card reveal-up">
-          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo — a completed project compared to what was promised</span></div></div>
+          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: a completed project compared to what was promised</span></div></div>
           <i class="fa-solid fa-scale-balanced"></i>
           <h3>Accountability</h3>
           <p>Progress is measured against what was actually promised, not against what's convenient to say afterward.</p>
         </div>
         <div class="card pillar-card reveal-up">
-          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo — a ward visit, any of the five</span></div></div>
+          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: a ward visit, any of the five</span></div></div>
           <i class="fa-solid fa-map-location-dot"></i>
           <h3>Presence</h3>
-          <p>Imara Daima, Kwa Njenga, Kwa Reuben, Pipeline, and Kware — tracked individually, not blurred into one average.</p>
+          <p>Imara Daima, Kwa Njenga, Kwa Reuben, Pipeline, and Kware: tracked individually, not blurred into one average.</p>
         </div>
         <div class="card pillar-card reveal-up">
-          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo — a returning site visit, same project over time</span></div></div>
+          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: a returning site visit, same project over time</span></div></div>
           <i class="fa-solid fa-arrows-rotate"></i>
           <h3>Continuity</h3>
           <p>The record doesn't reset on election day. Whatever happens in 2027, the tracker keeps running.</p>
@@ -251,26 +268,26 @@
     <div class="container">
       <div class="section-rule"></div>
       <div class="section-head reveal-up">
-        <span class="eyebrow">In His Words</span>
-        <h2>Vision for the constituency</h2>
+        <h2 class="mega-header section-mega-head">In His Words</h2>
+        <p class="section-dek">Vision for the constituency</p>
       </div>
       <div class="feature-row-list">
         <div class="feature-row reveal-up">
-          <div class="ph"><i class="fa-solid fa-image"></i><span>Photo — Economy &amp; Jobs</span></div>
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Photo: Economy &amp; Jobs</span></div>
           <div>
             <h3>Economy &amp; Jobs</h3>
             <p>[Erick's specific position and plan for economy and employment in Embakasi South.]</p>
           </div>
         </div>
         <div class="feature-row reveal-up">
-          <div class="ph"><i class="fa-solid fa-image"></i><span>Photo — Health &amp; Sanitation</span></div>
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Photo: Health &amp; Sanitation</span></div>
           <div>
             <h3>Health &amp; Sanitation</h3>
             <p>[Erick's specific position and plan for health and sanitation in Embakasi South.]</p>
           </div>
         </div>
         <div class="feature-row reveal-up">
-          <div class="ph"><i class="fa-solid fa-image"></i><span>Photo — Education &amp; Youth</span></div>
+          <div class="ph"><i class="fa-solid fa-image"></i><span>Photo: Education &amp; Youth</span></div>
           <div>
             <h3>Education &amp; Youth</h3>
             <p>[Erick's specific position and plan for education and youth in Embakasi South.]</p>
@@ -286,27 +303,27 @@
     <div class="container">
       <div class="section-rule"></div>
       <div class="section-head reveal-up">
-        <span class="eyebrow">Explore Further</span>
-        <h2>The rest of the record</h2>
-        <p>Erick's story is one part of a connected site — see the foundation's approach, the vision behind it, and what residents are saying.</p>
+        <h2 class="mega-header section-mega-head">Explore Further</h2>
+        <p class="section-dek">The rest of the record</p>
+        <p>Erick's story is one part of a connected site: see the foundation's approach, the vision behind it, and what residents are saying.</p>
       </div>
       <div class="grid grid-3">
         <a href="foundation.html" class="card pillar-card explore-card reveal-up">
-          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo — foundation team or flagship project</span></div></div>
+          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: foundation team or flagship project</span></div></div>
           <i class="fa-solid fa-landmark"></i>
           <h3>The Foundation</h3>
           <p>The principles and focus areas behind every project on the tracker.</p>
           <span class="value-card-link">See the approach <i class="fa-solid fa-arrow-right"></i></span>
         </a>
         <a href="vision.html" class="card pillar-card explore-card reveal-up">
-          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo — a wide shot of Embakasi South</span></div></div>
+          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: a wide shot of Embakasi South</span></div></div>
           <i class="fa-solid fa-flag"></i>
           <h3>The Vision</h3>
-          <p>What Erick is prioritising for Embakasi South, beyond the election — and beyond the constituency's own borders.</p>
+          <p>What Erick is prioritising for Embakasi South, beyond the election, and beyond the constituency's own borders.</p>
           <span class="value-card-link">Read the vision <i class="fa-solid fa-arrow-right"></i></span>
         </a>
         <a href="community.html" class="card pillar-card explore-card reveal-up">
-          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo — a community gathering or ward meeting</span></div></div>
+          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: a community gathering or ward meeting</span></div></div>
           <i class="fa-solid fa-people-group"></i>
           <h3>Community</h3>
           <p>Voices from Embakasi South residents on what's working and what isn't.</p>
@@ -322,23 +339,23 @@
     <div class="container">
       <div class="section-rule"></div>
       <div class="pull-quote-panel reveal-up">
-        <p class="pull-quote-text">A leader who cannot be checked cannot be trusted. So check me — every promise dated, every project budgeted, every claim left open for anyone in Embakasi South to verify.</p>
+        <p class="pull-quote-text">A leader who cannot be checked cannot be trusted. So check me: every promise dated, every project budgeted, every claim left open for anyone in Embakasi South to verify.</p>
         <div class="pull-quote-attribution">
           <img class="pull-quote-avatar" src="img/potrait.jpg" alt="Erick Janganya">
-          <span class="pull-quote-cite">Erick Janganya, Founder — Erick Janganya Foundation</span>
+          <span class="pull-quote-cite">Erick Janganya, Founder, Erick Janganya Foundation</span>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section-tight cta-band">
+  <section class="section-tight cta-band cta-band--display">
     <div class="container">
       <div class="cta-band-inner">
         <div>
           <h2>See the record behind the story</h2>
           <p>Every claim made on this page is checkable against the same tracker as everything else.</p>
         </div>
-        <a class="btn btn-outline cta-band-btn" href="tracker.html"><i class="fa-solid fa-chart-line"></i> View the tracker</a>
+        <a class="btn btn-outline cta-band-btn" href="tracker.html">View the tracker</a>
       </div>
     </div>
   </section>

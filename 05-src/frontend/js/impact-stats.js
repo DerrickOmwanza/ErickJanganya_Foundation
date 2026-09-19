@@ -30,20 +30,8 @@
   }
 
   function armObserver() {
-    var values = Object.keys(els).map(function (k) { return els[k]; }).filter(Boolean);
-    if (!('IntersectionObserver' in window)) {
-      values.forEach(animateCount);
-      return;
-    }
-    var io = new IntersectionObserver(function (entries, obs) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          values.forEach(animateCount);
-          obs.disconnect();
-        }
-      });
-    }, { threshold: 0.4 });
-    io.observe(section);
+    // Counts up as soon as the data arrives, not when the strip scrolls into view.
+    Object.keys(els).map(function (k) { return els[k]; }).filter(Boolean).forEach(animateCount);
   }
 
   Promise.all([

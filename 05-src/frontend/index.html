@@ -75,7 +75,7 @@
     </nav>
     <div class="header-actions">
       <button class="nav-search" aria-label="Search" onclick="toggleSearch()"><i class="fa-solid fa-magnifying-glass"></i></button>
-      <a class="btn btn-primary" href="involve.html"><i class="fa-solid fa-heart"></i> Support the cause</a>
+      <a class="btn btn-primary" href="involve.html">Donate</a>
       <button class="nav-toggle" aria-label="Open menu" onclick="toggleDrawer(true)"><i class="fa-solid fa-bars"></i></button>
     </div>
   </div>
@@ -83,18 +83,35 @@
 
 <div class="mobile-drawer" id="mobile-drawer">
   <div class="mobile-drawer-inner">
-    <button class="mobile-drawer-close" aria-label="Close menu" onclick="toggleDrawer(false)"><i class="fa-solid fa-xmark"></i></button>
-    <a href="index.html">Home</a>
-    <a href="about.html">About Erick</a>
-    <a href="foundation.html">The Foundation</a>
-    <a href="vision.html">Vision</a>
-    <a href="tracker.html">Development Tracker</a>
-    <a href="promises.html">Promise Scorecard</a>
-    <a href="community.html">Community</a>
-    <a href="media.html">Media Centre</a>
-    <a href="news.html">News &amp; Press</a>
-    <a href="events.html">Events</a>
-    <a href="contact.html">Contact</a>
+    <div class="mobile-drawer-top">
+      <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+        <rect x="12" y="60" width="20" height="30" rx="7"/>
+        <rect x="40" y="40" width="20" height="50" rx="7"/>
+        <rect x="68" y="16" width="20" height="74" rx="7"/>
+      </svg>
+      <button class="mobile-drawer-close" aria-label="Close menu" onclick="toggleDrawer(false)"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <nav class="mobile-drawer-nav">
+      <a href="index.html">Home</a>
+      <span class="mobile-drawer-label">About</span>
+      <a href="about.html">About Erick</a>
+      <a href="foundation.html">The Foundation</a>
+      <a href="vision.html">Vision</a>
+      <span class="mobile-drawer-label">Progress</span>
+      <a href="tracker.html">Development Tracker</a>
+      <a href="promises.html">Promise Scorecard</a>
+      <span class="mobile-drawer-label">Get involved</span>
+      <a href="community.html">Community</a>
+      <a href="events.html">Events</a>
+      <span class="mobile-drawer-label">Media</span>
+      <a href="media.html">Media Centre</a>
+      <a href="news.html">News &amp; Press</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="mobile-drawer-foot">
+      <a class="btn btn-primary" href="involve.html">Donate</a>
+      <button type="button" class="mobile-drawer-search" onclick="toggleDrawer(false);toggleSearch(true)"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+    </div>
   </div>
 </div>
 
@@ -112,27 +129,40 @@
 
 <main>
 
-  <!-- REVIEW WITH ERICK: confirm rotating-word list and tone before this page goes live — AI-generated placeholder photos are wired in below; swap for real ground photos the moment Erick provides them (same filenames in img/, or update the data-image paths). -->
-  <!-- Full-bleed rotating hero: word + background image are driven together by rotateHero() in main.js. -->
-  <section class="hero hero-full" id="hero" data-interval="3800">
+  <!-- REVIEW WITH ERICK: confirm rotating-word list and tone before this page goes live — stock placeholder clips are wired in below; swap for real ground footage the moment Erick provides it (same filenames in img/, or update the data-video/data-poster paths). -->
+  <!-- Full-bleed rotating hero: word + background video are driven together by rotateHero() in main.js.
+       Each clip auto-advances to the next on its own 'ended' event (they're pre-trimmed to ~4.5s) rather
+       than a fixed timer, so playback and the on-screen word always stay in sync. Two stacked <video>
+       layers crossfade into each other (see .hero-slide-video in style.css) so the transition reads as
+       one continuous clip rather than a hard cut through black. -->
+  <section class="hero hero-full" id="hero">
     <div class="hero-bg">
-      <img class="hero-slide-img" id="heroSlideImg" src="img/hero-roads.jpeg" alt="">
+      <video class="hero-slide-video" id="heroVideoA" muted playsinline preload="auto"></video>
+      <video class="hero-slide-video" id="heroVideoB" muted playsinline preload="auto"></video>
       <div class="hero-scrim"></div>
     </div>
     <div class="container hero-content">
-      <span class="hero-kicker">Embakasi South, Kenya &middot; Foundation</span>
       <h1 class="hero-rotate">
-        <span class="hero-rotate-word" id="heroRotateWord">Roads</span>
-        <span class="hero-rotate-fixed">— tracked, dated, open to check.</span>
+        <span class="hero-rotate-word-wrap">
+          <span class="hero-rotate-word" id="heroWordA"></span>
+          <span class="hero-rotate-word" id="heroWordB"></span>
+        </span>
+        <span class="hero-rotate-fixed">tracked, dated, open to check.</span>
       </h1>
+    </div>
+    <div class="hero-controls">
+      <button type="button" class="hero-control" id="heroPrev" aria-label="Previous clip"><i class="fa-solid fa-arrow-left"></i></button>
+      <button type="button" class="hero-control" id="heroToggle" aria-label="Pause"><i class="fa-solid fa-pause"></i></button>
+      <button type="button" class="hero-control" id="heroNext" aria-label="Next clip"><i class="fa-solid fa-arrow-right"></i></button>
     </div>
     <div class="hero-scroll-cue" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></div>
     <ul class="hero-slides" hidden>
-      <li data-word="Roads" data-image="img/hero-roads.jpeg"></li>
-      <li data-word="Clinics" data-image="img/hero-clinics.jpeg"></li>
-      <li data-word="Water" data-image="img/hero-water.jpeg"></li>
-      <li data-word="Schools" data-image="img/hero-schools.jpeg"></li>
-      <li data-word="Markets" data-image="img/hero-markets.jpeg"></li>
+      <li data-word="Roads" data-video="img/hero-roads.mp4" data-poster="img/hero-roads-poster.jpg"></li>
+      <li data-word="Clinics" data-video="img/hero-clinics.mp4" data-poster="img/hero-clinics-poster.jpg"></li>
+      <li data-word="Water" data-video="img/hero-water.mp4" data-poster="img/hero-water-poster.jpg"></li>
+      <li data-word="Schools" data-video="img/hero-schools.mp4" data-poster="img/hero-schools-poster.jpg"></li>
+      <li data-word="Markets" data-video="img/hero-markets.mp4" data-poster="img/hero-markets-poster.jpg"></li>
+      <li data-word="Community" data-video="img/hero-cbos.mp4" data-poster="img/hero-cbos-poster.jpg"></li>
     </ul>
   </section>
 
@@ -152,20 +182,22 @@
   <section class="section">
     <div class="container">
       <div class="section-rule"></div>
+      <h2 class="mega-header section-mega-head">Track</h2>
       <div class="visit-duo">
         <div class="visit-primary reveal-up">
           <!-- REVIEW: AI-generated placeholder — replace with a real tracker/project-site photo once supplied -->
           <img class="visit-img-primary" src="img/tracker-preview.jpg" alt="Community development project underway in Embakasi South">
           <h3>Development Tracker</h3>
-          <p>Every project happening in Embakasi South right now — dated, budgeted, and open for anyone to check.</p>
+          <p>Every project happening in Embakasi South right now: dated, budgeted, and open for anyone to check.</p>
           <a class="btn btn-outline" href="tracker.html">See the progress tracker</a>
         </div>
         <div class="visit-secondary reveal-up">
-          <!-- Real photo, from Erick's Facebook, confirmed cleared for use -->
-          <img class="visit-img-secondary" src="img/erick-portrait.jpg" alt="Erick Janganya in the field in Embakasi South">
-          <h3>Who's behind it</h3>
-          <p>Erick founded this foundation to hold every promise made in Embakasi South to the same standard the tracker above does — dated, budgeted, checkable.</p>
-          <a class="btn btn-outline" href="about.html">Erick's story</a>
+          <!-- REVIEW: stock placeholder (symbolic, not a real Embakasi South photo) — swap for a real
+               tracker/evidence photo once supplied. -->
+          <img class="visit-img-secondary" src="img/promise-tracker.jpg" alt="Promises tracked against time — kept, in progress, or not started">
+          <h3>Promise Tracker</h3>
+          <p>Every public promise made to Embakasi South, scored honestly: kept, in progress, or not yet started, with evidence linked back to the Development Tracker beside it.</p>
+          <a class="btn btn-outline" href="promises.html">See the promise scorecard</a>
         </div>
       </div>
     </div>
@@ -181,13 +213,13 @@
   <section class="section">
     <div class="container">
       <div class="section-rule"></div>
-      <div class="section-head reveal-up"><span class="eyebrow">Field work</span><h2>Recent moments</h2></div>
+      <h2 class="mega-header section-mega-head reveal-up">Field Work</h2>
       <div class="field-grid">
         <div class="field-item reveal-up">
           <!-- Real photo, supplied directly by Erick — walking through Embakasi South with residents. -->
           <div class="field-item-media"><img src="img/ground-engagement.jpg" alt="Erick Janganya walking through Embakasi South surrounded by residents"></div>
           <h3>Ground Visits</h3>
-          <p>Every project on the tracker gets a site visit before it's marked verified — photographed, dated, and logged.</p>
+          <p>Every project on the tracker gets a site visit before it's marked verified: photographed, dated, and logged.</p>
           <a class="field-item-link" href="tracker.html">See the tracker <i class="fa-solid fa-arrow-right"></i></a>
         </div>
         <div class="field-item reveal-up">
@@ -201,7 +233,7 @@
           <!-- Real photo, supplied directly by Erick — a goods distribution on the ground in Embakasi South. -->
           <div class="field-item-media"><img src="img/ground-verification.jpg" alt="Erick Janganya at a community goods distribution in Embakasi South"></div>
           <h3>Verification in Practice</h3>
-          <p>What "open for anyone to check" looks like on the ground — proof behind every claim on this site.</p>
+          <p>What "open for anyone to check" looks like on the ground: proof behind every claim on this site.</p>
           <a class="field-item-link" href="foundation.html">How it works <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
@@ -262,7 +294,7 @@
       <div class="value-panel-wrap">
         <div class="split-panel split-panel--yellow reveal-up">
           <span class="eyebrow">Why this foundation</span>
-          <h3 class="split-panel-statement">Accountability you can see. Every claim made here carries proof — a date, a location, a photo — that anyone can check.</h3>
+          <h3 class="split-panel-statement">Accountability you can see. Every claim made here carries proof.</h3>
           <a class="split-panel-link" href="foundation.html">See our approach <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
@@ -276,9 +308,8 @@
        POST /api/newsletter) and forms.js were extended to match this same field set.
        REVIEW: privacy.html/terms.html don't exist yet — links below are placeholders until those pages
        are built; same "#" placeholder pattern used for the footer's social links. -->
-  <section class="section-tight insider-section" id="stay-updated">
+  <section class="section-tight insider-section insider-section--purple" id="stay-updated">
     <div class="container">
-      <div class="section-rule"></div>
       <div class="insider-box">
         <div class="insider-copy reveal-up">
           <h2>Stay updated</h2>
@@ -305,7 +336,6 @@
             <label for="nl-phone">Phone number (optional)</label>
             <input type="tel" id="nl-phone" name="phone">
           </div>
-          <p class="insider-disclaimer">By providing a phone number, you confirm that you are an adult and consent to receive automated marketing and informational SMS messages from the Erick Janganya Foundation at the phone number you provided. To learn more about how the Foundation would use your information, read our <a href="#">Privacy Statement</a>. Message and data rates may apply. Message frequency varies. You may opt out at any time by texting &ldquo;STOP&rdquo; to [SMS short code]. Consent is not a condition of purchase or service.</p>
           <div class="insider-consent-row">
             <label class="insider-checkbox">
               <input type="checkbox" name="agreedToTerms" required>
@@ -330,7 +360,7 @@
     <div class="container tracker-split-grid">
       <div class="split-panel split-panel--sky reveal-up">
         <span class="eyebrow">Development tracker</span>
-        <h3>Projects in motion, verified as they happen.</h3>
+        <h3 class="split-panel-statement">Projects in motion, verified as they happen.</h3>
         <a class="split-panel-link" href="tracker.html">View full tracker <i class="fa-solid fa-arrow-right"></i></a>
       </div>
       <!-- Populated live from the API by js/home-tracker-preview.js — see that file for the card
@@ -344,14 +374,14 @@
     </div>
   </section>
 
-  <section class="section-tight cta-band">
+  <section class="section-tight cta-band cta-band--display">
     <div class="container">
       <div class="cta-band-inner">
         <div>
-          <h2>Help move Embakasi South forward</h2>
-          <p>Cash, goods, or time — from anywhere in the world, it reaches Embakasi South and goes straight onto the tracker.</p>
+          <h2>Help move Embakasi South forward <img class="cta-chip" src="img/unity-togetherness-crop.jpg" alt="A handshake between two people, symbolising unity"></h2>
+          <p>Cash, goods, or time: from anywhere in the world, it reaches Embakasi South and goes straight onto the tracker.</p>
         </div>
-        <a class="btn btn-outline cta-band-btn" href="involve.html"><i class="fa-solid fa-heart"></i> Support the cause</a>
+        <a class="btn btn-outline cta-band-btn" href="involve.html">Donate</a>
       </div>
     </div>
   </section>

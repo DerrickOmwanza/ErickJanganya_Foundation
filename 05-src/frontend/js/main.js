@@ -1,6 +1,7 @@
 function toggleDrawer(open) {
   var drawer = document.getElementById('mobile-drawer');
   if (drawer) drawer.classList.toggle('open', open);
+  document.documentElement.classList.toggle('drawer-open', !!open);
 }
 
 // Search overlay: replaces the header with a big inline search field over the hero, closed via the
@@ -11,7 +12,7 @@ function toggleSearch(open) {
   if (!overlay) return;
   var willOpen = typeof open === 'boolean' ? open : !overlay.classList.contains('open');
   var header = document.querySelector('.site-header');
-  if (willOpen && header) overlay.style.top = header.style.top || getComputedStyle(header).top;
+  if (willOpen && header) overlay.style.top = Math.max(0, header.getBoundingClientRect().top) + 'px';
   overlay.classList.toggle('open', willOpen);
   overlay.setAttribute('aria-hidden', willOpen ? 'false' : 'true');
   if (willOpen) {
@@ -41,79 +42,115 @@ function animateCounters() {
 function animateProgressBars() {
   var bars = document.querySelectorAll('.progress-fill[data-progress]');
   if (!bars.length) return;
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function fill(el) { el.style.width = el.dataset.progress + '%'; }
-
-  if (reduce || !('IntersectionObserver' in window)) {
-    bars.forEach(fill);
-    return;
-  }
-  var io = new IntersectionObserver(function (entries, obs) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        fill(entry.target);
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.4 });
-  bars.forEach(function (el) { io.observe(el); });
+  // Filled immediately (not on scroll-into-view) so nothing waits on the viewport before showing.
+  bars.forEach(function (el) { el.style.width = el.dataset.progress + '%'; });
 }
 
-// Reveals the mission line's words (and inline photo chips) one after another the first time the
-// section scrolls into view — also fires correctly on load if the page opens already scrolled there.
-function revealMissionLine() {
-  var line = document.getElementById('missionLine');
-  if (!line) return;
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce || !('IntersectionObserver' in window)) {
-    line.classList.add('in-view');
-    return;
-  }
-  var io = new IntersectionObserver(function (entries, obs) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        line.classList.add('in-view');
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.4 });
-  io.observe(line);
-}
-
-// Rotates the hero's single word + background photo together, so the
-// headline word and the visible image always change in sync.
+// Rotates the hero's single word + background video together, so the headline word and the
+// visible clip always change in sync. Each clip is pre-trimmed to ~4.5s and drives its own
+// advance via the video's 'ended' event (rather than a fixed setInterval, which would drift out
+// of sync with clips of slightly different lengths) — prev/next/pause controls (bottom-right,
+// matching Obama.org's hero rail) let a visitor override that automatic pace at any time.
+//
+// Both the video and the word use the same "two layers take turns" trick: a standby layer is
+// prepared while the active one keeps showing, then they swap. For video that means loading the
+// next clip and waiting for 'loadeddata' before it fades to the front (see .hero-slide-video) —
+// for the word it means two stacked spans (see .hero-rotate-word), where the outgoing one slides
+// up and out while the incoming one slides up into place from below, at the same time, so the
+// swap reads as a continuous reel rather than a fade.
 function rotateHero() {
   var hero = document.getElementById('hero');
   if (!hero) return;
   var slides = Array.prototype.slice.call(hero.querySelectorAll('.hero-slides li'));
-  var wordEl = document.getElementById('heroRotateWord');
-  var imgEl = document.getElementById('heroSlideImg');
-  if (!slides.length || !wordEl) return;
+  var wordA = document.getElementById('heroWordA');
+  var wordB = document.getElementById('heroWordB');
+  var videoA = document.getElementById('heroVideoA');
+  var videoB = document.getElementById('heroVideoB');
+  var prevBtn = document.getElementById('heroPrev');
+  var nextBtn = document.getElementById('heroNext');
+  var toggleBtn = document.getElementById('heroToggle');
+  if (!slides.length || !wordA || !wordB || !videoA || !videoB) return;
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var interval = parseInt(hero.dataset.interval, 10) || 3800;
   var i = 0;
+  var paused = reduce;
+  var active = videoA;
+  var standby = videoB;
+  var activeWord = wordA;
+  var standbyWord = wordB;
+  var advancing = false;
 
-  function applySlide(index) {
-    var slide = slides[index];
-    wordEl.textContent = slide.dataset.word;
-    if (imgEl && slide.dataset.image) imgEl.src = slide.dataset.image;
+  function setPaused(next) {
+    paused = next;
+    if (toggleBtn) {
+      toggleBtn.innerHTML = paused ? '<i class="fa-solid fa-play"></i>' : '<i class="fa-solid fa-pause"></i>';
+      toggleBtn.setAttribute('aria-label', paused ? 'Play' : 'Pause');
+    }
+    if (paused) active.pause();
+    else active.play().catch(function () {});
   }
 
-  applySlide(0);
-  if (reduce || slides.length < 2) return;
+  function swapWord(text) {
+    standbyWord.textContent = text;
+    standbyWord.style.transition = 'none';
+    standbyWord.classList.remove('is-active', 'is-leaving');
+    standbyWord.getBoundingClientRect(); // force reflow so the "parked below" reset above is committed
+    standbyWord.style.transition = '';
+    activeWord.classList.add('is-leaving');
+    activeWord.classList.remove('is-active');
+    standbyWord.classList.add('is-active');
+    var justLeft = activeWord;
+    activeWord = standbyWord;
+    standbyWord = justLeft;
+    setTimeout(function () { justLeft.classList.remove('is-leaving'); }, 500);
+  }
 
-  setInterval(function () {
-    i = (i + 1) % slides.length;
-    wordEl.classList.add('is-swapping');
-    if (imgEl) imgEl.classList.add('is-swapping');
-    setTimeout(function () {
-      applySlide(i);
-      wordEl.classList.remove('is-swapping');
-      if (imgEl) imgEl.classList.remove('is-swapping');
-    }, 350);
-  }, interval);
+  function goTo(index) {
+    if (advancing) return;
+    advancing = true;
+    var target = (index + slides.length) % slides.length;
+    var slide = slides[target];
+
+    function reveal() {
+      standby.removeEventListener('loadeddata', reveal);
+      if (!paused) standby.play().catch(function () {});
+      standby.classList.add('is-active');
+      active.classList.remove('is-active');
+      swapWord(slide.dataset.word);
+
+      var justFinished = active;
+      active = standby;
+      standby = justFinished;
+      i = target;
+      setTimeout(function () { justFinished.pause(); advancing = false; }, 800);
+    }
+    standby.poster = slide.dataset.poster || '';
+    standby.src = slide.dataset.video;
+    standby.currentTime = 0;
+    standby.addEventListener('loadeddata', reveal);
+  }
+
+  // Only whichever layer is actually active/playing can naturally reach 'ended', so both listeners
+  // can be bound once up front rather than re-bound on every swap.
+  function onEnded() { if (!paused) goTo(i + 1); }
+  videoA.addEventListener('ended', onEnded);
+  videoB.addEventListener('ended', onEnded);
+  if (prevBtn) prevBtn.addEventListener('click', function () { goTo(i - 1); });
+  if (nextBtn) nextBtn.addEventListener('click', function () { goTo(i + 1); });
+  if (toggleBtn) toggleBtn.addEventListener('click', function () { setPaused(!paused); });
+
+  // First slide has no predecessor to crossfade from — load it straight into the active layers.
+  var first = slides[0];
+  activeWord.textContent = first.dataset.word;
+  active.poster = first.dataset.poster || '';
+  active.src = first.dataset.video;
+  active.addEventListener('loadeddata', function once() {
+    active.removeEventListener('loadeddata', once);
+    active.classList.add('is-active');
+    activeWord.classList.add('is-active');
+    if (!paused) active.play().catch(function () {});
+  });
+  setPaused(paused);
 }
 
 // On pages with a full-bleed hero, the header starts transparent (overlaying the hero image,
@@ -126,23 +163,27 @@ function initHeaderScroll() {
   var hero = document.querySelector('.hero.hero-full');
   if (!header || !hero) return;
   var ticker = document.querySelector('.top-banner');
-  var threshold = 60;
 
-  function positionHeader() {
-    if (ticker) header.style.top = ticker.offsetHeight + 'px';
+  // Obama.org behaviour. At scroll 0 the nav links float over the hero with no bar behind them,
+  // under the yellow banner. On the very first scroll the white bar appears (header--solid) right
+  // beneath the banner; the banner is part of the page (position:absolute, see .top-banner) so it
+  // scrolls away 1:1 with the wheel while the bar's top edge stays pinned to the banner's bottom
+  // edge, until the banner is gone and the white bar sticks at top:0.
+  // The banner/bar positioning itself is pure CSS (static banner + sticky header, see style.css) so it
+  // stays perfectly in step with native scrolling; JS only measures heights and flips the bar's
+  // colours on the first scroll.
+  function measure() {
+    var root = document.documentElement.style;
+    root.setProperty('--banner-h', (ticker ? ticker.offsetHeight : 0) + 'px');
+    root.setProperty('--header-h', header.offsetHeight + 'px');
   }
-  if (ticker) positionHeader();
-
   function onScroll() {
-    var scrolled = window.scrollY > threshold;
-    header.classList.toggle('header--solid', scrolled);
-    if (ticker) {
-      ticker.classList.toggle('is-hidden', scrolled);
-      header.style.top = scrolled ? '0px' : ticker.offsetHeight + 'px';
-    }
+    header.classList.toggle('header--solid', window.scrollY > 0);
   }
   window.addEventListener('scroll', onScroll, { passive: true });
-  if (ticker) window.addEventListener('resize', function () { if (window.scrollY <= threshold) positionHeader(); }, { passive: true });
+  window.addEventListener('resize', measure, { passive: true });
+  window.addEventListener('load', measure);
+  measure();
   onScroll();
 }
 
@@ -208,29 +249,40 @@ function initJourneyRail() {
   });
 }
 
-// Generic scroll-triggered reveal (fade + rise) applied to any element carrying .reveal-up —
-// section heads, value cards, split panels, the subscribe band, the impact stat tiles. Keeps the
-// page feeling alive as you scroll instead of everything just being present on load.
-function initScrollReveals() {
-  var els = document.querySelectorAll('.reveal-up');
-  if (!els.length) return;
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce || !('IntersectionObserver' in window)) {
-    els.forEach(function (el) { el.classList.add('in-view'); });
-    return;
-  }
-  var io = new IntersectionObserver(function (entries, obs) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in-view');
-        obs.unobserve(entry.target);
-      }
+// Site-wide smooth, inertial page scrolling via Lenis (loaded on demand so no page needs its own
+// <script> tag). Wheel events over a nested scroller (the homepage tracker list) stay with that
+// scroller while it can still move in the wheel's direction, and pass to the page the moment it hits
+// its top/bottom — so the cursor position never traps the page scroll. Skipped entirely for
+// visitors who prefer reduced motion (native scrolling is used instead).
+function initSmoothScroll() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js';
+  s.onload = function () {
+    if (!window.Lenis) return;
+    var lenis = new window.Lenis({ lerp: 0.09, wheelMultiplier: 1 });
+    function raf(t) { lenis.raf(t); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+
+    document.querySelectorAll('.split-cards, .value-grid').forEach(function (el) {
+      el.addEventListener('wheel', function (e) {
+        var atTop = el.scrollTop <= 0;
+        var atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 1;
+        var canScroll = e.deltaY < 0 ? !atTop : !atBottom;
+        if (canScroll) e.stopPropagation();
+      }, { passive: true });
     });
-  }, { threshold: 0.15 });
-  els.forEach(function (el) { io.observe(el); });
+  };
+  document.head.appendChild(s);
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+  initSmoothScroll();
+  // Lenis (smooth page scroll) intercepts every wheel event on the window, which froze the side menu
+  // and search overlay's own scrolling. data-lenis-prevent tells it to leave these panels alone.
+  document.querySelectorAll('.mobile-drawer-inner, .search-overlay').forEach(function (el) {
+    el.setAttribute('data-lenis-prevent', '');
+  });
   // mark current nav item
   var path = window.location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('[data-nav]').forEach(function (el) {
@@ -238,10 +290,8 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   animateProgressBars();
-  revealMissionLine();
   rotateHero();
   initHeaderScroll();
   initMediaCarousel();
   initJourneyRail();
-  initScrollReveals();
 });
