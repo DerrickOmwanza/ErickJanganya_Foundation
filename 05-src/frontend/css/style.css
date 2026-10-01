@@ -553,6 +553,26 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .feature-row h3{font-family:var(--font-h);font-size:22px;margin-bottom:8px;line-height:1.2;}
 .feature-row p{font-weight:500;color:var(--ink-soft);font-size:15.5px;line-height:1.6;margin-bottom:10px;}
 
+/* Vision row list ("In His Words" on about.html) — large alternating editorial rows, a step up from
+   .feature-row's compact list treatment: a big square sharp-cornered photo, a faint oversized numeral
+   (classic magazine-spread device, quieter than another red .eyebrow label), a larger heading, and a
+   wider-breathing paragraph. vision-row--reverse flips which side the photo sits on so the three rows
+   alternate rather than repeating the same left/right split three times. */
+.vision-row-list{margin-top:16px;}
+.vision-row{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding:48px 0;border-top:1px solid var(--line);}
+.vision-row:first-child{border-top:none;padding-top:16px;}
+.vision-row--reverse .vision-row-media{order:2;}
+.vision-row-media{aspect-ratio:1/1;overflow:hidden;}
+.vision-row-media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.22,.7,.3,1);}
+.vision-row:hover .vision-row-media img{transform:scale(1.05);}
+.vision-row-num{display:block;font-family:var(--font-display);font-weight:700;font-size:56px;line-height:1;color:var(--line);margin-bottom:10px;}
+.vision-row-body h3{font-family:var(--font-h);font-weight:700;font-size:clamp(26px,2.6vw,34px);line-height:1.18;margin-bottom:14px;color:var(--ink-black);}
+.vision-row-body p{font-size:17px;font-weight:500;color:var(--ink-soft);line-height:1.7;max-width:460px;}
+@media (prefers-reduced-motion: reduce){
+  .vision-row-media img{transition:none;}
+  .vision-row:hover .vision-row-media img{transform:none;}
+}
+
 /* "Why this foundation" — Obama.org "Programs" pattern, mirrored: 2x2 value-card grid on the left, a
    contained yellow statement box on the right. Obama's Programs box isn't full-bleed — it's sized to its
    own text and sits inset on a plain background — so this section uses its own padded container/grid
@@ -640,6 +660,10 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
   .feature-pair{grid-template-columns:1fr;gap:36px;}
   .feature-row{grid-template-columns:1fr;gap:16px;}
   .feature-row .ph{aspect-ratio:1/1;max-width:360px;}
+  .vision-row,.vision-row--reverse{grid-template-columns:1fr;gap:20px;padding:32px 0;}
+  .vision-row--reverse .vision-row-media{order:0;}
+  .vision-row-media{max-width:420px;}
+  .vision-row-num{font-size:40px;}
   .footer-grid{grid-template-columns:repeat(2,1fr);}
   .cta-band-inner{gap:20px;}
   .nav-links{display:none;}
