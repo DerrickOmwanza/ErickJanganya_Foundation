@@ -336,6 +336,19 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .pull-quote-attribution{display:flex;align-items:center;gap:12px;margin-top:20px;}
 .pull-quote-avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:none;position:relative;z-index:1;}
 
+/* About's founder quote only — a centered testimonial treatment: red icon badge instead of the
+   oversized glyph, a constrained measure for a proper editorial line length, and a real photo sized
+   up from the plain 44px avatar. Vision's institutional quote (no person attached) keeps the base
+   left-rule/quote-mark styling above, untouched. */
+.pull-quote-panel--feature{border-left:none;padding-left:0;margin:40px auto 12px;max-width:740px;text-align:center;}
+.pull-quote-panel--feature::before{display:none;}
+.pull-quote-mark{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;background:var(--red);color:#fff;font-size:18px;margin-bottom:24px;}
+.pull-quote-panel--feature .pull-quote-attribution{justify-content:center;margin-top:26px;}
+.pull-quote-panel--feature .pull-quote-avatar{width:60px;height:60px;border:2px solid var(--red);}
+@media (max-width:600px){
+  .pull-quote-panel--feature{max-width:none;}
+}
+
 /* About Erick — "Why I'm Running": deliberately text-forward (no photo slot) editorial block. Instead of
    leaving the right side of the container empty, a magazine-style pull-quote excerpt (lifted from the
    body copy itself) sits alongside the paragraphs — a classic editorial op-ed layout rather than another
