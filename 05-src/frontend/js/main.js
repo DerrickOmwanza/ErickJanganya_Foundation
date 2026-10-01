@@ -105,6 +105,24 @@ function rotateHero() {
     setTimeout(function () { justLeft.classList.remove('is-leaving'); }, 500);
   }
 
+  // Index of the slide currently loaded (or loading) into `standby`, so the fetch that matters —
+  // the *next* clip — starts the moment the current one goes active, not only once it ends. On
+  // localhost every clip loads from disk instantly either way, which is why this gap was invisible
+  // there; over a real network, fetching ~1-3MB only after 'ended' fires left the last frame frozen
+  // for however long that fetch took. preloadStandby() is called right after every reveal, so by the
+  // time the new active clip's own 'ended' fires, its successor is typically already sitting ready.
+  var standbyPreloadIndex = -1;
+
+  function preloadStandby(index) {
+    var target = (index + slides.length) % slides.length;
+    if (standbyPreloadIndex === target) return; // already loading/loaded this one
+    var slide = slides[target];
+    standbyPreloadIndex = target;
+    standby.poster = slide.dataset.poster || '';
+    standby.src = slide.dataset.video;
+    standby.currentTime = 0;
+  }
+
   function goTo(index) {
     if (advancing) return;
     advancing = true;
@@ -122,11 +140,18 @@ function rotateHero() {
       active = standby;
       standby = justFinished;
       i = target;
+      standbyPreloadIndex = -1;
+      preloadStandby(i + 1);
       setTimeout(function () { justFinished.pause(); advancing = false; }, 800);
     }
-    standby.poster = slide.dataset.poster || '';
-    standby.src = slide.dataset.video;
-    standby.currentTime = 0;
+
+    if (standbyPreloadIndex === target && standby.readyState >= 2) {
+      // Already preloaded (the common case: this is the clip we started fetching last time) —
+      // reveal immediately instead of re-requesting it and waiting again.
+      reveal();
+      return;
+    }
+    if (standbyPreloadIndex !== target) preloadStandby(target);
     standby.addEventListener('loadeddata', reveal);
   }
 
@@ -149,6 +174,7 @@ function rotateHero() {
     active.classList.add('is-active');
     activeWord.classList.add('is-active');
     if (!paused) active.play().catch(function () {});
+    preloadStandby(1);
   });
   setPaused(paused);
 }
