@@ -591,15 +591,13 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 
 /* Same scrollable-list treatment as the homepage tracker cards (.split-cards): one column of
    image-led cards in a bordered, red-scrollbar box instead of a static 2x2 grid (2026-09-19). */
-.value-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;align-items:start;max-height:560px;overflow-y:auto;padding:16px;background:var(--bg-soft);border:1px solid var(--line);border-radius:18px;scrollbar-width:thin;scrollbar-color:var(--red) transparent;}
-/* Reused on about.html's "What Guides This" (exactly 4 cards, same count as the scroll box is sized
-   for) — cancels the scroll-box chrome since nothing ever overflows it there, leaving a plain 2x2 grid. */
-.value-grid.guides-grid{max-height:none;overflow:visible;padding:0;background:none;border:none;border-radius:0;}
+.value-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;align-items:stretch;max-height:560px;overflow-y:auto;padding:16px;background:var(--bg-soft);border:1px solid var(--line);border-radius:18px;scrollbar-width:thin;scrollbar-color:var(--red) transparent;}
 .value-grid::-webkit-scrollbar{width:7px;}
 .value-grid::-webkit-scrollbar-thumb{background:var(--red);border-radius:10px;}
-.value-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;padding-bottom:24px;transition:transform .25s ease, box-shadow .25s ease;}
+.value-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;padding-bottom:24px;transition:transform .25s ease, box-shadow .25s ease;display:flex;flex-direction:column;}
 .value-card:hover{transform:translateY(-4px);box-shadow:0 16px 30px rgba(0,0,0,.14);}
-.value-card-img-wrap{aspect-ratio:16/10;overflow:hidden;margin-bottom:22px;}
+.value-card-img-wrap{aspect-ratio:16/10;overflow:hidden;margin-bottom:22px;flex:none;}
+.value-card-img-wrap .ph{height:100%;width:100%;}
 .value-card-img{width:100%;height:100%;object-fit:cover;display:block;font-size:12px;transition:transform .5s cubic-bezier(.22,.7,.3,1);}
 .value-card:hover .value-card-img{transform:scale(1.08);}
 @media (prefers-reduced-motion: reduce){
