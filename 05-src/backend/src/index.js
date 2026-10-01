@@ -1,43 +1,6 @@
-import 'dotenv/config';
-import express from 'express';
-import cors from 'cors';
-
-import authRoutes from './routes/auth.js';
-import trackerRoutes from './routes/tracker.js';
-import promisesRoutes from './routes/promises.js';
-import newsRoutes from './routes/news.js';
-import eventsRoutes from './routes/events.js';
-import mediaRoutes from './routes/media.js';
-import contactRoutes from './routes/contact.js';
-import newsletterRoutes from './routes/newsletter.js';
-
-const app = express();
-
-app.use(cors());
-app.use(express.json());
-
-app.get('/api/health', (req, res) => {
-  res.json({ ok: true, service: 'erick-janganya-foundation-api' });
-});
-
-app.use('/api/auth', authRoutes);
-app.use('/api/tracker', trackerRoutes);
-app.use('/api/promises', promisesRoutes);
-app.use('/api/news', newsRoutes);
-app.use('/api/events', eventsRoutes);
-app.use('/api/media', mediaRoutes);
-app.use('/api/contact', contactRoutes);
-app.use('/api/newsletter', newsletterRoutes);
-
-app.use((req, res) => {
-  res.status(404).json({ error: 'Not found' });
-});
-
-// eslint-disable-next-line no-unused-vars
-app.use((err, req, res, next) => {
-  console.error(err);
-  res.status(500).json({ error: 'Internal server error' });
-});
+// Local dev entry point only — `npm run dev` / `npm start`. Vercel never runs this file; it
+// uses api/index.js instead, which imports the same app from ./app.js.
+import app from './app.js';
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {

@@ -1,0 +1,51 @@
+name: Backend CI
+
+# Runs on every push/PR that touches the backend, independent of Vercel's own preview deploys —
+# catches a broken `npm install`, a Prisma schema error, or a server that fails to boot, before
+# a human has to notice it on a preview URL. DATABASE_URL below is a placeholder: `prisma generate`
+# only needs the schema file and a syntactically present connection string, not a reachable
+# database, and /api/health (the route this workflow calls) never touches Prisma either.
+on:
+  push:
+    paths: ['05-src/backend/**']
+  pull_request:
+    paths: ['05-src/backend/**']
+
+jobs:
+  build-and-smoke-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 05-src/backend
+    env:
+      DATABASE_URL: "postgresql://user:password@localhost:5432/dbname?schema=public"
+      JWT_SECRET: "ci-placeholder-secret"
+      ADMIN_SETUP_KEY: "ci-placeholder-key"
+      PORT: 4000
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: 05-src/backend/package-lock.json
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Boot the server and check /api/health
+        run: |
+          node src/index.js &
+          pid=$!
+          ok=""
+          for i in $(seq 1 20); do
+            if curl -sf http://localhost:4000/api/health > /dev/null; then ok=1; break; fi
+            sleep 0.5
+          done
+          kill "$pid" 2>/dev/null || true
+          if [ -z "$ok" ]; then
+            echo "Server never responded on /api/health" >&2
+            exit 1
+          fi
+          echo "Health check passed."

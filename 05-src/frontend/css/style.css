@@ -291,13 +291,7 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .skeleton-split .skeleton-body{padding:22px 24px 24px;}
 
 /* About Erick — hero intro */
-.about-hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;}
-.about-hero-grid .eyebrow{font-size:clamp(20px,2.6vw,32px);letter-spacing:.02em;}
 
-.about-hero-grid h1{font-size:clamp(36px,4.6vw,58px);line-height:1.05;margin:10px 0 16px;}
-.about-hero-grid .lead{font-size:17.5px;font-weight:500;color:var(--ink-soft);line-height:1.6;max-width:520px;}
-.about-portrait{aspect-ratio:4/5;border-radius:var(--radius);overflow:hidden;}
-.about-portrait img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
 
 /* About Erick — journey rail. Horizontal scroll-snap strip, chosen over the old vertical spine
    (2026-09-16) for a shorter, more modern sequence: pure CSS scroll-snap, no framework, native touch
@@ -313,7 +307,7 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .journey-rail-track{position:absolute;top:54px;left:4px;width:calc(100% - 8px);height:2px;background:var(--line);z-index:0;}
 .journey-stop{scroll-snap-align:start;flex:0 0 clamp(230px,25vw,290px);position:relative;z-index:1;}
 .journey-stop-num{position:relative;z-index:1;width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:600;font-size:14px;margin-bottom:16px;box-shadow:0 0 0 6px var(--bg-soft);}
-.journey-stop .ph, .journey-stop img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:var(--radius);margin-bottom:16px;}
+.journey-stop .ph, .journey-stop img{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:50% 30%;display:block;border-radius:0;margin-bottom:16px;}
 .journey-stop-year{display:block;font-family:var(--font-display);font-weight:600;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--red);margin-bottom:6px;}
 .journey-stop h3{font-size:clamp(20px,1.6vw,22px);margin-bottom:9px;line-height:1.2;}
 .journey-stop p{font-size:15.5px;font-weight:500;color:var(--ink-soft);line-height:1.6;}
@@ -555,7 +549,7 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .feature-row-list{margin-top:8px;}
 .feature-row{display:grid;grid-template-columns:200px 1fr;gap:30px;align-items:start;padding:30px 0;border-top:1px solid var(--line);}
 .feature-row:first-child{border-top:none;padding-top:8px;}
-.feature-row .ph{aspect-ratio:4/3;height:auto;}
+.feature-row .ph{aspect-ratio:1/1;height:auto;border-radius:0;}
 .feature-row h3{font-family:var(--font-h);font-size:22px;margin-bottom:8px;line-height:1.2;}
 .feature-row p{font-weight:500;color:var(--ink-soft);font-size:15.5px;line-height:1.6;margin-bottom:10px;}
 
@@ -600,7 +594,7 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 /* Top image on an otherwise-icon pillar-card — Obama.org keeps every card photo-led on a plain
    white ground rather than colour-blocked; this bleeds a photo to the card's own edges (undoing
    the card's padding just for the image) with the icon/heading/text still in the normal flow below. */
-.pillar-card-img{aspect-ratio:4/3;margin:-26px -22px 20px;border-radius:var(--radius) var(--radius) 0 0;overflow:hidden;}
+.pillar-card-img{aspect-ratio:1/1;margin:-26px -22px 20px;border-radius:0;overflow:hidden;}
 .pillar-card-img .ph, .pillar-card-img img{height:100%;width:100%;border-radius:0;}
 .pillar-card-img img{object-fit:cover;display:block;}
 .pillar-card:hover, .pillar-card:focus-visible{transform:translateY(-7px); box-shadow:0 18px 34px rgba(0,0,0,.18), 0 2px 6px rgba(0,0,0,.08); border-color:var(--red); outline:none;}
@@ -645,7 +639,7 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
   .field-item:nth-child(2n)::before{display:block;left:-16px;}
   .feature-pair{grid-template-columns:1fr;gap:36px;}
   .feature-row{grid-template-columns:1fr;gap:16px;}
-  .feature-row .ph{aspect-ratio:16/10;}
+  .feature-row .ph{aspect-ratio:1/1;max-width:360px;}
   .footer-grid{grid-template-columns:repeat(2,1fr);}
   .cta-band-inner{gap:20px;}
   .nav-links{display:none;}
@@ -681,8 +675,6 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
   .insider-box{grid-template-columns:1fr;gap:32px;}
   .insider-consent-row{flex-direction:column;align-items:flex-start;gap:18px;}
   .insider-submit{width:100%;justify-content:center;}
-  .about-hero-grid{grid-template-columns:1fr;gap:32px;}
-  .about-hero-grid .about-portrait{max-width:360px;}
   .journey-stop{flex-basis:78vw;}
   .pull-quote-panel{padding-left:22px;border-left-width:3px;}
   .pull-quote-panel::before{font-size:90px;top:-24px;left:-2px;}
@@ -749,3 +741,24 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .section-head:has(.mega-header){max-width:900px;}
 .section-head h2.mega-header{font-size:clamp(42px,7.4vw,92px);line-height:.94;margin:0 0 24px;}
 .section-head p.section-dek{font-family:var(--font-h);font-weight:700;font-size:clamp(22px,2.4vw,32px);line-height:1.25;color:var(--ink-black);margin:0 0 14px;max-width:720px;}
+
+/* About hero (2026-09-19): a dark band matching the portrait's near-black studio backdrop (#050505), so the photo reads as
+   standing in the section instead of sitting in a frame. Text is white; the portrait fades into the dark on its left edge. */
+.about-hero{background:#050505 radial-gradient(60% 90% at 12% 35%, rgba(0,100,240,.22) 0%, rgba(0,100,240,0) 70%);color:#fff;padding:132px 0 0;overflow:hidden;}
+.about-hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:end;}
+.about-hero-copy{padding-bottom:64px;}
+.about-hero-kicker{display:inline-block;color:var(--yellow);font-size:14px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:18px;}
+.about-hero h1{font-family:var(--font-display);font-weight:700;color:#fff;font-size:clamp(48px,6.2vw,92px);line-height:.98;letter-spacing:-.01em;margin:0 0 22px;}
+.about-hero .lead{color:rgba(255,255,255,.88);font-size:clamp(16.5px,1.25vw,18px);font-weight:500;line-height:1.65;max-width:600px;margin:0 0 12px;}
+.about-hero-close{color:#fff;font-family:var(--font-h);font-weight:700;font-size:clamp(20px,1.9vw,26px);line-height:1.35;max-width:600px;margin:20px 0 0;padding-left:20px;border-left:4px solid var(--red);}
+.about-portrait{position:relative;aspect-ratio:4/5;overflow:hidden;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 22%);mask-image:linear-gradient(to right,transparent 0,#000 22%);}
+.about-portrait img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
+@media(max-width:960px){
+  .about-hero{padding-top:120px;}
+  .about-hero-grid{grid-template-columns:1fr;gap:8px;}
+  .about-hero-copy{padding-bottom:28px;}
+  .about-portrait{max-width:440px;width:100%;margin:0 auto;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 20%);mask-image:linear-gradient(to bottom,transparent 0,#000 20%);}
+}
+
+/* About page: every image is a sharp-cornered square, like the homepage Field Work photos. */
+.pillar-card{border-radius:0;}

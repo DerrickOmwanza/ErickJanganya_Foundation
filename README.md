@@ -22,3 +22,14 @@ Base project folder. Everything related to this build lives here going forward.
 4. Development starts in `05-src/`.
 
 See `02-docs/Erick_Janganya_Foundation_Wireframe_Manual.docx` for the full section-by-section breakdown of what every page and admin screen does.
+
+## Deployment
+
+The site is built and tested on [Vercel](https://vercel.com) (hosting + CI/CD) with [Neon](https://neon.tech) as the Postgres database, as two separate Vercel projects from this one repo:
+
+- **Frontend** — Root Directory `05-src/frontend`. Plain static HTML/CSS/JS, no build step; Vercel serves it as-is.
+- **Backend** — Root Directory `05-src/backend`. Express API running as Vercel serverless functions. Full setup steps, environment variables, and the CI workflow are documented in [`05-src/backend/README.md`](05-src/backend/README.md#deploying-vercel--neon).
+
+Every push to `main` deploys to production; every pull request gets its own preview URL for both projects automatically, once each is connected to this GitHub repo in the Vercel dashboard.
+
+Once the site is verified and ready for public launch, the backend moves from Vercel to a VPS (e.g. HostAfrica) as a normal long-running Node process — the application code doesn't change, only where it's hosted.

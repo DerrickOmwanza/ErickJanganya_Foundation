@@ -2,10 +2,15 @@
 // reads or writes live data (tracker, promises, contact form, newsletter
 // signup, and later news/events/media).
 //
-// NOTE: API_BASE points at your local backend for now. Once the backend is
-// deployed somewhere public, change this one line and every page picks it up.
+// API_BASE picks itself by hostname rather than being hardcoded, since this is a plain static
+// site with no build step to inject environment variables: on localhost it talks to the local
+// dev backend; everywhere else (Vercel previews and production) it talks to the deployed API.
+// PROD_API_BASE is the one line to update once the backend's real Vercel URL (or custom domain)
+// is known — see 05-src/backend/README.md for the deployment steps.
 window.ApiClient = (function () {
-  var API_BASE = 'http://localhost:4000/api';
+  var PROD_API_BASE = 'https://erick-janganya-foundation-api.vercel.app/api';
+  var isLocal = ['localhost', '127.0.0.1', ''].indexOf(location.hostname) !== -1;
+  var API_BASE = isLocal ? 'http://localhost:4000/api' : PROD_API_BASE;
 
   function buildUrl(path, params) {
     var url = new URL(API_BASE + path);

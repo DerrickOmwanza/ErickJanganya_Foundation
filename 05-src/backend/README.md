@@ -106,3 +106,63 @@ Opens a local GUI to view/edit any table without writing SQL.
 - CORS is open by default (`app.use(cors())`) since the frontend is static
   HTML served separately; tighten this to a specific origin before deploying
   publicly.
+
+## Deploying (Vercel + Neon)
+
+The database is already on Neon. This turns the API into a Vercel
+serverless function — `api/index.js` wraps the same Express app from
+`src/app.js` that `npm run dev` uses locally, so routes behave identically
+either way. `vercel.json` rewrites every request into that one function.
+
+These steps happen in the Vercel dashboard, under your own account — not
+something I can do for you from here:
+
+1. **Push this repo to GitHub** (already done — `origin` is
+   `DerrickOmwanza/ErickJanganya_Foundation`).
+2. On [vercel.com](https://vercel.com), **New Project → import that repo**.
+3. Set **Root Directory** to `05-src/backend`. Vercel auto-detects it as a
+   Node project — no build command override needed (`postinstall` already
+   runs `prisma generate` after every install).
+4. Add **Environment Variables** (Project Settings → Environment Variables),
+   copying the values from your local `.env`:
+   - `DATABASE_URL` — use the Neon **pooled** connection string (the one
+     with `-pooler` in the hostname), exactly like local dev. Serverless
+     functions open many short-lived connections, which the pooler is built
+     for.
+   - `JWT_SECRET`
+   - `ADMIN_SETUP_KEY`
+   - Don't set `PORT` — Vercel ignores it; the serverless entry point doesn't
+     call `app.listen()`.
+5. Deploy. Vercel gives you a URL like
+   `https://<project-name>.vercel.app`. Test it:
+   `https://<project-name>.vercel.app/api/health` should return
+   `{"ok":true,...}`.
+6. **Connect the frontend to it** — in
+   `05-src/frontend/js/api.js`, set `PROD_API_BASE` to that URL + `/api`.
+   (The frontend already picks local vs. deployed automatically by hostname,
+   so this is the only line to change.)
+
+### CI
+
+`.github/workflows/backend-ci.yml` runs on every push/PR that touches this
+folder: installs, generates the Prisma client, boots the server, and checks
+`/api/health` responds — independent of Vercel's own preview deploys, so a
+broken dependency or a server that fails to start gets caught even before a
+preview URL exists.
+
+### Preview databases (optional, recommended once you're iterating a lot)
+
+Vercel's **Neon integration** (Project Settings → Integrations → Neon) can
+create a fresh Neon branch of your database for every pull request
+automatically, and tear it down when the PR closes — so preview deploys
+don't touch your real data. Set it up from the Vercel dashboard once the
+project exists; it fills in a branch-specific `DATABASE_URL` for each
+preview deployment on its own.
+
+### Moving to a VPS later
+
+Once the site is ready for public launch, the same `src/app.js` runs as a
+normal long-lived Node process (`npm start`) on a VPS (e.g. HostAfrica) —
+nothing about the route code changes, only how it's hosted. At that point,
+also tighten CORS to the real production domain instead of the open default
+above.
