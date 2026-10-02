@@ -329,24 +329,22 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .pull-quote-panel::before{content:'"';position:absolute;top:-22px;left:-6px;font-family:var(--font-h);font-size:150px;font-weight:700;color:var(--line);line-height:1;pointer-events:none;z-index:0;}
 .pull-quote-text{position:relative;z-index:1;color:var(--ink-black);font-family:var(--font-h);font-weight:700;font-size:clamp(24px,3.1vw,36px);line-height:1.42;}
 .pull-quote-cite{position:relative;z-index:1;display:block;color:var(--red);font-family:var(--font-b);font-weight:700;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;}
-/* Attribution row — optional: a small round portrait next to the citation, tying a quote to the
-   real person saying it without repeating the hero's side-by-side photo treatment. Wraps the cite
-   even where there's no avatar (e.g. Vision's institutional-voice quote), so the margin-top that
-   used to live on .pull-quote-cite now lives here instead — no layout shift either way. */
+/* Wraps the cite so its top margin lives in one place, with or without a person attached. */
 .pull-quote-attribution{display:flex;align-items:center;gap:12px;margin-top:20px;}
-.pull-quote-avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:none;position:relative;z-index:1;}
 
-/* About's founder quote only — a centered testimonial treatment: red icon badge instead of the
-   oversized glyph, a constrained measure for a proper editorial line length, and a real photo sized
-   up from the plain 44px avatar. Vision's institutional quote (no person attached) keeps the base
+/* About's founder quote only: the real portrait fixed on the left, the quote on the right, a red badge
+   and rule framing the text. Vision's institutional quote (no person attached) keeps the base
    left-rule/quote-mark styling above, untouched. */
-.pull-quote-panel--feature{border-left:none;padding-left:0;margin:40px auto 12px;max-width:740px;text-align:center;}
+.pull-quote-panel.pull-quote-panel--feature{display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:72px;align-items:center;border-left:none;padding-left:0;margin:40px 0 12px;}
 .pull-quote-panel--feature::before{display:none;}
-.pull-quote-mark{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;background:var(--red);color:#fff;font-size:18px;margin-bottom:24px;}
-.pull-quote-panel--feature .pull-quote-attribution{justify-content:center;margin-top:26px;}
-.pull-quote-panel--feature .pull-quote-avatar{width:60px;height:60px;border:2px solid var(--red);}
-@media (max-width:600px){
-  .pull-quote-panel--feature{max-width:none;}
+.pull-quote-portrait{aspect-ratio:4/5;overflow:hidden;max-width:440px;width:100%;}
+.pull-quote-portrait img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
+.pull-quote-mark{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;background:var(--red);color:#fff;font-size:18px;margin-bottom:28px;}
+.pull-quote-panel--feature .pull-quote-text{font-size:clamp(24px,2.6vw,34px);line-height:1.4;}
+.pull-quote-panel--feature .pull-quote-attribution{margin-top:32px;padding-top:22px;border-top:2px solid var(--red);width:fit-content;}
+@media (max-width:960px){
+  .pull-quote-panel.pull-quote-panel--feature{grid-template-columns:1fr;gap:36px;}
+  .pull-quote-portrait{max-width:380px;}
 }
 
 /* About Erick — "Why I'm Running": deliberately text-forward (no photo slot) editorial block. Instead of
