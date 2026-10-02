@@ -784,17 +784,25 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
    standing in the section instead of sitting in a frame. Text is white; the portrait fades into the dark on its left edge. */
 .about-hero{background:#050505 radial-gradient(60% 90% at 12% 35%, rgba(0,100,240,.22) 0%, rgba(0,100,240,0) 70%);color:#fff;padding:132px 0 0;overflow:hidden;}
 .about-hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:end;}
-.about-hero-copy{padding-bottom:64px;}
+.about-hero-copy{padding-bottom:56px;}
 .about-hero-kicker{display:inline-block;color:var(--yellow);font-size:14px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:18px;}
-.about-hero h1{font-family:var(--font-display);font-weight:700;color:#fff;font-size:clamp(48px,6.2vw,92px);line-height:.98;letter-spacing:-.01em;margin:0 0 22px;}
-.about-hero .lead{color:rgba(255,255,255,.88);font-size:clamp(16.5px,1.25vw,18px);font-weight:500;line-height:1.65;max-width:600px;margin:0 0 12px;}
-.about-hero-close{color:#fff;font-family:var(--font-h);font-weight:700;font-size:clamp(20px,1.9vw,26px);line-height:1.35;max-width:600px;margin:20px 0 0;padding-left:20px;border-left:4px solid var(--red);}
+.about-hero h1{font-family:var(--font-display);font-weight:700;color:#fff;font-size:clamp(48px,6.2vw,92px);line-height:.98;letter-spacing:-.01em;margin:0 0 30px;}
+.about-hero .lead{color:rgba(255,255,255,.82);font-size:clamp(17px,1.3vw,19px);font-weight:500;line-height:1.75;margin:0;}
+/* The opening paragraph is the page's headline statement and the only copy beside the portrait: set larger
+   and brighter. The other two paragraphs live in .about-hero-statement below, two columns on desktop. */
+.about-hero .lead--intro{color:#fff;font-size:clamp(20px,1.7vw,25px);line-height:1.55;max-width:600px;}
+.about-hero-statement{display:grid;grid-template-columns:1fr 1fr;gap:24px 72px;align-items:start;padding-top:0;padding-bottom:80px;}
+.about-hero-statement::before{content:"";grid-column:1/-1;height:1px;background:rgba(255,255,255,.16);margin-bottom:40px;}
+.about-hero-statement .lead{font-size:clamp(17px,1.3vw,19px);line-height:1.8;max-width:540px;}
+.about-hero-close{color:#fff;font-family:var(--font-h);font-weight:700;font-size:clamp(21px,2vw,28px);line-height:1.4;max-width:540px;margin:0;padding-left:24px;border-left:4px solid var(--red);}
 .about-portrait{position:relative;aspect-ratio:4/5;overflow:hidden;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 22%);mask-image:linear-gradient(to right,transparent 0,#000 22%);}
 .about-portrait img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
 @media(max-width:960px){
   .about-hero{padding-top:120px;}
   .about-hero-grid{grid-template-columns:1fr;gap:8px;}
   .about-hero-copy{padding-bottom:28px;}
+  .about-hero-statement{grid-template-columns:1fr;gap:28px;padding-top:36px;padding-bottom:56px;}
+  .about-hero-statement::before{display:none;}
   .about-portrait{max-width:440px;width:100%;margin:0 auto;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 20%);mask-image:linear-gradient(to bottom,transparent 0,#000 20%);}
 }
 
