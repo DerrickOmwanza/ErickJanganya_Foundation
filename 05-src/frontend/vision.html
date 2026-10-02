@@ -91,9 +91,8 @@
        partner rather than any claim of existing investors/partnerships that don't exist yet. The
        original three sections (intro, priorities, "beyond the election") are unchanged in substance;
        "beyond the election" is merged into a single broader closing pull-quote rather than sitting
-       next to a near-duplicate new one. The Horizon reuses the About page's journey-rail component
-       (see main.js initJourneyRail, generalized to run on more than one rail per page) rather than a
-       new pattern — a sequential roadmap and a sequential life story are the same shape of content. -->
+       next to a near-duplicate new one. The Horizon was first built on the About page's journey-rail component and was rebuilt
+       2026-10-03 as its own ascending staircase layout (see the comment on that section). -->
 
   <!-- Hero rebuilt 2026-10-03 to the same dark band as the Foundation and About heroes (it was a plain
        heading on white above a detached rounded photo strip). Wording is the existing dek, only its dash
@@ -272,50 +271,46 @@
     </div>
   </section>
 
-  <!-- The Horizon — reuses the About page's journey-rail component (same CSS, same generalized JS)
-       for a forward-looking roadmap instead of a backward-looking life story. Clearly framed as a
-       plan/aspiration throughout ("the plan"), not a claim that any phase is already complete. -->
-  <section class="section">
+  <!-- The Horizon. Rebuilt 2026-10-03 from the About page's horizontal journey rail into an ascending
+       staircase: three phases whose photo slots rise left to right (so the layout itself reads as progress
+       toward the horizon), each with its years set large. Dates updated to the five year parliamentary term
+       (confirmed 2026-10-03): 2026 to 2027, 2027 to 2032, 2032 and beyond. Clearly a plan and an
+       aspiration ("the plan"), not a claim that any phase is already complete. The photos are placeholders
+       that need real photos of those moments. -->
+  <section class="section horizon">
     <div class="container">
       <div class="section-rule"></div>
-      <h2 class="mega-header reveal-up" style="font-size:clamp(34px,5.4vw,64px);">The Horizon</h2>
-      <p class="mega-header-dek reveal-up">Three phases, from a verified baseline to a record built to outlast any one term.</p>
-      <div class="journey-rail-wrap reveal-up">
-        <div class="journey-rail-scroll">
-          <div class="journey-rail">
-            <div class="journey-rail-track"></div>
-
-            <div class="journey-stop">
-              <span class="journey-stop-num">1</span>
-              <div class="ph"><i class="fa-solid fa-image"></i><span>Photo — a site visit in progress</span></div>
-              <span class="journey-stop-year">2026 – 2027</span>
+      <h2 class="mega-header" style="font-size:clamp(34px,5.4vw,64px);">The Horizon</h2>
+      <p class="mega-header-dek">Three phases, from a verified baseline to a record built to outlast any one term.</p>
+      <ol class="horizon-steps">
+          <li class="horizon-step">
+            <div class="horizon-step-media"><div class="ph"><i class="fa-solid fa-image"></i><span>Real photo needed: a site visit in progress</span></div></div>
+            <div class="horizon-step-body">
+              <span class="horizon-step-label">Phase 1</span>
+              <span class="horizon-step-years">2026 to 2027</span>
               <h3>Verified Baseline</h3>
               <p>Every ward's current infrastructure, health, education, and water access status documented and published before the 2027 election.</p>
             </div>
-
-            <div class="journey-stop">
-              <span class="journey-stop-num">2</span>
-              <div class="ph"><i class="fa-solid fa-image"></i><span>Photo — a completed project</span></div>
-              <span class="journey-stop-year">2027 – 2030</span>
+          </li>
+          <li class="horizon-step">
+            <div class="horizon-step-media"><div class="ph"><i class="fa-solid fa-image"></i><span>Real photo needed: a completed project</span></div></div>
+            <div class="horizon-step-body">
+              <span class="horizon-step-label">Phase 2</span>
+              <span class="horizon-step-years">2027 to 2032</span>
               <h3>Delivery Under Watch</h3>
               <p>Every project promised during the term tracked to completion, or explained, in public, in real time.</p>
             </div>
-
-            <div class="journey-stop">
-              <span class="journey-stop-num">3</span>
-              <div class="ph"><i class="fa-solid fa-image"></i><span>Photo — the tracker, in use</span></div>
-              <span class="journey-stop-year">2030 and beyond</span>
+          </li>
+          <li class="horizon-step">
+            <div class="horizon-step-media"><div class="ph"><i class="fa-solid fa-image"></i><span>Real photo needed: the tracker in use</span></div></div>
+            <div class="horizon-step-body">
+              <span class="horizon-step-label">Phase 3</span>
+              <span class="horizon-step-years">2032 and beyond</span>
               <h3>A Standing Record</h3>
-              <p>Embakasi South's permanent, independent development record — open to residents, researchers, and partners alike, regardless of who holds the seat.</p>
+              <p>Embakasi South's permanent, independent development record, open to residents, researchers, and partners alike, regardless of who holds the seat.</p>
             </div>
-
-          </div>
-        </div>
-        <div class="journey-rail-arrows">
-          <button class="journey-arrow journey-prev" aria-label="Previous phase"><i class="fa-solid fa-chevron-left"></i></button>
-          <button class="journey-arrow journey-next" aria-label="Next phase"><i class="fa-solid fa-chevron-right"></i></button>
-        </div>
-      </div>
+          </li>
+      </ol>
     </div>
   </section>
 
