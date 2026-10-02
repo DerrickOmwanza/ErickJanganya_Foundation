@@ -94,16 +94,23 @@
        (see main.js initJourneyRail, generalized to run on more than one rail per page) rather than a
        new pattern — a sequential roadmap and a sequential life story are the same shape of content. -->
 
-  <section class="section" style="padding-top:150px;padding-bottom:0;">
-    <div class="container">
-      <h1 class="mega-header reveal-up">Vision</h1>
-      <p class="mega-header-dek reveal-up">The Embakasi South we're building toward — where the constituency should be in five to ten years, beyond the priorities of a single term.</p>
-    </div>
-  </section>
-  <section class="section-tight" style="padding-top:32px;">
-    <div class="container">
-      <div class="ph reveal-up" style="aspect-ratio:21/9;border-radius:var(--radius);">
-        <i class="fa-solid fa-image"></i><span>Hero photo — Embakasi South, a wide shot</span>
+  <!-- Hero rebuilt 2026-10-03 to the same dark band as the Foundation and About heroes (it was a plain
+       heading on white above a detached rounded photo strip). Wording is the existing dek, only its dash
+       turned into a colon; the buttons lead to the priorities below and the live tracker. The photo is
+       still a placeholder: it needs a real wide shot of Embakasi South. -->
+  <section class="page-hero">
+    <div class="container page-hero-grid">
+      <div class="page-hero-copy">
+        <span class="page-hero-kicker">Embakasi South &middot; The long view</span>
+        <h1>Vision</h1>
+        <p class="page-hero-lead">The Embakasi South we're building toward: where the constituency should be in five to ten years, beyond the priorities of a single term.</p>
+        <div class="page-hero-actions">
+          <a class="btn btn-primary" href="#priorities">See the priorities <i class="fa-solid fa-arrow-down"></i></a>
+          <a class="btn btn-outline" href="tracker.html">View the tracker</a>
+        </div>
+      </div>
+      <div class="page-hero-media">
+        <div class="ph"><i class="fa-solid fa-image"></i><span>Real photo needed: a wide shot of Embakasi South</span></div>
       </div>
     </div>
   </section>
@@ -139,7 +146,7 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="priorities">
     <div class="container">
       <div class="section-rule"></div>
       <h2 class="mega-header reveal-up" style="font-size:clamp(34px,5.4vw,64px);">Priorities</h2>
