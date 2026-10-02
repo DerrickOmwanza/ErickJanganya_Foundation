@@ -577,6 +577,45 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .mega-header{font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:clamp(42px,7.4vw,92px);line-height:.94;letter-spacing:-.01em;color:var(--ink-black);margin:0 0 14px;}
 .mega-header-dek{font-size:17px;color:var(--ink-soft);max-width:640px;}
 
+/* Foundation Stories (foundation.html): editorial layout, one large lead story beside two smaller ones
+   stacked, whole cards as links. Sharp-cornered photos, serif headlines. */
+.stories-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px 40px;flex-wrap:wrap;}
+.stories-head .org-link{flex:none;margin-bottom:6px;}
+.stories{display:grid;grid-template-columns:1.2fr 1fr;gap:56px;margin-top:44px;align-items:stretch;}
+.stories-side{display:flex;flex-direction:column;justify-content:space-between;gap:36px;}
+.story{display:block;color:var(--ink-black);}
+.story-media{overflow:hidden;background:var(--bg-soft);}
+.story-media .ph{height:100%;width:100%;border-radius:0;}
+.story-media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s cubic-bezier(.22,.7,.3,1);}
+.story:hover .story-media img{transform:scale(1.05);}
+.story:focus-visible{outline:3px solid var(--yellow);outline-offset:6px;}
+.story-tag{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:12px;}
+.story-tag::before{content:"";width:22px;height:2px;background:var(--red);}
+.story h3{font-family:var(--font-h);font-weight:700;line-height:1.18;margin:0 0 12px;background:linear-gradient(currentColor,currentColor) 0 100%/0 2px no-repeat;transition:background-size .35s ease;display:inline;}
+.story:hover h3{background-size:100% 2px;}
+.story p{font-size:16.5px;font-weight:500;line-height:1.65;color:var(--ink-soft);margin:12px 0 16px;}
+.story-more{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14.5px;text-decoration:underline;text-underline-offset:4px;transition:gap .2s ease,color .2s ease;}
+.story:hover .story-more{gap:13px;color:var(--red);}
+.story--lead .story-media{aspect-ratio:16/10;margin-bottom:26px;}
+.story--lead h3{font-size:clamp(28px,3vw,40px);}
+.story--lead p{font-size:18px;max-width:560px;}
+.stories-side .story{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:26px;align-items:center;}
+.stories-side .story+.story{padding-top:36px;border-top:1px solid var(--line);}
+.stories-side .story-media{aspect-ratio:4/5;}
+.stories-side .story h3{font-size:clamp(22px,2vw,28px);}
+.stories-side .story p{font-size:15.5px;margin:10px 0 14px;}
+@media (prefers-reduced-motion: reduce){
+  .story-media img,.story h3{transition:none;}
+  .story:hover .story-media img{transform:none;}
+}
+@media (max-width:960px){
+  .stories{grid-template-columns:1fr;gap:44px;}
+  .stories-side{gap:32px;}
+  .stories-side .story{grid-template-columns:1fr;gap:0;}
+  .stories-side .story+.story{padding-top:32px;}
+  .stories-side .story-media{aspect-ratio:16/10;margin-bottom:22px;}
+}
+
 /* Structure & Leadership (foundation.html): tiered org chart. .org-tier is the labelled rule above each
    tier; .person-card is one slot (photo, name, role, one line). Pending slots show a "photo coming soon"
    box and bracketed text; a filled slot just swaps in an <img> and real text (no other CSS change). */

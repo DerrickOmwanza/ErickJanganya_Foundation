@@ -152,34 +152,50 @@
     </div>
   </section>
 
-  <!-- Foundation Stories — reuses the homepage's existing 3-column .field-grid exactly (Obama's
-       "Program stories" grid), just with different content. Mock stories for now. -->
+  <!-- Foundation Stories. Redesigned 2026-10-02 from three equal columns (the homepage's field-grid) into an
+       editorial layout: one lead story large on the left, two smaller stories stacked on the right, whole
+       cards as links. The stories themselves are still ILLUSTRATIVE MOCK CONTENT (same convention as the
+       tracker seed data): the places, events and details below are not real reports and must be replaced
+       with real dispatches before launch. The photo slots need real photos from those stories, not stock. -->
   <section class="section-tight" style="background:#fff;border-top:1px solid var(--line);">
     <div class="container">
       <div class="section-rule"></div>
-      <h2 class="mega-header reveal-up" style="font-size:clamp(34px,5.4vw,64px);">Foundation Stories</h2>
-      <p class="mega-header-dek reveal-up" style="margin-bottom:28px;">Dispatches from the ground — project updates, ward visits, and the people behind the numbers on the tracker.</p>
-      <div class="field-grid">
-        <div class="field-item reveal-up">
-          <div class="field-item-media"><div class="ph"><i class="fa-solid fa-image"></i><span>Story photo — Imara Daima footbridge</span></div></div>
-          <span class="eyebrow">Infrastructure · Imara Daima</span>
-          <h3>Inside the Imara Daima footbridge repair</h3>
-          <p>A look at the crew, the timeline, and what's left before the crossing reopens for good.</p>
-          <a class="field-item-link" href="news.html">Read the update <i class="fa-solid fa-arrow-right"></i></a>
+      <div class="stories-head">
+        <div>
+          <h2 class="mega-header reveal-up" style="font-size:clamp(34px,5.4vw,64px);">Foundation Stories</h2>
+          <p class="mega-header-dek reveal-up" style="margin-bottom:0;">Dispatches from the ground: project updates, ward visits, and the people behind the numbers on the tracker.</p>
         </div>
-        <div class="field-item reveal-up">
-          <div class="field-item-media"><div class="ph"><i class="fa-solid fa-image"></i><span>Story photo — Kware medical camp</span></div></div>
-          <span class="eyebrow">Health · Kware</span>
-          <h3>What a Kware medical camp actually looks like</h3>
-          <p>Screenings, referrals, and the residents who showed up on a Tuesday morning.</p>
-          <a class="field-item-link" href="news.html">Read the update <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-        <div class="field-item reveal-up">
-          <div class="field-item-media"><div class="ph"><i class="fa-solid fa-image"></i><span>Story photo — Kwa Njenga skills hub</span></div></div>
-          <span class="eyebrow">Youth &amp; Employment · Kwa Njenga</span>
-          <h3>Inside the Kwa Njenga skills hub, mid-build</h3>
-          <p>Concrete's poured, equipment's ordered — a progress check on the training space.</p>
-          <a class="field-item-link" href="news.html">Read the update <i class="fa-solid fa-arrow-right"></i></a>
+        <a class="org-link reveal-up" href="news.html">All updates <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="stories">
+        <a class="story story--lead reveal-up" href="news.html">
+          <div class="story-media"><div class="ph"><i class="fa-solid fa-image"></i><span>Real photo needed: the Imara Daima footbridge repair</span></div></div>
+          <div class="story-body">
+            <span class="story-tag">Infrastructure &middot; Imara Daima</span>
+            <h3>Inside the Imara Daima footbridge repair</h3>
+            <p>A look at the crew, the timeline, and what's left before the crossing reopens for good.</p>
+            <span class="story-more">Read the update <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </a>
+        <div class="stories-side">
+        <a class="story  reveal-up" href="news.html">
+          <div class="story-media"><div class="ph"><i class="fa-solid fa-image"></i><span>Real photo needed: a Kware medical camp</span></div></div>
+          <div class="story-body">
+            <span class="story-tag">Health &middot; Kware</span>
+            <h3>What a Kware medical camp actually looks like</h3>
+            <p>Screenings, referrals, and the residents who showed up on a Tuesday morning.</p>
+            <span class="story-more">Read the update <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </a>
+        <a class="story  reveal-up" href="news.html">
+          <div class="story-media"><div class="ph"><i class="fa-solid fa-image"></i><span>Real photo needed: the Kwa Njenga skills hub</span></div></div>
+          <div class="story-body">
+            <span class="story-tag">Youth &amp; Employment &middot; Kwa Njenga</span>
+            <h3>Inside the Kwa Njenga skills hub, mid-build</h3>
+            <p>Concrete's poured and equipment's ordered: a progress check on the training space.</p>
+            <span class="story-more">Read the update <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </a>
         </div>
       </div>
     </div>
