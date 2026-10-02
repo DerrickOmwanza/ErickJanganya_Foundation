@@ -257,45 +257,54 @@
 
   <!-- Focus areas were "Health, Education, Infrastructure" in the original wireframe (pre-dates the
        backend). Swapped in the four categories the tracker actually uses today (see seed.js /
-       tracker.js) so this page stays consistent with what's live elsewhere rather than a stale list. -->
+       tracker.js) so this page stays consistent with what's live elsewhere rather than a stale list.
+       Redesigned 2026-10-02 as an alternating wide/narrow grid (7:5 then 5:7) of photo-over-text cards
+       on a white ground, so it reads differently from the photo panels above it and the overlay tiles
+       further up. Photos are symbolic stock, mapped by the user: construction workers = Youth &
+       Employment, health app on a phone = Health, night construction site = Infrastructure, handwashing
+       = Water & Sanitation. -->
   <section class="section-tight" style="background:#fff;border-top:1px solid var(--line);">
     <div class="container">
       <div class="section-rule"></div>
       <h2 class="mega-header reveal-up" style="font-size:clamp(34px,5.4vw,64px);">Focus Areas</h2>
-      <p class="mega-header-dek reveal-up">The same categories used on the Development Tracker — every project maps to one of these.</p>
-      <div class="feature-row-list">
-        <div class="feature-row reveal-up">
-          <div class="ph"><i class="fa-solid fa-image"></i><span>Focus area photo — Infrastructure</span></div>
-          <div>
+      <p class="mega-header-dek reveal-up">The same categories used on the Development Tracker. Every project maps to one of these.</p>
+      <div class="focus-grid">
+        <a class="focus-card focus-card--wide reveal-up" href="tracker.html">
+          <div class="focus-card-media"><img src="img/focus-infrastructure.jpg" alt="A construction site at night with tower cranes and rising buildings, symbolising infrastructure" style="object-position:50% 55%;"></div>
+          <div class="focus-card-body">
+            <span class="focus-card-num">01</span>
             <h3>Infrastructure</h3>
-            <p>Roads, drainage, footbridges, and public works that hold up under daily use.</p>
-            <a class="field-item-link" href="tracker.html">See infrastructure projects <i class="fa-solid fa-arrow-right"></i></a>
+            <p>Roads, drainage, footbridges and public works that hold up under daily use.</p>
+            <span class="focus-card-link">See infrastructure projects <i class="fa-solid fa-arrow-right"></i></span>
           </div>
-        </div>
-        <div class="feature-row reveal-up">
-          <div class="ph"><i class="fa-solid fa-image"></i><span>Focus area photo — Health</span></div>
-          <div>
+        </a>
+        <a class="focus-card focus-card--narrow reveal-up" href="tracker.html">
+          <div class="focus-card-media"><img src="img/focus-health.jpg" alt="A health app open on a phone beside the word Health, symbolising access to care" style="object-position:88% 50%;"></div>
+          <div class="focus-card-body">
+            <span class="focus-card-num">02</span>
             <h3>Health</h3>
-            <p>Outreach camps, maternal health checks, and improved access to basic care.</p>
-            <a class="field-item-link" href="tracker.html">See health projects <i class="fa-solid fa-arrow-right"></i></a>
+            <p>Outreach camps, maternal health checks and improved access to basic care.</p>
+            <span class="focus-card-link">See health projects <i class="fa-solid fa-arrow-right"></i></span>
           </div>
-        </div>
-        <div class="feature-row reveal-up">
-          <div class="ph"><i class="fa-solid fa-image"></i><span>Focus area photo — Water &amp; Sanitation</span></div>
-          <div>
+        </a>
+        <a class="focus-card focus-card--narrow reveal-up" href="tracker.html">
+          <div class="focus-card-media"><img src="img/vision-health-sanitation.jpg" alt="Hands being washed under a running tap, symbolising clean water and sanitation" style="object-position:55% 50%;"></div>
+          <div class="focus-card-body">
+            <span class="focus-card-num">03</span>
             <h3>Water &amp; Sanitation</h3>
             <p>Public water points and sanitation upgrades in the wards that need them most.</p>
-            <a class="field-item-link" href="tracker.html">See water projects <i class="fa-solid fa-arrow-right"></i></a>
+            <span class="focus-card-link">See water projects <i class="fa-solid fa-arrow-right"></i></span>
           </div>
-        </div>
-        <div class="feature-row reveal-up">
-          <div class="ph"><i class="fa-solid fa-image"></i><span>Focus area photo — Youth &amp; Employment</span></div>
-          <div>
+        </a>
+        <a class="focus-card focus-card--wide reveal-up" href="tracker.html">
+          <div class="focus-card-media"><img src="img/focus-youth.jpg" alt="Construction workers in hard hats and high visibility vests assembling reinforcement steel, symbolising jobs and skills" style="object-position:50% 40%;"></div>
+          <div class="focus-card-body">
+            <span class="focus-card-num">04</span>
             <h3>Youth &amp; Employment</h3>
-            <p>Skills training and small-business support so opportunity doesn't require leaving the constituency.</p>
-            <a class="field-item-link" href="tracker.html">See youth projects <i class="fa-solid fa-arrow-right"></i></a>
+            <p>Skills training and small business support so opportunity doesn't require leaving the constituency.</p>
+            <span class="focus-card-link">See youth projects <i class="fa-solid fa-arrow-right"></i></span>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </section>
