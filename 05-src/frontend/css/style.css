@@ -393,10 +393,6 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 /* Editorial CTA — a statement + supporting text/link split, white ground, divided by a rule rather
    than a coloured card (replaces .split-panel--sky on "Partner With Us", 2026-09-17: card-on-card
    design was fighting the same white-background principle the pull-quote rework just addressed). */
-.editorial-cta{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;}
-.editorial-cta-lead h3{font-family:var(--font-h);font-weight:700;font-size:clamp(28px,3.4vw,42px);line-height:1.18;color:var(--ink-black);margin-top:10px;}
-.editorial-cta-body{border-left:1px solid var(--line);padding-left:40px;}
-.editorial-cta-body p{font-size:16px;color:var(--ink-soft);line-height:1.7;margin-bottom:20px;max-width:440px;}
 
 /* About Erick — "Explore Further" cards reuse .pillar-card's look but are real links (whole card
    clickable) rather than static info cards, so they need pointer cursor + block display. */
@@ -576,6 +572,30 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
    (hero-rotate-word) but static, black-on-white, and left-aligned instead of white-on-photo. */
 .mega-header{font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:clamp(42px,7.4vw,92px);line-height:.94;letter-spacing:-.01em;color:var(--ink-black);margin:0 0 14px;}
 .mega-header-dek{font-size:17px;color:var(--ink-soft);max-width:640px;}
+
+/* Partner With Us (vision.html): a contained black invitation panel beside the three audiences. */
+.partner-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0;align-items:stretch;margin-top:8px;}
+.partner-panel{background:#050505 radial-gradient(70% 70% at 0% 0%, rgba(0,100,240,.28) 0%, rgba(0,100,240,0) 70%);color:#fff;padding:64px 56px;display:flex;flex-direction:column;align-items:flex-start;}
+.partner-kicker{display:inline-block;color:var(--yellow);font-size:14px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:20px;}
+.partner-panel h2{font-family:var(--font-display);font-weight:700;text-transform:uppercase;color:#fff;font-size:clamp(36px,4.4vw,60px);line-height:1;letter-spacing:-.01em;margin:0 0 24px;}
+.partner-panel p{font-size:clamp(17px,1.4vw,19px);line-height:1.65;color:rgba(255,255,255,.82);max-width:480px;margin:0 0 36px;}
+.partner-btn{margin-top:auto;background:#fff;color:#000;border:2px solid #fff;border-radius:0;font-family:var(--font-display);font-weight:600;font-size:20px;padding:16px 32px;gap:12px;}
+.partner-btn::after{display:none;}
+.partner-btn:hover{background:var(--yellow);border-color:var(--yellow);color:#000;}
+.partner-audiences{padding:64px 0 0 56px;display:flex;flex-direction:column;}
+.partner-label{font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
+.partner-audiences ul{list-style:none;margin:0;padding:0;flex:1;display:flex;flex-direction:column;}
+.partner-audience{flex:1;display:grid;grid-template-columns:56px 1fr;column-gap:22px;align-items:center;padding:30px 0;border-bottom:1px solid var(--line);}
+.partner-audience:first-child{border-top:3px solid var(--ink-black);margin-top:16px;}
+.partner-audience-icon{display:flex;align-items:center;justify-content:center;width:56px;height:56px;border:1px solid var(--ink-black);font-size:22px;color:var(--ink-black);}
+.partner-audience h3{font-family:var(--font-display);font-weight:600;font-size:clamp(24px,2.2vw,30px);line-height:1.1;margin:0 0 8px;}
+.partner-audience p{font-size:16.5px;font-weight:500;line-height:1.6;color:var(--ink-soft);margin:0;max-width:440px;}
+@media (max-width:960px){
+  .partner-grid{grid-template-columns:minmax(0,1fr);}
+  .partner-panel{padding:44px 28px 40px;}
+  .partner-btn{margin-top:0;padding:14px 24px;font-size:18px;}
+  .partner-audiences{padding:36px 0 0;}
+}
 
 /* Statement band (vision.html): flat yellow with the site's arch pattern, a large serif statement, and a set
    of ripples spreading from one point (decorative). */
@@ -1122,8 +1142,6 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
   .pull-quote-panel::before{font-size:90px;top:-24px;left:-2px;}
   .why-running-grid{grid-template-columns:1fr;gap:32px;}
   .why-running-body{padding-left:20px;border-left-width:3px;font-size:16.5px;}
-  .editorial-cta{grid-template-columns:1fr;gap:24px;}
-  .editorial-cta-body{padding-left:20px;}
   .why-running-excerpt{position:static;padding-left:20px;border-left-width:3px;}
   .section-rule{height:6px;margin-bottom:30px;}
 }
