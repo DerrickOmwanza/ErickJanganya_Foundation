@@ -581,7 +581,7 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
    as the headline. The map is click to interact once JS is live (.is-live adds an overlay so a wheel scroll
    over it still scrolls the page); without JS the iframe is simply interactive. */
 .where-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:64px;align-items:start;margin-top:40px;}
-.map-frame{position:relative;height:520px;border:1px solid var(--line);background:var(--bg-soft);overflow:hidden;}
+.map-frame{position:relative;z-index:0;isolation:isolate;height:520px;border:1px solid var(--line);background:var(--bg-soft);overflow:hidden;}
 .map-frame iframe{width:100%;height:100%;border:0;display:block;filter:grayscale(.55) contrast(1.04);transition:filter .3s ease;}
 .map-frame:hover iframe,.map-frame.is-active iframe{filter:none;}
 .map-frame.is-live iframe{pointer-events:none;}
