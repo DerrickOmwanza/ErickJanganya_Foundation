@@ -197,8 +197,12 @@
 
   <!-- Why I'm Running — was three unbroken paragraphs, then three colour-blocked story-panels (flagged
        2026-09-16 as a deviation from Obama.org's own approach: text stays on a plain white ground there,
-       photos carry the visual interest, not colour). Same three beats, now plain white pillar-cards with
-       a top photo each instead. -->
+       photos carry the visual interest, not colour), then three pillar-cards (2026-09-17). Rebuilt
+       2026-10-02 as a scroll-driven story: one photo pinned on the left that changes as each of the three
+       beats reaches the middle of the screen, the argument set large on the right, no cards. The photo
+       appears twice per beat on purpose: in .story-stage (desktop, pinned) and .story-beat-media (mobile,
+       where nothing is pinned). Swap both when the real photos arrive. Progressive enhancement: without
+       JS (main.js initStoryScroll) every beat just reads at full strength. -->
   <section class="section">
     <div class="container">
       <div class="section-rule"></div>
@@ -207,21 +211,31 @@
         <p class="section-dek">The record has to be honest first</p>
         <p>Three things this campaign comes down to.</p>
       </div>
-      <div class="grid grid-3">
-        <div class="card pillar-card reveal-up">
-          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: an unfinished or stalled project site</span></div></div>
-          <h3>A pattern, not a lack of ideas</h3>
-          <p>A borehole promised at a rally, never dug. A road resurfaced only where the cameras could see it. A youth fund announced, never disbursed. The problem was never short on ideas. It was that nobody checked whether they became real.</p>
+      <div class="story-scroll">
+        <div class="story-stage" aria-hidden="true">
+          <div class="story-frame is-active" data-story="0"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: an unfinished or stalled project site</span></div></div>
+          <div class="story-frame" data-story="1"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: Erick reviewing tracker records on site</span></div></div>
+          <div class="story-frame" data-story="2"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: Erick speaking directly with residents</span></div></div>
         </div>
-        <div class="card pillar-card reveal-up">
-          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: Erick reviewing tracker records on site</span></div></div>
-          <h3>The same standard, applied to me</h3>
-          <p>That's the gap the foundation exists to close: every project and promise made to this constituency, dated and open to verify, whether or not I made it. This campaign is the next step of that work, not a departure from it.</p>
-        </div>
-        <div class="card pillar-card reveal-up">
-          <div class="pillar-card-img"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: Erick speaking directly with residents</span></div></div>
-          <h3>What I'm asking for</h3>
-          <p>Not another name promising it'll be different this time. A representative willing to be checked the same way everyone else already is on this site. That's the only thing I'm asking the chance to be.</p>
+        <div class="story-beats">
+          <article class="story-beat is-active" data-story="0">
+            <div class="story-beat-media"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: an unfinished or stalled project site</span></div></div>
+            <span class="story-beat-num">01</span>
+            <h3>A pattern, not a lack of ideas</h3>
+            <p>A borehole promised at a rally, never dug. A road resurfaced only where the cameras could see it. A youth fund announced, never disbursed. The problem was never short on ideas. It was that nobody checked whether they became real.</p>
+          </article>
+          <article class="story-beat" data-story="1">
+            <div class="story-beat-media"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: Erick reviewing tracker records on site</span></div></div>
+            <span class="story-beat-num">02</span>
+            <h3>The same standard, applied to me</h3>
+            <p>That's the gap the foundation exists to close: every project and promise made to this constituency, dated and open to verify, whether or not I made it. This campaign is the next step of that work, not a departure from it.</p>
+          </article>
+          <article class="story-beat" data-story="2">
+            <div class="story-beat-media"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: Erick speaking directly with residents</span></div></div>
+            <span class="story-beat-num">03</span>
+            <h3>What I'm asking for</h3>
+            <p>Not another name promising it'll be different this time. A representative willing to be checked the same way everyone else already is on this site. That's the only thing I'm asking the chance to be.</p>
+          </article>
         </div>
       </div>
     </div>

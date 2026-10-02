@@ -275,6 +275,26 @@ function initJourneyRail() {
   });
 }
 
+// About's "Why I'm Running" scroll story: whichever .story-beat crosses a thin band at the vertical
+// centre of the viewport becomes active, which fades the others back and swaps the pinned photo
+// (.story-frame) with the same data-story index.
+function initStoryScroll() {
+  document.querySelectorAll('.story-scroll').forEach(function (wrap) {
+    if (!('IntersectionObserver' in window)) return;
+    var beats = wrap.querySelectorAll('.story-beat');
+    var frames = wrap.querySelectorAll('.story-frame');
+    function activate(idx) {
+      beats.forEach(function (b) { b.classList.toggle('is-active', b.getAttribute('data-story') === idx); });
+      frames.forEach(function (f) { f.classList.toggle('is-active', f.getAttribute('data-story') === idx); });
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) activate(e.target.getAttribute('data-story')); });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    beats.forEach(function (b) { io.observe(b); });
+    wrap.classList.add('is-live');
+  });
+}
+
 // Site-wide smooth, inertial page scrolling via Lenis (loaded on demand so no page needs its own
 // <script> tag). Wheel events over a nested scroller (the homepage tracker list) stay with that
 // scroller while it can still move in the wheel's direction, and pass to the page the moment it hits
@@ -320,4 +340,5 @@ document.addEventListener('DOMContentLoaded', function () {
   initHeaderScroll();
   initMediaCarousel();
   initJourneyRail();
+  initStoryScroll();
 });

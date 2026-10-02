@@ -347,6 +347,37 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
   .pull-quote-portrait{max-width:380px;}
 }
 
+/* About Erick — "Why I'm Running" scroll story. Left: a photo pinned in place; right: three large beats.
+   JS (initStoryScroll) marks .is-live on the wrapper and moves .is-active to whichever beat sits at the
+   middle of the screen, which fades the other beats back and swaps the pinned photo. Without JS none of
+   that applies and every beat simply reads at full strength. Below 960px nothing is pinned: each beat
+   carries its own photo and reads as a plain stack. */
+.story-scroll{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:80px;align-items:start;margin-top:8px;}
+.story-stage{position:sticky;top:120px;aspect-ratio:4/5;max-height:calc(100vh - 160px);width:100%;max-width:480px;overflow:hidden;}
+.story-frame{position:absolute;inset:0;opacity:0;transition:opacity .6s ease;}
+.story-frame.is-active{opacity:1;}
+.story-frame .ph{height:100%;width:100%;border-radius:0;}
+.story-beat{min-height:64vh;display:flex;flex-direction:column;justify-content:center;padding:36px 0;border-top:1px solid var(--line);transition:opacity .5s ease;}
+.story-beat:first-child{border-top:none;}
+.story-scroll.is-live .story-beat{opacity:.28;}
+.story-scroll.is-live .story-beat.is-active{opacity:1;}
+.story-beat-media{display:none;}
+.story-beat-num{font-family:var(--font-display);font-weight:600;font-size:18px;letter-spacing:.08em;color:var(--red);margin-bottom:18px;}
+.story-beat-num::after{content:"";display:inline-block;vertical-align:middle;width:56px;height:2px;margin-left:14px;background:var(--red);}
+.story-beat h3{font-size:clamp(28px,3vw,42px);line-height:1.12;margin:0 0 22px;}
+.story-beat p{font-size:clamp(18px,1.4vw,20px);font-weight:500;line-height:1.75;color:var(--ink-soft);max-width:560px;}
+@media (prefers-reduced-motion: reduce){
+  .story-frame,.story-beat{transition:none;}
+}
+@media (max-width:960px){
+  .story-scroll{grid-template-columns:1fr;gap:0;}
+  .story-stage{display:none;}
+  .story-beat{min-height:0;padding:36px 0;}
+  .story-scroll.is-live .story-beat{opacity:1;}
+  .story-beat-media{display:block;aspect-ratio:16/10;margin-bottom:24px;overflow:hidden;}
+  .story-beat-media .ph{height:100%;width:100%;border-radius:0;}
+}
+
 /* About Erick — "Why I'm Running": deliberately text-forward (no photo slot) editorial block. Instead of
    leaving the right side of the container empty, a magazine-style pull-quote excerpt (lifted from the
    body copy itself) sits alongside the paragraphs — a classic editorial op-ed layout rather than another
