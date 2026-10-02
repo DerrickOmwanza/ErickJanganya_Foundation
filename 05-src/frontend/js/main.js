@@ -387,6 +387,22 @@ function initVerifySteps() {
   });
 }
 
+// Embedded maps: an iframe under the pointer swallows the mouse wheel, trapping the page scroll. Once JS is
+// live the map is inert until clicked (the overlay lets the wheel scroll the page), becomes interactive on
+// click, and goes inert again when the pointer leaves or the user presses Escape.
+function initMapFrames() {
+  document.querySelectorAll('.map-frame').forEach(function (frame) {
+    var hint = frame.querySelector('.map-frame-hint');
+    function activate() { frame.classList.add('is-active'); }
+    function deactivate() { frame.classList.remove('is-active'); }
+    frame.classList.add('is-live');
+    if (hint) hint.hidden = false;
+    frame.addEventListener('click', activate);
+    frame.addEventListener('mouseleave', deactivate);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') deactivate(); });
+  });
+}
+
 // Site-wide smooth, inertial page scrolling via Lenis (loaded on demand so no page needs its own
 // <script> tag). Wheel events over a nested scroller (the homepage tracker list) stay with that
 // scroller while it can still move in the wheel's direction, and pass to the page the moment it hits
@@ -435,4 +451,5 @@ document.addEventListener('DOMContentLoaded', function () {
   initStoryScroll();
   initPrinciplePanels();
   initVerifySteps();
+  initMapFrames();
 });

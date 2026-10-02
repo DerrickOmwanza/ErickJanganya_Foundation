@@ -115,33 +115,53 @@
     </div>
   </section>
 
-  <!-- Where This Is — orientation for a reader who isn't already local: a real embedded map (OpenStreetMap,
-       no API key/billing needed) plus plain, verifiable geography. Exists because "global platform" only
-       works if an outside reader can place this constituency on a map in five seconds. Coordinates are an
-       approximate area centred on Embakasi South's wards, not a claimed precise boundary — captioned as
-       such rather than implying more precision than a locator map actually has. -->
-  <section class="section-tight" style="padding-top:8px;">
+  <!-- Where This Is: orientation for a reader who isn't already local. A real embedded map (OpenStreetMap, no
+       API key or billing) beside plain, verifiable geography, because "global platform" only works if an
+       outside reader can place this constituency on a map in five seconds. Rebuilt 2026-10-03: a larger
+       sharp-cornered map on the left (slightly desaturated so it sits in our palette), the facts on the
+       right with the five wards as the headline number. The coordinates are an approximate area centred
+       on Embakasi South's wards, not a claimed precise boundary, and the caption says so. The map is
+       click to interact (main.js initMapFrames) so scrolling the page never gets trapped inside it; with
+       no JS it stays fully interactive. -->
+  <section class="section">
     <div class="container">
-      <div class="reveal-up" style="border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);margin-bottom:14px;">
-        <iframe
-          src="https://www.openstreetmap.org/export/embed.html?bbox=36.835%2C-1.39%2C36.955%2C-1.29&amp;layer=mapnik&amp;marker=-1.34%2C36.895"
-          style="width:100%;height:340px;border:0;display:block;"
-          title="Map showing the approximate area of Embakasi South constituency, Nairobi, Kenya"></iframe>
-      </div>
-      <p style="font-size:12.5px;color:var(--ink-mute);margin-bottom:24px;">Approximate area — Embakasi South constituency, Nairobi County, Kenya. <a href="https://www.openstreetmap.org/?mlat=-1.34&amp;mlon=36.895#map=12/-1.34/36.895" target="_blank" rel="noopener" style="color:var(--blue);">View larger map ↗</a></p>
-      <div class="grid grid-3 reveal-up" style="gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;">
-        <div style="background:#fff;padding:24px 22px;">
-          <span class="eyebrow" style="display:block;margin-bottom:8px;">Where</span>
-          <p style="font-weight:700;font-size:16px;margin:0;">Nairobi County, Kenya</p>
+      <div class="section-rule"></div>
+      <h2 class="mega-header reveal-up" style="font-size:clamp(34px,5.4vw,64px);">Where This Is</h2>
+      <p class="mega-header-dek reveal-up">A quick orientation for anyone reading from outside Embakasi South.</p>
+      <div class="where-grid">
+        <div class="where-map reveal-up">
+          <div class="map-frame">
+            <iframe
+              src="https://www.openstreetmap.org/export/embed.html?bbox=36.835%2C-1.39%2C36.955%2C-1.29&amp;layer=mapnik&amp;marker=-1.34%2C36.895"
+              loading="lazy"
+              title="Map showing the approximate area of Embakasi South constituency, Nairobi, Kenya"></iframe>
+            <button class="map-frame-hint" type="button" hidden><i class="fa-solid fa-hand-pointer"></i> Click to explore the map</button>
+          </div>
+          <p class="where-caption">Approximate area of Embakasi South constituency, Nairobi County, Kenya. <a href="https://www.openstreetmap.org/?mlat=-1.34&amp;mlon=36.895#map=12/-1.34/36.895" target="_blank" rel="noopener">View larger map <i class="fa-solid fa-arrow-up-right-from-square"></i></a></p>
         </div>
-        <div style="background:#fff;padding:24px 22px;">
-          <span class="eyebrow" style="display:block;margin-bottom:8px;">Wards</span>
-          <p style="font-weight:700;font-size:16px;margin:0;">Imara Daima · Kwa Njenga · Kwa Reuben · Pipeline · Kware</p>
-        </div>
-        <div style="background:#fff;padding:24px 22px;">
-          <span class="eyebrow" style="display:block;margin-bottom:8px;">Seat</span>
-          <p style="font-weight:700;font-size:16px;margin:0;">Embakasi South Constituency, National Assembly of Kenya</p>
-        </div>
+        <dl class="where-facts reveal-up">
+          <div class="where-fact where-fact--lead">
+            <dt>Wards</dt>
+            <dd>
+              <span class="where-count">5</span>
+              <ul class="where-wards">
+                <li>Imara Daima</li>
+                <li>Kwa Njenga</li>
+                <li>Kwa Reuben</li>
+                <li>Pipeline</li>
+                <li>Kware</li>
+              </ul>
+            </dd>
+          </div>
+          <div class="where-fact">
+            <dt>Where</dt>
+            <dd>Nairobi County, Kenya</dd>
+          </div>
+          <div class="where-fact">
+            <dt>Seat</dt>
+            <dd>Embakasi South Constituency, National Assembly of Kenya</dd>
+          </div>
+        </dl>
       </div>
     </div>
   </section>
