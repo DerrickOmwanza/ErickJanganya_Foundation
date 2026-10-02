@@ -159,6 +159,7 @@
               </ul>
             </dd>
             <dd class="where-hint" hidden><i class="fa-solid fa-location-crosshairs"></i> Select a ward to zoom the map to its boundary.</dd>
+            <dd class="ward-detail" id="wardDetail" aria-live="polite" hidden></dd>
           </div>
           <div class="where-fact">
             <dt>Where</dt>
@@ -169,6 +170,29 @@
             <dd>Embakasi South Constituency, National Assembly of Kenya</dd>
           </div>
         </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- Where things stand today. Live counts from the Development Tracker and Promise Scorecard APIs (js/vision-live.js),
+       tying the long-term vision to the actual record. Hidden unless real records exist: the API still holds
+       "[Placeholder]" seed records, which this strip deliberately ignores so sample numbers never read as fact.
+       Open vision.html?sample=1 to preview it with the sample records (labelled "Sample data"). -->
+  <section class="section-tight live-strip" id="liveStrip" hidden>
+    <div class="container">
+      <div class="live-strip-head">
+        <div>
+          <span class="live-strip-kicker"><span class="live-dot" aria-hidden="true"></span>Live from the record <span class="live-sample" id="liveSample" hidden>Sample data</span></span>
+          <h2>Where things stand today</h2>
+          <p>Counts come straight from the Development Tracker and the Promise Scorecard. <span id="liveUpdated"></span></p>
+        </div>
+        <a class="org-link" href="tracker.html">Open the tracker <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="live-stats">
+        <div class="live-stat"><b id="liveProjects">0</b><span>Projects tracked</span></div>
+        <div class="live-stat"><b id="liveCompleted">0</b><span>Projects completed</span></div>
+        <div class="live-stat"><b><span id="liveWards">0</span><small id="liveWardsOf"></small></b><span>Wards with a logged project</span></div>
+        <div class="live-stat"><b id="livePromises">0</b><span>Promises tracked</span></div>
       </div>
     </div>
   </section>
@@ -451,7 +475,9 @@
 </footer>
 
 <script src="js/vendor/leaflet.js"></script>
+<script src="js/api.js"></script>
 <script src="js/main.js"></script>
+<script src="js/vision-live.js"></script>
 <script src="js/ward-map.js"></script>
 </body>
 </html>

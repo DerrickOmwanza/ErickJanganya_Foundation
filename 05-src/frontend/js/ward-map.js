@@ -11,6 +11,7 @@
   var statusEl = frame.querySelector('.map-status');
   var chips = Array.prototype.slice.call(document.querySelectorAll('.ward-chip'));
   var hint = document.querySelector('.where-hint');
+  var detailEl = document.getElementById('wardDetail');
   if (!mapEl || !statusEl || !chips.length) return;
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -117,6 +118,18 @@
         select(null);
       });
     }
+    // Per-ward details (live project counts) from js/vision-live.js, shown under the chips.
+    function renderDetail() {
+      if (!detailEl) return;
+      if (!current) { detailEl.hidden = true; detailEl.innerHTML = ''; return; }
+      var token = current;
+      detailEl.hidden = false;
+      detailEl.innerHTML = '<p class="ward-detail-loading">Loading the record for ' + names[current] + '</p>';
+      if (!window.VisionLive) { detailEl.hidden = true; return; }
+      window.VisionLive.wardDetail(names[current]).then(function (html) {
+        if (token === current) detailEl.innerHTML = html;
+      });
+    }
     function select(slug) {
       if (slug === current) slug = null;
       if (current && layers[current]) {
@@ -138,6 +151,7 @@
         fly(allBounds, 24);
       }
       renderStatus();
+      renderDetail();
     }
 
     chips.forEach(function (chip) {

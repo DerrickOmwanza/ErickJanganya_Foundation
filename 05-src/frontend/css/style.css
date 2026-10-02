@@ -719,6 +719,53 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .where-fact--lead .where-hint[hidden]{display:none;}
 .where-hint i{color:var(--red);margin-right:6px;}
 
+/* Ward details under the chips (js/vision-live.js): live project counts for the selected ward. */
+.where-fact--lead .ward-detail{display:block;margin-top:22px;padding:20px 22px;border:1px solid var(--line);border-left:4px solid var(--red);font-size:15px;font-weight:500;color:var(--ink-black);}
+.where-fact--lead .ward-detail[hidden]{display:none;}
+.ward-detail p{margin:0;}
+.ward-detail-loading,.ward-detail-empty{font-size:15px;line-height:1.55;color:var(--ink-soft);}
+.ward-detail-sample,.live-sample{display:inline-block;padding:3px 8px;background:var(--yellow);color:#000;font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;}
+.ward-detail-count{font-size:16px;margin-bottom:12px!important;}
+.ward-detail-count strong{font-family:var(--font-display);font-size:34px;font-weight:700;line-height:1;margin-right:6px;vertical-align:-3px;}
+.ward-detail-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
+.ward-detail-chip{padding:4px 9px;border:1px solid var(--ink-black);font-size:12.5px;font-weight:700;text-transform:capitalize;}
+.ward-detail-chip--completed{background:var(--ink-black);color:#fff;}
+.ward-detail-list{list-style:none;margin:0 0 14px;padding:0;}
+.ward-detail-list li{padding:11px 0;border-top:1px solid var(--line);}
+.ward-detail-title{display:block;font-weight:700;font-size:15px;line-height:1.3;}
+.ward-detail-meta{display:block;font-size:13px;color:var(--ink-soft);margin:3px 0 7px;}
+.ward-detail-bar{display:block;height:5px;background:var(--line);}
+.ward-detail-bar i{display:block;height:100%;background:var(--red);}
+.ward-detail-more{font-size:13px;color:var(--ink-soft);margin-bottom:12px!important;}
+.ward-detail-link{display:inline-flex;align-items:center;gap:8px;margin-top:6px;font-weight:700;font-size:14.5px;color:var(--ink-black);text-decoration:underline;text-underline-offset:4px;transition:gap .2s ease,color .2s ease;}
+.ward-detail-link:hover{gap:12px;color:var(--red);}
+
+/* "Where things stand today" strip (js/vision-live.js): four live counts. Hidden unless real records exist. */
+.live-strip{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:72px 0 76px;}
+.live-strip[hidden]{display:none;}
+.live-strip-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px 40px;flex-wrap:wrap;margin-bottom:44px;}
+.live-strip-kicker{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:14px;}
+.live-strip-kicker .live-sample{margin:0 0 0 8px;}
+.live-dot{width:10px;height:10px;border-radius:50%;background:var(--red);animation:liveDot 1.8s ease-out infinite;}
+@keyframes liveDot{0%{box-shadow:0 0 0 0 rgba(206,34,39,.5);}100%{box-shadow:0 0 0 11px rgba(206,34,39,0);}}
+.live-strip-head h2{font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:clamp(34px,5vw,64px);line-height:.98;letter-spacing:-.01em;margin:0 0 12px;}
+.live-strip-head p{font-size:16.5px;color:var(--ink-soft);max-width:520px;margin:0;}
+.live-strip-head .org-link{flex:none;margin-bottom:6px;}
+.live-stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:3px solid var(--ink-black);}
+.live-stat{padding:30px 28px 8px 0;}
+.live-stat+.live-stat{padding-left:28px;border-left:1px solid var(--line);}
+.live-stat b{display:block;font-family:var(--font-display);font-weight:700;font-size:clamp(56px,7vw,104px);line-height:.95;letter-spacing:-.02em;color:var(--ink-black);}
+.live-stat b small{font-size:.38em;font-weight:600;color:var(--ink-soft);letter-spacing:0;margin-left:8px;}
+.live-stat>span{display:block;margin-top:12px;font-size:15px;font-weight:600;color:var(--ink-soft);}
+@media (prefers-reduced-motion: reduce){.live-dot{animation:none;}}
+@media (max-width:960px){
+  .live-strip{padding:56px 0 60px;}
+  .live-stats{grid-template-columns:repeat(2,1fr);}
+  .live-stat{padding:24px 16px 20px 0;border-bottom:1px solid var(--line);}
+  .live-stat+.live-stat{padding-left:0;border-left:0;}
+  .live-stat:nth-child(even){padding-left:20px;border-left:1px solid var(--line);}
+}
+
 /* Interactive ward map (js/ward-map.js): a Leaflet map filling .map-frame, with a status card on top and the
    same click-to-engage behaviour as the iframe it replaces. */
 .ward-map{position:absolute;inset:0;background:var(--bg-soft);font-family:inherit;}
