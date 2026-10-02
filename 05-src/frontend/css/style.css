@@ -577,6 +577,59 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .mega-header{font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:clamp(42px,7.4vw,92px);line-height:.94;letter-spacing:-.01em;color:var(--ink-black);margin:0 0 14px;}
 .mega-header-dek{font-size:17px;color:var(--ink-soft);max-width:640px;}
 
+/* Priorities (vision.html): dark band, priority selector on the left, photo + text + UN SDG box on the right.
+   Base (no JS, and below 960px) = four stacked cards with everything visible. With JS on a wide screen
+   (.is-live) the selector shows and only the chosen panel is displayed. */
+.priorities{background:#050505 radial-gradient(55% 80% at 10% 0%, rgba(0,100,240,.2) 0%, rgba(0,100,240,0) 70%);color:#fff;padding:96px 0 88px;}
+.priorities-head{max-width:760px;margin-bottom:56px;}
+.priorities-head h2{font-family:var(--font-display);font-weight:700;text-transform:uppercase;color:#fff;font-size:clamp(40px,6vw,76px);line-height:.96;letter-spacing:-.01em;margin:0 0 18px;}
+.priorities-head p{font-size:clamp(18px,1.5vw,21px);line-height:1.6;color:rgba(255,255,255,.8);max-width:660px;}
+.priorities-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:64px;align-items:start;}
+.priority-tabs{display:flex;flex-direction:column;border-top:1px solid rgba(255,255,255,.16);}
+.priority-tabs[hidden]{display:none;}
+.priority-tab{position:relative;display:grid;grid-template-columns:auto 1fr auto;align-items:center;column-gap:20px;width:100%;padding:28px 8px 28px 24px;border:0;border-bottom:1px solid rgba(255,255,255,.16);background:transparent;color:rgba(255,255,255,.45);font:inherit;text-align:left;cursor:pointer;transition:color .25s ease,background .25s ease;}
+.priority-tab::before{content:"";position:absolute;left:0;top:-1px;bottom:-1px;width:4px;background:var(--yellow);transform:scaleY(0);transform-origin:center;transition:transform .3s ease;}
+.priority-tab:hover,.priority-tab:focus-visible{color:#fff;}
+.priority-tab:focus-visible{outline:3px solid var(--yellow);outline-offset:-3px;}
+.priority-tab[aria-selected="true"]{color:#fff;background:rgba(255,255,255,.05);}
+.priority-tab[aria-selected="true"]::before{transform:scaleY(1);}
+.priority-tab-num{font-family:var(--font-display);font-weight:600;font-size:16px;letter-spacing:.08em;color:var(--yellow);}
+.priority-tab-name{font-family:var(--font-display);font-weight:600;font-size:clamp(24px,2.4vw,34px);line-height:1.1;letter-spacing:-.005em;}
+.priority-tab-sdg{font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 9px;border:1px solid currentColor;white-space:nowrap;}
+.priority-panels{display:grid;gap:56px;}
+.priority-panel{display:block;}
+.priority-media{aspect-ratio:16/10;overflow:hidden;background:#111;}
+.priority-media img{width:100%;height:100%;object-fit:cover;display:block;}
+.priority-body{padding-top:28px;}
+.priority-label{display:block;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);margin-bottom:12px;}
+.priority-panel h3{font-family:var(--font-display);font-weight:600;font-size:clamp(30px,3.2vw,44px);line-height:1.05;letter-spacing:-.01em;color:#fff;margin:0 0 16px;}
+.priority-body>p{font-size:clamp(18px,1.4vw,20px);font-weight:500;line-height:1.65;color:rgba(255,255,255,.88);max-width:620px;margin:0 0 28px;}
+.priority-goal{padding:22px 26px;border:1px solid rgba(255,255,255,.2);border-left:4px solid var(--yellow);max-width:620px;}
+.priority-goal-tag{display:block;font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);margin-bottom:8px;}
+.priority-goal strong{display:block;font-family:var(--font-display);font-weight:600;font-size:clamp(20px,1.8vw,24px);line-height:1.2;color:#fff;margin-bottom:8px;}
+.priority-goal p{font-size:15.5px;line-height:1.6;color:rgba(255,255,255,.75);margin:0;}
+.priorities-note{margin-top:56px;max-width:660px;font-size:13.5px;line-height:1.6;color:rgba(255,255,255,.55);}
+@keyframes priorityIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+@media (min-width:961px){
+  .priorities-grid.is-live .priority-panels{display:block;}
+  .priorities-grid.is-live .priority-panel[hidden]{display:none;}
+  .priorities-grid.is-live .priority-panel:not([hidden]){animation:priorityIn .4s ease;}
+}
+@media (prefers-reduced-motion: reduce){
+  .priority-tab,.priority-tab::before{transition:none;}
+  .priorities-grid.is-live .priority-panel:not([hidden]){animation:none;}
+}
+@media (max-width:960px){
+  .priorities{padding:72px 0 72px;}
+  .priorities-head{margin-bottom:40px;}
+  .priorities-grid{grid-template-columns:1fr;gap:0;}
+  .priority-tabs{display:none!important;}
+  .priority-panels{gap:48px;}
+  .priority-panel[hidden]{display:block!important;}
+  .priority-panels .priority-panel+.priority-panel{padding-top:48px;border-top:1px solid rgba(255,255,255,.16);}
+  .priorities-note{margin-top:44px;}
+}
+
 /* Where This Is (vision.html): the map large on the left, the facts on the right with the number of wards
    as the headline. The map is click to interact once JS is live (.is-live adds an overlay so a wheel scroll
    over it still scrolls the page); without JS the iframe is simply interactive. */

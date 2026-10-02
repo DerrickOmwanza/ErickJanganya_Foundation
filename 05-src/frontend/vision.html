@@ -174,87 +174,101 @@
     </div>
   </section>
 
-  <section class="section" id="priorities">
+  <!-- Priorities, framed against the UN Sustainable Development Goals. MERGED 2026-10-03 from two near
+       duplicate sections (Priorities, then Aligned with Global Standards, which restated the same four
+       topics): each priority now carries its own SDG alignment. Kept to the four agreed topics. Dark band
+       with a priority selector on the left and the photo, text and global-goal box on the right (main.js
+       initPriorityTabs). Below 960px, or without JS, all four show as stacked cards. The SDG mapping is a
+       legitimate, citable framing of local work against a public framework, NOT a claim of UN endorsement
+       or partnership, and the footnote says so. Photos are symbolic and reused from other pages (health,
+       graduation caps, night construction, workers); the SDG labels are plain text, not the UN's
+       trademarked icons. REVIEW WITH ERICK: the priority wording is pledge-style and needs his sign-off. -->
+  <section class="section priorities" id="priorities">
     <div class="container">
-      <div class="section-rule"></div>
-      <h2 class="mega-header reveal-up" style="font-size:clamp(34px,5.4vw,64px);">Priorities</h2>
-      <p class="mega-header-dek reveal-up">What guides the long-term plan, beyond any single term in office.</p>
-      <div class="feature-row-list">
-        <div class="feature-row reveal-up">
-          <div class="ph"><i class="fa-solid fa-image"></i><span>Priority photo — Healthcare</span></div>
-          <div>
-            <h3>Healthcare</h3>
-            <p>Every ward with reliable access to a functioning clinic — not just outreach camps, but permanent care residents can count on.</p>
-          </div>
+      <div class="priorities-head reveal-up">
+        <span class="verify-kicker">Long-term plan</span>
+        <h2>Priorities</h2>
+        <p>What guides the long-term plan, beyond any single term in office, framed against the same development goals the international community already tracks, because accountability shouldn't need translation.</p>
+      </div>
+      <div class="priorities-grid reveal-up">
+        <div class="priority-tabs" role="tablist" aria-label="Long-term priorities" aria-orientation="vertical" hidden>
+          <button class="priority-tab" type="button" role="tab" id="ptab-health" aria-controls="ppanel-health" aria-selected="true" tabindex="0">
+            <span class="priority-tab-num">01</span>
+            <span class="priority-tab-name">Healthcare</span>
+            <span class="priority-tab-sdg">SDG 3</span>
+          </button>
+          <button class="priority-tab" type="button" role="tab" id="ptab-education" aria-controls="ppanel-education" aria-selected="false" tabindex="-1">
+            <span class="priority-tab-num">02</span>
+            <span class="priority-tab-name">Education</span>
+            <span class="priority-tab-sdg">SDG 4</span>
+          </button>
+          <button class="priority-tab" type="button" role="tab" id="ptab-infrastructure" aria-controls="ppanel-infrastructure" aria-selected="false" tabindex="-1">
+            <span class="priority-tab-num">03</span>
+            <span class="priority-tab-name">Housing &amp; Infrastructure</span>
+            <span class="priority-tab-sdg">SDG 9 &amp; 11</span>
+          </button>
+          <button class="priority-tab" type="button" role="tab" id="ptab-youth" aria-controls="ppanel-youth" aria-selected="false" tabindex="-1">
+            <span class="priority-tab-num">04</span>
+            <span class="priority-tab-name">Youth &amp; Employment</span>
+            <span class="priority-tab-sdg">SDG 8</span>
+          </button>
         </div>
-        <div class="feature-row reveal-up">
-          <div class="ph"><i class="fa-solid fa-image"></i><span>Priority photo — Education</span></div>
-          <div>
-            <h3>Education</h3>
-            <p>Schools, bursaries, and digital literacy that give every child in Embakasi South a real shot, not just a nearby classroom.</p>
-          </div>
-        </div>
-        <div class="feature-row reveal-up">
-          <div class="ph"><i class="fa-solid fa-image"></i><span>Priority photo — Housing &amp; Infrastructure</span></div>
-          <div>
-            <h3>Housing &amp; Infrastructure</h3>
-            <p>Upgraded settlements, roads that hold up through a rainy season, and drainage that doesn't flood the same streets every year.</p>
-          </div>
-        </div>
-        <div class="feature-row reveal-up">
-          <div class="ph"><i class="fa-solid fa-image"></i><span>Priority photo — Youth &amp; Employment</span></div>
-          <div>
-            <h3>Youth &amp; Employment</h3>
-            <p>Jobs and enterprise support that don't require leaving the constituency to find real opportunity.</p>
-          </div>
+        <div class="priority-panels">
+          <article class="priority-panel" role="tabpanel" id="ppanel-health" aria-labelledby="ptab-health">
+            <div class="priority-media"><img src="img/focus-health.jpg" alt="A health app open on a phone beside the word Health, symbolising access to care" loading="lazy" style="object-position:88% 50%;"></div>
+            <div class="priority-body">
+              <span class="priority-label">Priority 01</span>
+              <h3>Healthcare</h3>
+              <p>Every ward with reliable access to a functioning clinic: not just outreach camps, but permanent care residents can count on.</p>
+              <div class="priority-goal">
+                <span class="priority-goal-tag">UN SDG 3</span>
+                <strong>Good Health and Well-Being</strong>
+                <p>Embakasi South's healthcare priority, permanent clinics rather than outreach camps alone, sits inside this same global goal.</p>
+              </div>
+            </div>
+          </article>
+          <article class="priority-panel" role="tabpanel" id="ppanel-education" aria-labelledby="ptab-education">
+            <div class="priority-media"><img src="img/vision-education-youth.jpg" alt="Graduates raising their caps, symbolising education and youth opportunity" loading="lazy" style="object-position:50% 50%;"></div>
+            <div class="priority-body">
+              <span class="priority-label">Priority 02</span>
+              <h3>Education</h3>
+              <p>Schools, bursaries, and digital literacy that give every child in Embakasi South a real shot, not just a nearby classroom.</p>
+              <div class="priority-goal">
+                <span class="priority-goal-tag">UN SDG 4</span>
+                <strong>Quality Education</strong>
+                <p>Schools, bursaries, and digital literacy for every child here map directly onto this target.</p>
+              </div>
+            </div>
+          </article>
+          <article class="priority-panel" role="tabpanel" id="ppanel-infrastructure" aria-labelledby="ptab-infrastructure">
+            <div class="priority-media"><img src="img/focus-infrastructure.jpg" alt="A construction site at night with tower cranes and rising buildings, symbolising infrastructure" loading="lazy" style="object-position:50% 55%;"></div>
+            <div class="priority-body">
+              <span class="priority-label">Priority 03</span>
+              <h3>Housing &amp; Infrastructure</h3>
+              <p>Upgraded settlements, roads that hold up through a rainy season, and drainage that doesn't flood the same streets every year.</p>
+              <div class="priority-goal">
+                <span class="priority-goal-tag">UN SDG 9 &amp; 11</span>
+                <strong>Infrastructure &amp; Sustainable Communities</strong>
+                <p>Roads, drainage, and upgraded settlements: the same standard the UN sets for cities worldwide, applied ward by ward.</p>
+              </div>
+            </div>
+          </article>
+          <article class="priority-panel" role="tabpanel" id="ppanel-youth" aria-labelledby="ptab-youth">
+            <div class="priority-media"><img src="img/focus-youth.jpg" alt="Construction workers in hard hats and high visibility vests assembling reinforcement steel, symbolising jobs and skills" loading="lazy" style="object-position:50% 40%;"></div>
+            <div class="priority-body">
+              <span class="priority-label">Priority 04</span>
+              <h3>Youth &amp; Employment</h3>
+              <p>Jobs and enterprise support that don't require leaving the constituency to find real opportunity.</p>
+              <div class="priority-goal">
+                <span class="priority-goal-tag">UN SDG 8</span>
+                <strong>Decent Work and Economic Growth</strong>
+                <p>Jobs and enterprise support that keep opportunity inside the constituency, not just passing through it.</p>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Aligned with Global Standards — maps the same four priorities onto their UN Sustainable
-       Development Goals. This is a legitimate, citable framework (anyone can map local work onto the
-       SDGs), not a claim of UN endorsement or partnership — worth being precise about if this copy
-       is ever questioned. -->
-  <section class="section-tight" style="background:#fff;border-top:1px solid var(--line);">
-    <div class="container">
-      <div class="section-rule"></div>
-      <h2 class="mega-header reveal-up" style="font-size:clamp(34px,5.4vw,64px);">Aligned with Global Standards</h2>
-      <p class="mega-header-dek reveal-up">Local priorities, framed against the same development goals the international community already tracks — because accountability shouldn't need translation.</p>
-      <div class="feature-row-list">
-        <div class="feature-row reveal-up">
-          <div class="ph"><i class="fa-solid fa-image"></i><span>Photo — a clinic visit</span></div>
-          <div>
-            <span class="eyebrow">UN SDG 3</span>
-            <h3>Good Health and Well-Being</h3>
-            <p>Embakasi South's healthcare priority — permanent clinics, not just outreach camps — sits inside this same global goal.</p>
-          </div>
-        </div>
-        <div class="feature-row reveal-up">
-          <div class="ph"><i class="fa-solid fa-image"></i><span>Photo — a classroom</span></div>
-          <div>
-            <span class="eyebrow">UN SDG 4</span>
-            <h3>Quality Education</h3>
-            <p>Schools, bursaries, and digital literacy for every child here map directly onto this target.</p>
-          </div>
-        </div>
-        <div class="feature-row reveal-up">
-          <div class="ph"><i class="fa-solid fa-image"></i><span>Photo — a ward road or settlement</span></div>
-          <div>
-            <span class="eyebrow">UN SDG 9 &amp; 11</span>
-            <h3>Infrastructure &amp; Sustainable Communities</h3>
-            <p>Roads, drainage, and upgraded settlements — the same standard the UN sets for cities worldwide, applied ward by ward.</p>
-          </div>
-        </div>
-        <div class="feature-row reveal-up">
-          <div class="ph"><i class="fa-solid fa-image"></i><span>Photo — a youth enterprise or training session</span></div>
-          <div>
-            <span class="eyebrow">UN SDG 8</span>
-            <h3>Decent Work and Economic Growth</h3>
-            <p>Jobs and enterprise support that keep opportunity inside the constituency, not just passing through it.</p>
-          </div>
-        </div>
-      </div>
+      <p class="priorities-note">The Sustainable Development Goals mapping is our own framing of local priorities against a public framework. It does not imply endorsement by, or partnership with, the United Nations.</p>
     </div>
   </section>
 

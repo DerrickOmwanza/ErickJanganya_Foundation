@@ -387,6 +387,44 @@ function initVerifySteps() {
   });
 }
 
+// Vision's Priorities selector: a vertical tab list (click, hover on pointer devices, arrow keys) that shows
+// one priority panel at a time. Without JS, or on narrow screens (CSS hides the list there), every panel is
+// simply visible as a stacked card.
+function initPriorityTabs() {
+  document.querySelectorAll('.priorities-grid').forEach(function (wrap) {
+    var list = wrap.querySelector('[role="tablist"]');
+    var tabs = Array.prototype.slice.call(wrap.querySelectorAll('[role="tab"]'));
+    var panels = Array.prototype.slice.call(wrap.querySelectorAll('[role="tabpanel"]'));
+    if (!list || tabs.length !== panels.length) return;
+    var canHover = window.matchMedia('(hover: hover)').matches;
+
+    function select(i, focus) {
+      tabs.forEach(function (t, j) {
+        var on = j === i;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        panels[j].hidden = !on;
+      });
+      if (focus) tabs[i].focus();
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { select(i); });
+      if (canHover) t.addEventListener('mouseenter', function () { select(i); });
+      t.addEventListener('keydown', function (e) {
+        var next = null;
+        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') next = (i + 1) % tabs.length;
+        else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') next = (i - 1 + tabs.length) % tabs.length;
+        else if (e.key === 'Home') next = 0;
+        else if (e.key === 'End') next = tabs.length - 1;
+        if (next !== null) { e.preventDefault(); select(next, true); }
+      });
+    });
+    list.hidden = false;
+    wrap.classList.add('is-live');
+    select(0);
+  });
+}
+
 // Embedded maps: an iframe under the pointer swallows the mouse wheel, trapping the page scroll. Once JS is
 // live the map is inert until clicked (the overlay lets the wheel scroll the page), becomes interactive on
 // click, and goes inert again when the pointer leaves or the user presses Escape.
@@ -452,4 +490,5 @@ document.addEventListener('DOMContentLoaded', function () {
   initPrinciplePanels();
   initVerifySteps();
   initMapFrames();
+  initPriorityTabs();
 });
