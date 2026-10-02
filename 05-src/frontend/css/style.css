@@ -586,7 +586,7 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .map-frame:hover iframe,.map-frame.is-active iframe{filter:none;}
 .map-frame.is-live iframe{pointer-events:none;}
 .map-frame.is-live.is-active iframe{pointer-events:auto;}
-.map-frame-hint{position:absolute;left:16px;bottom:16px;display:inline-flex;align-items:center;gap:9px;padding:10px 16px;background:#000;color:#fff;border:0;font:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:opacity .25s ease;}
+.map-frame-hint{position:absolute;z-index:800;left:16px;bottom:16px;display:inline-flex;align-items:center;gap:9px;padding:10px 16px;background:#000;color:#fff;border:0;font:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:opacity .25s ease;}
 .map-frame-hint[hidden]{display:none;}
 .map-frame.is-active .map-frame-hint{opacity:0;pointer-events:none;}
 .where-caption{font-size:14px;line-height:1.6;color:var(--ink-soft);margin-top:14px;}
@@ -600,10 +600,41 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .where-fact--lead dd{display:flex;align-items:flex-start;gap:24px;}
 .where-count{flex:none;font-family:var(--font-display);font-weight:700;font-size:clamp(84px,9vw,128px);line-height:.85;color:var(--ink-black);}
 .where-wards{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;padding-top:6px;}
-.where-wards li{padding:8px 14px;border:1px solid var(--ink-black);font-size:15px;font-weight:600;line-height:1.2;}
+.ward-chip{padding:8px 14px;border:1px solid var(--ink-black);background:#fff;color:var(--ink-black);font:inherit;font-size:15px;font-weight:600;line-height:1.2;cursor:default;transition:background .2s ease,color .2s ease,border-color .2s ease;}
+.ward-chip.is-live{cursor:pointer;}
+.ward-chip.is-live:hover,.ward-chip.is-live:focus-visible,.ward-chip.is-hover{border-color:var(--red);color:var(--red);}
+.ward-chip.is-active,.ward-chip.is-active:hover{background:var(--ink-black);border-color:var(--ink-black);color:#fff;}
+.ward-chip:focus-visible{outline:3px solid var(--yellow);outline-offset:2px;}
+.where-fact--lead .where-hint{display:block;margin-top:16px;font-size:14px;font-weight:500;line-height:1.5;color:var(--ink-soft);}
+.where-fact--lead .where-hint[hidden]{display:none;}
+.where-hint i{color:var(--red);margin-right:6px;}
+
+/* Interactive ward map (js/ward-map.js): a Leaflet map filling .map-frame, with a status card on top and the
+   same click-to-engage behaviour as the iframe it replaces. */
+.ward-map{position:absolute;inset:0;background:var(--bg-soft);font-family:inherit;}
+.ward-map[hidden]{display:none;}
+.ward-map .leaflet-tile-pane{filter:grayscale(.55) contrast(1.04);transition:filter .3s ease;}
+.map-frame:hover .ward-map .leaflet-tile-pane,.map-frame.is-active .ward-map .leaflet-tile-pane{filter:none;}
+.ward-map .leaflet-container{font-family:inherit;}
+.ward-map .leaflet-bar{border:1px solid var(--line);box-shadow:none;border-radius:0;}
+.ward-map .leaflet-bar a{border-radius:0;color:var(--ink-black);}
+.ward-map .leaflet-control-attribution{font-size:11px;}
+.map-status{position:absolute;top:16px;left:16px;z-index:800;max-width:calc(100% - 96px);display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:11px 16px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--red);font-size:14.5px;color:var(--ink-black);}
+.map-status[hidden]{display:none;}
+.map-status-text{display:flex;flex-direction:column;gap:2px;line-height:1.3;font-weight:600;}
+.map-status-meta{font-size:13px;font-weight:500;color:var(--ink-soft);}
+.map-status-reset{padding:7px 12px;border:1px solid var(--ink-black);background:#fff;color:var(--ink-black);font:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:background .2s ease,color .2s ease;}
+.map-status-reset:hover,.map-status-reset:focus-visible{background:var(--ink-black);color:#fff;}
+.leaflet-tooltip.ward-tip{background:#000;color:#fff;border:0;border-radius:0;box-shadow:none;font-size:13px;font-weight:700;padding:5px 10px;}
+.leaflet-tooltip.ward-tip::before{display:none;}
+.leaflet-tooltip.ward-label{background:transparent;border:0;box-shadow:none;color:#000;font-family:var(--font-display);font-weight:700;font-size:18px;letter-spacing:.04em;text-transform:uppercase;text-shadow:0 0 4px #fff,0 0 4px #fff,0 0 8px #fff;padding:0;}
+.leaflet-tooltip.ward-label::before{display:none;}
 @media (max-width:960px){
   .where-grid{grid-template-columns:1fr;gap:40px;}
   .map-frame{height:380px;}
+  .map-status{top:10px;left:10px;max-width:calc(100% - 70px);padding:8px 12px;gap:8px 12px;font-size:13.5px;}
+  .map-status-meta{font-size:12px;}
+  .map-status-reset{padding:5px 10px;font-size:12px;}
 }
 
 /* Foundation Stories (foundation.html): editorial layout, one large lead story beside two smaller ones

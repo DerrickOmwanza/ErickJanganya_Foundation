@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="css/vendor/leaflet.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
@@ -122,7 +123,11 @@
        right with the five wards as the headline number. The coordinates are an approximate area centred
        on Embakasi South's wards, not a claimed precise boundary, and the caption says so. The map is
        click to interact (main.js initMapFrames) so scrolling the page never gets trapped inside it; with
-       no JS it stays fully interactive. -->
+       no JS it stays fully interactive.
+       Ward zoom (js/ward-map.js, added 2026-10-03): when Leaflet and data/embakasi-south-wards.geojson
+       load, the iframe is swapped for a Leaflet map with the five real ward boundaries (OpenStreetMap
+       administrative relations, level 8). Selecting a ward chip, or the ward on the map, zooms to it and
+       outlines it. If anything fails to load, the plain OpenStreetMap iframe stays as the fallback. -->
   <section class="section">
     <div class="container">
       <div class="section-rule"></div>
@@ -130,14 +135,16 @@
       <p class="mega-header-dek reveal-up">A quick orientation for anyone reading from outside Embakasi South.</p>
       <div class="where-grid">
         <div class="where-map reveal-up">
-          <div class="map-frame">
+          <div class="map-frame" data-lenis-prevent>
+            <div class="ward-map" id="wardMap" hidden></div>
+            <div class="map-status" aria-live="polite" hidden></div>
             <iframe
               src="https://www.openstreetmap.org/export/embed.html?bbox=36.835%2C-1.39%2C36.955%2C-1.29&amp;layer=mapnik&amp;marker=-1.34%2C36.895"
               loading="lazy"
               title="Map showing the approximate area of Embakasi South constituency, Nairobi, Kenya"></iframe>
             <button class="map-frame-hint" type="button" hidden><i class="fa-solid fa-hand-pointer"></i> Click to explore the map</button>
           </div>
-          <p class="where-caption">Approximate area of Embakasi South constituency, Nairobi County, Kenya. <a href="https://www.openstreetmap.org/?mlat=-1.34&amp;mlon=36.895#map=12/-1.34/36.895" target="_blank" rel="noopener">View larger map <i class="fa-solid fa-arrow-up-right-from-square"></i></a></p>
+          <p class="where-caption">Embakasi South constituency, Nairobi County, Kenya. Ward boundaries are from OpenStreetMap contributors and may differ slightly from the official IEBC boundaries. <a href="https://www.openstreetmap.org/?mlat=-1.34&amp;mlon=36.895#map=12/-1.34/36.895" target="_blank" rel="noopener">View larger map <i class="fa-solid fa-arrow-up-right-from-square"></i></a></p>
         </div>
         <dl class="where-facts reveal-up">
           <div class="where-fact where-fact--lead">
@@ -145,13 +152,14 @@
             <dd>
               <span class="where-count">5</span>
               <ul class="where-wards">
-                <li>Imara Daima</li>
-                <li>Kwa Njenga</li>
-                <li>Kwa Reuben</li>
-                <li>Pipeline</li>
-                <li>Kware</li>
+                <li><button type="button" class="ward-chip" data-ward="imara-daima" aria-pressed="false">Imara Daima</button></li>
+                <li><button type="button" class="ward-chip" data-ward="kwa-njenga" aria-pressed="false">Kwa Njenga</button></li>
+                <li><button type="button" class="ward-chip" data-ward="kwa-reuben" aria-pressed="false">Kwa Reuben</button></li>
+                <li><button type="button" class="ward-chip" data-ward="pipeline" aria-pressed="false">Pipeline</button></li>
+                <li><button type="button" class="ward-chip" data-ward="kware" aria-pressed="false">Kware</button></li>
               </ul>
             </dd>
+            <dd class="where-hint" hidden><i class="fa-solid fa-location-crosshairs"></i> Select a ward to zoom the map to its boundary.</dd>
           </div>
           <div class="where-fact">
             <dt>Where</dt>
@@ -391,6 +399,8 @@
   </div>
 </footer>
 
+<script src="js/vendor/leaflet.js"></script>
 <script src="js/main.js"></script>
+<script src="js/ward-map.js"></script>
 </body>
 </html>
