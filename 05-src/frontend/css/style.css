@@ -509,9 +509,6 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .insider-field input{width:100%;border:none;border-bottom:2px solid var(--ink-black);background:transparent;padding:8px 2px;font-size:16.5px;color:var(--ink-black);font-family:var(--font-b);border-radius:0;}
 .insider-field input:focus{outline:none;border-bottom-color:var(--blue);}
 .insider-field input::placeholder{color:var(--ink-mute);}
-.insider-disclaimer{font-size:13px;line-height:1.6;color:var(--ink-mute);margin-bottom:28px;}
-.insider-disclaimer a{color:var(--ink-black);text-decoration:underline;text-underline-offset:2px;}
-.insider-disclaimer a:hover{color:var(--blue);}
 .insider-consent-row{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
 .insider-checkbox{display:flex;align-items:center;gap:10px;font-size:14.5px;color:var(--ink-black);cursor:pointer;}
 .insider-checkbox input{width:18px;height:18px;flex-shrink:0;accent-color:var(--blue);cursor:pointer;}
@@ -531,9 +528,6 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .insider-section--purple .insider-checkbox input{accent-color:#fff;}
 .insider-section--purple .insider-checkbox a{color:#fff;}
 .insider-section--purple .insider-checkbox a:hover{color:var(--purple-light);}
-.insider-section--purple .insider-disclaimer{color:rgba(255,255,255,.78);}
-.insider-section--purple .insider-disclaimer a{color:#fff;}
-.insider-section--purple .insider-disclaimer a:hover{color:var(--purple-light);}
 .insider-section--purple .form-note--success{color:#7ff0b0;}
 .insider-section--purple .form-note--error{color:#ffc2c2;}
 .insider-checkbox a:hover{color:var(--blue);}
