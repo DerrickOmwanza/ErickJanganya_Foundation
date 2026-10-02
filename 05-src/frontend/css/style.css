@@ -578,6 +578,36 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .mega-header{font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:clamp(42px,7.4vw,92px);line-height:.94;letter-spacing:-.01em;color:var(--ink-black);margin:0 0 14px;}
 .mega-header-dek{font-size:17px;color:var(--ink-soft);max-width:640px;}
 
+/* Principle panels (foundation.html). Base = a plain stack of full photo tiles with the text visible (no
+   JS, and below 960px). With JS on a wide screen (.is-live) they become an accordion strip: the .is-open
+   panel widens to show its text, the others fold down to a vertical label. */
+.principle-panels{display:grid;gap:16px;margin-top:40px;}
+.principle-panel{position:relative;display:block;min-height:440px;overflow:hidden;color:#fff;background:#111;}
+.principle-panel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.22,.7,.3,1);}
+.principle-panel::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.9) 0%,rgba(0,0,0,.55) 40%,rgba(0,0,0,.08) 75%);pointer-events:none;}
+.principle-panel:focus-visible{outline:3px solid var(--yellow);outline-offset:3px;}
+.principle-panel-num{position:absolute;top:22px;left:24px;z-index:2;font-family:var(--font-display);font-weight:600;font-size:18px;letter-spacing:.08em;color:var(--yellow);}
+.principle-panel-label{display:none;}
+.principle-panel-body{position:absolute;left:0;bottom:0;z-index:2;width:100%;padding:32px 28px 30px;}
+.principle-panel h3{font-family:var(--font-display);font-weight:600;font-size:clamp(28px,3vw,40px);line-height:1.05;letter-spacing:-.01em;color:#fff;margin:0 0 12px;}
+.principle-panel p{font-size:17px;font-weight:500;line-height:1.6;color:rgba(255,255,255,.9);max-width:480px;margin:0 0 20px;}
+.principle-panel-link{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:14.5px;padding-bottom:3px;border-bottom:2px solid var(--yellow);transition:gap .2s ease;}
+.principle-panel:hover .principle-panel-link{gap:15px;}
+@media (min-width:961px){
+  .principle-panels{grid-template-columns:repeat(2,1fr);}
+  .principle-panels.is-live{display:flex;gap:10px;height:600px;}
+  .principle-panels.is-live .principle-panel{flex:1 1 0;min-height:0;transition:flex-grow .7s cubic-bezier(.22,.7,.3,1);}
+  .principle-panels.is-live .principle-panel.is-open{flex-grow:3.6;}
+  .principle-panels.is-live .principle-panel.is-open img{transform:scale(1.04);}
+  .principle-panels.is-live .principle-panel-body{width:560px;max-width:none;padding:40px 40px 38px;opacity:0;transform:translateY(18px);pointer-events:none;transition:opacity .3s ease,transform .3s ease;}
+  .principle-panels.is-live .principle-panel.is-open .principle-panel-body{opacity:1;transform:none;pointer-events:auto;transition:opacity .5s ease .25s,transform .5s ease .25s;}
+  .principle-panels.is-live .principle-panel-label{display:block;position:absolute;z-index:2;left:50%;bottom:28px;writing-mode:vertical-rl;transform:translateX(-50%) rotate(180deg);font-family:var(--font-display);font-weight:600;font-size:26px;letter-spacing:.02em;white-space:nowrap;color:#fff;transition:opacity .3s ease;}
+  .principle-panels.is-live .principle-panel.is-open .principle-panel-label{opacity:0;}
+}
+@media (prefers-reduced-motion: reduce){
+  .principle-panel,.principle-panel img,.principle-panel-body{transition:none!important;}
+}
+
 /* Platform tiles (foundation.html): two photo-led tiles, text laid over the image on a dark gradient,
    the whole tile is the link. Sharp corners like every other photo on the site. */
 .platform-tiles{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:8px;}

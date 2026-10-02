@@ -198,45 +198,59 @@
     </div>
   </section>
 
-  <!-- Core Principles — Obama's "Global Leadership Programs" photo-left/text-right row pattern. -->
+  <!-- Core Principles. Rebuilt 2026-10-02 from four photo-left/text-right rows (a pattern already used
+       elsewhere on this page) into an expanding-panel strip: four tall photo panels side by side, the one
+       under the pointer (or keyboard focus) opens to show its text, the rest fold down to a vertical
+       label. Photos are symbolic stock, mapped by the user: magnifying glass = Integrity, wind turbines
+       = Sustainable Development, desk of forms and calculator = Accountability, rain-covered glasses =
+       Transparency. Needs main.js initPrinciplePanels; without JS, and below 960px, every panel is
+       simply a full tile with its text visible. -->
   <section class="section">
     <div class="container">
       <div class="section-rule"></div>
       <h2 class="mega-header reveal-up" style="font-size:clamp(34px,5.4vw,64px);">Core Principles</h2>
       <p class="mega-header-dek reveal-up">Four things every project on this site has to answer to before it's marked verified.</p>
-      <div class="feature-row-list">
-        <div class="feature-row reveal-up">
-          <div class="ph"><i class="fa-solid fa-image"></i><span>Principle photo — Accountability</span></div>
-          <div>
+      <div class="principle-panels reveal-up">
+        <a class="principle-panel is-open" href="tracker.html">
+          <img src="img/principle-accountability.jpg" alt="A desk with a calendar, calculator, magnifying glass and paperwork, symbolising accountability" style="object-position:58% center;">
+          <span class="principle-panel-num">01</span>
+          <span class="principle-panel-label" aria-hidden="true">Accountability</span>
+          <div class="principle-panel-body">
             <h3>Accountability</h3>
-            <p>Every claim traces back to a project record anyone can check — nothing stands on reputation alone.</p>
-            <a class="field-item-link" href="tracker.html">See it on the tracker <i class="fa-solid fa-arrow-right"></i></a>
+            <p>Every claim traces back to a project record anyone can check. Nothing stands on reputation alone.</p>
+            <span class="principle-panel-link">See it on the tracker <i class="fa-solid fa-arrow-right"></i></span>
           </div>
-        </div>
-        <div class="feature-row reveal-up">
-          <div class="ph"><i class="fa-solid fa-image"></i><span>Principle photo — Transparency</span></div>
-          <div>
+        </a>
+        <a class="principle-panel" href="tracker.html">
+          <img src="img/principle-transparency.jpg" alt="Round glasses covered in water droplets, symbolising transparency" style="object-position:60% center;">
+          <span class="principle-panel-num">02</span>
+          <span class="principle-panel-label" aria-hidden="true">Transparency</span>
+          <div class="principle-panel-body">
             <h3>Transparency</h3>
-            <p>Budgets, funding sources, and progress are published as work happens, not summarised after the fact.</p>
-            <a class="field-item-link" href="tracker.html">See funding sources <i class="fa-solid fa-arrow-right"></i></a>
+            <p>Budgets, funding sources and progress are published as work happens, not summarised after the fact.</p>
+            <span class="principle-panel-link">See funding sources <i class="fa-solid fa-arrow-right"></i></span>
           </div>
-        </div>
-        <div class="feature-row reveal-up">
-          <div class="ph"><i class="fa-solid fa-image"></i><span>Principle photo — Sustainable Development</span></div>
-          <div>
+        </a>
+        <a class="principle-panel" href="vision.html">
+          <img src="img/principle-sustainable.jpg" alt="Wind turbines across a green field, symbolising development built to last" style="object-position:78% center;">
+          <span class="principle-panel-num">03</span>
+          <span class="principle-panel-label" aria-hidden="true">Sustainable Development</span>
+          <div class="principle-panel-body">
             <h3>Sustainable Development</h3>
-            <p>Projects are chosen to outlast a single term — built to serve Embakasi South well beyond one election cycle.</p>
-            <a class="field-item-link" href="vision.html">Read the vision <i class="fa-solid fa-arrow-right"></i></a>
+            <p>Projects are chosen to outlast a single term, built to serve Embakasi South well beyond one election cycle.</p>
+            <span class="principle-panel-link">Read the vision <i class="fa-solid fa-arrow-right"></i></span>
           </div>
-        </div>
-        <div class="feature-row reveal-up">
-          <div class="ph"><i class="fa-solid fa-image"></i><span>Principle photo — Integrity</span></div>
-          <div>
+        </a>
+        <a class="principle-panel" href="about.html">
+          <img src="img/principle-integrity.jpg" alt="A magnifying glass held up to a landscape, symbolising scrutiny and integrity" style="object-position:50% center;">
+          <span class="principle-panel-num">04</span>
+          <span class="principle-panel-label" aria-hidden="true">Integrity</span>
+          <div class="principle-panel-body">
             <h3>Integrity</h3>
-            <p>Credit is only claimed for work the foundation actually delivered — never overstated, never borrowed.</p>
-            <a class="field-item-link" href="about.html">Read Erick's story <i class="fa-solid fa-arrow-right"></i></a>
+            <p>Credit is only claimed for work the foundation actually delivered. Never overstated, never borrowed.</p>
+            <span class="principle-panel-link">Read Erick's story <i class="fa-solid fa-arrow-right"></i></span>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </section>

@@ -295,6 +295,20 @@ function initStoryScroll() {
   });
 }
 
+// Foundation's "Core Principles" accordion strip: the panel under the pointer (or keyboard focus)
+// becomes .is-open; the last one opened stays open when the pointer leaves, so one is always showing.
+function initPrinciplePanels() {
+  document.querySelectorAll('.principle-panels').forEach(function (wrap) {
+    var panels = wrap.querySelectorAll('.principle-panel');
+    function open(p) { panels.forEach(function (x) { x.classList.toggle('is-open', x === p); }); }
+    panels.forEach(function (p) {
+      p.addEventListener('mouseenter', function () { open(p); });
+      p.addEventListener('focus', function () { open(p); });
+    });
+    wrap.classList.add('is-live');
+  });
+}
+
 // Site-wide smooth, inertial page scrolling via Lenis (loaded on demand so no page needs its own
 // <script> tag). Wheel events over a nested scroller (the homepage tracker list) stay with that
 // scroller while it can still move in the wheel's direction, and pass to the page the moment it hits
@@ -341,4 +355,5 @@ document.addEventListener('DOMContentLoaded', function () {
   initMediaCarousel();
   initJourneyRail();
   initStoryScroll();
+  initPrinciplePanels();
 });
