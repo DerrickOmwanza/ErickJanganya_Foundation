@@ -517,9 +517,9 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .insider-checkbox input{width:18px;height:18px;flex-shrink:0;accent-color:var(--blue);cursor:pointer;}
 .insider-checkbox a{color:var(--ink-black);text-decoration:underline;text-underline-offset:2px;}
 
-/* Purple variant — homepage's "Stay updated" only (foundation.html keeps the plain off-white
-   version above); a full-bleed colored band like .cta-band, so the same top-of-section black
-   .section-rule divider isn't used here — the color block itself provides the separation. */
+/* Purple variant — used on the homepage and foundation.html "Stay updated" so the signup looks the same
+   everywhere; a full-bleed colored band like .cta-band, so the black .section-rule divider isn't used
+   here — the color block itself provides the separation. */
 .insider-section--purple{background:var(--purple);color:#fff;}
 .insider-section--purple .insider-copy h2{color:#fff;}
 .insider-section--purple .insider-copy p{color:rgba(255,255,255,.88);}
@@ -531,6 +531,11 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .insider-section--purple .insider-checkbox input{accent-color:#fff;}
 .insider-section--purple .insider-checkbox a{color:#fff;}
 .insider-section--purple .insider-checkbox a:hover{color:var(--purple-light);}
+.insider-section--purple .insider-disclaimer{color:rgba(255,255,255,.78);}
+.insider-section--purple .insider-disclaimer a{color:#fff;}
+.insider-section--purple .insider-disclaimer a:hover{color:var(--purple-light);}
+.insider-section--purple .form-note--success{color:#7ff0b0;}
+.insider-section--purple .form-note--error{color:#ffc2c2;}
 .insider-checkbox a:hover{color:var(--blue);}
 .insider-submit{border-color:var(--ink-black);flex-shrink:0;}
 .insider-submit:hover{border-color:var(--blue);color:var(--blue);}
