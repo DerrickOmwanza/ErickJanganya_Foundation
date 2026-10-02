@@ -578,6 +578,48 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .mega-header{font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:clamp(42px,7.4vw,92px);line-height:.94;letter-spacing:-.01em;color:var(--ink-black);margin:0 0 14px;}
 .mega-header-dek{font-size:17px;color:var(--ink-soft);max-width:640px;}
 
+/* Structure & Leadership (foundation.html): tiered org chart. .org-tier is the labelled rule above each
+   tier; .person-card is one slot (photo, name, role, one line). Pending slots show a "photo coming soon"
+   box and bracketed text; a filled slot just swaps in an <img> and real text (no other CSS change). */
+.org-tier{display:flex;align-items:center;gap:18px;margin:68px 0 30px;}
+.org-tier:first-of-type{margin-top:56px;}
+.org-tier span{flex:none;font-size:14px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-black);}
+.org-tier::after{content:"";order:1;flex:1;height:1px;background:var(--line);}
+.org-tier em{order:2;flex:none;font-style:normal;font-size:14px;color:var(--ink-soft);}
+.org-founder{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:72px;align-items:center;}
+.org-founder-photo{aspect-ratio:4/5;max-width:420px;width:100%;overflow:hidden;background:#0a0a0a;}
+.org-founder-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
+.org-founder-role{display:inline-block;font-size:14px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--red);padding-bottom:12px;margin-bottom:18px;border-bottom:3px solid var(--red);}
+.org-founder h3{font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:clamp(44px,6vw,84px);line-height:.96;letter-spacing:-.01em;margin:0 0 22px;}
+.org-founder p{font-size:clamp(18px,1.5vw,21px);font-weight:500;line-height:1.65;color:var(--ink-soft);max-width:560px;margin:0 0 26px;}
+.org-link{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:15px;color:var(--ink-black);text-decoration:underline;text-underline-offset:4px;transition:gap .2s ease,color .2s ease;}
+.org-link:hover{gap:14px;color:var(--red);}
+.org-grid{display:grid;gap:36px 28px;}
+.org-grid--3{grid-template-columns:repeat(4,1fr);}
+.org-grid--4{grid-template-columns:repeat(4,1fr);}
+.org-grid--5{grid-template-columns:repeat(5,1fr);gap:36px 22px;}
+.person-card-photo{aspect-ratio:4/5;overflow:hidden;margin-bottom:18px;background:var(--bg-soft);}
+.org-grid--5 .person-card-photo{aspect-ratio:1/1;}
+.person-card-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
+.person-card-photo .ph{height:100%;width:100%;border-radius:0;border:1px solid var(--line);background:linear-gradient(160deg,#f3f1ea,#e7e3d7);color:var(--ink-soft);}
+.person-card-photo .ph i{font-size:44px;opacity:.35;}
+.person-card-kicker{display:block;font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:6px;}
+.person-card-name{font-family:var(--font-display);font-weight:600;font-size:clamp(22px,2vw,28px);line-height:1.1;margin:0 0 6px;}
+.person-card-role{font-size:15px;font-weight:700;color:var(--ink-black);margin:0 0 8px;}
+.person-card-desc{font-size:15px;line-height:1.55;color:var(--ink-soft);margin:0;}
+.person-card--pending .person-card-name,.person-card--pending .person-card-role{color:var(--ink-soft);}
+.org-legal{margin-top:72px;padding:26px 30px;background:var(--bg-soft);border-left:4px solid var(--red);max-width:760px;}
+.org-legal-label{display:block;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
+.org-legal p{font-size:16px;line-height:1.7;color:var(--ink-soft);margin:0;}
+@media (max-width:960px){
+  .org-founder{grid-template-columns:1fr;gap:36px;}
+  .org-founder-photo{max-width:380px;}
+  .org-grid--3,.org-grid--4,.org-grid--5{grid-template-columns:repeat(2,1fr);gap:32px 18px;}
+  .org-tier{flex-wrap:wrap;gap:6px 18px;margin-top:56px;}
+  .org-tier::after{order:0;flex-basis:100%;height:0;display:none;}
+  .org-tier em{order:1;}
+}
+
 /* How Verification Works (foundation.html): dark band, four steps joined by one track. Each step is
    photo, then a numbered node sitting on the line, then label, title and text. The line runs from a
    step's node to the next step's node; the last node is a check mark. Photos are .ph placeholders until

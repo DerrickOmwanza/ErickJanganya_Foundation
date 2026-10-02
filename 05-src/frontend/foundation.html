@@ -373,38 +373,127 @@
     </div>
   </section>
 
-  <!-- Structure & leadership — real names/roles are still unconfirmed, so those stay bracketed (same
-       convention as about.html) even though the row layout itself is finished. Legal status likewise. -->
-  <section class="section-tight" style="background:#fff;border-top:1px solid var(--line);">
+  <!-- Structure & leadership. Rebuilt 2026-10-02 as a tiered org chart: Founder (real, with photo), Core
+       team, Ward liaisons (one per ward) and Board and advisors, then legal status. Everything below the
+       founder is a PLACEHOLDER SLOT on purpose: names, photos and the confirmed role titles are still to
+       come, so each slot shows [Name] and a bracketed [Role] with a "Photo coming soon" box.
+       REVIEW WITH ERICK: the role titles, the one line under each and the choice of slots (core team,
+       one liaison per ward, board) are our suggestions for a foundation like this, not confirmed
+       positions. Add, remove or rename slots to match the real structure.
+       TO FILL A SLOT: replace the .ph inside .person-card-photo with an <img src="img/..." alt="Name">,
+       type the real name and role, and delete the person-card--pending class and the brackets. The
+       card, spacing and image crop need no other change. Legal status stays bracketed until supplied. -->
+  <section class="section-tight org" style="background:#fff;border-top:1px solid var(--line);">
     <div class="container">
       <div class="section-rule"></div>
       <h2 class="mega-header reveal-up" style="font-size:clamp(34px,5.4vw,64px);">Structure &amp; Leadership</h2>
-      <p class="mega-header-dek reveal-up" style="margin-bottom:8px;">Who runs this, in their own right — not just Erick.</p>
-      <div class="feature-row-list">
-        <div class="feature-row reveal-up">
-          <div class="ph"><i class="fa-solid fa-image"></i><span>Leadership photo</span></div>
-          <div>
-            <h3>[Name]</h3>
-            <p>[Role — e.g. Founder &amp; Executive Director]</p>
-          </div>
+      <p class="mega-header-dek reveal-up" style="margin-bottom:0;">Who runs this, in their own right, not just Erick.</p>
+
+      <div class="org-tier reveal-up"><span>Founder</span></div>
+      <article class="org-founder reveal-up">
+        <div class="org-founder-photo"><img src="img/erick-portrait.jpg" alt="Erick Janganya, founder of the Erick Janganya Foundation"></div>
+        <div class="org-founder-body">
+          <span class="org-founder-role">Founder</span>
+          <h3>Erick Janganya</h3>
+          <p>Founder of the Erick Janganya Foundation and an independent candidate for the Embakasi South parliamentary seat in the 2027 general election.</p>
+          <a class="org-link" href="about.html">Read Erick's story <i class="fa-solid fa-arrow-right"></i></a>
         </div>
-        <div class="feature-row reveal-up">
-          <div class="ph"><i class="fa-solid fa-image"></i><span>Leadership photo</span></div>
-          <div>
-            <h3>[Name]</h3>
-            <p>[Role — e.g. Programs Lead]</p>
-          </div>
-        </div>
-        <div class="feature-row reveal-up">
-          <div class="ph"><i class="fa-solid fa-image"></i><span>Leadership photo</span></div>
-          <div>
-            <h3>[Name]</h3>
-            <p>[Role — e.g. Community Liaison, Kware Ward]</p>
-          </div>
-        </div>
+      </article>
+
+      <div class="org-tier reveal-up"><span>Core team</span><em>Names and photos to be announced</em></div>
+      <div class="org-grid org-grid--4">
+          <article class="person-card person-card--pending reveal-up">
+            <div class="person-card-photo"><div class="ph"><i class="fa-regular fa-user"></i><span>Photo coming soon</span></div></div>
+            <h4 class="person-card-name">[Name]</h4>
+            <p class="person-card-role">[Programs Lead]</p>
+            <p class="person-card-desc">Plans and oversees projects across the five wards.</p>
+          </article>
+          <article class="person-card person-card--pending reveal-up">
+            <div class="person-card-photo"><div class="ph"><i class="fa-regular fa-user"></i><span>Photo coming soon</span></div></div>
+            <h4 class="person-card-name">[Name]</h4>
+            <p class="person-card-role">[Head of Verification]</p>
+            <p class="person-card-desc">Leads site visits and signs off every status on the tracker.</p>
+          </article>
+          <article class="person-card person-card--pending reveal-up">
+            <div class="person-card-photo"><div class="ph"><i class="fa-regular fa-user"></i><span>Photo coming soon</span></div></div>
+            <h4 class="person-card-name">[Name]</h4>
+            <p class="person-card-role">[Finance and Compliance Lead]</p>
+            <p class="person-card-desc">Keeps budgets and funding sources accurate and published.</p>
+          </article>
+          <article class="person-card person-card--pending reveal-up">
+            <div class="person-card-photo"><div class="ph"><i class="fa-regular fa-user"></i><span>Photo coming soon</span></div></div>
+            <h4 class="person-card-name">[Name]</h4>
+            <p class="person-card-role">[Communications and Data Lead]</p>
+            <p class="person-card-desc">Keeps the tracker, scorecard and updates current.</p>
+          </article>
       </div>
-      <p class="reveal-up" style="font-size:15.5px;line-height:1.7;color:var(--ink-soft);max-width:640px;margin-top:8px;">[Legal status — e.g. registered as a CBO/NGO/trust, registration number if the foundation wants it displayed publicly, or a plain statement that formal registration is in progress.]</p>
-      <a class="field-item-link reveal-up" href="vision.html" style="margin-top:24px;">This mission framed against global standards — see the alignment <i class="fa-solid fa-arrow-right"></i></a>
+
+      <div class="org-tier reveal-up"><span>Ward liaisons</span><em>One for each of the five wards</em></div>
+      <div class="org-grid org-grid--5">
+          <article class="person-card person-card--pending reveal-up">
+            <div class="person-card-photo"><div class="ph"><i class="fa-regular fa-user"></i><span>Photo coming soon</span></div></div>
+            <span class="person-card-kicker">Imara Daima</span>
+            <h4 class="person-card-name">[Name]</h4>
+            <p class="person-card-role">[Community Liaison]</p>
+            <p class="person-card-desc">Resident contact point for Imara Daima.</p>
+          </article>
+          <article class="person-card person-card--pending reveal-up">
+            <div class="person-card-photo"><div class="ph"><i class="fa-regular fa-user"></i><span>Photo coming soon</span></div></div>
+            <span class="person-card-kicker">Kwa Njenga</span>
+            <h4 class="person-card-name">[Name]</h4>
+            <p class="person-card-role">[Community Liaison]</p>
+            <p class="person-card-desc">Resident contact point for Kwa Njenga.</p>
+          </article>
+          <article class="person-card person-card--pending reveal-up">
+            <div class="person-card-photo"><div class="ph"><i class="fa-regular fa-user"></i><span>Photo coming soon</span></div></div>
+            <span class="person-card-kicker">Kwa Reuben</span>
+            <h4 class="person-card-name">[Name]</h4>
+            <p class="person-card-role">[Community Liaison]</p>
+            <p class="person-card-desc">Resident contact point for Kwa Reuben.</p>
+          </article>
+          <article class="person-card person-card--pending reveal-up">
+            <div class="person-card-photo"><div class="ph"><i class="fa-regular fa-user"></i><span>Photo coming soon</span></div></div>
+            <span class="person-card-kicker">Pipeline</span>
+            <h4 class="person-card-name">[Name]</h4>
+            <p class="person-card-role">[Community Liaison]</p>
+            <p class="person-card-desc">Resident contact point for Pipeline.</p>
+          </article>
+          <article class="person-card person-card--pending reveal-up">
+            <div class="person-card-photo"><div class="ph"><i class="fa-regular fa-user"></i><span>Photo coming soon</span></div></div>
+            <span class="person-card-kicker">Kware</span>
+            <h4 class="person-card-name">[Name]</h4>
+            <p class="person-card-role">[Community Liaison]</p>
+            <p class="person-card-desc">Resident contact point for Kware.</p>
+          </article>
+      </div>
+
+      <div class="org-tier reveal-up"><span>Board and advisors</span><em>Names and photos to be announced</em></div>
+      <div class="org-grid org-grid--3">
+          <article class="person-card person-card--pending reveal-up">
+            <div class="person-card-photo"><div class="ph"><i class="fa-regular fa-user"></i><span>Photo coming soon</span></div></div>
+            <h4 class="person-card-name">[Name]</h4>
+            <p class="person-card-role">[Board Chair]</p>
+            <p class="person-card-desc">Oversees the foundation's governance.</p>
+          </article>
+          <article class="person-card person-card--pending reveal-up">
+            <div class="person-card-photo"><div class="ph"><i class="fa-regular fa-user"></i><span>Photo coming soon</span></div></div>
+            <h4 class="person-card-name">[Name]</h4>
+            <p class="person-card-role">[Treasurer]</p>
+            <p class="person-card-desc">Reviews how funds are received and spent.</p>
+          </article>
+          <article class="person-card person-card--pending reveal-up">
+            <div class="person-card-photo"><div class="ph"><i class="fa-regular fa-user"></i><span>Photo coming soon</span></div></div>
+            <h4 class="person-card-name">[Name]</h4>
+            <p class="person-card-role">[Independent Advisor]</p>
+            <p class="person-card-desc">Offers outside perspective on the foundation's work.</p>
+          </article>
+      </div>
+
+      <div class="org-legal reveal-up">
+        <span class="org-legal-label">Legal status</span>
+        <p>[Legal status, for example registered as a CBO, NGO or trust, with the registration number if the foundation wants it shown publicly, or a plain statement that formal registration is in progress.]</p>
+      </div>
+      <a class="org-link reveal-up" href="vision.html" style="margin-top:28px;">This mission framed against global standards: see the alignment <i class="fa-solid fa-arrow-right"></i></a>
     </div>
   </section>
 
