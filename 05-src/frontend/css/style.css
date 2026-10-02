@@ -578,6 +578,40 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .mega-header{font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:clamp(42px,7.4vw,92px);line-height:.94;letter-spacing:-.01em;color:var(--ink-black);margin:0 0 14px;}
 .mega-header-dek{font-size:17px;color:var(--ink-soft);max-width:640px;}
 
+/* How Verification Works (foundation.html): dark band, four steps joined by one track. Each step is
+   photo, then a numbered node sitting on the line, then label, title and text. The line runs from a
+   step's node to the next step's node; the last node is a check mark. Photos are .ph placeholders until
+   real site photos arrive, restyled dark so they sit on the band. */
+.verify{background:#050505 radial-gradient(55% 80% at 88% 8%, rgba(0,100,240,.2) 0%, rgba(0,100,240,0) 70%);color:#fff;padding:96px 0 104px;}
+.verify-head{max-width:720px;margin-bottom:64px;}
+.verify-kicker{display:inline-block;color:var(--yellow);font-size:14px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px;}
+.verify-head h2{font-family:var(--font-display);font-weight:700;text-transform:uppercase;color:#fff;font-size:clamp(40px,6vw,76px);line-height:.96;letter-spacing:-.01em;margin:0 0 18px;}
+.verify-head p{font-size:clamp(18px,1.5vw,21px);line-height:1.6;color:rgba(255,255,255,.8);max-width:560px;}
+.verify-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);column-gap:32px;}
+.verify-step{display:flex;flex-direction:column;}
+.verify-step-media{aspect-ratio:4/3;overflow:hidden;}
+.verify-step-media .ph{height:100%;width:100%;border-radius:0;background:repeating-linear-gradient(45deg,#161616,#161616 9px,#1d1d1d 9px,#1d1d1d 18px);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.55);}
+.verify-step-track{position:relative;height:48px;margin:28px 0 22px;}
+.verify-step:not(:last-child) .verify-step-track::before{content:"";position:absolute;left:24px;right:-32px;top:50%;height:2px;margin-top:-1px;background:linear-gradient(90deg,var(--yellow),rgba(255,189,18,.35));}
+.verify-node{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;background:#050505;border:2px solid var(--yellow);color:var(--yellow);font-family:var(--font-display);font-weight:600;font-size:20px;}
+.verify-node--final{background:var(--yellow);color:#000;font-size:18px;}
+.verify-step-label{display:block;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);margin-bottom:10px;}
+.verify-step h3{font-family:var(--font-display);font-weight:600;font-size:clamp(24px,2.1vw,30px);line-height:1.12;letter-spacing:-.005em;color:#fff;margin:0 0 12px;}
+.verify-step p{font-size:16.5px;font-weight:500;line-height:1.65;color:rgba(255,255,255,.78);}
+.verify-cta{display:inline-flex;align-items:center;gap:10px;margin-top:64px;color:#fff;font-weight:700;font-size:15px;padding-bottom:4px;border-bottom:2px solid var(--yellow);transition:gap .2s ease;}
+.verify-cta:hover{gap:15px;}
+@media (max-width:960px){
+  .verify{padding:72px 0 80px;}
+  .verify-head{margin-bottom:44px;}
+  .verify-steps{grid-template-columns:1fr;row-gap:0;position:relative;}
+  .verify-step{display:grid;grid-template-columns:48px 1fr;column-gap:20px;padding-bottom:44px;}
+  .verify-step:last-child{padding-bottom:0;}
+  .verify-step-track{grid-column:1;grid-row:1 / span 2;margin:0;height:auto;}
+  .verify-step:not(:last-child) .verify-step-track::before{left:23px;right:auto;top:48px;bottom:-44px;width:2px;height:auto;margin:0;background:linear-gradient(180deg,var(--yellow),rgba(255,189,18,.35));}
+  .verify-step-body{grid-column:2;grid-row:1;}
+  .verify-step-media{grid-column:2;grid-row:2;margin-top:20px;aspect-ratio:16/10;}
+}
+
 /* Focus-area cards (foundation.html): a 12 column grid where the cards alternate wide (7) and narrow (5)
    across two rows, so the pairs sit as 7:5 then 5:7. Every image is the same height, so each row stays
    level while the widths change. Photo over text on a white ground, whole card is the link. */
