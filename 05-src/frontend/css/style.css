@@ -578,12 +578,24 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .mega-header{font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:clamp(42px,7.4vw,92px);line-height:.94;letter-spacing:-.01em;color:var(--ink-black);margin:0 0 14px;}
 .mega-header-dek{font-size:17px;color:var(--ink-soft);max-width:640px;}
 
-/* Feature pair — two equal-width flagship tiles (Obama's "My Brother's Keeper / Girls Opportunity
-   Alliance" pattern): tall photo, display-font heading, one line, a field-item-link. */
-.feature-pair{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:8px;}
-.feature-pair-item .ph{aspect-ratio:4/5;margin-bottom:22px;}
-.feature-pair-item h3{font-family:var(--font-display);font-weight:600;font-size:clamp(24px,2.6vw,34px);letter-spacing:-.01em;margin-bottom:10px;}
-.feature-pair-item p{color:var(--ink-soft);font-size:16px;line-height:1.6;margin-bottom:14px;max-width:420px;}
+/* Platform tiles (foundation.html): two photo-led tiles, text laid over the image on a dark gradient,
+   the whole tile is the link. Sharp corners like every other photo on the site. */
+.platform-tiles{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:8px;}
+.platform-tile{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;color:#fff;background:#111;}
+.platform-tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s cubic-bezier(.22,.7,.3,1);}
+.platform-tile::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.6) 38%,rgba(0,0,0,0) 68%);pointer-events:none;}
+.platform-tile:hover img,.platform-tile:focus-visible img{transform:scale(1.06);}
+.platform-tile:focus-visible{outline:3px solid var(--yellow);outline-offset:3px;}
+.platform-tile-body{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:40px 40px 36px;}
+.platform-tile-tag{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);margin-bottom:12px;}
+.platform-tile h3{font-family:var(--font-display);font-weight:600;font-size:clamp(30px,3.2vw,46px);line-height:1.05;letter-spacing:-.01em;color:#fff;margin:0 0 14px;}
+.platform-tile p{font-size:17px;font-weight:500;line-height:1.6;color:rgba(255,255,255,.88);max-width:460px;margin:0 0 22px;}
+.platform-tile-link{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:14.5px;padding-bottom:3px;border-bottom:2px solid var(--yellow);transition:gap .2s ease;}
+.platform-tile:hover .platform-tile-link{gap:15px;}
+@media (prefers-reduced-motion: reduce){
+  .platform-tile img{transition:none;}
+  .platform-tile:hover img{transform:none;}
+}
 
 /* Feature row list — Obama's "Global Leadership Programs" pattern: photo-left, text-right rows,
    thin top rule between them instead of card chrome. Reused for principles, focus areas, process
@@ -700,7 +712,9 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
   .field-grid{grid-template-columns:1fr 1fr;column-gap:32px;row-gap:28px;}
   .field-item:not(:first-child)::before{display:none;}
   .field-item:nth-child(2n)::before{display:block;left:-16px;}
-  .feature-pair{grid-template-columns:1fr;gap:36px;}
+  .platform-tiles{grid-template-columns:1fr;gap:24px;}
+  .platform-tile{aspect-ratio:auto;min-height:500px;}
+  .platform-tile-body{padding:28px 24px 26px;}
   .feature-row{grid-template-columns:1fr;gap:16px;}
   .feature-row .ph{aspect-ratio:1/1;max-width:360px;}
   .vision-row,.vision-row--reverse{grid-template-columns:1fr;gap:20px;padding:32px 0;}

@@ -84,7 +84,7 @@
   <!-- Rebuilt on the Obama Foundation's "Programs" page rhythm (obama.org/programs), per direct
        reference/screenshots: a huge display-font section headline + one-line dek, then content, then
        a black section-rule, repeated — rather than a handful of small card grids and done scrolling.
-       Content shape reused three ways down the page: .feature-pair (two big tiles), .field-grid (the
+       Content shape reused three ways down the page: .platform-tiles (two photo-led tiles), .field-grid (the
        homepage's existing 3-column divided story grid), and .feature-row-list (photo-left/text-right
        rows) — so nothing new was invented per section, just recombined. Mission/principles/focus areas/
        how-it-works still trace back to the platform's original spec (01-wireframe #screen-foundation,
@@ -116,24 +116,38 @@
     </div>
   </section>
 
-  <!-- Flagship platforms — Obama's "My Brother's Keeper Alliance / Girls Opportunity Alliance" two-tile
-       pattern. The foundation's own two flagship platforms are the natural fit here. -->
+  <!-- Flagship platforms. Kept on this page (the Foundation page is where the two tools are introduced;
+       the homepage "Track" section is only the teaser) but redesigned 2026-10-02 so it no longer repeats
+       the homepage's image-above-text duo: two photo-led tiles with the text laid over the image, a
+       platform tag, and the whole tile as the link. Same two images as the homepage's Track section
+       (tracker-preview.jpg is AI-generated and promise-tracker.jpg is symbolic stock; both are
+       placeholders to swap for real photos, same as on the homepage). -->
   <section class="section">
     <div class="container">
       <div class="section-rule"></div>
-      <div class="feature-pair">
-        <div class="feature-pair-item reveal-up">
-          <div class="ph"><i class="fa-solid fa-image"></i><span>Development Tracker preview photo</span></div>
-          <h3>Development Tracker</h3>
-          <p>Every project across Embakasi South's five wards — dated, budgeted, and status-checked as work happens, not at election time.</p>
-          <a class="field-item-link" href="tracker.html">See the tracker <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-        <div class="feature-pair-item reveal-up">
-          <div class="ph"><i class="fa-solid fa-image"></i><span>Promise Scorecard preview photo</span></div>
-          <h3>Promise Scorecard</h3>
-          <p>Every commitment Erick has made, tracked against what's actually been delivered — kept, in progress, or not yet started.</p>
-          <a class="field-item-link" href="promises.html">See the scorecard <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
+      <div class="section-head reveal-up">
+        <h2 class="mega-header section-mega-head">Two Platforms</h2>
+        <p class="section-dek">One public record, two ways to check it</p>
+      </div>
+      <div class="platform-tiles">
+        <a class="platform-tile reveal-up" href="tracker.html">
+          <img src="img/tracker-preview.jpg" alt="A building under construction beside tower cranes, symbolising projects tracked from start to finish">
+          <div class="platform-tile-body">
+            <span class="platform-tile-tag">Platform 01</span>
+            <h3>Development Tracker</h3>
+            <p>Every project across Embakasi South's five wards, dated, budgeted and status-checked as work happens, not at election time.</p>
+            <span class="platform-tile-link">See the tracker <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </a>
+        <a class="platform-tile reveal-up" href="promises.html">
+          <img src="img/promise-tracker.jpg" alt="Three alarm clocks, symbolising promises tracked against time" style="object-position:28% center;">
+          <div class="platform-tile-body">
+            <span class="platform-tile-tag">Platform 02</span>
+            <h3>Promise Scorecard</h3>
+            <p>Every commitment Erick has made, tracked against what has actually been delivered: kept, in progress or not yet started.</p>
+            <span class="platform-tile-link">See the scorecard <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </a>
       </div>
     </div>
   </section>
