@@ -309,6 +309,84 @@ function initPrinciplePanels() {
   });
 }
 
+// Foundation's "How Verification Works": the steps light up in order and a status strip narrates what the
+// system is doing. Wide screens: the four steps sit in one row, so once the track scrolls into view they
+// activate on a timer. Narrow screens: they stack, so each step activates as it scrolls into view and
+// the strip stays pinned. Replay reruns it. Reduced motion (or no IntersectionObserver): jump straight to
+// the finished state.
+function initVerifySteps() {
+  var sec = document.querySelector('.verify');
+  if (!sec) return;
+  var steps = Array.prototype.slice.call(sec.querySelectorAll('.verify-step'));
+  var status = sec.querySelector('.verify-status');
+  var text = sec.querySelector('.verify-status-text');
+  var count = sec.querySelector('.verify-status-count');
+  var replay = sec.querySelector('.verify-replay');
+  var wide = window.matchMedia('(min-width: 961px)');
+  var timers = [];
+
+  function reset() {
+    timers.forEach(clearTimeout);
+    timers = [];
+    steps.forEach(function (s) { s.classList.remove('is-done', 'line-on'); });
+    sec.classList.remove('is-running', 'is-complete');
+    text.textContent = 'Claim received';
+    count.textContent = '0 of ' + steps.length;
+    status.style.setProperty('--p', 0);
+    replay.hidden = true;
+  }
+  function activate(i) {
+    if (steps[i].classList.contains('is-done')) return;
+    steps[i].classList.add('is-done');
+    if (i > 0) steps[i - 1].classList.add('line-on');
+    var n = steps.filter(function (s) { return s.classList.contains('is-done'); }).length;
+    text.textContent = steps[i].getAttribute('data-status');
+    count.textContent = n + ' of ' + steps.length;
+    status.style.setProperty('--p', n / steps.length);
+    if (n === steps.length) {
+      sec.classList.remove('is-running');
+      sec.classList.add('is-complete');
+      replay.hidden = false;
+    } else {
+      sec.classList.add('is-running');
+    }
+  }
+  function playTimed() {
+    reset();
+    steps.forEach(function (s, i) { timers.push(setTimeout(function () { activate(i); }, 450 + i * 950)); });
+  }
+
+  sec.classList.add('is-live');
+  reset();
+
+  if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    steps.forEach(function (s, i) { activate(i); });
+    return;
+  }
+
+  var played = false;
+  var list = sec.querySelector('.verify-steps');
+  new IntersectionObserver(function (entries, obs) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting && wide.matches && !played) { played = true; playTimed(); obs.unobserve(list); }
+    });
+  }, { threshold: 0.3 }).observe(list);
+
+  var stepIO = new IntersectionObserver(function (entries) {
+    if (wide.matches) return;
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      var i = steps.indexOf(e.target);
+      for (var j = 0; j <= i; j++) activate(j);
+    });
+  }, { rootMargin: '0px 0px -30% 0px', threshold: 0.2 });
+  steps.forEach(function (s) { stepIO.observe(s); });
+
+  replay.addEventListener('click', function () {
+    if (wide.matches) { playTimed(); } else { reset(); activate(0); steps[0].scrollIntoView({ block: 'center', behavior: 'smooth' }); }
+  });
+}
+
 // Site-wide smooth, inertial page scrolling via Lenis (loaded on demand so no page needs its own
 // <script> tag). Wheel events over a nested scroller (the homepage tracker list) stay with that
 // scroller while it can still move in the wheel's direction, and pass to the page the moment it hits
@@ -356,4 +434,5 @@ document.addEventListener('DOMContentLoaded', function () {
   initJourneyRail();
   initStoryScroll();
   initPrinciplePanels();
+  initVerifySteps();
 });

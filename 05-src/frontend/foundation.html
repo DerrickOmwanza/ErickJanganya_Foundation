@@ -313,7 +313,11 @@
        band with a connected four step track (numbered nodes on one line, photo above, text below, the
        last node a check mark), so the process reads as a sequence and the page gets a second dark band
        between white sections. The photos are placeholders on purpose: these need REAL photos taken by
-       the team on site (a site visit, a status check, budget records, the public tracker), not stock. -->
+       the team on site (a site visit, a status check, budget records, the public tracker), not stock.
+       Interactive (main.js initVerifySteps): when the track scrolls into view the steps activate one by one,
+       the line fills, and the status strip above narrates what the system is doing; a Replay button reruns
+       it. On phones each step activates as you scroll to it and the strip stays pinned. Without JS, or with
+       reduced motion, everything simply shows in its finished state. -->
   <section class="verify">
     <div class="container">
       <div class="verify-head reveal-up">
@@ -321,8 +325,14 @@
         <h2>How Verification Works</h2>
         <p>What separates a claim from a checked fact on this site.</p>
       </div>
+      <div class="verify-status" role="status" aria-live="polite">
+        <span class="verify-status-dot" aria-hidden="true"></span>
+        <span class="verify-status-text">Claim received</span>
+        <span class="verify-status-count">0 of 4</span>
+        <button class="verify-replay" type="button" hidden><i class="fa-solid fa-rotate-right"></i> Replay</button>
+      </div>
       <ol class="verify-steps">
-          <li class="verify-step reveal-up">
+          <li class="verify-step" data-status="Site visit logged">
             <div class="verify-step-media"><div class="ph"><i class="fa-solid fa-image"></i><span>Real photo needed: a team member on a project site</span></div></div>
             <div class="verify-step-track"><span class="verify-node">1</span></div>
             <div class="verify-step-body">
@@ -331,7 +341,7 @@
               <p>A team member visits in person and photographs the project as it stands, dated on arrival.</p>
             </div>
           </li>
-          <li class="verify-step reveal-up">
+          <li class="verify-step" data-status="Status set">
             <div class="verify-step-media"><div class="ph"><i class="fa-solid fa-image"></i><span>Real photo needed: checking a project against its record</span></div></div>
             <div class="verify-step-track"><span class="verify-node">2</span></div>
             <div class="verify-step-body">
@@ -340,7 +350,7 @@
               <p>Marked Planned, Ongoing, or Completed based on what's actually there, not what was announced.</p>
             </div>
           </li>
-          <li class="verify-step reveal-up">
+          <li class="verify-step" data-status="Budget and funding source attached">
             <div class="verify-step-media"><div class="ph"><i class="fa-solid fa-image"></i><span>Real photo needed: budget and funding records</span></div></div>
             <div class="verify-step-track"><span class="verify-node">3</span></div>
             <div class="verify-step-body">
@@ -349,7 +359,7 @@
               <p>Every project is labelled honestly: Foundation-funded, Government (NG-CDF), or Partner-funded.</p>
             </div>
           </li>
-          <li class="verify-step reveal-up">
+          <li class="verify-step" data-status="Verified. Public record updated">
             <div class="verify-step-media"><div class="ph"><i class="fa-solid fa-image"></i><span>Real photo needed: the public tracker in use</span></div></div>
             <div class="verify-step-track"><span class="verify-node verify-node--final"><i class="fa-solid fa-check"></i></span></div>
             <div class="verify-step-body">
