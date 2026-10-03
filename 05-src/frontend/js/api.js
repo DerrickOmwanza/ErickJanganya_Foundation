@@ -45,7 +45,17 @@ window.ApiClient = (function () {
     });
   }
 
-  return { get: get, post: post, API_BASE: API_BASE };
+  // The API still holds placeholder seed records (text starting with "[Placeholder]"). Anything that shows
+  // counts or figures as fact should pass lists through realOnly() so sample data never reads as the real
+  // record; once real records replace the seed data they flow through untouched.
+  function isPlaceholder(rec) {
+    return [rec && rec.title, rec && rec.summary, rec && rec.description].some(function (t) {
+      return String(t || '').trim().toLowerCase().indexOf('[placeholder]') === 0;
+    });
+  }
+  function realOnly(items) { return (items || []).filter(function (r) { return !isPlaceholder(r); }); }
+
+  return { get: get, post: post, API_BASE: API_BASE, isPlaceholder: isPlaceholder, realOnly: realOnly };
 })();
 
 // Small shared helpers used by more than one page-specific script.

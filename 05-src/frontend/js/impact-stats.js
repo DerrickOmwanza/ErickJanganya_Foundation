@@ -35,18 +35,27 @@
   }
 
   Promise.all([
-    window.ApiClient.get('/tracker', { limit: 100 }),
-    window.ApiClient.get('/promises', { limit: 1 }),
-    window.ApiClient.get('/events', { limit: 1 }),
+    window.ApiClient.get('/tracker', { limit: 200 }),
+    window.ApiClient.get('/promises', { limit: 200 }),
+    window.ApiClient.get('/events', { limit: 200 }),
   ]).then(function (results) {
-    var trackerItems = results[0].items || [];
+    // Placeholder seed records are ignored (see ApiClient.realOnly), so sample numbers never show as fact.
+    var trackerItems = window.ApiClient.realOnly(results[0].items);
+    var promiseItems = window.ApiClient.realOnly(results[1].items);
+    var eventItems = window.ApiClient.realOnly(results[2].items);
     var wardSet = {};
     trackerItems.forEach(function (p) { if (p.ward) wardSet[p.ward] = true; });
 
-    setTarget(els.projects, results[0].total || trackerItems.length);
+    // Nothing real to report yet: keep the whole strip hidden rather than showing zeros.
+    if (!trackerItems.length && !promiseItems.length && !eventItems.length) {
+      section.hidden = true;
+      return;
+    }
+
+    setTarget(els.projects, trackerItems.length);
     setTarget(els.wards, Object.keys(wardSet).length);
-    setTarget(els.promises, results[1].total || 0);
-    setTarget(els.events, results[2].total || 0);
+    setTarget(els.promises, promiseItems.length);
+    setTarget(els.events, eventItems.length);
 
     section.hidden = false;
     armObserver();

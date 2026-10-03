@@ -11,10 +11,7 @@
   var sampleMode = new URLSearchParams(window.location.search).get('sample') === '1';
   var strip = document.getElementById('liveStrip');
 
-  function isPlaceholder(rec) {
-    return [rec.title, rec.summary, rec.description].some(function (t) { return /^\s*\[placeholder\]/i.test(t || ''); });
-  }
-  function keep(items) { return sampleMode ? items : items.filter(function (r) { return !isPlaceholder(r); }); }
+  function keep(items) { return sampleMode ? items : window.ApiClient.realOnly(items); }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
 
   var ready = (!window.ApiClient ? Promise.reject(new Error('no api client')) : Promise.all([
