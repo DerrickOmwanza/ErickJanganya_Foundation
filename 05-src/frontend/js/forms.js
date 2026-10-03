@@ -60,6 +60,37 @@
     });
   }
 
+  // Vision page "Tell us what's missing" form. Reuses the contact endpoint: the ward goes in the subject so
+  // submissions can be sorted, and no backend change is needed.
+  var visionForm = document.getElementById('visionInputForm');
+  if (visionForm) {
+    var visionNote = document.getElementById('visionInputNote');
+    visionForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var ward = visionForm.ward.value;
+      var payload = {
+        name: visionForm.name.value.trim(),
+        email: visionForm.email.value.trim(),
+        subject: 'Vision input: ' + (ward || 'No ward given'),
+        message: visionForm.message.value.trim(),
+      };
+      if (!payload.name || !payload.email || !payload.message) {
+        showNote(visionNote, 'Please add your name, email, and what the vision should include.', 'error');
+        return;
+      }
+      withBusyButton(visionForm, 'Sending…', function () {
+        return window.ApiClient.post('/contact', payload)
+          .then(function () {
+            showNote(visionNote, 'Thank you. Your suggestion has been received.', 'success');
+            visionForm.reset();
+          })
+          .catch(function (err) {
+            showNote(visionNote, err.message || 'Something went wrong. Please try again.', 'error');
+          });
+      });
+    });
+  }
+
   // Contact form
   var contactForm = document.getElementById('contactForm');
   if (contactForm) {

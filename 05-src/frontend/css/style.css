@@ -725,6 +725,31 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .where-fact--lead .where-hint[hidden]{display:none;}
 .where-hint i{color:var(--red);margin-right:6px;}
 
+/* Your input + Questions (vision.html). The form reuses the underline field style of the newsletter signup. */
+.insider-field select,.insider-field textarea{width:100%;border:none;border-bottom:2px solid var(--ink-black);background:transparent;padding:8px 2px;font-size:16.5px;color:var(--ink-black);font-family:var(--font-b);border-radius:0;}
+.insider-field textarea{resize:vertical;min-height:96px;line-height:1.5;}
+.insider-field select:focus,.insider-field textarea:focus{outline:none;border-bottom-color:var(--blue);}
+.vision-input-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:72px;align-items:start;}
+.vision-input-copy h2{font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:clamp(36px,4.6vw,64px);line-height:.98;letter-spacing:-.01em;margin:6px 0 20px;}
+.vision-input-copy p{font-size:clamp(17px,1.4vw,19px);line-height:1.65;color:var(--ink-soft);max-width:460px;}
+.vision-input-form{max-width:520px;}
+.vision-input-form .insider-field{margin-bottom:34px;}
+.faq-list{margin-top:44px;border-top:3px solid var(--ink-black);max-width:900px;}
+.faq-item{border-bottom:1px solid var(--line);}
+.faq-item summary{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:26px 0;font-family:var(--font-display);font-weight:600;font-size:clamp(22px,2.2vw,28px);line-height:1.2;cursor:pointer;list-style:none;}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-item summary::after{content:"+";flex:none;display:flex;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--ink-black);font-family:var(--font-b);font-weight:500;font-size:22px;line-height:1;transition:background .2s ease,color .2s ease,transform .25s ease;}
+.faq-item[open] summary::after{content:"\2212";background:var(--ink-black);color:#fff;}
+.faq-item summary:hover::after{background:var(--ink-black);color:#fff;}
+.faq-item summary:focus-visible{outline:3px solid var(--yellow);outline-offset:2px;}
+.faq-item p{margin:0 0 28px;max-width:720px;font-size:17px;font-weight:500;line-height:1.7;color:var(--ink-soft);}
+.faq-item p a{color:var(--ink-black);font-weight:700;text-decoration:underline;text-underline-offset:3px;}
+.faq-item p a:hover{color:var(--red);}
+.faq-pending{font-style:italic;color:var(--ink-mute);}
+@media (max-width:960px){
+  .vision-input-grid{grid-template-columns:1fr;gap:36px;}
+}
+
 /* Plans It Connects To (vision.html): three tiers, national to constituency. Each row says what the plan is and
    holds a dashed slot for how Erick's priorities connect to it (to be confirmed). */
 .plans-list{list-style:none;margin:48px 0 0;padding:0;border-top:3px solid var(--ink-black);}

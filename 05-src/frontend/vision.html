@@ -128,6 +128,8 @@
         <li><a href="#plans">Local plans</a></li>
         <li><a href="#horizon">Horizon</a></li>
         <li><a href="#partner">Partner</a></li>
+        <li><a href="#input">Your input</a></li>
+        <li><a href="#faq">Questions</a></li>
       </ul>
     </div>
   </nav>
@@ -500,6 +502,90 @@
     </div>
   </section>
 
+  <!-- Your input (added 2026-10-03): a vision for a constituency should show it was shaped by the people in it. The
+       form posts to the existing /api/contact endpoint (no backend change) with the subject "Vision input:
+       <ward>", wired in js/forms.js (#visionInputForm). WHO READS AND ANSWERS these submissions is a decision
+       for the team: they arrive as contact submissions (admin GET /api/contact). -->
+  <section class="section-tight vision-input" id="input">
+    <div class="container">
+      <div class="section-rule"></div>
+      <div class="vision-input-grid">
+        <div class="vision-input-copy">
+          <span class="verify-kicker" style="color:var(--red);">Your input</span>
+          <h2>Tell us what's missing</h2>
+          <p>A vision for Embakasi South should be shaped by the people who live here. If something that matters to your ward is missing from these priorities, tell us.</p>
+        </div>
+        <form class="insider-form vision-input-form" id="visionInputForm" novalidate>
+          <div class="insider-field">
+            <label for="vi-name">Your name</label>
+            <input type="text" id="vi-name" name="name" required>
+          </div>
+          <div class="insider-field">
+            <label for="vi-email">Email</label>
+            <input type="email" id="vi-email" name="email" required>
+          </div>
+          <div class="insider-field">
+            <label for="vi-ward">Your ward</label>
+            <select id="vi-ward" name="ward">
+              <option value="">Choose your ward</option>
+              <option value="Imara Daima">Imara Daima</option>
+              <option value="Kwa Njenga">Kwa Njenga</option>
+              <option value="Kwa Reuben">Kwa Reuben</option>
+              <option value="Pipeline">Pipeline</option>
+              <option value="Kware">Kware</option>
+              <option value="Outside Embakasi South">I live outside Embakasi South</option>
+            </select>
+          </div>
+          <div class="insider-field">
+            <label for="vi-message">What should the vision include?</label>
+            <textarea id="vi-message" name="message" rows="4" required></textarea>
+          </div>
+          <div class="insider-consent-row">
+            <button type="submit" class="btn btn-outline insider-submit">Send my suggestion</button>
+          </div>
+          <p class="form-note" id="visionInputNote" hidden></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Questions (added 2026-10-03): honest answers to what investors, diaspora and residents ask. Every answer uses
+       only facts already on the site; the open points are bracketed [..] for Erick to complete. REVIEW WITH
+       ERICK, especially the campaign and funding answers. -->
+  <section class="section-tight faq" id="faq">
+    <div class="container">
+      <div class="section-rule"></div>
+      <h2 class="mega-header" style="font-size:clamp(34px,5.4vw,64px);">Questions</h2>
+      <p class="mega-header-dek">Straight answers to what people ask most.</p>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>Is this a campaign document?</summary>
+          <p>Erick Janganya is an independent candidate for the Embakasi South seat in the 2027 general election, and he founded the Erick Janganya Foundation. <span class="faq-pending">[How the foundation's vision relates to his candidacy, in Erick's own words, to be confirmed.]</span></p>
+        </details>
+        <details class="faq-item">
+          <summary>How does this relate to the tracker?</summary>
+          <p>The vision is the long-term plan. The <a href="tracker.html">Development Tracker</a> records the projects actually happening, dated and budgeted, and the <a href="promises.html">Promise Scorecard</a> tracks each commitment against what has been delivered. Together they let anyone compare what was promised with what was done.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Where do the promises come from?</summary>
+          <p>The Promise Scorecard lists the commitments from Erick's 2022 campaign platform (#KaziKwaMpango). Because he has not yet held the seat, none of them can show progress yet, and each is marked Not started.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How is the work funded?</summary>
+          <p>Every project on the Development Tracker is labelled with its funding source: Foundation-funded, Government (NG-CDF), or Partner-funded. <span class="faq-pending">[How the foundation itself raises and reports its funding, to be confirmed with Erick.]</span></p>
+        </details>
+        <details class="faq-item">
+          <summary>Who can partner with the foundation?</summary>
+          <p>Diaspora groups, development organisations, and mission-aligned investors who want to back real, ward-level work. <a href="contact.html">Start a conversation</a>.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can residents shape the priorities?</summary>
+          <p>Yes. Use the form above to tell us what is missing for your ward. Suggestions go to the foundation team.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
   <!-- Closing band: moved 2026-10-03 to the large display variant (cta-band--display) used on the homepage,
        About and Foundation, so every page closes the same way; the dash in the line became a colon. -->
   <section class="section-tight cta-band cta-band--display">
@@ -565,6 +651,7 @@
 <script src="js/vendor/leaflet.js"></script>
 <script src="js/api.js"></script>
 <script src="js/main.js"></script>
+<script src="js/forms.js"></script>
 <script src="js/vision-live.js"></script>
 <script src="js/ward-map.js"></script>
 </body>
