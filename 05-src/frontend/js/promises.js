@@ -72,6 +72,19 @@
     U.fillSelect(categorySelect, U.uniqueSorted(allItems.map(function (p) { return p.category; })), 'All categories');
   }
 
+  // Lets other pages deep link into a filtered Scorecard, e.g. promises.html?category=Health (used by the Vision
+  // page's priorities). Only values that exist in the filter dropdowns are applied.
+  function applyUrlFilters() {
+    var params = new URLSearchParams(window.location.search);
+    [['category', categorySelect], ['status', statusSelect]].forEach(function (pair) {
+      var value = params.get(pair[0]);
+      var select = pair[1];
+      if (!value || !select) return;
+      var match = Array.prototype.some.call(select.options, function (o) { return o.value === value; });
+      if (match) select.value = value;
+    });
+  }
+
   function load() {
     grid.innerHTML = U.skeletonProjCards(6, false);
     setState(null);
@@ -84,6 +97,7 @@
           return;
         }
         populateFilters();
+        applyUrlFilters();
         applyFiltersAndRender();
       })
       .catch(function (err) {
