@@ -76,10 +76,10 @@ const trackerProjects = [
   },
 ];
 
-// Promises: Erick's 2022 campaign platform (#KaziKwaMpango), summarised from public posts. These are real
-// pledges he made as a candidate, but the wording is a DRAFT summary and must be confirmed with Erick before
-// launch (each description starts with "[Draft to confirm]"). None can show progress until he holds the seat,
-// so every status is "Not started"; dateMade and targetDate stay empty because the exact dates are unconfirmed.
+// Promises: Erick's 2022 campaign platform (#KaziKwaMpango). These are REAL data, confirmed by Erick on
+// 2026-10-04 (he will review the whole app before public launch and any wording changes are made then). None
+// can show progress until he holds the seat, so every status is "Not started"; dateMade and targetDate stay
+// empty because the exact dates are unconfirmed.
 const promises = [
   {
     title: "Build decent ECDE classrooms",
@@ -87,7 +87,7 @@ const promises = [
     status: 'Not started',
     dateMade: null,
     targetDate: null,
-    description: "[Draft to confirm] Construct decent Early Childhood Development Education (ECDE) classrooms in Embakasi South.",
+    description: "Construct decent Early Childhood Development Education (ECDE) classrooms in Embakasi South.",
     evidenceNote: "Source: the 2022 campaign platform (#KaziKwaMpango). A pledge made as a candidate, not yet delivered.",
   },
   {
@@ -96,7 +96,7 @@ const promises = [
     status: 'Not started',
     dateMade: null,
     targetDate: null,
-    description: "[Draft to confirm] Employ trained ECDE teachers on permanent terms, with timely pay.",
+    description: "Employ trained ECDE teachers on permanent terms, with timely pay.",
     evidenceNote: "Source: the 2022 campaign platform (#KaziKwaMpango). A pledge made as a candidate, not yet delivered.",
   },
   {
@@ -105,7 +105,7 @@ const promises = [
     status: 'Not started',
     dateMade: null,
     targetDate: null,
-    description: "[Draft to confirm] Make sure ECDE classes have the learning resources they need.",
+    description: "Make sure ECDE classes have the learning resources they need.",
     evidenceNote: "Source: the 2022 campaign platform (#KaziKwaMpango). A pledge made as a candidate, not yet delivered.",
   },
   {
@@ -114,7 +114,7 @@ const promises = [
     status: 'Not started',
     dateMade: null,
     targetDate: null,
-    description: "[Draft to confirm] Ensure the fair allocation of bursaries so underprivileged students are supported.",
+    description: "Ensure the fair allocation of bursaries so underprivileged students are supported.",
     evidenceNote: "Source: the 2022 campaign platform (#KaziKwaMpango). A pledge made as a candidate, not yet delivered.",
   },
   {
@@ -123,7 +123,7 @@ const promises = [
     status: 'Not started',
     dateMade: null,
     targetDate: null,
-    description: "[Draft to confirm] Fully equip all hospitals within Embakasi South with medication.",
+    description: "Fully equip all hospitals within Embakasi South with medication.",
     evidenceNote: "Source: the 2022 campaign platform (#KaziKwaMpango). A pledge made as a candidate, not yet delivered.",
   },
   {
@@ -132,7 +132,7 @@ const promises = [
     status: 'Not started',
     dateMade: null,
     targetDate: null,
-    description: "[Draft to confirm] Upgrade and promote the sub-county hospitals serving Embakasi South.",
+    description: "Upgrade and promote the sub-county hospitals serving Embakasi South.",
     evidenceNote: "Source: the 2022 campaign platform (#KaziKwaMpango). A pledge made as a candidate, not yet delivered.",
   },
   {
@@ -141,7 +141,7 @@ const promises = [
     status: 'Not started',
     dateMade: null,
     targetDate: null,
-    description: "[Draft to confirm] Expand emergency capability by acquiring ambulances.",
+    description: "Expand emergency capability by acquiring ambulances.",
     evidenceNote: "Source: the 2022 campaign platform (#KaziKwaMpango). A pledge made as a candidate, not yet delivered.",
   },
   {
@@ -150,7 +150,7 @@ const promises = [
     status: 'Not started',
     dateMade: null,
     targetDate: null,
-    description: "[Draft to confirm] Pay Community Health Workers reasonable compensation for their work.",
+    description: "Pay Community Health Workers reasonable compensation for their work.",
     evidenceNote: "Source: the 2022 campaign platform (#KaziKwaMpango). A pledge made as a candidate, not yet delivered.",
   },
   {
@@ -159,7 +159,7 @@ const promises = [
     status: 'Not started',
     dateMade: null,
     targetDate: null,
-    description: "[Draft to confirm] Build modern public hygiene facilities to improve sanitation across the constituency.",
+    description: "Build modern public hygiene facilities to improve sanitation across the constituency.",
     evidenceNote: "Source: the 2022 campaign platform (#KaziKwaMpango). A pledge made as a candidate, not yet delivered.",
   },
   {
@@ -168,7 +168,7 @@ const promises = [
     status: 'Not started',
     dateMade: null,
     targetDate: null,
-    description: "[Draft to confirm] Improve the road network within Embakasi South.",
+    description: "Improve the road network within Embakasi South.",
     evidenceNote: "Source: the 2022 campaign platform (#KaziKwaMpango). A pledge made as a candidate, not yet delivered.",
   },
   {
@@ -177,7 +177,7 @@ const promises = [
     status: 'Not started',
     dateMade: null,
     targetDate: null,
-    description: "[Draft to confirm] Strengthen security infrastructure by building additional police posts.",
+    description: "Strengthen security infrastructure by building additional police posts.",
     evidenceNote: "Source: the 2022 campaign platform (#KaziKwaMpango). A pledge made as a candidate, not yet delivered.",
   },
   {
@@ -186,7 +186,7 @@ const promises = [
     status: 'Not started',
     dateMade: null,
     targetDate: null,
-    description: "[Draft to confirm] Install street lights to boost public safety.",
+    description: "Install street lights to boost public safety.",
     evidenceNote: "Source: the 2022 campaign platform (#KaziKwaMpango). A pledge made as a candidate, not yet delivered.",
   },
   {
@@ -195,7 +195,7 @@ const promises = [
     status: 'Not started',
     dateMade: null,
     targetDate: null,
-    description: "[Draft to confirm] Provide residents with reliable access to clean, safe drinking water.",
+    description: "Provide residents with reliable access to clean, safe drinking water.",
     evidenceNote: "Source: the 2022 campaign platform (#KaziKwaMpango). A pledge made as a candidate, not yet delivered.",
   },
   {
@@ -204,7 +204,7 @@ const promises = [
     status: 'Not started',
     dateMade: null,
     targetDate: null,
-    description: "[Draft to confirm] Start dedicated programmes for women and youth built on financial inclusion, access to information technology, and community programmes.",
+    description: "Start dedicated programmes for women and youth built on financial inclusion, access to information technology, and community programmes.",
     evidenceNote: "Source: the 2022 campaign platform (#KaziKwaMpango). A pledge made as a candidate, not yet delivered.",
   },
 ];
