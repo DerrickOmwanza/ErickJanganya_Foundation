@@ -387,6 +387,54 @@ function initVerifySteps() {
   });
 }
 
+// In-page index bar (.page-index): marks the link of the section currently in view (the last section whose
+// top has passed a line just under the sticky bar), hides links whose section is hidden, and keeps the active
+// link visible inside the bar when it scrolls sideways on small screens.
+function initPageIndex() {
+  document.querySelectorAll('.page-index').forEach(function (nav) {
+    var links = Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]'));
+    var items = links.map(function (a) {
+      return { link: a, li: a.closest('li'), target: document.getElementById(a.getAttribute('href').slice(1)) };
+    }).filter(function (it) { return it.target; });
+    if (!items.length) return;
+
+    function isShown(it) { return !it.target.hidden && it.target.offsetParent !== null; }
+    function refreshVisibility() { items.forEach(function (it) { if (it.li) it.li.hidden = !isShown(it); }); }
+
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var line = nav.getBoundingClientRect().bottom + 24;
+      var current = null;
+      items.forEach(function (it) {
+        if (isShown(it) && it.target.getBoundingClientRect().top <= line) current = it;
+      });
+      var nearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+      if (nearBottom) { for (var i = items.length - 1; i >= 0; i--) { if (isShown(items[i])) { current = items[i]; break; } } }
+      items.forEach(function (it) {
+        var on = it === current;
+        it.link.classList.toggle('is-active', on);
+        if (on) { it.link.setAttribute('aria-current', 'true'); } else { it.link.removeAttribute('aria-current'); }
+      });
+      var box = nav.querySelector('.page-index-inner');
+      if (current && box && box.scrollWidth > box.clientWidth) {
+        var l = current.link.offsetLeft, w = current.link.offsetWidth;
+        if (l < box.scrollLeft || l + w > box.scrollLeft + box.clientWidth) box.scrollTo({ left: Math.max(0, l - 24), behavior: 'auto' });
+      }
+    }
+    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+
+    refreshVisibility();
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    if (window.MutationObserver) {
+      var mo = new MutationObserver(function () { refreshVisibility(); onScroll(); });
+      items.forEach(function (it) { mo.observe(it.target, { attributes: true, attributeFilter: ['hidden'] }); });
+    }
+  });
+}
+
 // Vision's Priorities selector: a vertical tab list (click, hover on pointer devices, arrow keys) that shows
 // one priority panel at a time. Without JS, or on narrow screens (CSS hides the list there), every panel is
 // simply visible as a stacked card.
@@ -491,4 +539,5 @@ document.addEventListener('DOMContentLoaded', function () {
   initVerifySteps();
   initMapFrames();
   initPriorityTabs();
+  initPageIndex();
 });

@@ -719,6 +719,30 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .where-fact--lead .where-hint[hidden]{display:none;}
 .where-hint i{color:var(--red);margin-right:6px;}
 
+/* In-page index (vision.html): a bar that sticks under the fixed header, with the current section highlighted.
+   On narrow screens the links scroll sideways inside the bar. */
+.has-page-index section[id]{scroll-margin-top:140px;}
+.page-index{position:sticky;top:80px;z-index:40;background:#fff;border-bottom:1px solid var(--line);}
+.page-index-inner{display:flex;align-items:center;gap:28px;overflow-x:auto;scrollbar-width:none;}
+.page-index-inner::-webkit-scrollbar{display:none;}
+.page-index-label{flex:none;font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mute);}
+.page-index ul{list-style:none;margin:0;padding:0;display:flex;gap:6px;}
+.page-index li[hidden]{display:none;}
+.page-index a{position:relative;display:block;padding:17px 14px;font-size:14.5px;font-weight:600;color:var(--ink-soft);white-space:nowrap;transition:color .2s ease;}
+.page-index a::after{content:"";position:absolute;left:14px;right:14px;bottom:-1px;height:3px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .3s ease;}
+.page-index a:hover,.page-index a:focus-visible{color:var(--ink-black);}
+.page-index a:focus-visible{outline:3px solid var(--yellow);outline-offset:-3px;}
+.page-index a.is-active{color:var(--ink-black);}
+.page-index a.is-active::after{transform:scaleX(1);}
+@media (prefers-reduced-motion: reduce){.page-index a,.page-index a::after{transition:none;}}
+@media (max-width:960px){
+  .page-index{top:67px;}
+  .has-page-index section[id]{scroll-margin-top:128px;}
+  .page-index-label{display:none;}
+  .page-index-inner{gap:0;}
+  .page-index a{padding:15px 12px;}
+}
+
 /* Ward details under the chips (js/vision-live.js): live project counts for the selected ward. */
 .where-fact--lead .ward-detail{display:block;margin-top:22px;padding:20px 22px;border:1px solid var(--line);border-left:4px solid var(--red);font-size:15px;font-weight:500;color:var(--ink-black);}
 .where-fact--lead .ward-detail[hidden]{display:none;}
