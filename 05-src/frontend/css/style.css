@@ -725,6 +725,22 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .where-fact--lead .where-hint[hidden]{display:none;}
 .where-hint i{color:var(--red);margin-right:6px;}
 
+/* Plans It Connects To (vision.html): three tiers, national to constituency. Each row says what the plan is and
+   holds a dashed slot for how Erick's priorities connect to it (to be confirmed). */
+.plans-list{list-style:none;margin:48px 0 0;padding:0;border-top:3px solid var(--ink-black);}
+.plan-row{display:grid;grid-template-columns:190px minmax(0,1.1fr) minmax(0,.9fr);gap:0 48px;align-items:start;padding:36px 0;border-bottom:1px solid var(--line);}
+.plan-level{display:flex;flex-direction:column;gap:6px;font-family:var(--font-display);font-weight:600;font-size:22px;letter-spacing:.04em;text-transform:uppercase;color:var(--red);}
+.plan-level b{font-size:15px;letter-spacing:.1em;color:var(--ink-mute);}
+.plan-main h3{font-family:var(--font-h);font-weight:700;font-size:clamp(24px,2.4vw,32px);line-height:1.18;margin:0 0 12px;}
+.plan-main p{font-size:16.5px;font-weight:500;line-height:1.65;color:var(--ink-soft);margin:0;max-width:520px;}
+.plan-slot{padding:20px 22px;border:1.5px dashed var(--ink-mute);}
+.plan-slot-label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:8px;}
+.plan-slot p{margin:0;font-size:15.5px;line-height:1.55;font-style:italic;color:var(--ink-soft);}
+@media (max-width:960px){
+  .plan-row{grid-template-columns:1fr;gap:16px;padding:30px 0;}
+  .plan-level{flex-direction:row;align-items:baseline;gap:12px;}
+}
+
 /* In-page index (vision.html): a bar that sticks under the fixed header, with the current section highlighted.
    On narrow screens the links scroll sideways inside the bar. */
 .has-page-index section[id]{scroll-margin-top:140px;}
