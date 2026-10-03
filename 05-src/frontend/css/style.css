@@ -726,14 +726,6 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .where-hint i{color:var(--red);margin-right:6px;}
 
 /* Your input + Questions (vision.html). The form reuses the underline field style of the newsletter signup. */
-.insider-field select,.insider-field textarea{width:100%;border:none;border-bottom:2px solid var(--ink-black);background:transparent;padding:8px 2px;font-size:16.5px;color:var(--ink-black);font-family:var(--font-b);border-radius:0;}
-.insider-field textarea{resize:vertical;min-height:96px;line-height:1.5;}
-.insider-field select:focus,.insider-field textarea:focus{outline:none;border-bottom-color:var(--blue);}
-.vision-input-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:72px;align-items:start;}
-.vision-input-copy h2{font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:clamp(36px,4.6vw,64px);line-height:.98;letter-spacing:-.01em;margin:6px 0 20px;}
-.vision-input-copy p{font-size:clamp(17px,1.4vw,19px);line-height:1.65;color:var(--ink-soft);max-width:460px;}
-.vision-input-form{max-width:520px;}
-.vision-input-form .insider-field{margin-bottom:34px;}
 .faq-list{margin-top:44px;border-top:3px solid var(--ink-black);max-width:900px;}
 .faq-item{border-bottom:1px solid var(--line);}
 .faq-item summary{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:26px 0;font-family:var(--font-display);font-weight:600;font-size:clamp(22px,2.2vw,28px);line-height:1.2;cursor:pointer;list-style:none;}
@@ -745,8 +737,63 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .faq-item p{margin:0 0 28px;max-width:720px;font-size:17px;font-weight:500;line-height:1.7;color:var(--ink-soft);}
 .faq-item p a{color:var(--ink-black);font-weight:700;text-decoration:underline;text-underline-offset:3px;}
 .faq-item p a:hover{color:var(--red);}
+
+/* Your input (vision.html): a cream band, framing text and steps on the left, a form card on the right.
+   Ward and topic are chip radio groups; fields validate as you leave them; a thank-you panel replaces the form. */
+.vision-input{background:#F5F3EC;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:96px 0 104px;}
+.vision-input-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:72px;align-items:start;}
+.vi-kicker{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:16px;}
+.vision-input-copy h2{font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:clamp(38px,4.8vw,66px);line-height:.98;letter-spacing:-.01em;margin:0 0 22px;}
+.vision-input-copy>p{font-size:clamp(17px,1.4vw,19px);line-height:1.65;color:var(--ink-soft);max-width:440px;margin:0 0 36px;}
+.vi-steps{list-style:none;margin:0;padding:0;max-width:360px;}
+.vi-steps li{display:flex;align-items:center;gap:16px;padding:16px 0;border-top:1px solid rgba(0,0,0,.14);font-size:16.5px;font-weight:600;}
+.vi-steps li:last-child{border-bottom:1px solid rgba(0,0,0,.14);}
+.vi-steps b{flex:none;display:flex;align-items:center;justify-content:center;width:34px;height:34px;border:1.5px solid var(--ink-black);font-family:var(--font-display);font-size:16px;font-weight:600;}
+.vi-card{position:relative;background:#fff;border:1px solid var(--line);border-top:4px solid var(--red);padding:44px 44px 40px;box-shadow:0 18px 40px rgba(0,0,0,.06);}
+.vi-group{border:0;margin:0 0 30px;padding:0;min-width:0;}
+.vi-group legend{padding:0;margin-bottom:12px;font-size:15px;font-weight:700;color:var(--ink-black);}
+.vi-group legend em{font-style:normal;font-weight:500;font-size:13px;color:var(--ink-mute);margin-left:6px;}
+.vi-chips{display:flex;flex-wrap:wrap;gap:8px;}
+.vi-chip{position:relative;display:inline-block;cursor:pointer;}
+.vi-chip input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer;}
+.vi-chip span{display:block;padding:10px 16px;border:1.5px solid #cfcdc4;background:#fff;font-size:14.5px;font-weight:600;line-height:1.2;color:var(--ink-black);transition:border-color .15s ease,background .15s ease,color .15s ease;}
+.vi-chip:hover span{border-color:var(--ink-black);}
+.vi-chip input:checked+span{background:var(--ink-black);border-color:var(--ink-black);color:#fff;}
+.vi-chip input:focus-visible+span{outline:3px solid var(--yellow);outline-offset:2px;}
+.vi-field{margin-bottom:26px;min-width:0;}
+.vi-field label{display:block;margin-bottom:8px;font-size:15px;font-weight:700;color:var(--ink-black);}
+.vi-field input,.vi-field textarea{display:block;width:100%;padding:14px 16px;border:1.5px solid #cfcdc4;border-radius:0;background:#fff;font-family:var(--font-b);font-size:16.5px;line-height:1.5;color:var(--ink-black);transition:border-color .15s ease,box-shadow .15s ease;}
+.vi-field input::placeholder,.vi-field textarea::placeholder{color:var(--ink-mute);}
+.vi-field input:hover,.vi-field textarea:hover{border-color:#9c9a90;}
+.vi-field input:focus,.vi-field textarea:focus{outline:none;border-color:var(--ink-black);box-shadow:0 0 0 3px rgba(255,189,18,.55);}
+.vi-field textarea{resize:none;min-height:132px;overflow:hidden;}
+.vi-field.has-error input,.vi-field.has-error textarea{border-color:var(--red);}
+.vi-meta{display:flex;justify-content:space-between;gap:16px;margin-top:6px;min-height:20px;}
+.vi-error{display:block;min-height:0;font-size:13.5px;font-weight:600;color:var(--red);margin-top:6px;}
+.vi-meta .vi-error{margin-top:0;}
+.vi-count{flex:none;margin-left:auto;font-size:13px;color:var(--ink-mute);}
+.vi-count.is-near{color:var(--red);font-weight:600;}
+.vi-row{display:grid;grid-template-columns:1fr 1fr;gap:0 20px;}
+.vi-submit{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:18px 28px;border:2px solid var(--ink-black);background:var(--ink-black);color:#fff;font-family:var(--font-display);font-weight:600;font-size:21px;letter-spacing:.02em;cursor:pointer;transition:background .2s ease,color .2s ease,border-color .2s ease,gap .2s ease;}
+.vi-submit:hover,.vi-submit:focus-visible{background:var(--yellow);border-color:var(--yellow);color:#000;gap:16px;}
+.vi-submit:focus-visible{outline:3px solid var(--ink-black);outline-offset:3px;}
+.vi-submit:disabled{opacity:.7;cursor:progress;}
+.vi-card .form-note{margin-top:16px;}
+.vi-success{text-align:left;padding:12px 0 8px;animation:viIn .45s ease;}
+.vi-success[hidden]{display:none;}
+.vi-success-icon{display:flex;align-items:center;justify-content:center;width:64px;height:64px;margin-bottom:24px;background:var(--ink-black);color:#fff;font-size:26px;}
+.vi-success h3{font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:clamp(34px,3.6vw,48px);line-height:1;margin:0 0 14px;}
+.vi-success p{font-size:18px;line-height:1.6;color:var(--ink-soft);max-width:440px;margin:0 0 28px;}
+.vi-again{padding:13px 22px;border:1.5px solid var(--ink-black);background:#fff;color:var(--ink-black);font:inherit;font-weight:700;font-size:15px;cursor:pointer;transition:background .2s ease,color .2s ease;}
+.vi-again:hover,.vi-again:focus-visible{background:var(--ink-black);color:#fff;}
+@keyframes viIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+@media (prefers-reduced-motion: reduce){.vi-success{animation:none;}.vi-chip span,.vi-field input,.vi-field textarea,.vi-submit{transition:none;}}
 @media (max-width:960px){
-  .vision-input-grid{grid-template-columns:1fr;gap:36px;}
+  .vision-input{padding:64px 0 72px;}
+  .vision-input-grid{grid-template-columns:1fr;gap:40px;}
+  .vi-card{padding:30px 22px 28px;}
+  .vi-row{grid-template-columns:1fr;}
+  .vi-chip span{padding:13px 16px;}
 }
 
 /* Plans It Connects To (vision.html): three tiers, national to constituency. Each row says what the plan is and

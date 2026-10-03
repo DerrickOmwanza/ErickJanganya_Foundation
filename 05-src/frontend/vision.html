@@ -500,49 +500,76 @@
     </div>
   </section>
 
-  <!-- Your input (added 2026-10-03): a vision for a constituency should show it was shaped by the people in it. The
-       form posts to the existing /api/contact endpoint (no backend change) with the subject "Vision input:
-       <ward>", wired in js/forms.js (#visionInputForm). WHO READS AND ANSWERS these submissions is a decision
-       for the team: they arrive as contact submissions (admin GET /api/contact). -->
+  <!-- Your input. Redesigned 2026-10-04: a calm cream band with the framing text and three quick steps on the
+       left and a form card on the right. Ward and topic are tap-to-choose chips, the message grows as you type
+       and counts characters, fields validate as you leave them, the draft survives a refresh (sessionStorage),
+       a ward picked on the map above pre-selects here, and a thank-you panel replaces the form on success. It
+       still posts to the existing /api/contact endpoint (subject "Vision input: <ward>, <topic>"); the
+       behaviour lives in js/forms.js (#visionInputForm). Who reads these submissions is the team's call: they
+       arrive as contact submissions (admin GET /api/contact). -->
   <section class="section-tight vision-input" id="input">
     <div class="container">
-      <div class="section-rule"></div>
       <div class="vision-input-grid">
         <div class="vision-input-copy">
-          <span class="verify-kicker" style="color:var(--red);">Your input</span>
+          <span class="vi-kicker">Your input</span>
           <h2>Tell us what's missing</h2>
           <p>A vision for Embakasi South should be shaped by the people who live here. If something that matters to your ward is missing from these priorities, tell us.</p>
+          <ol class="vi-steps">
+            <li><b>1</b><span>Pick your ward</span></li>
+            <li><b>2</b><span>Say what's missing</span></li>
+            <li><b>3</b><span>Send it, in about a minute</span></li>
+          </ol>
         </div>
-        <form class="insider-form vision-input-form" id="visionInputForm" novalidate>
-          <div class="insider-field">
-            <label for="vi-name">Your name</label>
-            <input type="text" id="vi-name" name="name" required>
+        <div class="vi-card" id="viCard">
+          <form class="vi-form" id="visionInputForm" novalidate>
+            <fieldset class="vi-group">
+              <legend>Where do you live? <em>Optional</em></legend>
+              <div class="vi-chips">
+              <label class="vi-chip"><input type="radio" name="ward" value="Imara Daima"><span>Imara Daima</span></label>
+              <label class="vi-chip"><input type="radio" name="ward" value="Kwa Njenga"><span>Kwa Njenga</span></label>
+              <label class="vi-chip"><input type="radio" name="ward" value="Kwa Reuben"><span>Kwa Reuben</span></label>
+              <label class="vi-chip"><input type="radio" name="ward" value="Pipeline"><span>Pipeline</span></label>
+              <label class="vi-chip"><input type="radio" name="ward" value="Kware"><span>Kware</span></label>
+              <label class="vi-chip"><input type="radio" name="ward" value="Outside Embakasi South"><span>Outside Embakasi South</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="vi-group">
+              <legend>What is it about? <em>Optional</em></legend>
+              <div class="vi-chips">
+              <label class="vi-chip"><input type="radio" name="topic" value="Healthcare"><span>Healthcare</span></label>
+              <label class="vi-chip"><input type="radio" name="topic" value="Education"><span>Education</span></label>
+              <label class="vi-chip"><input type="radio" name="topic" value="Housing & Infrastructure"><span>Housing &amp; Infrastructure</span></label>
+              <label class="vi-chip"><input type="radio" name="topic" value="Youth & Employment"><span>Youth &amp; Employment</span></label>
+              <label class="vi-chip"><input type="radio" name="topic" value="Something else"><span>Something else</span></label>
+              </div>
+            </fieldset>
+            <div class="vi-field">
+              <label for="vi-message">What should the vision include?</label>
+              <textarea id="vi-message" name="message" rows="4" maxlength="1000" placeholder="A few words is enough." required aria-describedby="vi-message-err vi-count"></textarea>
+              <div class="vi-meta"><span class="vi-error" id="vi-message-err" role="alert"></span><span class="vi-count" id="vi-count">0 / 1000</span></div>
+            </div>
+            <div class="vi-row">
+              <div class="vi-field">
+                <label for="vi-name">Your name</label>
+                <input type="text" id="vi-name" name="name" autocomplete="name" required aria-describedby="vi-name-err">
+                <span class="vi-error" id="vi-name-err" role="alert"></span>
+              </div>
+              <div class="vi-field">
+                <label for="vi-email">Email</label>
+                <input type="email" id="vi-email" name="email" autocomplete="email" required aria-describedby="vi-email-err">
+                <span class="vi-error" id="vi-email-err" role="alert"></span>
+              </div>
+            </div>
+            <button type="submit" class="vi-submit">Send my suggestion <i class="fa-solid fa-arrow-right"></i></button>
+            <p class="form-note" id="visionInputNote" hidden></p>
+          </form>
+          <div class="vi-success" id="viSuccess" hidden tabindex="-1">
+            <span class="vi-success-icon" aria-hidden="true"><i class="fa-solid fa-check"></i></span>
+            <h3 id="viSuccessTitle">Thank you.</h3>
+            <p id="viSuccessText">Your suggestion has been received.</p>
+            <button type="button" class="vi-again" id="viAgain">Send another suggestion</button>
           </div>
-          <div class="insider-field">
-            <label for="vi-email">Email</label>
-            <input type="email" id="vi-email" name="email" required>
-          </div>
-          <div class="insider-field">
-            <label for="vi-ward">Your ward</label>
-            <select id="vi-ward" name="ward">
-              <option value="">Choose your ward</option>
-              <option value="Imara Daima">Imara Daima</option>
-              <option value="Kwa Njenga">Kwa Njenga</option>
-              <option value="Kwa Reuben">Kwa Reuben</option>
-              <option value="Pipeline">Pipeline</option>
-              <option value="Kware">Kware</option>
-              <option value="Outside Embakasi South">I live outside Embakasi South</option>
-            </select>
-          </div>
-          <div class="insider-field">
-            <label for="vi-message">What should the vision include?</label>
-            <textarea id="vi-message" name="message" rows="4" required></textarea>
-          </div>
-          <div class="insider-consent-row">
-            <button type="submit" class="btn btn-outline insider-submit">Send my suggestion</button>
-          </div>
-          <p class="form-note" id="visionInputNote" hidden></p>
-        </form>
+        </div>
       </div>
     </div>
   </section>

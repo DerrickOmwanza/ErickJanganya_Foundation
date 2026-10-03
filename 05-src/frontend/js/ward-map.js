@@ -152,6 +152,8 @@
       }
       renderStatus();
       renderDetail();
+      // Lets other parts of the page react (the Vision form pre-selects this ward).
+      window.dispatchEvent(new CustomEvent('ward-selected', { detail: { name: current ? names[current] : null } }));
     }
 
     chips.forEach(function (chip) {
