@@ -76,42 +76,136 @@ const trackerProjects = [
   },
 ];
 
+// Promises: Erick's 2022 campaign platform (#KaziKwaMpango), summarised from public posts. These are real
+// pledges he made as a candidate, but the wording is a DRAFT summary and must be confirmed with Erick before
+// launch (each description starts with "[Draft to confirm]"). None can show progress until he holds the seat,
+// so every status is "Not started"; dateMade and targetDate stay empty because the exact dates are unconfirmed.
 const promises = [
   {
-    title: 'Rehabilitate the Imara Daima footbridge',
-    category: 'Infrastructure',
-    status: 'In progress',
-    dateMade: new Date('2026-01-15'),
-    targetDate: new Date('2026-08-31'),
-    description: '[Placeholder] Commitment made during the Imara Daima community forum to repair the footbridge within the year.',
-    evidenceNote: 'Linked to the active Development Tracker project.',
-  },
-  {
-    title: 'Open a youth skills hub in Kwa Njenga',
-    category: 'Youth & Employment',
-    status: 'In progress',
-    dateMade: new Date('2026-02-01'),
-    targetDate: new Date('2026-12-31'),
-    description: '[Placeholder] Promise made at the 2026 youth roundtable to establish a dedicated training space.',
-    evidenceNote: 'Construction and program design underway.',
-  },
-  {
-    title: 'Deliver quarterly free medical camps across all five wards',
-    category: 'Health',
-    status: 'In progress',
-    dateMade: new Date('2025-12-01'),
-    targetDate: null,
-    description: '[Placeholder] Standing commitment to rotate free health outreach camps through Imara Daima, Kwa Njenga, Kwa Reuben, Pipeline, and Kware.',
-    evidenceNote: 'Kware camp series currently active; other wards to follow.',
-  },
-  {
-    title: 'Expand public water access in Kwa Reuben',
-    category: 'Water & Sanitation',
+    title: "Build decent ECDE classrooms",
+    category: "Education",
     status: 'Not started',
-    dateMade: new Date('2026-03-10'),
-    targetDate: new Date('2027-01-31'),
-    description: '[Placeholder] Commitment to add public water points in underserved sections of Kwa Reuben.',
-    evidenceNote: 'Site surveys not yet scheduled.',
+    dateMade: null,
+    targetDate: null,
+    description: "[Draft to confirm] Construct decent Early Childhood Development Education (ECDE) classrooms in Embakasi South.",
+    evidenceNote: "Source: the 2022 campaign platform (#KaziKwaMpango). A pledge made as a candidate, not yet delivered.",
+  },
+  {
+    title: "Employ trained ECDE teachers on permanent terms, paid on time",
+    category: "Education",
+    status: 'Not started',
+    dateMade: null,
+    targetDate: null,
+    description: "[Draft to confirm] Employ trained ECDE teachers on permanent terms, with timely pay.",
+    evidenceNote: "Source: the 2022 campaign platform (#KaziKwaMpango). A pledge made as a candidate, not yet delivered.",
+  },
+  {
+    title: "Provide the learning resources ECDE classes need",
+    category: "Education",
+    status: 'Not started',
+    dateMade: null,
+    targetDate: null,
+    description: "[Draft to confirm] Make sure ECDE classes have the learning resources they need.",
+    evidenceNote: "Source: the 2022 campaign platform (#KaziKwaMpango). A pledge made as a candidate, not yet delivered.",
+  },
+  {
+    title: "Allocate bursaries fairly to underprivileged students",
+    category: "Education",
+    status: 'Not started',
+    dateMade: null,
+    targetDate: null,
+    description: "[Draft to confirm] Ensure the fair allocation of bursaries so underprivileged students are supported.",
+    evidenceNote: "Source: the 2022 campaign platform (#KaziKwaMpango). A pledge made as a candidate, not yet delivered.",
+  },
+  {
+    title: "Fully equip every hospital in Embakasi South with medication",
+    category: "Health",
+    status: 'Not started',
+    dateMade: null,
+    targetDate: null,
+    description: "[Draft to confirm] Fully equip all hospitals within Embakasi South with medication.",
+    evidenceNote: "Source: the 2022 campaign platform (#KaziKwaMpango). A pledge made as a candidate, not yet delivered.",
+  },
+  {
+    title: "Upgrade and promote sub-county hospitals",
+    category: "Health",
+    status: 'Not started',
+    dateMade: null,
+    targetDate: null,
+    description: "[Draft to confirm] Upgrade and promote the sub-county hospitals serving Embakasi South.",
+    evidenceNote: "Source: the 2022 campaign platform (#KaziKwaMpango). A pledge made as a candidate, not yet delivered.",
+  },
+  {
+    title: "Acquire ambulances to expand emergency response",
+    category: "Health",
+    status: 'Not started',
+    dateMade: null,
+    targetDate: null,
+    description: "[Draft to confirm] Expand emergency capability by acquiring ambulances.",
+    evidenceNote: "Source: the 2022 campaign platform (#KaziKwaMpango). A pledge made as a candidate, not yet delivered.",
+  },
+  {
+    title: "Compensate Community Health Workers reasonably",
+    category: "Health",
+    status: 'Not started',
+    dateMade: null,
+    targetDate: null,
+    description: "[Draft to confirm] Pay Community Health Workers reasonable compensation for their work.",
+    evidenceNote: "Source: the 2022 campaign platform (#KaziKwaMpango). A pledge made as a candidate, not yet delivered.",
+  },
+  {
+    title: "Build modern public hygiene facilities",
+    category: "Water & Sanitation",
+    status: 'Not started',
+    dateMade: null,
+    targetDate: null,
+    description: "[Draft to confirm] Build modern public hygiene facilities to improve sanitation across the constituency.",
+    evidenceNote: "Source: the 2022 campaign platform (#KaziKwaMpango). A pledge made as a candidate, not yet delivered.",
+  },
+  {
+    title: "Improve the local road network",
+    category: "Infrastructure",
+    status: 'Not started',
+    dateMade: null,
+    targetDate: null,
+    description: "[Draft to confirm] Improve the road network within Embakasi South.",
+    evidenceNote: "Source: the 2022 campaign platform (#KaziKwaMpango). A pledge made as a candidate, not yet delivered.",
+  },
+  {
+    title: "Build additional police posts",
+    category: "Infrastructure",
+    status: 'Not started',
+    dateMade: null,
+    targetDate: null,
+    description: "[Draft to confirm] Strengthen security infrastructure by building additional police posts.",
+    evidenceNote: "Source: the 2022 campaign platform (#KaziKwaMpango). A pledge made as a candidate, not yet delivered.",
+  },
+  {
+    title: "Install street lights to improve public safety",
+    category: "Infrastructure",
+    status: 'Not started',
+    dateMade: null,
+    targetDate: null,
+    description: "[Draft to confirm] Install street lights to boost public safety.",
+    evidenceNote: "Source: the 2022 campaign platform (#KaziKwaMpango). A pledge made as a candidate, not yet delivered.",
+  },
+  {
+    title: "Provide reliable access to clean, safe drinking water",
+    category: "Water & Sanitation",
+    status: 'Not started',
+    dateMade: null,
+    targetDate: null,
+    description: "[Draft to confirm] Provide residents with reliable access to clean, safe drinking water.",
+    evidenceNote: "Source: the 2022 campaign platform (#KaziKwaMpango). A pledge made as a candidate, not yet delivered.",
+  },
+  {
+    title: "Launch empowerment programmes for women and youth",
+    category: "Youth & Employment",
+    status: 'Not started',
+    dateMade: null,
+    targetDate: null,
+    description: "[Draft to confirm] Start dedicated programmes for women and youth built on financial inclusion, access to information technology, and community programmes.",
+    evidenceNote: "Source: the 2022 campaign platform (#KaziKwaMpango). A pledge made as a candidate, not yet delivered.",
   },
 ];
 
@@ -180,18 +274,10 @@ async function main() {
     createdProjects.push(created);
   }
 
-  const findProjectId = (wardName) => createdProjects.find((p) => p.ward === wardName)?.id ?? null;
 
-  await prisma.promisePledge.create({
-    data: { ...promises[0], linkedProjectId: findProjectId('Imara Daima') },
-  });
-  await prisma.promisePledge.create({
-    data: { ...promises[1], linkedProjectId: findProjectId('Kwa Njenga') },
-  });
-  await prisma.promisePledge.create({ data: promises[2] });
-  await prisma.promisePledge.create({
-    data: { ...promises[3], linkedProjectId: findProjectId('Kwa Reuben') },
-  });
+  for (const promise of promises) {
+    await prisma.promisePledge.create({ data: promise });
+  }
 
   for (const post of newsPosts) {
     await prisma.newsPost.create({ data: post });

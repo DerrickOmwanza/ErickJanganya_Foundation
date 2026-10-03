@@ -45,15 +45,21 @@ window.ApiClient = (function () {
     });
   }
 
-  // The API still holds placeholder seed records (text starting with "[Placeholder]"). Anything that shows
-  // counts or figures as fact should pass lists through realOnly() so sample data never reads as the real
-  // record; once real records replace the seed data they flow through untouched.
+  // The API holds placeholder seed records (text starting with "[Placeholder]") while the site is being built,
+  // so real updates can later drop straight into the same slots. Pages that show counts or figures pass lists
+  // through realOnly(). HIDE_PLACEHOLDERS is the single switch: false while building (placeholders show, and
+  // pages label them as sample data), true at launch (they disappear from every count and list that uses
+  // realOnly()). Flip it to true when the site goes public.
+  var HIDE_PLACEHOLDERS = false;
   function isPlaceholder(rec) {
     return [rec && rec.title, rec && rec.summary, rec && rec.description].some(function (t) {
       return String(t || '').trim().toLowerCase().indexOf('[placeholder]') === 0;
     });
   }
-  function realOnly(items) { return (items || []).filter(function (r) { return !isPlaceholder(r); }); }
+  function realOnly(items) {
+    var list = items || [];
+    return HIDE_PLACEHOLDERS ? list.filter(function (r) { return !isPlaceholder(r); }) : list;
+  }
 
   return { get: get, post: post, API_BASE: API_BASE, isPlaceholder: isPlaceholder, realOnly: realOnly };
 })();

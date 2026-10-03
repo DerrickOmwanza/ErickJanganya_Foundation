@@ -1,25 +1,27 @@
 // Live record for the Vision page: feeds the "Where things stand today" strip and the per-ward details on the
 // ward map. Real counts come from the Development Tracker and Promise Scorecard APIs.
 //
-// IMPORTANT: the API still holds placeholder seed records (their text starts with "[Placeholder]"). Those are
-// hidden here so sample figures are never shown to visitors as fact; the strip stays hidden and ward details
-// say nothing has been published yet, until real records exist. To review the components with the sample
-// records, open vision.html?sample=1 (everything is then labelled "Sample data").
+// While the site is being built the API holds placeholder seed records (text starting with "[Placeholder]") so
+// real updates can drop into the same slots later. They are shown here, labelled "Sample data" whenever any
+// placeholder is on screen (the label disappears by itself once real records replace them). At launch, flip
+// HIDE_PLACEHOLDERS in js/api.js to true and they are filtered out (the strip then stays hidden until real
+// records exist, and wards say nothing has been published yet).
 (function () {
   'use strict';
   var WARD_TOTAL = 5;
-  var sampleMode = new URLSearchParams(window.location.search).get('sample') === '1';
   var strip = document.getElementById('liveStrip');
 
-  function keep(items) { return sampleMode ? items : window.ApiClient.realOnly(items); }
+  function keep(items) { return window.ApiClient.realOnly(items); }
+  function anyPlaceholder(items) { return items.some(window.ApiClient.isPlaceholder); }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
 
   var ready = (!window.ApiClient ? Promise.reject(new Error('no api client')) : Promise.all([
     window.ApiClient.get('/tracker', { limit: 200 }),
     window.ApiClient.get('/promises', { limit: 200 })
   ])).then(function (res) {
-    var data = { projects: keep(res[0].items || []), promises: keep(res[1].items || []), sample: sampleMode };
-    return data;
+    var projects = keep(res[0].items || []);
+    var promises = keep(res[1].items || []);
+    return { projects: projects, promises: promises, sample: anyPlaceholder(projects) || anyPlaceholder(promises) };
   });
 
   function animateCount(el, target) {
@@ -63,7 +65,7 @@
       return '<p class="ward-detail-empty">The live record could not be loaded right now.</p>' + link;
     }
     var items = data.projects.filter(function (p) { return p.ward === wardName; });
-    var sample = data.sample ? '<span class="ward-detail-sample">Sample data</span>' : '';
+    var sample = anyPlaceholder(items) ? '<span class="ward-detail-sample">Sample data</span>' : '';
     if (!items.length) {
       return sample + '<p class="ward-detail-empty">No published records for this ward yet.</p>' + link;
     }
