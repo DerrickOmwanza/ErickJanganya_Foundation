@@ -435,6 +435,20 @@ function initPageIndex() {
   });
 }
 
+// FAQ accordions (.faq-list): opening one question closes the others. The items also carry a shared name
+// attribute, which browsers with native exclusive details support on their own; this keeps older ones in line.
+function initFaqAccordion() {
+  document.querySelectorAll('.faq-list').forEach(function (list) {
+    var items = Array.prototype.slice.call(list.querySelectorAll('details'));
+    items.forEach(function (d) {
+      d.addEventListener('toggle', function () {
+        if (!d.open) return;
+        items.forEach(function (other) { if (other !== d && other.open) other.open = false; });
+      });
+    });
+  });
+}
+
 // Vision's Priorities selector: a vertical tab list (click, hover on pointer devices, arrow keys) that shows
 // one priority panel at a time. Without JS, or on narrow screens (CSS hides the list there), every panel is
 // simply visible as a stacked card.
@@ -540,4 +554,5 @@ document.addEventListener('DOMContentLoaded', function () {
   initMapFrames();
   initPriorityTabs();
   initPageIndex();
+  initFaqAccordion();
 });
