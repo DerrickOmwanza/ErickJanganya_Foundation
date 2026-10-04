@@ -1,16 +1,24 @@
-// Renders the Development Tracker grid from the live API. Requires api.js
+// Renders the Development Tracker from the live API: the hero "at a glance" panel, the filter toolbar (search,
+// status / ward / category chips with live counts, sort, result count, clear) and the project grid. Filters can be
+// shared as links, e.g. tracker.html?ward=Kware,Pipeline&status=Ongoing&q=water. Requires api.js
 // (window.ApiClient, window.FoundationUtils) to be loaded first.
 (function () {
   var grid = document.getElementById('trackerGrid');
   if (!grid) return; // not on this page
 
   var stateEl = document.getElementById('trackerState');
-  var wardSelect = document.getElementById('filterWard');
-  var categorySelect = document.getElementById('filterCategory');
-  var statusSelect = document.getElementById('filterStatus');
+  var filtersEl = document.getElementById('trackerFilters');
+  var searchEl = document.getElementById('tbSearch');
+  var sortEl = document.getElementById('tbSort');
+  var countEl = document.getElementById('tbCount');
+  var clearBtn = document.getElementById('tbClear');
 
   var U = window.FoundationUtils;
+  var WARDS = ['Imara Daima', 'Kwa Njenga', 'Kwa Reuben', 'Pipeline', 'Kware'];
+  var STATUSES = ['Planned', 'Ongoing', 'Completed'];
+  var SORTS = ['updated', 'progress', 'budget', 'title'];
   var allItems = [];
+  var state = { q: '', ward: [], category: [], status: [], sort: 'updated' };
 
   function badgeClass(status) {
     if (status === 'Completed') return 'badge-complete';
@@ -49,50 +57,6 @@
         '</div>' +
       '</div>'
     );
-  }
-
-  function setState(message, icon) {
-    if (!stateEl) return;
-    if (!message) { stateEl.hidden = true; return; }
-    stateEl.hidden = false;
-    stateEl.innerHTML = (icon ? '<i class="fa-solid ' + icon + '"></i>' : '') + U.escapeHtml(message);
-  }
-
-  function applyFiltersAndRender() {
-    var ward = wardSelect ? wardSelect.value : '';
-    var category = categorySelect ? categorySelect.value : '';
-    var status = statusSelect ? statusSelect.value : '';
-
-    var filtered = allItems.filter(function (p) {
-      return (!ward || p.ward === ward) && (!category || p.category === category) && (!status || p.status === status);
-    });
-
-    if (!filtered.length) {
-      grid.innerHTML = '';
-      setState('No projects match these filters yet.', 'fa-inbox');
-      return;
-    }
-    setState(null);
-    grid.innerHTML = filtered.map(renderCard).join('');
-    if (window.animateProgressBars) window.animateProgressBars();
-  }
-
-  function populateFilters() {
-    U.fillSelect(wardSelect, U.uniqueSorted(allItems.map(function (p) { return p.ward; })), 'All wards');
-    U.fillSelect(categorySelect, U.uniqueSorted(allItems.map(function (p) { return p.category; })), 'All categories');
-  }
-
-  // Lets other pages deep link into a filtered tracker, e.g. tracker.html?ward=Kware (used by the Vision
-  // page's ward map). Only values that exist in the filter dropdowns are applied.
-  function applyUrlFilters() {
-    var params = new URLSearchParams(window.location.search);
-    [['ward', wardSelect], ['category', categorySelect], ['status', statusSelect]].forEach(function (pair) {
-      var value = params.get(pair[0]);
-      var select = pair[1];
-      if (!value || !select) return;
-      var match = Array.prototype.some.call(select.options, function (o) { return o.value === value; });
-      if (match) select.value = value;
-    });
   }
 
   // Hero "at a glance" panel: totals across ALL projects (not just the filtered ones).
@@ -140,6 +104,152 @@
     if (!total) note.textContent = 'No projects have been published yet. Check back soon.';
   }
 
+  function setState(message, icon) {
+    if (!stateEl) return;
+    if (!message) { stateEl.hidden = true; return; }
+    stateEl.hidden = false;
+    stateEl.innerHTML = (icon ? '<i class="fa-solid ' + icon + '"></i>' : '') + U.escapeHtml(message);
+  }
+
+  // ----- Filtering -----
+
+  function hasFilters() {
+    return !!(state.q || state.ward.length || state.category.length || state.status.length);
+  }
+
+  // `skip` leaves one group out, so chip counts show what picking that chip WOULD give with the other filters on.
+  function matches(p, skip) {
+    if (skip !== 'ward' && state.ward.length && state.ward.indexOf(p.ward) < 0) return false;
+    if (skip !== 'category' && state.category.length && state.category.indexOf(p.category) < 0) return false;
+    if (skip !== 'status' && state.status.length && state.status.indexOf(p.status) < 0) return false;
+    if (state.q) {
+      var hay = [p.title, p.summary, p.ward, p.category, p.location, p.fundingSource, p.status].join(' ').toLowerCase();
+      if (hay.indexOf(state.q) < 0) return false;
+    }
+    return true;
+  }
+
+  function sorted(list) {
+    var by = {
+      updated: function (a, b) { return (Date.parse(b.updatedAt || '') || 0) - (Date.parse(a.updatedAt || '') || 0); },
+      progress: function (a, b) { return (Number(b.progressPercent) || 0) - (Number(a.progressPercent) || 0); },
+      budget: function (a, b) {
+        var x = a.budgetKes === null || a.budgetKes === undefined ? -1 : Number(a.budgetKes);
+        var y = b.budgetKes === null || b.budgetKes === undefined ? -1 : Number(b.budgetKes);
+        return y - x;
+      },
+      title: function (a, b) { return String(a.title).localeCompare(String(b.title)); }
+    };
+    return list.slice().sort(by[state.sort] || by.updated);
+  }
+
+  function updateChips() {
+    Array.prototype.forEach.call(filtersEl.querySelectorAll('.tb-chip'), function (chip) {
+      var group = chip.getAttribute('data-group'), value = chip.getAttribute('data-value');
+      var on = state[group].indexOf(value) >= 0;
+      var n = allItems.filter(function (p) { return matches(p, group) && p[group] === value; }).length;
+      chip.setAttribute('aria-pressed', on ? 'true' : 'false');
+      chip.classList.toggle('is-empty', n === 0 && !on);
+      chip.querySelector('.tb-n').textContent = n;
+    });
+  }
+
+  function syncUrl() {
+    var params = new URLSearchParams();
+    if (state.q) params.set('q', state.q);
+    ['ward', 'category', 'status'].forEach(function (g) { if (state[g].length) params.set(g, state[g].join(',')); });
+    if (state.sort !== 'updated') params.set('sort', state.sort);
+    var qs = params.toString();
+    try { history.replaceState(null, '', window.location.pathname + (qs ? '?' + qs : '') + window.location.hash); } catch (e) { /* ignore */ }
+  }
+
+  function render() {
+    var filtered = sorted(allItems.filter(function (p) { return matches(p); }));
+    var total = allItems.length;
+    countEl.textContent = hasFilters()
+      ? 'Showing ' + filtered.length + ' of ' + total + ' project' + (total === 1 ? '' : 's')
+      : total + ' project' + (total === 1 ? '' : 's');
+    clearBtn.hidden = !hasFilters();
+    updateChips();
+    syncUrl();
+
+    if (!filtered.length) {
+      grid.innerHTML = '';
+      stateEl.hidden = false;
+      stateEl.innerHTML = '<i class="fa-solid fa-inbox"></i>No projects match these filters. <button type="button" class="tb-inline-clear">Clear filters</button>';
+      return;
+    }
+    setState(null);
+    grid.innerHTML = filtered.map(renderCard).join('');
+    if (window.animateProgressBars) window.animateProgressBars();
+  }
+
+  function clearAll() {
+    state.q = ''; state.ward = []; state.category = []; state.status = [];
+    searchEl.value = '';
+    render();
+  }
+
+  function chip(group, value) {
+    return '<button type="button" class="tb-chip" data-group="' + group + '" data-value="' + U.escapeHtml(value) + '" aria-pressed="false">' +
+      U.escapeHtml(value) + ' <span class="tb-n">0</span></button>';
+  }
+
+  function buildChips() {
+    var wardList = WARDS.slice();
+    allItems.forEach(function (p) { if (p.ward && wardList.indexOf(p.ward) < 0) wardList.push(p.ward); });
+    var categories = U.uniqueSorted(allItems.map(function (p) { return p.category; }));
+    var groups = [
+      ['status', 'Status', STATUSES],
+      ['ward', 'Ward', wardList],
+      ['category', 'Category', categories]
+    ];
+    filtersEl.innerHTML = groups.map(function (g) {
+      return '<div class="tb-group"><span class="tb-label" id="tbl-' + g[0] + '">' + g[1] + '</span>' +
+        '<div class="tb-chips" role="group" aria-labelledby="tbl-' + g[0] + '">' + g[2].map(function (v) { return chip(g[0], v); }).join('') + '</div></div>';
+    }).join('');
+  }
+
+  // Filters in the address (shared links, and the Vision map's ward links). Comma separated values; only values
+  // that exist are applied.
+  function readUrl() {
+    var params = new URLSearchParams(window.location.search);
+    var valid = {};
+    Array.prototype.forEach.call(filtersEl.querySelectorAll('.tb-chip'), function (c) {
+      (valid[c.getAttribute('data-group')] = valid[c.getAttribute('data-group')] || []).push(c.getAttribute('data-value'));
+    });
+    ['ward', 'category', 'status'].forEach(function (g) {
+      var raw = params.get(g);
+      if (!raw) return;
+      state[g] = raw.split(',').filter(function (v) { return (valid[g] || []).indexOf(v) >= 0; });
+    });
+    var q = params.get('q');
+    if (q) { state.q = q.trim().toLowerCase(); searchEl.value = q.trim(); }
+    var s = params.get('sort');
+    if (s && SORTS.indexOf(s) >= 0) { state.sort = s; sortEl.value = s; }
+  }
+
+  function bind() {
+    filtersEl.addEventListener('click', function (e) {
+      var c = e.target.closest ? e.target.closest('.tb-chip') : null;
+      if (!c) return;
+      var g = c.getAttribute('data-group'), v = c.getAttribute('data-value');
+      var i = state[g].indexOf(v);
+      if (i >= 0) { state[g].splice(i, 1); } else { state[g].push(v); }
+      render();
+    });
+    var timer = null;
+    searchEl.addEventListener('input', function () {
+      clearTimeout(timer);
+      timer = setTimeout(function () { state.q = searchEl.value.trim().toLowerCase(); render(); }, 120);
+    });
+    sortEl.addEventListener('change', function () { state.sort = sortEl.value; render(); });
+    clearBtn.addEventListener('click', clearAll);
+    stateEl.addEventListener('click', function (e) {
+      if (e.target.classList && e.target.classList.contains('tb-inline-clear')) clearAll();
+    });
+  }
+
   function load() {
     grid.innerHTML = U.skeletonProjCards(6);
     setState(null);
@@ -149,24 +259,23 @@
         renderGlance(allItems, false);
         if (!allItems.length) {
           grid.innerHTML = '';
+          countEl.textContent = '0 projects';
           setState('No projects have been published yet. Check back soon.', 'fa-inbox');
           return;
         }
-        populateFilters();
-        applyUrlFilters();
-        applyFiltersAndRender();
+        buildChips();
+        readUrl();
+        render();
       })
       .catch(function (err) {
         console.error('Failed to load tracker projects:', err);
         renderGlance([], true);
         grid.innerHTML = '';
+        countEl.textContent = 'Projects unavailable';
         setState('Could not load projects right now. Make sure the backend is running, then refresh.', 'fa-triangle-exclamation');
       });
   }
 
-  [wardSelect, categorySelect, statusSelect].forEach(function (el) {
-    if (el) el.addEventListener('change', applyFiltersAndRender);
-  });
-
+  bind();
   document.addEventListener('DOMContentLoaded', load);
 })();

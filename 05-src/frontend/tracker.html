@@ -119,17 +119,30 @@
   <section class="section" id="projects">
     <div class="container">
       <h2 class="mega-header" style="font-size:clamp(34px,5.4vw,64px);">All Projects</h2>
-      <p class="mega-header-dek" style="margin-bottom:28px;">Filter by ward, category or status to find what you are looking for.</p>
+      <p class="mega-header-dek" style="margin-bottom:28px;">Search, or filter by status, ward and category. Any filtered view can be shared as a link.</p>
 
-      <div class="filter-bar">
-        <select id="filterWard" aria-label="Filter by ward"><option value="">All wards</option></select>
-        <select id="filterCategory" aria-label="Filter by category"><option value="">All categories</option></select>
-        <select id="filterStatus" aria-label="Filter by status">
-          <option value="">All statuses</option>
-          <option value="Ongoing">Ongoing</option>
-          <option value="Completed">Completed</option>
-          <option value="Planned">Planned</option>
-        </select>
+      <!-- Filter toolbar (js/tracker.js). Chips for status, ward and category are built from the data, select as many
+           as you like (any of one group, all groups together), and show live counts. The bar below them sticks
+           under the header with search, the result count, clear and sort. Every filter is reflected in the
+           address, so a filtered view can be shared. -->
+      <div class="tb-filters" id="trackerFilters" aria-label="Filter projects"></div>
+      <div class="tb-bar">
+        <label class="tb-search">
+          <span class="sr-only">Search projects</span>
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <input type="search" id="tbSearch" placeholder="Search projects, wards or categories" autocomplete="off">
+        </label>
+        <p class="tb-count" id="tbCount" role="status" aria-live="polite">Loading projects</p>
+        <button type="button" class="tb-clear" id="tbClear" hidden>Clear filters</button>
+        <div class="tb-sort">
+          <label for="tbSort">Sort</label>
+          <select id="tbSort">
+            <option value="updated">Recently updated</option>
+            <option value="progress">Most complete</option>
+            <option value="budget">Largest budget</option>
+            <option value="title">Name A to Z</option>
+          </select>
+        </div>
       </div>
 
       <p id="trackerState" class="data-state" hidden></p>
