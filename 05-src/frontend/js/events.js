@@ -426,10 +426,10 @@
 
   function icsText(t) { return String(t || '').replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n'); }
 
-  function downloadIcs(e) {
+  function vevent(e) {
     var c = calendarTimes(e);
-    var lines = [
-      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Erick Janganya Foundation//Events//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH', 'BEGIN:VEVENT',
+    return [
+      'BEGIN:VEVENT',
       'UID:event-' + e.id + '@erickjanganyafoundation.org',
       'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, ''),
       c.allDay ? 'DTSTART;VALUE=DATE:' + c.start : 'DTSTART:' + c.start,
@@ -437,17 +437,36 @@
       'SUMMARY:' + icsText(clean(e.title)),
       'DESCRIPTION:' + icsText(clean(e.description)),
       'LOCATION:' + icsText(place(e)),
-      'END:VEVENT', 'END:VCALENDAR'
+      'END:VEVENT'
     ];
+  }
+
+  // Downloads one calendar file holding every event given (one for the drawer, all upcoming for the page button).
+  function downloadIcs(events, filename) {
+    var lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Erick Janganya Foundation//Events//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH'];
+    events.forEach(function (e) { lines = lines.concat(vevent(e)); });
+    lines.push('END:VCALENDAR');
     var blob = new Blob([lines.join('\r\n') + '\r\n'], { type: 'text/calendar;charset=utf-8' });
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
     a.href = url;
-    a.download = String(clean(e.title)).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') + '.ics';
+    a.download = filename;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+  }
+
+  function slug(t) { return String(clean(t)).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''); }
+
+  // The page button: every upcoming event (not just the filtered ones) in one file.
+  function updateAddAll() {
+    var btn = document.getElementById('evAddAll');
+    if (!btn) return;
+    var n = allItems.filter(isUpcoming).length;
+    btn.hidden = !n;
+    var label = btn.querySelector('span');
+    if (label) label.textContent = 'Add ' + (n === 1 ? 'the upcoming event' : 'all ' + n + ' upcoming events') + ' to my calendar';
   }
 
   function googleUrl(e) {
@@ -599,7 +618,7 @@
     pdBody.addEventListener('click', function (ev) {
       var t = ev.target.closest ? ev.target : null;
       if (!t) return;
-      if (t.closest('[data-ics]')) { var e = findEvent(state.event); if (e) downloadIcs(e); return; }
+      if (t.closest('[data-ics]')) { var e = findEvent(state.event); if (e) downloadIcs([e], slug(e.title) + '.ics'); return; }
       var w = t.closest('.pd-ward');
       if (w) {
         state.ward = [w.getAttribute('data-ward')]; state.when = []; state.q = ''; searchEl.value = '';
@@ -648,6 +667,11 @@
       timer = setTimeout(function () { state.q = searchEl.value.trim().toLowerCase(); render(); }, 120);
     });
     clearBtn.addEventListener('click', clearAll);
+    var addAll = document.getElementById('evAddAll');
+    if (addAll) addAll.addEventListener('click', function () {
+      var up = allItems.filter(isUpcoming).sort(byDate);
+      if (up.length) downloadIcs(up, 'embakasi-south-events.ics');
+    });
     stateEl.addEventListener('click', function (e) {
       if (e.target.classList && e.target.classList.contains('tb-inline-clear')) clearAll();
     });
@@ -697,6 +721,7 @@
         buildChips();
         readUrl();
         render();
+        updateAddAll();
         if (state.event) openPanel(state.event, { fromUrl: true });
       })
       .catch(function (err) {

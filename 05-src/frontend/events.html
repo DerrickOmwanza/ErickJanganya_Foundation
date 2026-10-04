@@ -137,6 +137,7 @@
     <div class="container">
       <h2 class="mega-header" style="font-size:clamp(34px,5.4vw,64px);">All Events</h2>
       <p class="mega-header-dek" style="margin-bottom:36px;">What is coming up, and what has already happened.</p>
+      <button type="button" class="ev-addall" id="evAddAll" hidden><i class="fa-regular fa-calendar-plus" aria-hidden="true"></i><span>Add all upcoming events to my calendar</span></button>
       <!-- Filter toolbar (js/events.js), the same components as the Development Tracker: chips for when (upcoming or past) and
            for ward, built from the data with live counts, plus search, the result count and clear. Every filter is in the
            address, so a filtered view can be shared. With no chip chosen, everything shows. -->
@@ -160,6 +161,40 @@
            its title. The List view below is the alternative. -->
       <div id="eventsCalendar" class="cal" hidden></div>
       <div id="eventsList"></div>
+    </div>
+  </section>
+  <!-- What to expect: kept light on text and photo led. A real community photo beside three short points, written from what the
+       site already says about ward events (residents flag needs and review progress with the team). REVIEW WITH ERICK that
+       the third point matches how the team actually handles what is raised. -->
+  <section class="section lg" id="what-to-expect">
+    <div class="container">
+      <div class="section-rule"></div>
+      <h2 class="mega-header" style="font-size:clamp(34px,5.4vw,64px);">What to Expect</h2>
+      <p class="mega-header-dek">Every event is open to residents, and this is what they are for.</p>
+      <div class="wn-grid ex-grid">
+        <figure class="wn-photo">
+          <img src="img/career-path.jpg" alt="Erick Janganya among supporters at a community gathering in Embakasi South" loading="lazy" style="object-position:50% 30%;">
+          <figcaption>A community gathering, Embakasi South</figcaption>
+        </figure>
+        <ul class="ex-list">
+          <li><span class="ex-ico" aria-hidden="true"><i class="fa-solid fa-people-group"></i></span><div><h3>Everyone is welcome</h3><p>Residents of any ward are welcome. Bring a neighbour.</p></div></li>
+          <li><span class="ex-ico" aria-hidden="true"><i class="fa-solid fa-comments"></i></span><div><h3>You will be heard</h3><p>Events are where residents flag needs and review progress directly with the team.</p></div></li>
+          <li><span class="ex-ico" aria-hidden="true"><i class="fa-solid fa-clipboard-check"></i></span><div><h3>What is raised is followed up</h3><p>Anything about a project or a pledge is checked against the Tracker and the Scorecard.</p></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing band: the large display variant used on the other rebuilt pages, so every page closes the same way. -->
+  <section class="section-tight cta-band cta-band--display">
+    <div class="container">
+      <div class="cta-band-inner">
+        <div>
+          <h2>Be part of it <img class="cta-chip" src="img/ground-verification.jpg" alt="Erick Janganya at a community goods distribution in Embakasi South"></h2>
+          <p>Find an event near you, add it to your calendar, and bring a neighbour.</p>
+        </div>
+        <a class="btn btn-outline cta-band-btn" href="#events">See the calendar</a>
+      </div>
     </div>
   </section>
 </main>

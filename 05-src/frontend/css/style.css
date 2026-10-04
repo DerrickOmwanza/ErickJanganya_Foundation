@@ -2233,3 +2233,21 @@ a.ar-tile .ar-count i{margin-left:6px;font-size:11px;}
   .cal-btn{width:42px;height:42px;}
   .cal-today{padding:10px 16px;}
 }
+
+/* Events: the "Add all to my calendar" button and the "What to expect" section (photo beside three points). */
+.ev-addall{display:inline-flex;align-items:center;gap:10px;margin:-14px 0 36px;padding:12px 18px;border:1.5px solid var(--ink-black);background:#fff;color:var(--ink-black);font:inherit;font-size:15px;font-weight:700;cursor:pointer;transition:background .15s ease,color .15s ease;}
+.ev-addall[hidden]{display:none;}
+.ev-addall:hover{background:var(--ink-black);color:#fff;}
+.ev-addall:focus-visible{outline:3px solid var(--yellow);outline-offset:2px;}
+.ex-grid{align-items:center;}
+.ex-list{list-style:none;margin:0;padding:0;}
+.ex-list li{display:flex;align-items:flex-start;gap:22px;padding:26px 0;border-top:1px solid var(--line);}
+.ex-list li:first-child{border-top:3px solid var(--ink-black);}
+.ex-list li:last-child{border-bottom:1px solid var(--line);}
+.ex-ico{flex:none;display:flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;background:#000;color:#fff;font-size:21px;}
+.ex-list h3{margin:2px 0 6px;font-family:var(--font-h);font-weight:700;font-size:clamp(20px,1.9vw,24px);line-height:1.25;}
+.ex-list p{margin:0;max-width:460px;font-size:16.5px;line-height:1.6;color:var(--ink-soft);}
+@media (max-width:560px){
+  .ex-list li{gap:16px;padding:22px 0;}
+  .ex-ico{width:48px;height:48px;font-size:18px;}
+}
