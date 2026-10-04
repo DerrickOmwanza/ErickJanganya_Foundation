@@ -139,49 +139,83 @@
       <h2 class="mega-header" style="font-size:clamp(34px,5.4vw,64px);">Send a Message</h2>
       <p class="mega-header-dek" style="margin-bottom:36px;">Tell us what you need, and who to reply to.</p>
 
-      <div class="contact-grid">
-        <form id="contactForm" novalidate>
-          <div class="field-row">
-            <div class="field">
-              <label for="cf-name">Full name</label>
-              <input type="text" id="cf-name" name="name" required>
+      <!-- The message form, redesigned 2026-10-04 to the same flow as Vision's "Tell us what's missing" (.vi-*): topic and ward are
+           optional tap-to-choose chips (tap again to clear), the message grows as you type with a character count, fields validate
+           as you leave them, the draft survives a refresh (sessionStorage), and a thank-you panel replaces the form on success.
+           It still posts to the existing /api/contact endpoint (the topic and ward go in the subject and at the end of the message
+           so the team can sort them); the behaviour lives in js/forms.js (#contactForm). -->
+      <div class="contact-layout">
+        <div class="vi-card" id="cfCard">
+          <form class="vi-form" id="contactForm" novalidate>
+            <fieldset class="vi-group">
+              <legend>What is this about? <em>Optional</em></legend>
+              <div class="vi-chips">
+                <label class="vi-chip"><input type="radio" name="topic" value="Question"><span>Question</span></label>
+                <label class="vi-chip"><input type="radio" name="topic" value="Tip from the ground"><span>Tip from the ground</span></label>
+                <label class="vi-chip"><input type="radio" name="topic" value="Something to look into"><span>Something to look into</span></label>
+                <label class="vi-chip"><input type="radio" name="topic" value="Press"><span>Press</span></label>
+                <label class="vi-chip"><input type="radio" name="topic" value="Partnership"><span>Partnership</span></label>
+                <label class="vi-chip"><input type="radio" name="topic" value="Volunteering"><span>Volunteering</span></label>
+                <label class="vi-chip"><input type="radio" name="topic" value="Something else"><span>Something else</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="vi-group">
+              <legend>Which ward is it about? <em>Optional</em></legend>
+              <div class="vi-chips">
+                <label class="vi-chip"><input type="radio" name="ward" value="Imara Daima"><span>Imara Daima</span></label>
+                <label class="vi-chip"><input type="radio" name="ward" value="Kwa Njenga"><span>Kwa Njenga</span></label>
+                <label class="vi-chip"><input type="radio" name="ward" value="Kwa Reuben"><span>Kwa Reuben</span></label>
+                <label class="vi-chip"><input type="radio" name="ward" value="Pipeline"><span>Pipeline</span></label>
+                <label class="vi-chip"><input type="radio" name="ward" value="Kware"><span>Kware</span></label>
+                <label class="vi-chip"><input type="radio" name="ward" value="Outside Embakasi South"><span>Outside Embakasi South</span></label>
+              </div>
+            </fieldset>
+            <div class="vi-field">
+              <label for="cf-message">Your message</label>
+              <textarea id="cf-message" name="message" rows="4" maxlength="2000" placeholder="Tell us what you would like us to know or look into." required aria-describedby="cf-message-err cf-count"></textarea>
+              <div class="vi-meta"><span class="vi-error" id="cf-message-err" role="alert"></span><span class="vi-count" id="cf-count">0 / 2000</span></div>
             </div>
-            <div class="field">
-              <label for="cf-email">Email</label>
-              <input type="email" id="cf-email" name="email" required>
+            <div class="vi-row">
+              <div class="vi-field">
+                <label for="cf-name">Your name</label>
+                <input type="text" id="cf-name" name="name" autocomplete="name" required aria-describedby="cf-name-err">
+                <span class="vi-error" id="cf-name-err" role="alert"></span>
+              </div>
+              <div class="vi-field">
+                <label for="cf-email">Email</label>
+                <input type="email" id="cf-email" name="email" autocomplete="email" required aria-describedby="cf-email-err">
+                <span class="vi-error" id="cf-email-err" role="alert"></span>
+              </div>
             </div>
-          </div>
-          <div class="field-row">
-            <div class="field">
-              <label for="cf-phone">Phone (optional)</label>
-              <input type="tel" id="cf-phone" name="phone">
+            <div class="vi-field">
+              <label for="cf-phone">Phone <em class="vi-opt">Optional</em></label>
+              <input type="tel" id="cf-phone" name="phone" autocomplete="tel">
             </div>
-            <div class="field">
-              <label for="cf-subject">Subject (optional)</label>
-              <input type="text" id="cf-subject" name="subject">
-            </div>
-          </div>
-          <div class="field">
-            <label for="cf-message">Message</label>
-            <textarea id="cf-message" name="message" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Send message</button>
-          <p class="form-note" id="contactNote" hidden></p>
-        </form>
-
-        <div class="contact-side">
-          <h4>Direct</h4>
-          <p><i class="fa-solid fa-envelope"></i> hello@erickjanganyafoundation.org</p>
-          <p><i class="fa-solid fa-location-dot"></i> Embakasi South, Nairobi</p>
-          <h4 style="margin-top:28px;">Follow along</h4>
-          <div class="social-row">
-            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-            <a href="#" aria-label="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <button type="submit" class="vi-submit">Send my message <i class="fa-solid fa-arrow-right"></i></button>
+            <p class="form-note" id="contactNote" hidden></p>
+          </form>
+          <div class="vi-success" id="cfSuccess" hidden tabindex="-1">
+            <span class="vi-success-icon" aria-hidden="true"><i class="fa-solid fa-check"></i></span>
+            <h3 id="cfSuccessTitle">Thank you.</h3>
+            <p id="cfSuccessText">Your message has been received.</p>
+            <button type="button" class="vi-again" id="cfAgain">Send another message</button>
           </div>
         </div>
+
+        <aside class="contact-aside">
+          <figure class="vi-photo contact-photo">
+            <img src="img/community-forum.jpg" alt="Erick Janganya speaking to a packed community forum in Embakasi South" loading="lazy">
+            <figcaption>Embakasi South, community forum</figcaption>
+          </figure>
+          <div class="contact-aside-body">
+            <h3>Prefer to talk it through?</h3>
+            <p>Residents raise needs in person at ward-level community meetings, and messages sent here go straight to the team.</p>
+            <ul class="contact-aside-list">
+              <li><i class="fa-solid fa-envelope" aria-hidden="true"></i><a href="mailto:hello@erickjanganyafoundation.org">hello@<wbr>erickjanganyafoundation.org</a></li>
+              <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span>Embakasi South, Nairobi</span></li>
+            </ul>
+          </div>
+        </aside>
       </div>
     </div>
   </section>

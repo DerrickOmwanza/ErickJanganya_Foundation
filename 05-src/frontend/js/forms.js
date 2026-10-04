@@ -215,33 +215,152 @@
     })();
   }
 
-  // Contact form
+  // Contact page message form. The same smooth flow as the Vision form above: optional topic and ward chips (tap the chosen
+  // one again to clear it), a message box that grows with a character counter, validation as you leave each field (and focus
+  // on the first problem on submit), a draft that survives a refresh, and a thank-you panel in place of the form once it is
+  // sent. It posts to the existing contact endpoint: the topic and ward go in the subject and at the end of the message so
+  // the team can sort them, and the optional phone number goes in its own field.
   var contactForm = document.getElementById('contactForm');
   if (contactForm) {
-    var contactNote = document.getElementById('contactNote');
-    contactForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var payload = {
-        name: contactForm.name.value.trim(),
-        email: contactForm.email.value.trim(),
-        phone: contactForm.phone.value.trim(),
-        subject: contactForm.subject.value.trim(),
-        message: contactForm.message.value.trim(),
+    (function () {
+      var note = document.getElementById('contactNote');
+      var success = document.getElementById('cfSuccess');
+      var counter = document.getElementById('cf-count');
+      var DRAFT_KEY = 'ejf.contact.draft';
+      var MAX = 2000;
+      var fields = {
+        message: { el: contactForm.elements.message, wrap: contactForm.elements.message.closest('.vi-field'), err: document.getElementById('cf-message-err') },
+        name: { el: contactForm.elements.name, wrap: contactForm.elements.name.closest('.vi-field'), err: document.getElementById('cf-name-err') },
+        email: { el: contactForm.elements.email, wrap: contactForm.elements.email.closest('.vi-field'), err: document.getElementById('cf-email-err') }
       };
-      if (!payload.name || !payload.email || !payload.message) {
-        showNote(contactNote, 'Please fill in your name, email, and message.', 'error');
-        return;
+
+      function problem(key) {
+        var el = fields[key].el, v = el.value.trim();
+        if (key === 'message') return v ? '' : 'Please write your message.';
+        if (key === 'name') return v ? '' : 'Please add your name.';
+        if (!v) return 'Please add your email.';
+        return el.validity.typeMismatch ? "That email address doesn't look right." : '';
       }
-      withBusyButton(contactForm, 'Sending…', function () {
-        return window.ApiClient.post('/contact', payload)
-          .then(function (data) {
-            showNote(contactNote, data.message || 'Thank you. Your message has been received.', 'success');
-            contactForm.reset();
-          })
-          .catch(function (err) {
-            showNote(contactNote, err.message || 'Something went wrong. Please try again.', 'error');
-          });
+      function show(key, msg) {
+        var f = fields[key];
+        f.err.textContent = msg;
+        f.wrap.classList.toggle('has-error', !!msg);
+        if (msg) { f.el.setAttribute('aria-invalid', 'true'); } else { f.el.removeAttribute('aria-invalid'); }
+      }
+      function grow() {
+        var t = fields.message.el;
+        t.style.height = 'auto';
+        t.style.height = Math.max(t.scrollHeight + 2, 132) + 'px';
+        var n = t.value.length;
+        counter.textContent = n + ' / ' + MAX;
+        counter.classList.toggle('is-near', n >= MAX - 150);
+      }
+      function saveDraft() {
+        try {
+          sessionStorage.setItem(DRAFT_KEY, JSON.stringify({
+            topic: contactForm.topic.value, ward: contactForm.ward.value, message: fields.message.el.value,
+            name: fields.name.el.value, email: fields.email.el.value, phone: contactForm.phone.value
+          }));
+        } catch (e) { /* storage unavailable: the form simply works without a saved draft */ }
+      }
+      function clearDraft() { try { sessionStorage.removeItem(DRAFT_KEY); } catch (e) { /* ignore */ } }
+      function setRadio(name, value) {
+        Array.prototype.forEach.call(contactForm.querySelectorAll('input[name="' + name + '"]'), function (r) {
+          r.checked = r.value === value;
+          r._was = r.checked;
+        });
+      }
+
+      // Restore a saved draft
+      try {
+        var saved = JSON.parse(sessionStorage.getItem(DRAFT_KEY) || 'null');
+        if (saved) {
+          fields.message.el.value = saved.message || '';
+          fields.name.el.value = saved.name || '';
+          fields.email.el.value = saved.email || '';
+          contactForm.phone.value = saved.phone || '';
+          if (saved.topic) setRadio('topic', saved.topic);
+          if (saved.ward) setRadio('ward', saved.ward);
+        }
+      } catch (e) { /* ignore a bad draft */ }
+      grow();
+
+      // Chips: selecting the chosen one again clears it (they are optional)
+      Array.prototype.forEach.call(contactForm.querySelectorAll('.vi-chip input'), function (r) {
+        r._was = r.checked;
+        r.addEventListener('click', function () {
+          if (r._was) { r.checked = false; r._was = false; }
+          else {
+            Array.prototype.forEach.call(contactForm.querySelectorAll('input[name="' + r.name + '"]'), function (o) { o._was = false; });
+            r._was = true;
+          }
+          saveDraft();
+        });
       });
-    });
+
+      contactForm.phone.addEventListener('input', saveDraft);
+
+      // Validate as people leave a field; clear the message as soon as it is fixed
+      Object.keys(fields).forEach(function (key) {
+        var el = fields[key].el;
+        el.addEventListener('blur', function () { if (el.value.trim() || fields[key].wrap.classList.contains('has-error')) show(key, problem(key)); });
+        el.addEventListener('input', function () {
+          if (fields[key].wrap.classList.contains('has-error') && !problem(key)) show(key, '');
+          if (key === 'message') grow();
+          saveDraft();
+        });
+      });
+
+      contactForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        note.hidden = true;
+        var firstBad = null;
+        Object.keys(fields).forEach(function (key) {
+          var msg = problem(key);
+          show(key, msg);
+          if (msg && !firstBad) firstBad = fields[key].el;
+        });
+        if (firstBad) { firstBad.focus(); return; }
+
+        var topic = contactForm.topic.value, ward = contactForm.ward.value;
+        var subject = (topic ? 'Contact: ' + topic : 'Contact message') + (ward ? ', ' + ward : '');
+        var context = [];
+        if (topic) context.push('Topic: ' + topic);
+        if (ward) context.push('Ward: ' + ward);
+        var payload = {
+          name: fields.name.el.value.trim(),
+          email: fields.email.el.value.trim(),
+          phone: contactForm.phone.value.trim(),
+          subject: subject,
+          message: fields.message.el.value.trim() + (context.length ? '\n\n' + context.join('\n') : '')
+        };
+        withBusyButton(contactForm, 'Sending…', function () {
+          return window.ApiClient.post('/contact', payload)
+            .then(function () {
+              var first = payload.name.split(' ')[0];
+              document.getElementById('cfSuccessTitle').textContent = 'Thank you, ' + first + '.';
+              document.getElementById('cfSuccessText').textContent = 'Your message has been received by the team.';
+              clearDraft();
+              contactForm.hidden = true;
+              success.hidden = false;
+              success.focus();
+            })
+            .catch(function (err) {
+              showNote(note, err.message || 'Something went wrong. Please try again.', 'error');
+            });
+        });
+      });
+
+      document.getElementById('cfAgain').addEventListener('click', function () {
+        contactForm.reset();
+        Array.prototype.forEach.call(contactForm.querySelectorAll('.vi-chip input'), function (r) { r._was = false; });
+        Object.keys(fields).forEach(function (key) { show(key, ''); });
+        grow();
+        success.hidden = true;
+        contactForm.hidden = false;
+        fields.message.el.focus();
+      });
+    })();
   }
+
 })();
