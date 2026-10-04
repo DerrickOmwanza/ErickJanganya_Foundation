@@ -50,7 +50,7 @@
       withBusyButton(newsletterForm, 'Subscribing…', function () {
         return window.ApiClient.post('/newsletter', payload)
           .then(function () {
-            showNote(newsletterNote, "You're subscribed — thank you.", 'success');
+            showNote(newsletterNote, "You're subscribed. Thank you.", 'success');
             newsletterForm.reset();
           })
           .catch(function (err) {
@@ -235,7 +235,7 @@
       withBusyButton(contactForm, 'Sending…', function () {
         return window.ApiClient.post('/contact', payload)
           .then(function (data) {
-            showNote(contactNote, data.message || 'Thank you — your message has been received.', 'success');
+            showNote(contactNote, data.message || 'Thank you. Your message has been received.', 'success');
             contactForm.reset();
           })
           .catch(function (err) {

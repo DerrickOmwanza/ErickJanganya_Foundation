@@ -51,18 +51,37 @@
 
 <div class="mobile-drawer" id="mobile-drawer">
   <div class="mobile-drawer-inner">
-    <button class="mobile-drawer-close" aria-label="Close menu" onclick="toggleDrawer(false)"><i class="fa-solid fa-xmark"></i></button>
-    <a href="index.html">Home</a>
-    <a href="about.html">About Erick</a>
-    <a href="foundation.html">The Foundation</a>
-    <a href="vision.html">Vision</a>
-    <a href="tracker.html">Development Tracker</a>
-    <a href="promises.html">Promise Scorecard</a>
-    <a href="community.html">Community</a>
-    <a href="media.html">Media Centre</a>
-    <a href="news.html">News &amp; Press</a>
-    <a href="events.html">Events</a>
-    <a href="contact.html">Contact</a>
+    <div class="mobile-drawer-top">
+      <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+        <rect x="12" y="60" width="20" height="30" rx="7"/>
+        <rect x="40" y="40" width="20" height="50" rx="7"/>
+        <rect x="68" y="16" width="20" height="74" rx="7"/>
+      </svg>
+      <span class="mobile-drawer-brand">Erick Janganya Foundation</span>
+      <button class="mobile-drawer-close" aria-label="Close menu" onclick="toggleDrawer(false)"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <nav class="mobile-drawer-nav">
+      <a href="index.html">Home</a>
+      <span class="mobile-drawer-label">About</span>
+      <a href="about.html">About Erick</a>
+      <a href="foundation.html">The Foundation</a>
+      <a href="vision.html">Vision</a>
+      <span class="mobile-drawer-label">Progress</span>
+      <a href="tracker.html">Development Tracker</a>
+      <a href="promises.html">Promise Scorecard</a>
+      <span class="mobile-drawer-label">Get involved</span>
+      <a href="community.html">Community</a>
+      <a href="events.html">Events</a>
+      <span class="mobile-drawer-label">Media</span>
+      <a href="media.html">Media Centre</a>
+      <a href="news.html">News &amp; Press</a>
+      <span class="mobile-drawer-label">Get in touch</span>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="mobile-drawer-foot">
+      <a class="btn btn-primary" href="involve.html">Donate</a>
+      <button type="button" class="mobile-drawer-search" aria-label="Search the site" onclick="toggleDrawer(false);toggleSearch(true)"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
   </div>
 </div>
 
@@ -79,12 +98,62 @@
 </div>
 
 <main>
-  <div class="container stub-wrap">
-    <span class="eyebrow">Get Involved</span>
-    <h1>Coming soon.</h1>
-    <p>Ways to give cash, goods or time will go live here once the development tracker is ready to link donations to real projects.</p>
-    <a class="btn btn-secondary" href="index.html#stay-updated"><i class="fa-solid fa-bell"></i> Notify me</a>
-  </div>
+  <!-- Coming-soon template shared by Events, News, Media, Community and Get Involved (css: .soon-*). Same dark hero as
+       the rebuilt pages, a preview of what the page will carry (photo slots are placeholders), and links to live pages.
+       Replace this whole <main> when the page itself is built. -->
+  <section class="page-hero soon-hero">
+    <div class="container">
+      <span class="page-hero-kicker">Coming soon</span>
+      <h1>Get Involved</h1>
+      <p class="page-hero-lead">Give cash, goods or time, and see it land on a real project in the tracker.</p>
+      <div class="page-hero-actions">
+        <a class="btn btn-primary" href="index.html#stay-updated"><i class="fa-solid fa-bell"></i> Notify me when it opens</a>
+        <a class="btn btn-outline" href="tracker.html">See the live tracker</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section soon-body">
+    <div class="container">
+      <div class="section-rule"></div>
+      <h2 class="mega-header" style="font-size:clamp(34px,5.4vw,64px);">Ways to take part</h2>
+      <ul class="soon-grid">
+        <li class="soon-card">
+          <div class="soon-photo"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: a funded project</span></div></div>
+          <div class="soon-card-body">
+            <span class="soon-ico" aria-hidden="true"><i class="fa-solid fa-hand-holding-dollar"></i></span>
+            <h3>Donate cash</h3>
+            <p>Fund a project and follow it from planning to completion.</p>
+          </div>
+        </li>
+        <li class="soon-card">
+          <div class="soon-photo"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: goods being delivered</span></div></div>
+          <div class="soon-card-body">
+            <span class="soon-ico" aria-hidden="true"><i class="fa-solid fa-box-open"></i></span>
+            <h3>Donate goods</h3>
+            <p>Give materials and supplies where they are needed most.</p>
+          </div>
+        </li>
+        <li class="soon-card">
+          <div class="soon-photo"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: volunteers at work</span></div></div>
+          <div class="soon-card-body">
+            <span class="soon-ico" aria-hidden="true"><i class="fa-solid fa-people-group"></i></span>
+            <h3>Volunteer</h3>
+            <p>Give your time on the ground in your own ward.</p>
+          </div>
+        </li>
+      </ul>
+
+      <div class="soon-meanwhile">
+        <h3>In the meantime</h3>
+        <ul>
+          <li><a href="vision.html#partner">Partner with us <i class="fa-solid fa-arrow-right"></i></a></li>
+          <li><a href="tracker.html">See where support goes <i class="fa-solid fa-arrow-right"></i></a></li>
+          <li><a href="contact.html">Get in touch <i class="fa-solid fa-arrow-right"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer class="site-footer">

@@ -93,7 +93,7 @@
         allItems = data.items || [];
         if (!allItems.length) {
           grid.innerHTML = '';
-          setState('No promises have been published yet — check back soon.', 'fa-inbox');
+          setState('No promises have been published yet. Check back soon.', 'fa-inbox');
           return;
         }
         populateFilters();

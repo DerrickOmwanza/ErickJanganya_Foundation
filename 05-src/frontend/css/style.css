@@ -97,12 +97,15 @@ img{max-width:100%;display:block;}
 .mobile-drawer-close:hover{background:var(--ink-black);color:#fff;border-color:var(--ink-black);}
 .mobile-drawer-nav{padding:6px 20px 12px;flex:1 0 auto;}
 .mobile-drawer-label{display:block;margin:16px 0 0;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red);}
-.mobile-drawer-inner a{display:block;padding:10px 0;border-bottom:1px solid var(--line);font-family:var(--font-display);font-weight:600;font-size:23px;line-height:1.1;color:var(--ink-black);transition:color .2s ease, padding-left .2s ease;}
+.mobile-drawer-inner a{display:block;padding:9px 0;border-bottom:1px solid var(--line);font-family:var(--font-display);font-weight:600;font-size:23px;line-height:1.1;color:var(--ink-black);transition:color .2s ease, padding-left .2s ease;}
 .mobile-drawer-inner a:hover,.mobile-drawer-inner a:focus-visible{color:var(--blue);padding-left:6px;}
-.mobile-drawer-foot{flex:none;position:sticky;bottom:0;background:#fff;padding:14px 20px 18px;border-top:1px solid var(--line);display:grid;gap:10px;}
-.mobile-drawer-inner .mobile-drawer-foot a.btn{border:none;border-radius:0;padding:15px 24px;justify-content:center;font-size:22px;font-weight:600;color:#fff;background:var(--blue);}
+.mobile-drawer-inner a[aria-current="page"]{color:var(--red);padding-left:14px;box-shadow:inset 3px 0 0 var(--red);}
+.mobile-drawer-foot{flex:none;position:sticky;bottom:0;background:#fff;padding:12px 20px calc(14px + env(safe-area-inset-bottom));border-top:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1fr) 56px;gap:10px;}
+.mobile-drawer-inner .mobile-drawer-foot a.btn{border:none;border-radius:0;padding:13px 24px;justify-content:center;font-size:22px;font-weight:600;color:#fff;background:var(--blue);}
 .mobile-drawer-inner .mobile-drawer-foot a.btn:hover{background:var(--ink-black);color:#fff;padding-left:24px;}
-.mobile-drawer-search{display:flex;align-items:center;gap:10px;justify-content:center;background:none;border:1px solid var(--line);padding:12px;font:600 15px var(--font-b);color:var(--ink-black);cursor:pointer;}
+.mobile-drawer-brand{flex:1;min-width:0;margin-left:12px;font-family:var(--font-display);font-weight:600;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-black);line-height:1.2;}
+.mobile-drawer-search{display:flex;align-items:center;justify-content:center;width:56px;background:none;border:1px solid var(--ink-black);font-size:18px;color:var(--ink-black);cursor:pointer;transition:background .2s ease,color .2s ease;}
+.mobile-drawer-search:hover,.mobile-drawer-search:focus-visible{background:var(--ink-black);color:#fff;}
 .mobile-drawer-search:hover{border-color:var(--ink-black);}
 html.drawer-open{overflow:hidden;}
 
@@ -1098,15 +1101,16 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 
 @media (max-width:960px){
   .lg-block{margin-top:56px;}
-  .lg-flow{grid-template-columns:1fr;gap:28px;}
+  .lg-flow{grid-template-columns:minmax(0,1fr);gap:28px;}
   .lg-step{flex-direction:row;}
   .lg-step .lg-photo{flex:0 0 38%;}
   .lg-step .lg-photo .ph{height:100%;aspect-ratio:auto;min-height:200px;}
   .lg-step:not(:last-child)::after{display:none;}
-  .lg-panel,.lg-verify{grid-template-columns:1fr;}
+  .lg-panel,.lg-verify{grid-template-columns:minmax(0,1fr);}
   .lg-panel .lg-photo .ph,.lg-verify .lg-photo .ph{aspect-ratio:16/9;height:auto;min-height:0;}
   .lg-panel-text,.lg-verify-body{padding:28px 24px;}
-  .lg-numbers{grid-template-columns:1fr;gap:22px;}
+  .lg-numbers{grid-template-columns:minmax(0,1fr);gap:22px;}
+  .lg-checks{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 20px;}
 }
 @media (max-width:560px){
   .lg-step{flex-direction:column;}
@@ -1622,7 +1626,40 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 
 .note{font-size:12px;color:var(--ph-text);font-style:italic;}
 
-/* ===== coming-soon stub pages ===== */
+/* ===== coming-soon pages (Events, News, Media, Community, Get Involved): dark hero, a preview of what will be
+   there with photo placeholders, and links to live pages ===== */
+.soon-hero{padding:150px 0 84px;}
+.soon-hero h1{margin-bottom:24px;}
+.soon-grid{list-style:none;margin:44px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;}
+.soon-card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-top:5px solid var(--ink-black);}
+.soon-photo .ph{height:auto;width:100%;aspect-ratio:16/10;border:0;border-radius:0;overflow:hidden;}
+.soon-card-body{padding:24px 26px 30px;}
+.soon-ico{display:flex;align-items:center;justify-content:center;width:48px;height:48px;margin-bottom:16px;border-radius:50%;background:#000;color:#fff;font-size:18px;}
+.soon-card h3{margin:0 0 8px;font-family:var(--font-h);font-weight:700;font-size:22px;line-height:1.25;}
+.soon-card p{margin:0;font-size:16px;line-height:1.6;color:var(--ink-soft);}
+.soon-meanwhile{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px 40px;margin-top:64px;padding:28px 32px;background:#FAF9F5;border:1px solid var(--line);border-left:5px solid var(--yellow);}
+.soon-meanwhile h3{margin:0;font-family:var(--font-h);font-weight:700;font-size:22px;}
+.soon-meanwhile ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:12px 32px;}
+.soon-meanwhile a{display:inline-flex;align-items:center;gap:10px;font-size:15.5px;font-weight:700;color:var(--ink-black);border-bottom:2px solid var(--ink-black);padding:2px 0;transition:gap .2s ease;}
+.soon-meanwhile a:hover{gap:14px;}
+@media (max-width:960px){
+  .soon-hero{padding:116px 0 56px;}
+  .soon-grid{grid-template-columns:minmax(0,1fr);gap:24px;margin-top:32px;}
+  .soon-card{flex-direction:row;}
+  .soon-photo{flex:0 0 40%;}
+  .soon-photo .ph{height:100%;aspect-ratio:auto;min-height:170px;}
+  .soon-meanwhile{margin-top:44px;padding:24px 22px;}
+}
+@media (max-width:560px){
+  .soon-card{flex-direction:column;}
+  .soon-photo{flex:none;}
+  .soon-photo .ph{aspect-ratio:16/9;height:auto;min-height:0;}
+  .soon-card-body{padding:20px 20px 26px;}
+  .soon-meanwhile ul{flex-direction:column;gap:14px;}
+  .page-hero-actions .btn{width:100%;justify-content:center;}
+}
+
+/* Older plain stub layout, kept for any page not yet moved to the template above */
 .stub-wrap{padding:110px 0;text-align:center;}
 .stub-wrap .eyebrow{display:block;margin-bottom:10px;}
 .stub-wrap h1{font-size:34px;margin-bottom:14px;}

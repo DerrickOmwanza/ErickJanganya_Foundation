@@ -47,7 +47,7 @@
     .then(function (data) {
       var items = data.items || [];
       if (!items.length) {
-        container.innerHTML = '<p class="data-state"><i class="fa-solid fa-inbox"></i> No projects published yet — check back soon.</p>';
+        container.innerHTML = '<p class="data-state"><i class="fa-solid fa-inbox"></i> No projects published yet. Check back soon.</p>';
         return;
       }
       container.innerHTML = items.map(renderCard).join('');

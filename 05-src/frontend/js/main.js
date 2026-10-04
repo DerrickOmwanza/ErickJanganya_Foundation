@@ -1,8 +1,56 @@
+// Mobile menu drawer (the same markup is on every page). Opening it moves focus to the close button and marks the
+// page behind it as unreachable by assistive tech; closing returns focus to the menu button. It also closes on
+// Escape, on a tap on the dimmed area, when any link in it is tapped, and if the window grows to desktop width.
+var drawerReturnFocus = null;
 function toggleDrawer(open) {
   var drawer = document.getElementById('mobile-drawer');
-  if (drawer) drawer.classList.toggle('open', open);
-  document.documentElement.classList.toggle('drawer-open', !!open);
+  if (!drawer) return;
+  var willOpen = !!open;
+  if (willOpen === drawer.classList.contains('open')) return;
+  drawer.classList.toggle('open', willOpen);
+  drawer.setAttribute('aria-hidden', willOpen ? 'false' : 'true');
+  document.documentElement.classList.toggle('drawer-open', willOpen);
+  var toggle = document.querySelector('.nav-toggle');
+  if (toggle) toggle.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+  if (willOpen) {
+    drawerReturnFocus = toggle || document.activeElement;
+    var close = drawer.querySelector('.mobile-drawer-close');
+    if (close) setTimeout(function () { close.focus({ preventScroll: true }); }, 60);
+  } else if (drawerReturnFocus && drawerReturnFocus.focus) {
+    drawerReturnFocus.focus({ preventScroll: true });
+    drawerReturnFocus = null;
+  }
 }
+(function initDrawer() {
+  var drawer = document.getElementById('mobile-drawer');
+  if (!drawer) return;
+  drawer.setAttribute('aria-hidden', 'true');
+  drawer.setAttribute('role', 'dialog');
+  drawer.setAttribute('aria-modal', 'true');
+  drawer.setAttribute('aria-label', 'Site menu');
+  var toggle = document.querySelector('.nav-toggle');
+  if (toggle) { toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-controls', 'mobile-drawer'); }
+  drawer.addEventListener('click', function (e) {
+    if (e.target === drawer || (e.target.closest && e.target.closest('.mobile-drawer-nav a, .mobile-drawer-foot a'))) toggleDrawer(false);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (!drawer.classList.contains('open')) return;
+    if (e.key === 'Escape') { toggleDrawer(false); return; }
+    if (e.key === 'Tab') {
+      var f = Array.prototype.filter.call(drawer.querySelectorAll('a[href],button'), function (el) { return el.offsetParent !== null; });
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  window.addEventListener('resize', function () { if (window.innerWidth > 960) toggleDrawer(false); });
+  // Mark the page you are on.
+  var here = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  Array.prototype.forEach.call(drawer.querySelectorAll('.mobile-drawer-nav a'), function (a) {
+    if ((a.getAttribute('href') || '').toLowerCase().split('#')[0] === here) a.setAttribute('aria-current', 'page');
+  });
+})();
 
 // Search overlay: replaces the header with a big inline search field over the hero, closed via the
 // X button or Escape. Kept in sync with the header's current top offset so it lines up whether or
