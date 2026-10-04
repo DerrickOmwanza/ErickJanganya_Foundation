@@ -20,6 +20,18 @@
   var allItems = [];
   var state = { q: '', category: [], status: [], sort: 'area', pledge: null };
 
+  // A picture and an icon for each area. The photos are illustrative stand-ins until real local pictures replace them;
+  // an area with no entry here simply gets a neutral tile and a flag icon.
+  var AREA_META = {
+    'Education': { img: 'img/vision-education-youth.jpg', icon: 'fa-graduation-cap' },
+    'Health': { img: 'img/hero-clinics-poster.jpg', icon: 'fa-heart-pulse' },
+    'Infrastructure': { img: 'img/hero-roads-poster.jpg', icon: 'fa-road' },
+    'Water & Sanitation': { img: 'img/hero-water-poster.jpg', icon: 'fa-droplet' },
+    'Youth & Employment': { img: 'img/focus-youth.jpg', icon: 'fa-briefcase' }
+  };
+  function areaIcon(cat) { return (AREA_META[cat] && AREA_META[cat].icon) || 'fa-flag'; }
+  function areaImg(cat) { return (AREA_META[cat] && AREA_META[cat].img) || null; }
+
   function slug(status) {
     if (status === 'Kept') return 'kept';
     if (status === 'In progress') return 'progress';
@@ -78,6 +90,48 @@
     } else {
       note.hidden = true;
     }
+  }
+
+  // "Browse by area" photo tiles: one per area, with a picture, an icon, the number of pledges and where they stand.
+  // Clicking a tile filters the list below to that area (click again to undo).
+  function renderTiles() {
+    var wrap = document.getElementById('areaTiles');
+    var sec = document.getElementById('areas');
+    if (!wrap) return;
+    var cats = U.uniqueSorted(allItems.map(function (p) { return p.category; }));
+    if (!cats.length) { if (sec) sec.hidden = true; return; }
+    wrap.innerHTML = cats.map(function (cat) {
+      var items = allItems.filter(function (p) { return p.category === cat; });
+      var img = areaImg(cat);
+      return (
+        '<button type="button" class="ar-tile' + (img ? '' : ' ar-tile--plain') + '" data-category="' + U.escapeHtml(cat) + '" aria-pressed="false">' +
+          (img ? '<img src="' + U.escapeHtml(img) + '" alt="" loading="lazy">' : '') +
+          '<span class="ar-shade" aria-hidden="true"></span>' +
+          '<span class="ar-body">' +
+            '<span class="ar-ico" aria-hidden="true"><i class="fa-solid ' + areaIcon(cat) + '"></i></span>' +
+            '<span class="ar-name">' + U.escapeHtml(cat) + '</span>' +
+            '<span class="ar-count">' + U.escapeHtml(plural(items.length, 'pledge')) + '</span>' +
+            '<span class="ar-bar" aria-hidden="true">' + groupBar(items) + '</span>' +
+          '</span>' +
+        '</button>'
+      );
+    }).join('');
+    wrap.addEventListener('click', function (e) {
+      var t = e.target.closest ? e.target.closest('.ar-tile') : null;
+      if (!t) return;
+      var cat = t.getAttribute('data-category');
+      var i = state.category.indexOf(cat);
+      if (i >= 0) { state.category.splice(i, 1); } else { state.category = [cat]; }
+      render();
+      var target = document.getElementById('pledges');
+      if (target && i < 0) target.scrollIntoView({ behavior: reduceMotionPref() ? 'auto' : 'smooth', block: 'start' });
+    });
+  }
+
+  function updateTiles() {
+    Array.prototype.forEach.call(document.querySelectorAll('.ar-tile'), function (t) {
+      t.setAttribute('aria-pressed', state.category.indexOf(t.getAttribute('data-category')) >= 0 ? 'true' : 'false');
+    });
   }
 
   // "How We Score": live counts beside each mark, and a Show button that filters the list above to that mark.
@@ -173,6 +227,7 @@
       return (
         '<section class="sg-group" aria-labelledby="sg-' + U.escapeHtml(slugify(cat)) + '">' +
           '<header class="sg-head">' +
+            '<span class="sg-ico" aria-hidden="true"><i class="fa-solid ' + areaIcon(cat) + '"></i></span>' +
             '<h3 id="sg-' + U.escapeHtml(slugify(cat)) + '">' + U.escapeHtml(cat) + '</h3>' +
             '<span class="sg-count">' + U.escapeHtml(groupSummary(g)) + '</span>' +
             '<span class="sg-bar" aria-hidden="true">' + groupBar(g) + '</span>' +
@@ -255,6 +310,7 @@
       : plural(total, 'pledge');
     clearBtn.hidden = !hasFilters();
     updateChips();
+    updateTiles();
     syncUrl();
 
     if (!filtered.length) {
@@ -403,7 +459,9 @@
     ];
     var statusClass = s === 'kept' ? 'completed' : (s === 'progress' ? 'ongoing' : 'planned');
     pdBody.innerHTML =
-      '<div class="pd-media pd-media--' + statusClass + '" style="border-bottom-width:6px"></div>' +
+      (areaImg(p.category)
+        ? '<div class="pd-media pd-media--' + statusClass + '"><div class="ph"><img src="' + U.escapeHtml(areaImg(p.category)) + '" alt="" loading="lazy"></div></div>'
+        : '<div class="pd-media pd-media--' + statusClass + '" style="border-bottom-width:6px"></div>') +
       '<div class="pd-main">' +
         '<span class="pd-status pd-status--' + statusClass + '"><i class="fa-solid fa-circle"></i> ' + U.escapeHtml(p.status) + '</span>' +
         '<p class="pd-where">' + U.escapeHtml(p.category) + '</p>' +
@@ -569,6 +627,7 @@
           return;
         }
         buildChips();
+        renderTiles();
         renderHow();
         readUrl();
         render();

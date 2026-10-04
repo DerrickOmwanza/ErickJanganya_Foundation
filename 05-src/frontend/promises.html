@@ -134,6 +134,16 @@
     </div>
   </section>
 
+  <!-- Browse by area: photo tiles built from the data (js/promises.js renderTiles). Each shows the area, how many pledges it
+       holds and where they stand; clicking one filters the list below. The photos are illustrative stand-ins until real local
+       pictures replace them (js AREA_META). -->
+  <section class="ar" id="areas" aria-label="Browse the pledges by area">
+    <div class="container">
+      <span class="ar-kicker">Browse by area</span>
+      <div class="ar-grid" id="areaTiles"></div>
+    </div>
+  </section>
+
   <section class="section" id="pledges">
     <div class="container">
       <h2 class="mega-header" style="font-size:clamp(34px,5.4vw,64px);">All Pledges</h2>
@@ -181,7 +191,7 @@
         <div class="lg-bhead"><span class="lg-kicker">01</span><h3>The three marks</h3></div>
         <ol class="hw-rows">
           <li class="hw-row hw-row--kept">
-            <div class="lg-photo"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: a delivered project</span></div></div>
+            <div class="lg-photo lg-photo--img"><img src="img/hero-schools-poster.jpg" alt="A classroom ready for pupils" loading="lazy"><span class="hw-illus">Illustrative photo</span></div>
             <div class="hw-text">
               <span class="hw-mark"><i class="fa-solid fa-circle"></i> Kept <b class="hw-n" data-count-status="Kept">0</b></span>
               <p class="hw-meaning">The promise has been delivered.</p>
@@ -190,7 +200,7 @@
             </div>
           </li>
           <li class="hw-row hw-row--progress">
-            <div class="lg-photo"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: work under way</span></div></div>
+            <div class="lg-photo lg-photo--img"><img src="img/focus-infrastructure.jpg" alt="Construction under way" loading="lazy"><span class="hw-illus">Illustrative photo</span></div>
             <div class="hw-text">
               <span class="hw-mark"><i class="fa-solid fa-circle"></i> In progress <b class="hw-n" data-count-status="In progress">0</b></span>
               <p class="hw-meaning">Work towards the promise has started.</p>
@@ -199,7 +209,7 @@
             </div>
           </li>
           <li class="hw-row hw-row--notstarted">
-            <div class="lg-photo"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: a site before work begins</span></div></div>
+            <div class="lg-photo lg-photo--img"><img src="img/vision-economy-jobs.jpg" alt="Plans and figures on a desk, waiting to be acted on" loading="lazy"><span class="hw-illus">Illustrative photo</span></div>
             <div class="hw-text">
               <span class="hw-mark"><i class="fa-solid fa-circle"></i> Not started <b class="hw-n" data-count-status="Not started">0</b></span>
               <p class="hw-meaning">Nothing has been delivered yet.</p>
@@ -222,10 +232,14 @@
             <a class="pd-link" href="about.html">About Erick <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
+        <figure class="hw-banner">
+          <img src="img/ground-engagement.jpg" alt="Erick Janganya walking a street in Embakasi South among residents" loading="lazy">
+          <figcaption>On the ground in Embakasi South</figcaption>
+        </figure>
       </div>
 
       <div class="lg-verify">
-        <div class="lg-photo"><div class="ph"><i class="fa-solid fa-image"></i><span>Real photo needed: a team member checking a project on site</span></div></div>
+        <div class="lg-photo lg-photo--img"><img src="img/ground-verification.jpg" alt="Supplies being handed out to residents during the 2022 campaign" loading="lazy"><span class="hw-illus hw-illus--real">On the ground, 2022</span></div>
         <div class="lg-verify-body">
           <span class="lg-kicker lg-kicker--red">Before any mark changes</span>
           <h3>Every mark is checked on site</h3>
@@ -247,7 +261,7 @@
     <div class="container">
       <div class="cta-band-inner">
         <div>
-          <h2>Hold us to our word</h2>
+          <h2>Hold us to our word <img class="cta-chip" src="img/unity-togetherness-crop.jpg" alt="A handshake between two people, symbolising trust"></h2>
           <p>Every pledge is public and every mark is checked. If you see something we should look into, tell us.</p>
         </div>
         <a class="btn btn-outline cta-band-btn" href="contact.html">Get in touch</a>
