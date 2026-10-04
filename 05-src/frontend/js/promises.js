@@ -80,6 +80,32 @@
     }
   }
 
+  // "How We Score": live counts beside each mark, and a Show button that filters the list above to that mark.
+  function renderHow() {
+    var sec = document.getElementById('how-we-score');
+    if (!sec) return;
+    function count(s) { return allItems.filter(function (p) { return p.status === s; }).length; }
+    Array.prototype.forEach.call(sec.querySelectorAll('.hw-n'), function (el) {
+      el.textContent = plural(count(el.getAttribute('data-count-status')), 'pledge');
+    });
+    Array.prototype.forEach.call(sec.querySelectorAll('.lg-show'), function (btn) {
+      var n = count(btn.getAttribute('data-status'));
+      btn.querySelector('.lg-label').textContent = n ? 'Show ' + plural(n, 'pledge') : 'None yet';
+      btn.disabled = !n;
+    });
+    sec.addEventListener('click', function (e) {
+      var b = e.target.closest ? e.target.closest('.lg-show') : null;
+      if (!b || b.disabled) return;
+      state.category = []; state.q = ''; searchEl.value = '';
+      state.status = [b.getAttribute('data-status')];
+      render();
+      var target = document.getElementById('pledges');
+      if (target) target.scrollIntoView({ behavior: reduceMotionPref() ? 'auto' : 'smooth', block: 'start' });
+    });
+  }
+
+  function reduceMotionPref() { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+
   function setState(message, icon) {
     if (!stateEl) return;
     if (!message) { stateEl.hidden = true; return; }
@@ -543,6 +569,7 @@
           return;
         }
         buildChips();
+        renderHow();
         readUrl();
         render();
         if (state.pledge) openPanel(state.pledge, { fromUrl: true });

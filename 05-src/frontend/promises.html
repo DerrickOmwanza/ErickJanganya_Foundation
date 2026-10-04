@@ -167,6 +167,79 @@
       <div id="promisesList"></div>
     </div>
   </section>
+
+  <!-- How we score: kept deliberately light on text. 01 the three marks (photo slots are placeholders, live counts and Show
+       buttons filter the list above), 02 where the pledges come from (real 2022 campaign portrait), then a photo led
+       verification band (the same components as the Tracker legend: .lg-*). -->
+  <section class="section lg hw" id="how-we-score">
+    <div class="container">
+      <div class="section-rule"></div>
+      <h2 class="mega-header" style="font-size:clamp(34px,5.4vw,64px);">How We Score</h2>
+      <p class="mega-header-dek">Three marks, one standard: nothing is marked on a claim alone.</p>
+
+      <div class="lg-block">
+        <div class="lg-bhead"><span class="lg-kicker">01</span><h3>The three marks</h3></div>
+        <ol class="hw-rows">
+          <li class="hw-row hw-row--kept">
+            <div class="lg-photo"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: a delivered project</span></div></div>
+            <div class="hw-text">
+              <span class="hw-mark"><i class="fa-solid fa-circle"></i> Kept <b class="hw-n" data-count-status="Kept">0</b></span>
+              <p class="hw-meaning">The promise has been delivered.</p>
+              <p class="hw-takes"><span>What it takes</span>The work is finished and checked on site, with the proof attached.</p>
+              <button type="button" class="lg-show" data-status="Kept"><span class="lg-label">Show pledges</span> <i class="fa-solid fa-arrow-up"></i></button>
+            </div>
+          </li>
+          <li class="hw-row hw-row--progress">
+            <div class="lg-photo"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: work under way</span></div></div>
+            <div class="hw-text">
+              <span class="hw-mark"><i class="fa-solid fa-circle"></i> In progress <b class="hw-n" data-count-status="In progress">0</b></span>
+              <p class="hw-meaning">Work towards the promise has started.</p>
+              <p class="hw-takes"><span>What it takes</span>A project is under way on the tracker, and its progress has been verified.</p>
+              <button type="button" class="lg-show" data-status="In progress"><span class="lg-label">Show pledges</span> <i class="fa-solid fa-arrow-up"></i></button>
+            </div>
+          </li>
+          <li class="hw-row hw-row--notstarted">
+            <div class="lg-photo"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: a site before work begins</span></div></div>
+            <div class="hw-text">
+              <span class="hw-mark"><i class="fa-solid fa-circle"></i> Not started <b class="hw-n" data-count-status="Not started">0</b></span>
+              <p class="hw-meaning">Nothing has been delivered yet.</p>
+              <p class="hw-takes"><span>What it takes</span>The pledge is on the record, waiting for work to begin. Nothing is rounded up.</p>
+              <button type="button" class="lg-show" data-status="Not started"><span class="lg-label">Show pledges</span> <i class="fa-solid fa-arrow-up"></i></button>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="lg-block">
+        <div class="lg-bhead"><span class="lg-kicker">02</span><h3>Where these pledges come from</h3></div>
+        <div class="hw-origin">
+          <div class="hw-origin-photo">
+            <img src="img/2022-campaign.jpg" alt="Erick Janganya, from the 2022 campaign" loading="lazy">
+            <span class="hw-origin-tag">2022 campaign</span>
+          </div>
+          <div class="hw-origin-text">
+            <p>From the 2022 campaign platform, <b>#KaziKwaMpango</b>. They stay on the scorecard until each one is kept.</p>
+            <a class="pd-link" href="about.html">About Erick <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg-verify">
+        <div class="lg-photo"><div class="ph"><i class="fa-solid fa-image"></i><span>Real photo needed: a team member checking a project on site</span></div></div>
+        <div class="lg-verify-body">
+          <span class="lg-kicker lg-kicker--red">Before any mark changes</span>
+          <h3>Every mark is checked on site</h3>
+          <ol class="lg-checks">
+            <li><span>1</span>Pledge recorded</li>
+            <li><span>2</span>Linked to a project</li>
+            <li><span>3</span>Checked on site</li>
+            <li><span><i class="fa-solid fa-check"></i></span>Mark updated</li>
+          </ol>
+          <a class="pd-link" href="foundation.html#verification">See how verification works <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <!-- Pledge detail drawer (js/promises.js): same component as the Tracker's project drawer (.pd-*). Opens from any pledge,
