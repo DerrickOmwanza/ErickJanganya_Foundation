@@ -98,60 +98,47 @@
 </div>
 
 <main>
-  <!-- Coming-soon template shared by Events, News, Media, Community and Get Involved (css: .soon-*). Same dark hero as
-       the rebuilt pages, a preview of what the page will carry (photo slots are placeholders), and links to live pages.
-       Replace this whole <main> when the page itself is built. -->
-  <section class="page-hero soon-hero">
-    <div class="container">
-      <span class="page-hero-kicker">Coming soon</span>
-      <h1>Events</h1>
-      <p class="page-hero-lead">Community meetings, ward visits and outreach days across Embakasi South, with the date, the place and how to be there.</p>
-      <div class="page-hero-actions">
-        <a class="btn btn-primary" href="index.html#stay-updated"><i class="fa-solid fa-bell"></i> Notify me when it opens</a>
-        <a class="btn btn-outline" href="tracker.html">See the live tracker</a>
+  <!-- Rebuilt 2026-10-04 from the bare "coming soon" stub. Hero over a real photo (a community forum) with a live "at a glance"
+       panel (js/events.js renderGlance: upcoming count, the next event, past events, wards, days to go), then the events
+       themselves from the Events API, upcoming first and past below. -->
+  <section class="page-hero page-hero--events">
+    <div class="container page-hero-grid">
+      <div class="page-hero-copy">
+        <span class="page-hero-kicker">Embakasi South &middot; Ward by ward</span>
+        <h1>Events</h1>
+        <p class="page-hero-lead">Community forums, medical camps, open days and ward visits: where the team will be, and how to be there.</p>
+        <div class="page-hero-actions">
+          <a class="btn btn-primary" href="#events">See the events <i class="fa-solid fa-arrow-down"></i></a>
+          <a class="btn btn-outline" href="index.html#stay-updated"><i class="fa-solid fa-bell"></i> Get notified</a>
+        </div>
       </div>
+      <aside class="glance ev-glance is-loading" id="evGlance" aria-label="Events at a glance" aria-live="polite">
+        <div class="glance-head">
+          <span class="glance-title"><span class="glance-dot" aria-hidden="true"></span>At a glance</span>
+          <span class="glance-sample" id="egSample" hidden>Sample data</span>
+        </div>
+        <div class="glance-main"><b id="egUpcoming">...</b><span id="egUpcomingLabel">upcoming events</span></div>
+        <div class="eg-next" id="egNext">
+          <span class="eg-next-label">Next up</span>
+          <b id="egNextTitle">...</b>
+          <span id="egNextMeta"></span>
+        </div>
+        <dl class="glance-stats">
+          <div><dt>Coming in</dt><dd id="egIn">...</dd></div>
+          <div><dt>Past events</dt><dd id="egPast">...</dd></div>
+          <div><dt>Wards</dt><dd><span id="egWards">...</span><small> / 5</small></dd></div>
+        </dl>
+        <p class="glance-note" id="egNote" hidden></p>
+      </aside>
     </div>
   </section>
 
-  <section class="section soon-body">
+  <section class="section" id="events">
     <div class="container">
-      <div class="section-rule"></div>
-      <h2 class="mega-header" style="font-size:clamp(34px,5.4vw,64px);">What will be here</h2>
-      <ul class="soon-grid">
-        <li class="soon-card">
-          <div class="soon-photo"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: a community meeting</span></div></div>
-          <div class="soon-card-body">
-            <span class="soon-ico" aria-hidden="true"><i class="fa-solid fa-calendar-days"></i></span>
-            <h3>Upcoming events</h3>
-            <p>Every gathering listed with its date, venue and ward.</p>
-          </div>
-        </li>
-        <li class="soon-card">
-          <div class="soon-photo"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: residents at a ward visit</span></div></div>
-          <div class="soon-card-body">
-            <span class="soon-ico" aria-hidden="true"><i class="fa-solid fa-user-plus"></i></span>
-            <h3>Join in</h3>
-            <p>Say you are coming, and bring a neighbour with you.</p>
-          </div>
-        </li>
-        <li class="soon-card">
-          <div class="soon-photo"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: an outreach day</span></div></div>
-          <div class="soon-card-body">
-            <span class="soon-ico" aria-hidden="true"><i class="fa-solid fa-images"></i></span>
-            <h3>Past events</h3>
-            <p>Pictures and a short report on what happened and what followed.</p>
-          </div>
-        </li>
-      </ul>
-
-      <div class="soon-meanwhile">
-        <h3>In the meantime</h3>
-        <ul>
-          <li><a href="tracker.html">See the work already tracked <i class="fa-solid fa-arrow-right"></i></a></li>
-          <li><a href="vision.html">Read the vision for Embakasi South <i class="fa-solid fa-arrow-right"></i></a></li>
-          <li><a href="contact.html">Get in touch <i class="fa-solid fa-arrow-right"></i></a></li>
-        </ul>
-      </div>
+      <h2 class="mega-header" style="font-size:clamp(34px,5.4vw,64px);">All Events</h2>
+      <p class="mega-header-dek" style="margin-bottom:36px;">What is coming up, and what has already happened.</p>
+      <p id="eventsState" class="data-state" hidden></p>
+      <div id="eventsList"></div>
     </div>
   </section>
 </main>
@@ -202,6 +189,8 @@
   </div>
 </footer>
 
+<script src="js/api.js"></script>
 <script src="js/main.js"></script>
+<script src="js/events.js"></script>
 </body>
 </html>
