@@ -79,13 +79,47 @@
 </div>
 
 <main>
-  <section class="section" style="padding-top:150px;">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Development Tracker</span>
-        <h1 style="font-size:40px;margin:8px 0 12px;">Every project, dated and located.</h1>
-        <p>Real projects across Embakasi South's five wards — tracked from planning to completion, with budgets, funding sources, and proof as it happens.</p>
+  <!-- Hero rebuilt 2026-10-04 to the shared dark page-hero band (it was a small heading on white). The right side
+       is a live "at a glance" panel (js/tracker.js renderGlance): total projects, a status breakdown bar, total
+       budget, wards covered and the last update, all from the Development Tracker API. It shows "Sample data"
+       automatically while placeholder records are on screen. -->
+  <section class="page-hero page-hero--tracker">
+    <div class="container page-hero-grid">
+      <div class="page-hero-copy">
+        <span class="page-hero-kicker">Embakasi South &middot; Updated as work happens</span>
+        <h1>Development Tracker</h1>
+        <p class="page-hero-lead">Every project across Embakasi South's five wards, dated and located, tracked from planning to completion with budgets, funding sources and proof as it happens.</p>
+        <div class="page-hero-actions">
+          <a class="btn btn-primary" href="#projects">Browse the projects <i class="fa-solid fa-arrow-down"></i></a>
+          <a class="btn btn-outline" href="promises.html">See the promises</a>
+        </div>
       </div>
+      <aside class="glance is-loading" id="glance" aria-label="The tracker at a glance" aria-live="polite">
+        <div class="glance-head">
+          <span class="glance-title"><span class="glance-dot" aria-hidden="true"></span>At a glance</span>
+          <span class="glance-sample" id="glanceSample" hidden>Sample data</span>
+        </div>
+        <div class="glance-main"><b id="glanceProjects">...</b><span>projects tracked</span></div>
+        <div class="glance-bar" id="glanceBar" role="img" aria-label="Projects by status"></div>
+        <ul class="glance-legend">
+          <li><i class="glance-key glance-key--completed"></i><b id="glanceCompleted">...</b> Completed</li>
+          <li><i class="glance-key glance-key--ongoing"></i><b id="glanceOngoing">...</b> Ongoing</li>
+          <li><i class="glance-key glance-key--planned"></i><b id="glancePlanned">...</b> Planned</li>
+        </ul>
+        <dl class="glance-stats">
+          <div><dt>Total budget</dt><dd id="glanceBudget">...</dd></div>
+          <div><dt>Wards covered</dt><dd><span id="glanceWards">...</span><small> / 5</small></dd></div>
+          <div><dt>Last updated</dt><dd id="glanceUpdated">...</dd></div>
+        </dl>
+        <p class="glance-note" id="glanceNote" hidden></p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <div class="container">
+      <h2 class="mega-header" style="font-size:clamp(34px,5.4vw,64px);">All Projects</h2>
+      <p class="mega-header-dek" style="margin-bottom:28px;">Filter by ward, category or status to find what you are looking for.</p>
 
       <div class="filter-bar">
         <select id="filterWard" aria-label="Filter by ward"><option value="">All wards</option></select>
