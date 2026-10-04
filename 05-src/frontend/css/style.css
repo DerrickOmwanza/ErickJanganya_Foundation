@@ -2031,3 +2031,13 @@ section[id]{scroll-margin-top:84px;}
 .verify-step-media{position:relative;}
 .verify-step-media img{width:100%;height:100%;object-fit:cover;display:block;}
 .platform-tile .hw-illus{top:12px;bottom:auto;z-index:2;}
+
+/* Home imagery: honest labels on the stock pictures, preview cards with area photos, and the "What we track" tiles. */
+.visit-media{position:relative;}
+.value-card-img-wrap{position:relative;}
+.split-card-img{position:relative;overflow:hidden;background:#111;}
+.split-card-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.home-areas{margin-top:72px;}
+a.ar-tile{text-decoration:none;color:#fff;}
+a.ar-tile .ar-count i{margin-left:6px;font-size:11px;}
+@media (max-width:960px){.home-areas{margin-top:48px;}}

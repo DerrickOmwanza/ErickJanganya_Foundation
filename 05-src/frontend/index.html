@@ -188,7 +188,7 @@
       <div class="visit-duo">
         <div class="visit-primary reveal-up">
           <!-- REVIEW: AI-generated placeholder — replace with a real tracker/project-site photo once supplied -->
-          <img class="visit-img-primary" src="img/tracker-preview.jpg" alt="Community development project underway in Embakasi South">
+          <div class="visit-media"><img class="visit-img-primary" src="img/tracker-preview.jpg" alt="A multi-storey building rising beside two tower cranes"><span class="hw-illus">Illustrative photo</span></div>
           <h3>Development Tracker</h3>
           <p>Every project happening in Embakasi South right now: dated, budgeted, and open for anyone to check.</p>
           <a class="btn btn-outline" href="tracker.html">See the progress tracker</a>
@@ -196,11 +196,17 @@
         <div class="visit-secondary reveal-up">
           <!-- REVIEW: stock placeholder (symbolic, not a real Embakasi South photo) — swap for a real
                tracker/evidence photo once supplied. -->
-          <img class="visit-img-secondary" src="img/promise-tracker.jpg" alt="Promises tracked against time — kept, in progress, or not started">
+          <div class="visit-media"><img class="visit-img-secondary" src="img/promise-tracker.jpg" alt="Alarm clocks, symbolising promises tracked against time"><span class="hw-illus">Illustrative photo</span></div>
           <h3>Promise Tracker</h3>
           <p>Every public promise made to Embakasi South, scored honestly: kept, in progress, or not yet started, with evidence linked back to the Development Tracker beside it.</p>
           <a class="btn btn-outline" href="promises.html">See the promise scorecard</a>
         </div>
+      </div>
+      <!-- What we track: one photo tile per area of work, built from js/area-meta.js (the same pictures and icons as the
+           Tracker and the Scorecard). Each links to that area on the Development Tracker. -->
+      <div class="home-areas reveal-up">
+        <span class="ar-kicker">What we track</span>
+        <div class="ar-grid" id="homeAreaTiles"></div>
       </div>
     </div>
   </section>
@@ -266,28 +272,28 @@
       <div class="value-grid">
         <div class="value-card reveal-up">
           <!-- REVIEW: replace with a real photo illustrating transparency (e.g. a resident reviewing a project record) once supplied -->
-          <div class="value-card-img-wrap"><img class="value-card-img" src="img/value-transparency.jpg" alt="Residents reviewing a project record together"></div>
+          <div class="value-card-img-wrap"><img class="value-card-img" src="img/value-transparency.jpg" alt="Round glasses beaded with water, symbolising clear sight"><span class="hw-illus">Illustrative photo</span></div>
           <h3>Radical transparency</h3>
           <p>Every project, photo and shilling logged for anyone to verify.</p>
           <a class="value-card-link" href="foundation.html">Learn more <i class="fa-solid fa-arrow-right"></i></a>
         </div>
         <div class="value-card reveal-up">
           <!-- REVIEW: AI-generated placeholder — replace with a real community/ward meeting photo once supplied -->
-          <div class="value-card-img-wrap"><img class="value-card-img" src="img/value-community.jpg" alt="Community members gathered for a ward meeting"></div>
+          <div class="value-card-img-wrap"><img class="value-card-img" src="img/value-community.jpg" alt="Hands joined in a circle, symbolising community"><span class="hw-illus">Illustrative photo</span></div>
           <h3>Community-led</h3>
           <p>Priorities set from what residents of the five wards actually need.</p>
           <a class="value-card-link" href="community.html">Learn more <i class="fa-solid fa-arrow-right"></i></a>
         </div>
         <div class="value-card reveal-up">
           <!-- REVIEW: AI-generated placeholder — replace with a real progress-tracker-in-use photo once supplied -->
-          <div class="value-card-img-wrap"><img class="value-card-img" src="img/value-tracker.jpg" alt="Checking project progress data on a phone at a project site"></div>
+          <div class="value-card-img-wrap"><img class="value-card-img" src="img/value-tracker.jpg" alt="Charts and figures under a magnifying glass, symbolising measured progress"><span class="hw-illus">Illustrative photo</span></div>
           <h3>Measurable delivery</h3>
           <p>Progress tracked with dates, budgets and completion percentages.</p>
           <a class="value-card-link" href="tracker.html">Learn more <i class="fa-solid fa-arrow-right"></i></a>
         </div>
         <div class="value-card reveal-up">
           <!-- REVIEW: AI-generated placeholder — replace with a real diaspora/local-support photo once supplied -->
-          <div class="value-card-img-wrap"><img class="value-card-img" src="img/value-diaspora.jpg" alt="Staying connected with Embakasi South from afar"></div>
+          <div class="value-card-img-wrap"><img class="value-card-img" src="img/value-diaspora.jpg" alt="A globe resting in green leaves, symbolising a record open to everyone, everywhere"><span class="hw-illus">Illustrative photo</span></div>
           <h3>Open to everyone, everywhere</h3>
           <p>Residents, the diaspora, and partners anywhere in the world see the same record and can hold it to the same standard.</p>
           <a class="value-card-link" href="vision.html">See the global vision <i class="fa-solid fa-arrow-right"></i></a>
@@ -441,6 +447,8 @@
 <script src="js/main.js"></script>
 <script src="js/forms.js"></script>
 <script src="js/impact-stats.js"></script>
+<script src="js/area-meta.js"></script>
+<script src="js/home-areas.js"></script>
 <script src="js/home-tracker-preview.js"></script>
 </body>
 </html>

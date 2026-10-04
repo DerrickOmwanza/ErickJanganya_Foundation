@@ -21,11 +21,21 @@
     return 'source-adv';
   }
 
-  function renderCard(p) {
+  // The project's own photo when it has one, otherwise its area's picture from js/area-meta.js (labelled illustrative),
+  // otherwise the plain placeholder.
+  function cardMedia(p, i) {
+    if (p.photoUrl) return '<div class="split-card-img"><img src="' + U.escapeHtml(p.photoUrl) + '" alt="' + U.escapeHtml(p.title) + '" loading="lazy"></div>';
+    var meta = window.AreaMeta && window.AreaMeta[p.category];
+    var src = meta && (meta.imgs && meta.imgs.length ? meta.imgs[i % meta.imgs.length] : meta.img);
+    if (src) return '<div class="split-card-img"><img src="' + U.escapeHtml(src) + '" alt="" loading="lazy"><span class="hw-illus">Illustrative photo</span></div>';
+    return '<div class="ph split-card-img"><i class="fa-solid fa-image"></i></div>';
+  }
+
+  function renderCard(p, i) {
     var updated = U.relativeTime(p.updatedAt);
     return (
       '<a class="split-card" href="tracker.html">' +
-        '<div class="ph split-card-img"><i class="fa-solid fa-image"></i></div>' +
+        cardMedia(p, i) +
         '<div class="split-card-body">' +
           '<span class="tag-plain">' + U.escapeHtml(p.ward) + ' <i class="fa-solid fa-circle"></i> ' + U.escapeHtml(p.category) + '</span>' +
           '<h4>' + U.escapeHtml(p.title) + '</h4>' +
