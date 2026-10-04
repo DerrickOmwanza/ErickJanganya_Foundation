@@ -2251,3 +2251,15 @@ a.ar-tile .ar-count i{margin-left:6px;font-size:11px;}
   .ex-list li{gap:16px;padding:22px 0;}
   .ex-ico{width:48px;height:48px;font-size:18px;}
 }
+
+/* Get Involved page: hero over a real photo with a "four ways to help" card, photo rows (the Promise Scorecard .hw-* rows),
+   a "where support goes" strip, the offer form (the Contact layout) and the FAQ. */
+.page-hero.page-hero--involve{background:linear-gradient(90deg,rgba(5,5,5,.95) 0%,rgba(5,5,5,.8) 42%,rgba(5,5,5,.32) 100%),url("../img/career-path.jpg") 50% 30%/cover no-repeat #050505;}
+.page-hero--involve h1{font-size:clamp(56px,7vw,100px);}
+.ig-quick li{padding:16px 0;}
+.ig-quick a{display:inline-block;}
+.ig-numbers{margin:32px 0 0;}
+.ig-numbers b{font-size:20px;}
+.ig-verify-text{margin:0 0 24px;font-size:17px;line-height:1.6;color:var(--ink-soft);}
+.ig-links{display:flex;flex-wrap:wrap;gap:14px 28px;}
+#volunteer,#partner,#goods,#cash,#offer,#where-support-goes{scroll-margin-top:100px;}

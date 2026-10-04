@@ -370,4 +370,171 @@
     })();
   }
 
+
+  // Get Involved offer form. Same flow as the Contact form above, with a required "how would you like to help" choice (a
+  // chip can be changed but not cleared), an optional ward and note, a draft that survives a refresh, and a thank-you panel in
+  // place of the form. It posts to the existing contact endpoint with the way and ward in the subject and at the end of the
+  // message so the team can sort offers. The "I want to..." buttons on each way pick the chip and scroll to the form, and
+  // ?way= in a link does the same.
+  var involveForm = document.getElementById('involveForm');
+  if (involveForm) {
+    (function () {
+      var note = document.getElementById('involveNote');
+      var success = document.getElementById('igSuccess');
+      var counter = document.getElementById('ig-count');
+      var wayErr = document.getElementById('ig-way-err');
+      var DRAFT_KEY = 'ejf.involve.draft';
+      var MAX = 1500;
+      var fields = {
+        name: { el: involveForm.elements.name, wrap: involveForm.elements.name.closest('.vi-field'), err: document.getElementById('ig-name-err') },
+        email: { el: involveForm.elements.email, wrap: involveForm.elements.email.closest('.vi-field'), err: document.getElementById('ig-email-err') }
+      };
+      var message = involveForm.elements.message;
+
+      function problem(key) {
+        var el = fields[key].el, v = el.value.trim();
+        if (key === 'name') return v ? '' : 'Please add your name.';
+        if (!v) return 'Please add your email.';
+        return el.validity.typeMismatch ? "That email address doesn't look right." : '';
+      }
+      function show(key, msg) {
+        var f = fields[key];
+        f.err.textContent = msg;
+        f.wrap.classList.toggle('has-error', !!msg);
+        if (msg) { f.el.setAttribute('aria-invalid', 'true'); } else { f.el.removeAttribute('aria-invalid'); }
+      }
+      function grow() {
+        message.style.height = 'auto';
+        message.style.height = Math.max(message.scrollHeight + 2, 110) + 'px';
+        var n = message.value.length;
+        counter.textContent = n + ' / ' + MAX;
+        counter.classList.toggle('is-near', n >= MAX - 150);
+      }
+      function saveDraft() {
+        try {
+          sessionStorage.setItem(DRAFT_KEY, JSON.stringify({
+            way: involveForm.way.value, ward: involveForm.ward.value, message: message.value,
+            name: fields.name.el.value, email: fields.email.el.value, phone: involveForm.phone.value
+          }));
+        } catch (e) { /* storage unavailable: the form simply works without a saved draft */ }
+      }
+      function clearDraft() { try { sessionStorage.removeItem(DRAFT_KEY); } catch (e) { /* ignore */ } }
+      function setRadio(name, value) {
+        Array.prototype.forEach.call(involveForm.querySelectorAll('input[name="' + name + '"]'), function (r) {
+          r.checked = r.value === value;
+          r._was = r.checked;
+        });
+      }
+      function wayProblem() { return involveForm.way.value ? '' : 'Please choose how you would like to help.'; }
+      function showWay(msg) { wayErr.textContent = msg; }
+
+      // Restore a saved draft, then let a link (?way=) override the way
+      try {
+        var saved = JSON.parse(sessionStorage.getItem(DRAFT_KEY) || 'null');
+        if (saved) {
+          message.value = saved.message || '';
+          fields.name.el.value = saved.name || '';
+          fields.email.el.value = saved.email || '';
+          involveForm.phone.value = saved.phone || '';
+          if (saved.way) setRadio('way', saved.way);
+          if (saved.ward) setRadio('ward', saved.ward);
+        }
+      } catch (e) { /* ignore a bad draft */ }
+      try {
+        var linked = new URLSearchParams(window.location.search).get('way');
+        if (linked) setRadio('way', linked);
+      } catch (e) { /* ignore bad link parameters */ }
+      grow();
+
+      // Ward chips are optional (tap again to clear); the way is required, so it can be changed but not cleared
+      Array.prototype.forEach.call(involveForm.querySelectorAll('.vi-chip input'), function (r) {
+        r._was = r.checked;
+        r.addEventListener('click', function () {
+          if (r.name === 'ward' && r._was) { r.checked = false; r._was = false; }
+          else {
+            Array.prototype.forEach.call(involveForm.querySelectorAll('input[name="' + r.name + '"]'), function (o) { o._was = false; });
+            r._was = true;
+          }
+          if (r.name === 'way') showWay('');
+          saveDraft();
+        });
+      });
+
+      // "I want to ..." on each way: choose it and take the visitor to the form
+      Array.prototype.forEach.call(document.querySelectorAll('.ig-offer'), function (btn) {
+        btn.addEventListener('click', function () {
+          setRadio('way', btn.getAttribute('data-way'));
+          showWay('');
+          saveDraft();
+          var target = document.getElementById('offer');
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+
+      involveForm.phone.addEventListener('input', saveDraft);
+      message.addEventListener('input', function () { grow(); saveDraft(); });
+
+      Object.keys(fields).forEach(function (key) {
+        var el = fields[key].el;
+        el.addEventListener('blur', function () { if (el.value.trim() || fields[key].wrap.classList.contains('has-error')) show(key, problem(key)); });
+        el.addEventListener('input', function () {
+          if (fields[key].wrap.classList.contains('has-error') && !problem(key)) show(key, '');
+          saveDraft();
+        });
+      });
+
+      involveForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        note.hidden = true;
+        var firstBad = null;
+        var wayMsg = wayProblem();
+        showWay(wayMsg);
+        if (wayMsg) firstBad = involveForm.querySelector('input[name="way"]');
+        Object.keys(fields).forEach(function (key) {
+          var msg = problem(key);
+          show(key, msg);
+          if (msg && !firstBad) firstBad = fields[key].el;
+        });
+        if (firstBad) { firstBad.focus(); return; }
+
+        var way = involveForm.way.value, ward = involveForm.ward.value;
+        var context = ['Way to help: ' + way];
+        if (ward) context.push('Ward: ' + ward);
+        var payload = {
+          name: fields.name.el.value.trim(),
+          email: fields.email.el.value.trim(),
+          phone: involveForm.phone.value.trim(),
+          subject: 'Get involved: ' + way + (ward ? ', ' + ward : ''),
+          message: (message.value.trim() ? message.value.trim() + '\n\n' : '') + context.join('\n')
+        };
+        withBusyButton(involveForm, 'Sending…', function () {
+          return window.ApiClient.post('/contact', payload)
+            .then(function () {
+              var first = payload.name.split(' ')[0];
+              document.getElementById('igSuccessTitle').textContent = 'Thank you, ' + first + '.';
+              document.getElementById('igSuccessText').textContent = 'Your offer has been received. The team will be in touch.';
+              clearDraft();
+              involveForm.hidden = true;
+              success.hidden = false;
+              success.focus();
+            })
+            .catch(function (err) {
+              showNote(note, err.message || 'Something went wrong. Please try again.', 'error');
+            });
+        });
+      });
+
+      document.getElementById('igAgain').addEventListener('click', function () {
+        involveForm.reset();
+        Array.prototype.forEach.call(involveForm.querySelectorAll('.vi-chip input'), function (r) { r._was = false; });
+        Object.keys(fields).forEach(function (key) { show(key, ''); });
+        showWay('');
+        grow();
+        success.hidden = true;
+        involveForm.hidden = false;
+        involveForm.querySelector('input[name="way"]').focus();
+      });
+    })();
+  }
+
 })();

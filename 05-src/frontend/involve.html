@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Get Involved — Erick Janganya Foundation</title>
+<title>Get Involved | Erick Janganya Foundation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
@@ -94,59 +94,216 @@
 </div>
 
 <main>
-  <!-- Coming-soon template shared by Events, News, Media, Community and Get Involved (css: .soon-*). Same dark hero as
-       the rebuilt pages, a preview of what the page will carry (photo slots are placeholders), and links to live pages.
-       Replace this whole <main> when the page itself is built. -->
-  <section class="page-hero soon-hero">
+  <!-- Built 2026-10-05 from the bare "coming soon" stub (the Donate button on every page leads here). Hero over a real photo with a
+       "Four ways to help" card, then a photo row for each way (anchors #volunteer #partner #goods #cash, linked from the footer),
+       a "where support goes" strip, one form, a short FAQ and the banner. HONEST BY DESIGN: online giving does not exist yet, so
+       "Give cash" is an enquiry, not a payment; nothing here claims registration status or tax receipts (legal status is still
+       unconfirmed, see the Foundation page). REVIEW WITH ERICK: the wording of each way and the FAQ answers. -->
+  <section class="page-hero page-hero--involve">
+    <div class="container page-hero-grid">
+      <div class="page-hero-copy">
+        <span class="page-hero-kicker">Embakasi South &middot; Join the work</span>
+        <h1>Get Involved</h1>
+        <p class="page-hero-lead">Give your time, your skills, supplies or support, and see where it lands on the Development Tracker.</p>
+        <div class="page-hero-actions">
+          <a class="btn btn-primary" href="#offer">Tell us how you can help <i class="fa-solid fa-arrow-down"></i></a>
+          <a class="btn btn-outline" href="tracker.html">See where support goes</a>
+        </div>
+      </div>
+      <aside class="glance contact-card" aria-label="Four ways to help">
+        <div class="glance-head">
+          <span class="glance-title"><span class="glance-dot" aria-hidden="true"></span>Four ways to help</span>
+        </div>
+        <ul class="cc-list ig-quick">
+          <li><span class="cc-ico" aria-hidden="true"><i class="fa-solid fa-people-group"></i></span><div><span class="cc-label">Time</span><a href="#volunteer">Volunteer</a></div></li>
+          <li><span class="cc-ico" aria-hidden="true"><i class="fa-solid fa-handshake"></i></span><div><span class="cc-label">Skills and funding</span><a href="#partner">Partner with us</a></div></li>
+          <li><span class="cc-ico" aria-hidden="true"><i class="fa-solid fa-box-open"></i></span><div><span class="cc-label">Supplies</span><a href="#goods">Donate goods</a></div></li>
+          <li><span class="cc-ico" aria-hidden="true"><i class="fa-solid fa-hand-holding-dollar"></i></span><div><span class="cc-label">Money</span><a href="#cash">Give cash</a></div></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" id="ways">
     <div class="container">
-      <span class="page-hero-kicker">Coming soon</span>
-      <h1>Get Involved</h1>
-      <p class="page-hero-lead">Give cash, goods or time, and see it land on a real project in the tracker.</p>
-      <div class="page-hero-actions">
-        <a class="btn btn-primary" href="index.html#stay-updated"><i class="fa-solid fa-bell"></i> Notify me when it opens</a>
-        <a class="btn btn-outline" href="tracker.html">See the live tracker</a>
+      <h2 class="mega-header" style="font-size:clamp(34px,5.4vw,64px);">Ways to Help</h2>
+      <p class="mega-header-dek" style="margin-bottom:40px;">Pick what suits you. Each one ends in the same place: real, checkable work in Embakasi South.</p>
+      <ol class="hw-rows ig-rows">
+        <li class="hw-row ig-row" id="volunteer" style="--hw-accent:var(--yellow);">
+          <div class="lg-photo lg-photo--img"><img src="img/ground-engagement.jpg" alt="Erick Janganya walking a street in Embakasi South among residents" loading="lazy" style="object-position:50% 60%;"><span class="hw-illus hw-illus--real">On the ground, Embakasi South</span></div>
+          <div class="hw-text">
+            <span class="hw-mark">Volunteer</span>
+            <p class="hw-meaning">Give your time on the ground in your own ward.</p>
+            <p class="hw-takes"><span>What it looks like</span>Helping at ward events, taking part in site visits, and spreading the word to neighbours.</p>
+            <button type="button" class="lg-show ig-offer" data-way="Volunteer">I want to volunteer <i class="fa-solid fa-arrow-down"></i></button>
+          </div>
+        </li>
+        <li class="hw-row ig-row" id="partner" style="--hw-accent:var(--red);">
+          <div class="lg-photo lg-photo--img"><img src="img/value-diaspora.jpg" alt="A globe resting in green leaves, symbolising partners anywhere in the world" loading="lazy"><span class="hw-illus">Illustrative photo</span></div>
+          <div class="hw-text">
+            <span class="hw-mark">Partner with us</span>
+            <p class="hw-meaning">Back real, ward-level work with partners who can check it.</p>
+            <p class="hw-takes"><span>Who it is for</span>Diaspora groups, development organisations and mission-aligned investors, anywhere in the world.</p>
+            <button type="button" class="lg-show ig-offer" data-way="Partner with us">I want to partner <i class="fa-solid fa-arrow-down"></i></button>
+          </div>
+        </li>
+        <li class="hw-row ig-row" id="goods" style="--hw-accent:#1f9d55;">
+          <div class="lg-photo lg-photo--img"><img src="img/ground-verification.jpg" alt="Supplies being handed out to residents during the 2022 campaign" loading="lazy"><span class="hw-illus hw-illus--real">On the ground, 2022</span></div>
+          <div class="hw-text">
+            <span class="hw-mark">Donate goods</span>
+            <p class="hw-meaning">Give materials and supplies where they are needed most.</p>
+            <p class="hw-takes"><span>What it looks like</span>Building materials, supplies and equipment for projects on the tracker. Tell us what you have and the team will say where it can go.</p>
+            <button type="button" class="lg-show ig-offer" data-way="Donate goods">I have goods to give <i class="fa-solid fa-arrow-down"></i></button>
+          </div>
+        </li>
+        <li class="hw-row ig-row" id="cash" style="--hw-accent:#8a919a;">
+          <div class="lg-photo lg-photo--img"><img src="img/tracker-preview.jpg" alt="A building rising beside two tower cranes" loading="lazy" style="object-position:50% 70%;"><span class="hw-illus">Illustrative photo</span></div>
+          <div class="hw-text">
+            <span class="hw-mark">Give cash</span>
+            <p class="hw-meaning">Fund a project and follow it from planning to completion.</p>
+            <p class="hw-takes"><span>Please note</span>Online giving is not open yet. Tell us you would like to give and the team will get in touch with how.</p>
+            <button type="button" class="lg-show ig-offer" data-way="Give cash">I would like to give <i class="fa-solid fa-arrow-down"></i></button>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Where support goes: what the site already promises, in three lines. Links to the pages that prove it. -->
+  <section class="section lg" id="where-support-goes">
+    <div class="container">
+      <div class="section-rule"></div>
+      <h2 class="mega-header" style="font-size:clamp(34px,5.4vw,64px);">Where Support Goes</h2>
+      <p class="mega-header-dek">Nothing here is taken on trust.</p>
+      <ul class="lg-numbers ig-numbers">
+        <li><span class="lg-ico" aria-hidden="true"><i class="fa-solid fa-diagram-project"></i></span><div><b>Every project is public</b><p>Dated, budgeted and located on the Development Tracker.</p></div></li>
+        <li><span class="lg-ico" aria-hidden="true"><i class="fa-solid fa-tags"></i></span><div><b>Funding is labelled</b><p>Foundation-funded, Government (NG-CDF) or Partner-funded, on every project.</p></div></li>
+        <li><span class="lg-ico" aria-hidden="true"><i class="fa-solid fa-clipboard-check"></i></span><div><b>Claims are checked on site</b><p>A site visit comes before any status is published.</p></div></li>
+      </ul>
+      <div class="lg-verify ig-verify">
+        <div class="lg-photo lg-photo--img"><img src="img/community-forum.jpg" alt="Erick Janganya speaking to a packed community forum in Embakasi South" loading="lazy" style="object-position:60% 40%;"><span class="hw-illus hw-illus--real">Embakasi South, community forum</span></div>
+        <div class="lg-verify-body">
+          <span class="lg-kicker lg-kicker--red">See it for yourself</span>
+          <h3>Follow your support from start to finish</h3>
+          <p class="ig-verify-text">Open the tracker to see every project, or the scorecard to see every pledge and whether it has been kept.</p>
+          <div class="ig-links"><a class="pd-link" href="tracker.html">Open the tracker <i class="fa-solid fa-arrow-right"></i></a><a class="pd-link" href="promises.html">Open the scorecard <i class="fa-solid fa-arrow-right"></i></a></div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section soon-body">
+  <section class="section" id="offer">
+    <div class="container">
+      <h2 class="mega-header" style="font-size:clamp(34px,5.4vw,64px);">Tell Us How You Can Help</h2>
+      <p class="mega-header-dek" style="margin-bottom:36px;">A few details and the team will be in touch.</p>
+      <div class="contact-layout">
+        <div class="vi-card" id="igCard">
+          <form class="vi-form" id="involveForm" novalidate>
+            <fieldset class="vi-group" id="ig-way-group">
+              <legend>How would you like to help?</legend>
+              <div class="vi-chips">
+                <label class="vi-chip"><input type="radio" name="way" value="Volunteer"><span>Volunteer</span></label>
+                <label class="vi-chip"><input type="radio" name="way" value="Partner with us"><span>Partner with us</span></label>
+                <label class="vi-chip"><input type="radio" name="way" value="Donate goods"><span>Donate goods</span></label>
+                <label class="vi-chip"><input type="radio" name="way" value="Give cash"><span>Give cash</span></label>
+                <label class="vi-chip"><input type="radio" name="way" value="Not sure yet"><span>Not sure yet</span></label>
+              </div>
+              <span class="vi-error" id="ig-way-err" role="alert"></span>
+            </fieldset>
+            <fieldset class="vi-group">
+              <legend>Which ward would you like to help in? <em>Optional</em></legend>
+              <div class="vi-chips">
+                <label class="vi-chip"><input type="radio" name="ward" value="Imara Daima"><span>Imara Daima</span></label>
+                <label class="vi-chip"><input type="radio" name="ward" value="Kwa Njenga"><span>Kwa Njenga</span></label>
+                <label class="vi-chip"><input type="radio" name="ward" value="Kwa Reuben"><span>Kwa Reuben</span></label>
+                <label class="vi-chip"><input type="radio" name="ward" value="Pipeline"><span>Pipeline</span></label>
+                <label class="vi-chip"><input type="radio" name="ward" value="Kware"><span>Kware</span></label>
+                <label class="vi-chip"><input type="radio" name="ward" value="Anywhere"><span>Anywhere</span></label>
+              </div>
+            </fieldset>
+            <div class="vi-field">
+              <label for="ig-message">A little about you <em class="vi-opt">Optional</em></label>
+              <textarea id="ig-message" name="message" rows="4" maxlength="1500" placeholder="What you can offer, and anything the team should know." aria-describedby="ig-count"></textarea>
+              <div class="vi-meta"><span class="vi-error" aria-hidden="true"></span><span class="vi-count" id="ig-count">0 / 1500</span></div>
+            </div>
+            <div class="vi-row">
+              <div class="vi-field">
+                <label for="ig-name">Your name</label>
+                <input type="text" id="ig-name" name="name" autocomplete="name" required aria-describedby="ig-name-err">
+                <span class="vi-error" id="ig-name-err" role="alert"></span>
+              </div>
+              <div class="vi-field">
+                <label for="ig-email">Email</label>
+                <input type="email" id="ig-email" name="email" autocomplete="email" required aria-describedby="ig-email-err">
+                <span class="vi-error" id="ig-email-err" role="alert"></span>
+              </div>
+            </div>
+            <div class="vi-field">
+              <label for="ig-phone">Phone <em class="vi-opt">Optional</em></label>
+              <input type="tel" id="ig-phone" name="phone" autocomplete="tel">
+            </div>
+            <button type="submit" class="vi-submit">Send my offer <i class="fa-solid fa-arrow-right"></i></button>
+            <p class="form-note" id="involveNote" hidden></p>
+          </form>
+          <div class="vi-success" id="igSuccess" hidden tabindex="-1">
+            <span class="vi-success-icon" aria-hidden="true"><i class="fa-solid fa-check"></i></span>
+            <h3 id="igSuccessTitle">Thank you.</h3>
+            <p id="igSuccessText">Your offer has been received.</p>
+            <button type="button" class="vi-again" id="igAgain">Send another offer</button>
+          </div>
+        </div>
+        <aside class="contact-aside">
+          <figure class="vi-photo contact-photo">
+            <img src="img/career-path.jpg" alt="Erick Janganya among supporters at a community gathering in Embakasi South" loading="lazy" style="object-position:50% 30%;">
+            <figcaption>A community gathering, Embakasi South</figcaption>
+          </figure>
+          <div class="contact-aside-body">
+            <h3>Prefer to talk first?</h3>
+            <p>Write to the team and say how you would like to help.</p>
+            <ul class="contact-aside-list">
+              <li><i class="fa-solid fa-envelope" aria-hidden="true"></i><a href="mailto:hello@erickjanganyafoundation.org">hello@<wbr>erickjanganyafoundation.org</a></li>
+              <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span>Embakasi South, Nairobi</span></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight faq" id="faq">
     <div class="container">
       <div class="section-rule"></div>
-      <h2 class="mega-header" style="font-size:clamp(34px,5.4vw,64px);">Ways to take part</h2>
-      <ul class="soon-grid">
-        <li class="soon-card">
-          <div class="soon-photo"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: a funded project</span></div></div>
-          <div class="soon-card-body">
-            <span class="soon-ico" aria-hidden="true"><i class="fa-solid fa-hand-holding-dollar"></i></span>
-            <h3>Donate cash</h3>
-            <p>Fund a project and follow it from planning to completion.</p>
-          </div>
-        </li>
-        <li class="soon-card">
-          <div class="soon-photo"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: goods being delivered</span></div></div>
-          <div class="soon-card-body">
-            <span class="soon-ico" aria-hidden="true"><i class="fa-solid fa-box-open"></i></span>
-            <h3>Donate goods</h3>
-            <p>Give materials and supplies where they are needed most.</p>
-          </div>
-        </li>
-        <li class="soon-card">
-          <div class="soon-photo"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: volunteers at work</span></div></div>
-          <div class="soon-card-body">
-            <span class="soon-ico" aria-hidden="true"><i class="fa-solid fa-people-group"></i></span>
-            <h3>Volunteer</h3>
-            <p>Give your time on the ground in your own ward.</p>
-          </div>
-        </li>
-      </ul>
+      <h2 class="mega-header" style="font-size:clamp(34px,5.4vw,64px);">Questions</h2>
+      <p class="mega-header-dek">Straight answers before you get involved.</p>
+      <div class="faq-list">
+        <details class="faq-item" name="faq" open>
+          <summary>Can I give money online?</summary>
+          <p>Not yet. Online giving is not open. If you would like to give, tell us using the form above and the team will get in touch with how.</p>
+        </details>
+        <details class="faq-item" name="faq">
+          <summary>Where does support go?</summary>
+          <p>To projects on the <a href="tracker.html">Development Tracker</a>, each labelled with its funding source and checked on site before its status is published.</p>
+        </details>
+        <details class="faq-item" name="faq">
+          <summary>Can I help if I live outside Embakasi South?</summary>
+          <p>Yes. Partners and the diaspora can follow the work and back it from anywhere, because the record is open to everyone. Volunteering on the ground is easiest for residents.</p>
+        </details>
+        <details class="faq-item" name="faq">
+          <summary>How do I know the work is real?</summary>
+          <p>Every project and pledge is public, dated and open to check. See <a href="foundation.html#verification">how verification works</a>.</p>
+        </details>
+      </div>
+    </div>
+  </section>
 
-      <div class="soon-meanwhile">
-        <h3>In the meantime</h3>
-        <ul>
-          <li><a href="vision.html#partner">Partner with us <i class="fa-solid fa-arrow-right"></i></a></li>
-          <li><a href="tracker.html">See where support goes <i class="fa-solid fa-arrow-right"></i></a></li>
-          <li><a href="contact.html">Get in touch <i class="fa-solid fa-arrow-right"></i></a></li>
-        </ul>
+  <section class="section-tight cta-band cta-band--display">
+    <div class="container">
+      <div class="cta-band-inner">
+        <div>
+          <h2>Join the work <img class="cta-chip" src="img/career-path.jpg" alt="Erick Janganya among supporters at a community gathering"></h2>
+          <p>However you can help, there is a place for it in Embakasi South.</p>
+        </div>
+        <a class="btn btn-outline cta-band-btn" href="#offer">Offer your help</a>
       </div>
     </div>
   </section>
@@ -199,6 +356,8 @@
   </div>
 </footer>
 
+<script src="js/api.js"></script>
 <script src="js/main.js"></script>
+<script src="js/forms.js"></script>
 </body>
 </html>
