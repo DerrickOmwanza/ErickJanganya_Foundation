@@ -1001,6 +1001,26 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .sg-status--progress i{color:var(--yellow);}
 .sg-status--notstarted i{color:#8a919a;}
 .sg-rows--flat{border-top:3px solid var(--ink-black);}
+/* Pledge rows are openable (drawer): the title is a link stretched over the whole row; the Tracker link stays above it. */
+.sg-row{position:relative;cursor:pointer;transition:background .2s ease;}
+.sg-row:hover{background:#FAF9F5;}
+.sg-open{color:inherit;text-decoration:none;}
+.sg-open::after{content:"";position:absolute;inset:0;z-index:1;}
+.sg-open:focus-visible{outline:3px solid var(--yellow);outline-offset:3px;}
+.sg-link{position:relative;z-index:2;}
+/* Drawer: the status track (Not started, In progress, Kept) and the linked project card */
+.pr-track{list-style:none;display:flex;gap:6px;margin:22px 0 26px;padding:0;--pr-accent:#8a919a;}
+.pr-track--progress{--pr-accent:var(--yellow);}
+.pr-track--kept{--pr-accent:#1f9d55;}
+.pr-track li{flex:1;padding-top:14px;position:relative;font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-mute);}
+.pr-track li::before{content:"";position:absolute;top:0;left:0;right:0;height:6px;background:#EDEBE3;}
+.pr-track li.is-done::before{background:var(--pr-accent);}
+.pr-track li.is-now{color:var(--ink-black);}
+.pr-proj{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 18px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--ink-black);color:var(--ink-black);text-decoration:none;transition:background .15s ease;}
+.pr-proj:hover{background:#F3F1EA;}
+.pr-proj b{display:block;font-family:var(--font-h);font-size:17px;line-height:1.3;}
+.pr-proj span{font-size:13.5px;color:var(--ink-mute);}
+.pr-proj i{flex:none;}
 @media (max-width:860px){
   .sg-group{margin-bottom:44px;}
   .sg-bar{width:100%;margin-left:0;order:3;}
@@ -1866,3 +1886,8 @@ section[id]{scroll-margin-top:84px;}
 
 /* About page: every image is a sharp-cornered square, like the homepage Field Work photos. */
 .pillar-card{border-radius:0;}
+@media (max-width:600px){
+  .pd-facts--compact{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .pd-facts--compact>div:nth-child(even){padding-left:16px;border-left:1px solid var(--line);}
+  .pd-facts--compact>div:nth-child(odd){padding-right:12px;}
+}

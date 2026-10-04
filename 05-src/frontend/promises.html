@@ -169,6 +169,23 @@
   </section>
 </main>
 
+<!-- Pledge detail drawer (js/promises.js): same component as the Tracker's project drawer (.pd-*). Opens from any pledge,
+     and from a shared link: promises.html?pledge=ID -->
+<div class="pd-overlay" id="pdOverlay" hidden></div>
+<aside class="pd" id="pdPanel" role="dialog" aria-modal="true" aria-labelledby="pdTitle" hidden tabindex="-1">
+  <div class="pd-bar">
+    <div class="pd-step">
+      <button type="button" class="pd-btn" id="pdPrev" aria-label="Previous pledge"><i class="fa-solid fa-arrow-left"></i></button>
+      <button type="button" class="pd-btn" id="pdNext" aria-label="Next pledge"><i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+    <div class="pd-actions">
+      <button type="button" class="pd-copy" id="pdCopy"><i class="fa-solid fa-link"></i><span>Copy link</span></button>
+      <button type="button" class="pd-btn pd-close" id="pdClose" aria-label="Close pledge details"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+  </div>
+  <div class="pd-body" id="pdBody"></div>
+</aside>
+
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
