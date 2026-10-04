@@ -139,6 +139,29 @@
     if (!total) note.textContent = 'No projects have been published yet. Check back soon.';
   }
 
+  // Legend: live counts beside each status and funding source, and a "Show" button that filters the list above to it.
+  function renderLegend() {
+    var legend = document.getElementById('legend');
+    if (!legend) return;
+    Array.prototype.forEach.call(legend.querySelectorAll('.lg-show'), function (btn) {
+      var status = btn.getAttribute('data-status'), funding = btn.getAttribute('data-funding');
+      var n = allItems.filter(function (p) { return status ? p.status === status : p.fundingSource === funding; }).length;
+      btn.querySelector('.lg-label').textContent = n ? 'Show ' + n + ' project' + (n === 1 ? '' : 's') : 'None yet';
+      btn.disabled = !n;
+    });
+  }
+
+  function showFromLegend(btn) {
+    var status = btn.getAttribute('data-status'), funding = btn.getAttribute('data-funding');
+    state.ward = []; state.category = []; state.status = [];
+    state.q = funding ? funding.toLowerCase() : '';
+    searchEl.value = funding || '';
+    if (status) state.status = [status];
+    render();
+    var target = document.getElementById('projects');
+    if (target) target.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+  }
+
   function setState(message, icon) {
     if (!stateEl) return;
     if (!message) { stateEl.hidden = true; return; }
@@ -361,6 +384,11 @@
         try { localStorage.setItem(VIEW_KEY, state.view); } catch (e) { /* ignore */ }
         render();
       });
+    });
+    var legend = document.getElementById('legend');
+    if (legend) legend.addEventListener('click', function (e) {
+      var b = e.target.closest ? e.target.closest('.lg-show') : null;
+      if (b && !b.disabled) showFromLegend(b);
     });
     document.addEventListener('click', function (e) {
       var t = e.target;
@@ -615,6 +643,7 @@
           return;
         }
         buildChips();
+        renderLegend();
         readUrl();
         render();
         if (state.project) openPanel(state.project, { fromUrl: true });

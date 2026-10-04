@@ -968,6 +968,45 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
   .pl-row:hover td,.pl-row:hover .pl-main{background:transparent;}
 }
 
+/* Tracker legend (tracker.html #legend): status and funding definitions with live counts, then what the numbers
+   mean and a link to the verification steps. */
+.lg{background:#FAF9F5;}
+.lg-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:56px;margin-top:44px;}
+.lg-h{margin:0 0 6px;padding-bottom:14px;border-bottom:3px solid var(--ink-black);font-family:var(--font-h);font-weight:700;font-size:24px;}
+.lg-list{list-style:none;margin:0;padding:0;}
+.lg-item{--lg-accent:transparent;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 0 22px 20px;border-bottom:1px solid var(--line);box-shadow:inset 4px 0 0 var(--lg-accent);}
+.lg-item--planned{--lg-accent:#8a919a;}
+.lg-item--ongoing{--lg-accent:var(--yellow);}
+.lg-item--completed{--lg-accent:#1f9d55;}
+.lg-item--fund{box-shadow:none;padding-left:0;}
+.lg-text{min-width:0;}
+.lg-text b{display:block;margin-bottom:6px;font-family:var(--font-h);font-size:20px;}
+.lg-text .source-chip{margin:0 0 8px;}
+.lg-text p{margin:0;font-size:15.5px;line-height:1.6;color:var(--ink-soft);}
+.lg-show{flex:none;display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1.5px solid var(--ink-black);background:#fff;color:var(--ink-black);font:inherit;font-size:14px;font-weight:700;white-space:nowrap;cursor:pointer;transition:background .15s ease,color .15s ease;}
+.lg-show:hover:not(:disabled){background:var(--ink-black);color:#fff;}
+.lg-show:disabled{opacity:.4;cursor:default;}
+.lg-show:focus-visible{outline:3px solid var(--yellow);outline-offset:2px;}
+.lg-show i{font-size:12px;}
+.lg-numbers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:48px 0 0;border-top:3px solid var(--ink-black);}
+.lg-numbers>div{padding:22px 28px 0 0;}
+.lg-numbers>div+div{padding-left:28px;border-left:1px solid var(--line);}
+.lg-numbers dt{margin-bottom:8px;font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red);}
+.lg-numbers dd{margin:0;font-size:16px;line-height:1.6;color:var(--ink-soft);}
+.lg-verify{display:flex;align-items:center;justify-content:space-between;gap:20px 40px;margin-top:44px;padding:26px 30px;background:#fff;border:1px solid var(--line);border-left:5px solid var(--ink-black);}
+.lg-verify p{margin:0;max-width:640px;font-size:16.5px;line-height:1.65;color:var(--ink-soft);}
+.lg-verify p b{color:var(--ink-black);}
+.lg-verify .pd-link{flex:none;}
+@media (max-width:860px){
+  .lg-cols{grid-template-columns:1fr;gap:40px;}
+  .lg-numbers{grid-template-columns:1fr;}
+  .lg-numbers>div,.lg-numbers>div+div{padding:20px 0;border-left:0;border-bottom:1px solid var(--line);}
+  .lg-verify{flex-direction:column;align-items:flex-start;}
+}
+@media (max-width:520px){
+  .lg-item{flex-direction:column;align-items:flex-start;gap:14px;}
+}
+
 /* Tracker project detail drawer (tracker.html #pdPanel, js/tracker.js). Slides in from the right over a dimmed page;
    status sets the accent colour, as on the cards. */
 .pc-open{color:inherit;text-decoration:none;}

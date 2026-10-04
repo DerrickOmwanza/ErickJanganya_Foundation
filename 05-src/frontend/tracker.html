@@ -169,6 +169,65 @@
       <div class="grid grid-3" id="trackerGrid"></div>
     </div>
   </section>
+
+  <!-- Legend: what the status and funding labels mean, how to read the numbers, and how a record is verified.
+       The counts and "Show" buttons are live (js/tracker.js renderLegend): they apply that status, or search that
+       funding source, in the list above. -->
+  <section class="section lg" id="legend">
+    <div class="container">
+      <div class="section-rule"></div>
+      <h2 class="mega-header" style="font-size:clamp(34px,5.4vw,64px);">How to Read This Tracker</h2>
+      <p class="mega-header-dek">Every project carries a status, a funding source and a set of numbers. This is what each one means.</p>
+
+      <div class="lg-cols">
+        <div class="lg-col">
+          <h3 class="lg-h">Status</h3>
+          <ul class="lg-list">
+            <li class="lg-item lg-item--planned">
+              <div class="lg-text"><b>Planned</b><p>Approved or announced, but no work has started on site yet.</p></div>
+              <button type="button" class="lg-show" data-status="Planned"><span class="lg-label">Show projects</span> <i class="fa-solid fa-arrow-up"></i></button>
+            </li>
+            <li class="lg-item lg-item--ongoing">
+              <div class="lg-text"><b>Ongoing</b><p>Work is under way. The progress figure is how far along it was when last checked on site.</p></div>
+              <button type="button" class="lg-show" data-status="Ongoing"><span class="lg-label">Show projects</span> <i class="fa-solid fa-arrow-up"></i></button>
+            </li>
+            <li class="lg-item lg-item--completed">
+              <div class="lg-text"><b>Completed</b><p>The work is finished and has been checked on site by the team.</p></div>
+              <button type="button" class="lg-show" data-status="Completed"><span class="lg-label">Show projects</span> <i class="fa-solid fa-arrow-up"></i></button>
+            </li>
+          </ul>
+        </div>
+        <div class="lg-col">
+          <h3 class="lg-h">Funding source</h3>
+          <ul class="lg-list">
+            <li class="lg-item lg-item--fund">
+              <div class="lg-text"><span class="source-chip source-fnd">Foundation-funded</span><p>Paid for by the Erick Janganya Foundation, from the donations it has received.</p></div>
+              <button type="button" class="lg-show" data-funding="Foundation-funded"><span class="lg-label">Show projects</span> <i class="fa-solid fa-arrow-up"></i></button>
+            </li>
+            <li class="lg-item lg-item--fund">
+              <div class="lg-text"><span class="source-chip source-gov">Government (NG-CDF)</span><p>Paid for from public money, such as the National Government Constituency Development Fund. The Foundation documents it; it did not fund it.</p></div>
+              <button type="button" class="lg-show" data-funding="Government (NG-CDF)"><span class="lg-label">Show projects</span> <i class="fa-solid fa-arrow-up"></i></button>
+            </li>
+            <li class="lg-item lg-item--fund">
+              <div class="lg-text"><span class="source-chip source-partner">Partner-funded</span><p>Paid for by a partner organisation or donor working alongside the Foundation.</p></div>
+              <button type="button" class="lg-show" data-funding="Partner-funded"><span class="lg-label">Show projects</span> <i class="fa-solid fa-arrow-up"></i></button>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <dl class="lg-numbers">
+        <div><dt>Progress</dt><dd>The share of the project's work that is finished, as last verified on site.</dd></div>
+        <div><dt>Budget</dt><dd>The amount set aside for the whole project, not the money spent so far.</dd></div>
+        <div><dt>Updated</dt><dd>When the record last changed, so you can see how fresh the information is.</dd></div>
+      </dl>
+
+      <div class="lg-verify">
+        <p><b>Every record is checked before it is published.</b> A team member visits the site, the status is set from what is actually there, and the budget and funding source are attached.</p>
+        <a class="pd-link" href="foundation.html#verification">See how verification works <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
 </main>
 
 <!-- Project detail drawer (js/tracker.js). Opens from any card or row, and from a shared link: tracker.html?project=ID -->
