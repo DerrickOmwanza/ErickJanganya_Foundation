@@ -7,14 +7,18 @@ const REQUIRED = ['title', 'ward', 'category', 'status'];
 const WRITABLE = [
   'title', 'ward', 'category', 'status', 'progressPercent', 'budgetKes',
   'fundingSource', 'summary', 'location', 'photoUrl', 'startedOn',
+  'beforePhotoUrl', 'afterPhotoUrl', 'beforeTakenOn', 'afterTakenOn',
 ];
+const DATE_FIELDS = ['startedOn', 'beforeTakenOn', 'afterTakenOn'];
 
 function pickWritable(body) {
   const data = {};
   for (const key of WRITABLE) {
     if (body[key] !== undefined) data[key] = body[key];
   }
-  if (data.startedOn) data.startedOn = new Date(data.startedOn);
+  for (const key of DATE_FIELDS) {
+    if (data[key]) data[key] = new Date(data[key]);
+  }
   if (data.progressPercent !== undefined) data.progressPercent = Number(data.progressPercent);
   if (data.budgetKes !== undefined) data.budgetKes = data.budgetKes === null ? null : Number(data.budgetKes);
   return data;
