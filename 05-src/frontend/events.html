@@ -149,13 +149,37 @@
         </label>
         <p class="tb-count" id="evCount" role="status" aria-live="polite">Loading events</p>
         <button type="button" class="tb-clear" id="evClear" hidden>Clear filters</button>
+        <div class="tb-view" role="group" aria-label="Choose a view">
+          <button type="button" class="tb-view-btn" data-view="calendar" aria-pressed="true"><i class="fa-regular fa-calendar" aria-hidden="true"></i><span>Calendar</span></button>
+          <button type="button" class="tb-view-btn" data-view="list" aria-pressed="false"><i class="fa-solid fa-list" aria-hidden="true"></i><span>List</span></button>
+        </div>
       </div>
 
       <p id="eventsState" class="data-state" hidden></p>
+      <!-- Calendar view (js/events.js renderCalendar): a month grid with each event on its date as a small cropped photo and
+           its title. The List view below is the alternative. -->
+      <div id="eventsCalendar" class="cal" hidden></div>
       <div id="eventsList"></div>
     </div>
   </section>
 </main>
+
+<!-- Event detail drawer (js/events.js): the same component as the Tracker's project drawer (.pd-*). Opens from any event, and
+     from a shared link: events.html?event=ID -->
+<div class="pd-overlay" id="pdOverlay" hidden></div>
+<aside class="pd" id="pdPanel" role="dialog" aria-modal="true" aria-labelledby="pdTitle" hidden tabindex="-1">
+  <div class="pd-bar">
+    <div class="pd-step">
+      <button type="button" class="pd-btn" id="pdPrev" aria-label="Previous event"><i class="fa-solid fa-arrow-left"></i></button>
+      <button type="button" class="pd-btn" id="pdNext" aria-label="Next event"><i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+    <div class="pd-actions">
+      <button type="button" class="pd-copy" id="pdCopy"><i class="fa-solid fa-link"></i><span>Copy link</span></button>
+      <button type="button" class="pd-btn pd-close" id="pdClose" aria-label="Close event details"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+  </div>
+  <div class="pd-body" id="pdBody"></div>
+</aside>
 
 <footer class="site-footer">
   <div class="container">

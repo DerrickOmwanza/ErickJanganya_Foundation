@@ -283,6 +283,13 @@
           if (saved.ward) setRadio('ward', saved.ward);
         }
       } catch (e) { /* ignore a bad draft */ }
+      // A link from another page (an event's "Tell us you are coming") can prefill the topic, ward and message.
+      try {
+        var linked = new URLSearchParams(window.location.search);
+        if (linked.get('topic')) setRadio('topic', linked.get('topic'));
+        if (linked.get('ward')) setRadio('ward', linked.get('ward'));
+        if (linked.get('message') && !fields.message.el.value) fields.message.el.value = linked.get('message').slice(0, MAX);
+      } catch (e) { /* ignore bad link parameters */ }
       grow();
 
       // Chips: selecting the chosen one again clears it (they are optional)
