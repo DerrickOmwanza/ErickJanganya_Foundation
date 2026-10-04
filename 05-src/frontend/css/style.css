@@ -2041,3 +2041,13 @@ section[id]{scroll-margin-top:84px;}
 a.ar-tile{text-decoration:none;color:#fff;}
 a.ar-tile .ar-count i{margin-left:6px;font-size:11px;}
 @media (max-width:960px){.home-areas{margin-top:48px;}}
+
+/* About imagery: journey photos, the pinned story photos, value and explore cards, with stock labelled (.hw-illus). */
+.journey-media{position:relative;margin-bottom:16px;}
+.journey-stop .journey-media img{margin-bottom:0;}
+.story-frame{overflow:hidden;}
+.story-frame img,.story-beat-media img{width:100%;height:100%;object-fit:cover;display:block;}
+.story-beat-media{position:relative;}
+.value-card-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
+.pillar-card-img{position:relative;}
+.vision-row-media{position:relative;}
