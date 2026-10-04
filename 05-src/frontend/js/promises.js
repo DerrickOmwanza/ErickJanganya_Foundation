@@ -44,6 +44,56 @@
     );
   }
 
+  // Hero "scorecard at a glance" panel: totals across ALL pledges (not just the filtered ones).
+  function renderGlance(items, failed) {
+    var panel = document.getElementById('scoreGlance');
+    if (!panel) return;
+    var $ = function (id) { return document.getElementById(id); };
+    var note = $('sgNote');
+    panel.classList.remove('is-loading');
+    if (failed) {
+      ['sgTotal', 'sgKept', 'sgProgress', 'sgNotStarted', 'sgAreas'].forEach(function (id) { $(id).textContent = '0'; });
+      $('sgRate').textContent = 'Not available';
+      $('sgUpdated').textContent = 'Not available';
+      note.hidden = false;
+      note.textContent = 'The live figures could not be loaded right now.';
+      return;
+    }
+    var counts = { Kept: 0, 'In progress': 0, 'Not started': 0 };
+    var areas = {}, latest = 0;
+    items.forEach(function (p) {
+      if (counts[p.status] !== undefined) counts[p.status]++;
+      if (p.category) areas[p.category] = true;
+      var t = Date.parse(p.updatedAt || p.createdAt || '');
+      if (t && t > latest) latest = t;
+    });
+    var total = items.length;
+    $('sgTotal').textContent = total.toLocaleString();
+    $('sgKept').textContent = counts.Kept;
+    $('sgProgress').textContent = counts['In progress'];
+    $('sgNotStarted').textContent = counts['Not started'];
+    $('sgRate').textContent = total ? Math.round(counts.Kept / total * 100) + '%' : '0%';
+    $('sgAreas').textContent = Object.keys(areas).length;
+    $('sgUpdated').textContent = latest ? new Date(latest).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Not yet';
+    var bar = $('sgBar');
+    bar.innerHTML = [['Kept', 'completed'], ['In progress', 'ongoing'], ['Not started', 'planned']].map(function (s) {
+      return '<span class="glance-seg glance-seg--' + s[1] + '" data-w="' + (total ? (counts[s[0]] / total * 100) : 0) + '"></span>';
+    }).join('');
+    bar.setAttribute('aria-label', counts.Kept + ' kept, ' + counts['In progress'] + ' in progress, ' + counts['Not started'] + ' not started');
+    requestAnimationFrame(function () {
+      Array.prototype.forEach.call(bar.children, function (seg) { seg.style.width = seg.getAttribute('data-w') + '%'; });
+    });
+    if (!total) {
+      note.hidden = false;
+      note.textContent = 'No pledges have been published yet. Check back soon.';
+    } else if (!counts.Kept && !counts['In progress']) {
+      note.hidden = false;
+      note.textContent = 'Every pledge is still ahead of us. Each one is marked only when the work has been verified on site.';
+    } else {
+      note.hidden = true;
+    }
+  }
+
   function setState(message, icon) {
     if (!stateEl) return;
     if (!message) { stateEl.hidden = true; return; }
@@ -90,7 +140,8 @@
     setState(null);
     window.ApiClient.get('/promises', { limit: 100 })
       .then(function (data) {
-        allItems = data.items || [];
+        allItems = window.ApiClient.realOnly(data.items || []);
+        renderGlance(allItems, false);
         if (!allItems.length) {
           grid.innerHTML = '';
           setState('No promises have been published yet. Check back soon.', 'fa-inbox');
@@ -102,6 +153,7 @@
       })
       .catch(function (err) {
         console.error('Failed to load promises:', err);
+        renderGlance([], true);
         grid.innerHTML = '';
         setState('Could not load promises right now. Make sure the backend is running, then refresh.', 'fa-triangle-exclamation');
       });

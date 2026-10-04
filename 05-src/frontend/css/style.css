@@ -1254,7 +1254,7 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 }
 
 /* Tracker hero "at a glance" panel (tracker.html, js/tracker.js renderGlance): live totals on the dark band. */
-.page-hero--tracker h1{font-size:clamp(52px,6vw,88px);}
+.page-hero--tracker h1,.page-hero--promises h1{font-size:clamp(52px,6vw,88px);}
 .glance{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);border-top:4px solid var(--yellow);padding:30px 32px 28px;color:#fff;}
 .glance-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;}
 .glance-title{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);}

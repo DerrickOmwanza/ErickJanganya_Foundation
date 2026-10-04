@@ -98,13 +98,46 @@
 </div>
 
 <main>
-  <section class="section" style="padding-top:150px;">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Promise Scorecard</span>
-        <h1 style="font-size:40px;margin:8px 0 12px;">Every commitment, tracked against delivery.</h1>
-        <p>Public promises made to Embakasi South residents, scored honestly as kept, in progress, or not yet started, with evidence linked back to the Development Tracker where it exists.</p>
+  <!-- Hero rebuilt 2026-10-04 to the shared dark page-hero band (it was a small heading on white), with a live
+       "scorecard at a glance" panel (js/promises.js renderGlance): pledges made, a status breakdown bar, the share kept,
+       categories covered and the last update, all from the Promise Scorecard API. Same panel component as the
+       Development Tracker (.glance). -->
+  <section class="page-hero page-hero--promises">
+    <div class="container page-hero-grid">
+      <div class="page-hero-copy">
+        <span class="page-hero-kicker">Embakasi South &middot; Held to account</span>
+        <h1>Promise Scorecard</h1>
+        <p class="page-hero-lead">Every pledge made to residents, scored against what has actually been delivered, with the evidence shown beside it.</p>
+        <div class="page-hero-actions">
+          <a class="btn btn-primary" href="#pledges">Browse the pledges <i class="fa-solid fa-arrow-down"></i></a>
+          <a class="btn btn-outline" href="tracker.html">See the projects</a>
+        </div>
       </div>
+      <aside class="glance is-loading" id="scoreGlance" aria-label="The scorecard at a glance" aria-live="polite">
+        <div class="glance-head">
+          <span class="glance-title"><span class="glance-dot" aria-hidden="true"></span>At a glance</span>
+        </div>
+        <div class="glance-main"><b id="sgTotal">...</b><span>pledges made</span></div>
+        <div class="glance-bar" id="sgBar" role="img" aria-label="Pledges by status"></div>
+        <ul class="glance-legend">
+          <li><i class="glance-key glance-key--completed"></i><b id="sgKept">...</b> Kept</li>
+          <li><i class="glance-key glance-key--ongoing"></i><b id="sgProgress">...</b> In progress</li>
+          <li><i class="glance-key glance-key--planned"></i><b id="sgNotStarted">...</b> Not started</li>
+        </ul>
+        <dl class="glance-stats">
+          <div><dt>Kept so far</dt><dd id="sgRate">...</dd></div>
+          <div><dt>Areas</dt><dd id="sgAreas">...</dd></div>
+          <div><dt>Last updated</dt><dd id="sgUpdated">...</dd></div>
+        </dl>
+        <p class="glance-note" id="sgNote" hidden></p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" id="pledges">
+    <div class="container">
+      <h2 class="mega-header" style="font-size:clamp(34px,5.4vw,64px);">All Pledges</h2>
+      <p class="mega-header-dek" style="margin-bottom:28px;">Filter by area or by status. A pledge is marked Kept only once the work has been checked on site.</p>
 
       <div class="filter-bar">
         <select id="filterCategory" aria-label="Filter by category"><option value="">All categories</option></select>
