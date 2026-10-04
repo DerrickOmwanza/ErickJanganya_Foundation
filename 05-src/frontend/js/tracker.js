@@ -25,6 +25,26 @@
   var allItems = [];
   var state = { q: '', ward: [], category: [], status: [], sort: 'updated', view: 'cards', project: null };
 
+  // A picture and an icon for each category, shared with the Promise Scorecard (js/area-meta.js).
+  var AREA_META = window.AreaMeta || {};
+  function areaImg(cat) { return (AREA_META[cat] && AREA_META[cat].img) || null; }
+  function areaIcon(cat) { return (AREA_META[cat] && AREA_META[cat].icon) || 'fa-flag'; }
+
+  // Position of a project among those in its category (by id), so neighbours in a category get different pictures.
+  function categoryRank(p) {
+    return allItems.filter(function (q) { return q.category === p.category && Number(q.id) < Number(p.id); }).length;
+  }
+
+  // The photo for a project: its own photo when it has one, otherwise its category's illustrative picture (labelled as
+  // such), otherwise a plain placeholder. `cls` is the class for a real or stand-in image.
+  function projectPhoto(p, cls) {
+    if (p.photoUrl) return '<img class="' + cls + '" src="' + U.escapeHtml(p.photoUrl) + '" alt="' + U.escapeHtml(p.title) + '" loading="lazy">';
+    var meta = AREA_META[p.category];
+    var stock = meta && meta.imgs && meta.imgs.length ? meta.imgs[categoryRank(p) % meta.imgs.length] : areaImg(p.category);
+    if (stock) return '<img class="' + cls + '" src="' + U.escapeHtml(stock) + '" alt="" loading="lazy"><span class="hw-illus">Illustrative photo</span>';
+    return '<i class="fa-solid fa-image"></i><span>Photo coming soon</span>';
+  }
+
   function badgeClass(status) {
     if (status === 'Completed') return 'badge-complete';
     if (status === 'Ongoing') return 'badge-ongoing';
@@ -48,9 +68,7 @@
   // Cards view: a status coloured top edge, photo with the status on it, then place, title, summary, a progress
   // line, budget and start, and the funding source with when it was last updated.
   function renderCard(p) {
-    var photo = p.photoUrl
-      ? '<img class="proj-photo" src="' + U.escapeHtml(p.photoUrl) + '" alt="' + U.escapeHtml(p.title) + '" loading="lazy">'
-      : '<i class="fa-solid fa-image"></i><span>Photo coming soon</span>';
+    var photo = projectPhoto(p, 'proj-photo');
     var updated = U.relativeTime(p.updatedAt);
     return (
       '<article class="pc pc--' + U.escapeHtml(String(p.status).toLowerCase()) + '" data-id="' + U.escapeHtml(String(p.id)) + '">' +
@@ -179,6 +197,55 @@
     if (target) target.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
   }
 
+  // "Browse by category" photo tiles: one per category, with a picture, an icon, the number of projects and where they
+  // stand (completed, ongoing, planned). Clicking a tile filters the list below to that category (again to undo).
+  function renderTiles() {
+    var wrap = document.getElementById('categoryTiles');
+    var sec = document.getElementById('categories');
+    if (!wrap) return;
+    var cats = U.uniqueSorted(allItems.map(function (p) { return p.category; }));
+    if (!cats.length) { if (sec) sec.hidden = true; return; }
+    wrap.style.setProperty('--ar-n', Math.min(cats.length, 5));
+    wrap.setAttribute('data-n', String(Math.min(cats.length, 5)));
+    wrap.innerHTML = cats.map(function (cat) {
+      var items = allItems.filter(function (p) { return p.category === cat; });
+      var img = areaImg(cat);
+      var bar = ['Completed', 'Ongoing', 'Planned'].map(function (st) {
+        var n = items.filter(function (p) { return p.status === st; }).length;
+        var klass = st === 'Completed' ? 'kept' : (st === 'Ongoing' ? 'progress' : 'notstarted');
+        return n ? '<span class="sg-seg sg-seg--' + klass + '" style="width:' + (n / items.length * 100) + '%"></span>' : '';
+      }).join('');
+      return (
+        '<button type="button" class="ar-tile' + (img ? '' : ' ar-tile--plain') + '" data-category="' + U.escapeHtml(cat) + '" aria-pressed="false">' +
+          (img ? '<img src="' + U.escapeHtml(img) + '" alt="" loading="lazy">' : '') +
+          '<span class="ar-shade" aria-hidden="true"></span>' +
+          '<span class="ar-body">' +
+            '<span class="ar-ico" aria-hidden="true"><i class="fa-solid ' + areaIcon(cat) + '"></i></span>' +
+            '<span class="ar-name">' + U.escapeHtml(cat) + '</span>' +
+            '<span class="ar-count">' + items.length + ' project' + (items.length === 1 ? '' : 's') + '</span>' +
+            '<span class="ar-bar" aria-hidden="true">' + bar + '</span>' +
+          '</span>' +
+        '</button>'
+      );
+    }).join('');
+    wrap.addEventListener('click', function (e) {
+      var t = e.target.closest ? e.target.closest('.ar-tile') : null;
+      if (!t) return;
+      var cat = t.getAttribute('data-category');
+      var i = state.category.indexOf(cat);
+      if (i >= 0) { state.category.splice(i, 1); } else { state.category = [cat]; }
+      render();
+      var target = document.getElementById('projects');
+      if (target && i < 0) target.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+    });
+  }
+
+  function updateTiles() {
+    Array.prototype.forEach.call(document.querySelectorAll('.ar-tile'), function (t) {
+      t.setAttribute('aria-pressed', state.category.indexOf(t.getAttribute('data-category')) >= 0 ? 'true' : 'false');
+    });
+  }
+
   function setState(message, icon) {
     if (!stateEl) return;
     if (!message) { stateEl.hidden = true; return; }
@@ -293,6 +360,7 @@
       : total + ' project' + (total === 1 ? '' : 's');
     clearBtn.hidden = !hasFilters();
     updateChips();
+    updateTiles();
     updateViewButtons();
     syncUrl();
 
@@ -497,9 +565,7 @@
   }
 
   function fillPanel(p) {
-    var photo = p.photoUrl
-      ? '<img src="' + U.escapeHtml(p.photoUrl) + '" alt="' + U.escapeHtml(p.title) + '">'
-      : '<i class="fa-solid fa-image"></i><span>Photo coming soon</span>';
+    var photo = projectPhoto(p, '');
     var updated = U.relativeTime(p.updatedAt);
     var updatedExact = p.updatedAt ? new Date(p.updatedAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
     var status = String(p.status).toLowerCase();
@@ -676,6 +742,7 @@
           return;
         }
         buildChips();
+        renderTiles();
         renderLegend();
         if (window.TrackerCompare) window.TrackerCompare.render(allItems, function (id, opener) { openPanel(id, { opener: opener }); });
         readUrl();

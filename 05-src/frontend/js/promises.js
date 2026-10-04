@@ -20,15 +20,8 @@
   var allItems = [];
   var state = { q: '', category: [], status: [], sort: 'area', pledge: null };
 
-  // A picture and an icon for each area. The photos are illustrative stand-ins until real local pictures replace them;
-  // an area with no entry here simply gets a neutral tile and a flag icon.
-  var AREA_META = {
-    'Education': { img: 'img/vision-education-youth.jpg', icon: 'fa-graduation-cap' },
-    'Health': { img: 'img/hero-clinics-poster.jpg', icon: 'fa-heart-pulse' },
-    'Infrastructure': { img: 'img/hero-roads-poster.jpg', icon: 'fa-road' },
-    'Water & Sanitation': { img: 'img/hero-water-poster.jpg', icon: 'fa-droplet' },
-    'Youth & Employment': { img: 'img/focus-youth.jpg', icon: 'fa-briefcase' }
-  };
+  // A picture and an icon for each area, shared with the Development Tracker (js/area-meta.js).
+  var AREA_META = window.AreaMeta || {};
   function areaIcon(cat) { return (AREA_META[cat] && AREA_META[cat].icon) || 'fa-flag'; }
   function areaImg(cat) { return (AREA_META[cat] && AREA_META[cat].img) || null; }
 
@@ -100,6 +93,8 @@
     if (!wrap) return;
     var cats = U.uniqueSorted(allItems.map(function (p) { return p.category; }));
     if (!cats.length) { if (sec) sec.hidden = true; return; }
+    wrap.style.setProperty('--ar-n', Math.min(cats.length, 5));
+    wrap.setAttribute('data-n', String(Math.min(cats.length, 5)));
     wrap.innerHTML = cats.map(function (cat) {
       var items = allItems.filter(function (p) { return p.category === cat; });
       var img = areaImg(cat);
