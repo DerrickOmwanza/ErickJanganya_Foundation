@@ -75,7 +75,7 @@
       <a href="contact.html">Contact</a>
     </nav>
     <div class="mobile-drawer-foot">
-      <a class="btn btn-primary" href="involve.html">Donate</a>
+      <a class="btn btn-primary" href="involve.html#donate">Donate</a>
       <button type="button" class="mobile-drawer-search" aria-label="Search the site" onclick="toggleDrawer(false);toggleSearch(true)"><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
   </div>
@@ -106,8 +106,8 @@
         <h1>Get Involved</h1>
         <p class="page-hero-lead">Give your time, your skills, supplies or support, and see where it lands on the Development Tracker.</p>
         <div class="page-hero-actions">
-          <a class="btn btn-primary" href="#offer">Tell us how you can help <i class="fa-solid fa-arrow-down"></i></a>
-          <a class="btn btn-outline" href="tracker.html">See where support goes</a>
+          <a class="btn btn-primary" href="#donate">Give now <i class="fa-solid fa-arrow-down"></i></a>
+          <a class="btn btn-outline" href="#ways">Other ways to help</a>
         </div>
       </div>
       <aside class="glance contact-card" aria-label="Four ways to help">
@@ -118,9 +118,45 @@
           <li><span class="cc-ico" aria-hidden="true"><i class="fa-solid fa-people-group"></i></span><div><span class="cc-label">Time</span><a href="#volunteer">Volunteer</a></div></li>
           <li><span class="cc-ico" aria-hidden="true"><i class="fa-solid fa-handshake"></i></span><div><span class="cc-label">Skills and funding</span><a href="#partner">Partner with us</a></div></li>
           <li><span class="cc-ico" aria-hidden="true"><i class="fa-solid fa-box-open"></i></span><div><span class="cc-label">Supplies</span><a href="#goods">Donate goods</a></div></li>
-          <li><span class="cc-ico" aria-hidden="true"><i class="fa-solid fa-hand-holding-dollar"></i></span><div><span class="cc-label">Money</span><a href="#cash">Give cash</a></div></li>
+          <li><span class="cc-ico" aria-hidden="true"><i class="fa-solid fa-hand-holding-dollar"></i></span><div><span class="cc-label">Money</span><a href="#donate">Give cash</a></div></li>
         </ul>
       </aside>
+    </div>
+  </section>
+
+  <!-- Give: modelled on the Obama Foundation donate flow (one-time or monthly, amount chips, custom amount with a currency, then a
+       two-panel dialog). Online payment is NOT integrated yet, so nothing here takes card details: the flow records a PLEDGE
+       (amount, frequency, preferred method, contact details) and posts it to the contact endpoint; the team follows up. The
+       dialog is also used for volunteering, partnering and donating goods (js/give.js). When a payment provider is chosen, the
+       "method" step in js/give.js is where it plugs in, and the honest "nothing is charged" wording must be removed then. -->
+  <section class="section dn" id="donate">
+    <div class="container dn-grid">
+      <div class="dn-copy">
+        <span class="dn-kicker">Give from anywhere</span>
+        <h2 class="dn-title">Your support turns promises into progress</h2>
+        <p class="dn-lede">Give once or every month, in Kenya or abroad. Every gift goes to work you can follow on the Development Tracker.</p>
+        <p class="dn-note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i><span>Online payments are being set up. Until they open, your gift is a pledge: nothing is charged, and the team contacts you to complete it.</span></p>
+      </div>
+      <form class="dn-widget" id="dnWidget" novalidate>
+        <div class="dn-seg" role="group" aria-label="How often">
+          <button type="button" class="dn-seg-btn" data-freq="once" aria-pressed="false">One-time</button>
+          <button type="button" class="dn-seg-btn" data-freq="monthly" aria-pressed="true"><i class="fa-solid fa-heart" aria-hidden="true"></i> Monthly</button>
+        </div>
+        <div class="dn-amounts" id="dnAmounts" role="group" aria-label="Choose an amount"></div>
+        <div class="dn-custom">
+          <label class="dn-sr" for="dnAmount">Amount</label>
+          <input type="text" id="dnAmount" inputmode="decimal" autocomplete="off" placeholder="0">
+          <label class="dn-sr" for="dnCurrency">Currency</label>
+          <select id="dnCurrency">
+            <option value="KES">KES</option>
+            <option value="USD">USD</option>
+            <option value="GBP">GBP</option>
+            <option value="EUR">EUR</option>
+          </select>
+        </div>
+        <span class="dn-err" id="dnWidgetErr" role="alert"></span>
+        <button type="submit" class="dn-go">Donate</button>
+      </form>
     </div>
   </section>
 
@@ -135,7 +171,7 @@
             <span class="hw-mark">Volunteer</span>
             <p class="hw-meaning">Give your time on the ground in your own ward.</p>
             <p class="hw-takes"><span>What it looks like</span>Helping at ward events, taking part in site visits, and spreading the word to neighbours.</p>
-            <button type="button" class="lg-show ig-offer" data-way="Volunteer">I want to volunteer <i class="fa-solid fa-arrow-down"></i></button>
+            <button type="button" class="lg-show" data-mode="volunteer">I want to volunteer <i class="fa-solid fa-arrow-down"></i></button>
           </div>
         </li>
         <li class="hw-row ig-row" id="partner" style="--hw-accent:var(--red);">
@@ -144,7 +180,7 @@
             <span class="hw-mark">Partner with us</span>
             <p class="hw-meaning">Back real, ward-level work with partners who can check it.</p>
             <p class="hw-takes"><span>Who it is for</span>Diaspora groups, development organisations and mission-aligned investors, anywhere in the world.</p>
-            <button type="button" class="lg-show ig-offer" data-way="Partner with us">I want to partner <i class="fa-solid fa-arrow-down"></i></button>
+            <button type="button" class="lg-show" data-mode="partner">I want to partner <i class="fa-solid fa-arrow-down"></i></button>
           </div>
         </li>
         <li class="hw-row ig-row" id="goods" style="--hw-accent:#1f9d55;">
@@ -153,7 +189,7 @@
             <span class="hw-mark">Donate goods</span>
             <p class="hw-meaning">Give materials and supplies where they are needed most.</p>
             <p class="hw-takes"><span>What it looks like</span>Building materials, supplies and equipment for projects on the tracker. Tell us what you have and the team will say where it can go.</p>
-            <button type="button" class="lg-show ig-offer" data-way="Donate goods">I have goods to give <i class="fa-solid fa-arrow-down"></i></button>
+            <button type="button" class="lg-show" data-mode="goods">I have goods to give <i class="fa-solid fa-arrow-down"></i></button>
           </div>
         </li>
         <li class="hw-row ig-row" id="cash" style="--hw-accent:#8a919a;">
@@ -161,8 +197,8 @@
           <div class="hw-text">
             <span class="hw-mark">Give cash</span>
             <p class="hw-meaning">Fund a project and follow it from planning to completion.</p>
-            <p class="hw-takes"><span>Please note</span>Online giving is not open yet. Tell us you would like to give and the team will get in touch with how.</p>
-            <button type="button" class="lg-show ig-offer" data-way="Give cash">I would like to give <i class="fa-solid fa-arrow-down"></i></button>
+            <p class="hw-takes"><span>Please note</span>Give once or monthly, from anywhere in the world. Online payment opens soon: until then your gift is a pledge and nothing is charged.</p>
+            <button type="button" class="lg-show" data-mode="cash">Give now <i class="fa-solid fa-arrow-down"></i></button>
           </div>
         </li>
       </ol>
@@ -195,7 +231,7 @@
   <section class="section" id="offer">
     <div class="container">
       <h2 class="mega-header" style="font-size:clamp(34px,5.4vw,64px);">Tell Us How You Can Help</h2>
-      <p class="mega-header-dek" style="margin-bottom:36px;">A few details and the team will be in touch.</p>
+      <p class="mega-header-dek" style="margin-bottom:36px;">Prefer to write it out, or not sure yet? A few details and the team will be in touch.</p>
       <div class="contact-layout">
         <div class="vi-card" id="igCard">
           <form class="vi-form" id="involveForm" novalidate>
@@ -278,7 +314,7 @@
       <div class="faq-list">
         <details class="faq-item" name="faq" open>
           <summary>Can I give money online?</summary>
-          <p>Not yet. Online giving is not open. If you would like to give, tell us using the form above and the team will get in touch with how.</p>
+          <p>Not yet. Secure online payment is being set up. You can already choose an amount and send a pledge: nothing is charged, and the team will email you how to complete it.</p>
         </details>
         <details class="faq-item" name="faq">
           <summary>Where does support go?</summary>
@@ -309,6 +345,34 @@
   </section>
 </main>
 
+<!-- Give / help dialog (js/give.js fills the steps). Two panels: a photo and story on the left, the steps on the right. -->
+<div class="dn-overlay" id="dnOverlay" hidden>
+  <div class="dn-modal" id="dnModal" role="dialog" aria-modal="true" aria-labelledby="dnTitle">
+    <aside class="dn-side">
+      <div class="dn-side-photo"><img src="img/ground-engagement.jpg" alt="Erick Janganya walking a street in Embakasi South among residents" loading="lazy"></div>
+      <div class="dn-side-body" data-lenis-prevent>
+        <div class="dn-brand">
+          <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><rect x="12" y="60" width="20" height="30" rx="7"/><rect x="40" y="40" width="20" height="50" rx="7"/><rect x="68" y="16" width="20" height="74" rx="7"/></svg>
+          <span>Erick Janganya<br>Foundation</span>
+        </div>
+        <p id="dnSideText"></p>
+        <p class="dn-side-strong" id="dnSideStrong"></p>
+        <p class="dn-side-links"><a href="mailto:hello@erickjanganyafoundation.org">Questions? Email the team</a> <span aria-hidden="true">&middot;</span> <a href="foundation.html#verification">How we verify the work</a></p>
+      </div>
+    </aside>
+    <div class="dn-main">
+      <header class="dn-head">
+        <button type="button" class="dn-icon" id="dnBack" aria-label="Go back"><i class="fa-solid fa-chevron-left"></i></button>
+        <h2 id="dnTitle">Give</h2>
+        <button type="button" class="dn-icon" id="dnClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+      </header>
+      <div class="dn-progress" aria-hidden="true"><i id="dnBar"></i></div>
+      <div class="dn-body" id="dnBody" data-lenis-prevent></div>
+    </div>
+  </div>
+</div>
+
+
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
@@ -326,7 +390,7 @@
       </div>
       <div>
         <h4>Get involved</h4>
-        <a href="involve.html#cash">Donate cash</a>
+        <a href="involve.html#donate">Donate cash</a>
         <a href="involve.html#goods">Donate goods</a>
         <a href="involve.html#volunteer">Volunteer</a>
         <a href="involve.html#partner">Partner with us</a>
@@ -359,5 +423,6 @@
 <script src="js/api.js"></script>
 <script src="js/main.js"></script>
 <script src="js/forms.js"></script>
+<script src="js/give.js"></script>
 </body>
 </html>
