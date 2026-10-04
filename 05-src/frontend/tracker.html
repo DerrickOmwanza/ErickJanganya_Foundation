@@ -134,6 +134,10 @@
         </label>
         <p class="tb-count" id="tbCount" role="status" aria-live="polite">Loading projects</p>
         <button type="button" class="tb-clear" id="tbClear" hidden>Clear filters</button>
+        <div class="tb-view" role="group" aria-label="Choose a view">
+          <button type="button" class="tb-view-btn" data-view="cards" aria-pressed="true"><i class="fa-solid fa-table-cells-large" aria-hidden="true"></i><span>Cards</span></button>
+          <button type="button" class="tb-view-btn" data-view="list" aria-pressed="false"><i class="fa-solid fa-list" aria-hidden="true"></i><span>List</span></button>
+        </div>
         <div class="tb-sort">
           <label for="tbSort">Sort</label>
           <select id="tbSort">

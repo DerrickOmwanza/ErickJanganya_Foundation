@@ -911,6 +911,63 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
   .map-status-reset{padding:5px 10px;font-size:12px;}
 }
 
+/* Tracker project cards and list (tracker.html, js/tracker.js). Status sets the accent colour: completed green,
+   ongoing yellow, planned grey. Cards view = photo + facts; List view = a compact table that stacks on phones. */
+.pc-grid{gap:28px;}
+.pc{--pc-accent:#8a919a;position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-top:4px solid var(--pc-accent);transition:transform .25s ease,box-shadow .25s ease;}
+.pc:hover{transform:translateY(-4px);box-shadow:0 16px 30px rgba(0,0,0,.12);}
+.pc--completed,.pl-row--completed{--pc-accent:#1f9d55;}
+.pc--ongoing,.pl-row--ongoing{--pc-accent:var(--yellow);}
+.pc--planned,.pl-row--planned{--pc-accent:#8a919a;}
+.pc-media{position:relative;}
+.pc-media .ph{height:auto;width:100%;aspect-ratio:16/10;border:0;border-radius:0;overflow:hidden;}
+.pc-media img{width:100%;height:100%;object-fit:cover;display:block;}
+.pc-status{position:absolute;left:14px;top:14px;display:inline-flex;align-items:center;gap:7px;padding:6px 11px;background:#fff;font-size:12.5px;font-weight:700;letter-spacing:.04em;color:var(--ink-black);}
+.pc-status i{font-size:8px;color:var(--pc-accent);}
+.pc-body{display:flex;flex-direction:column;flex:1;padding:22px 24px;}
+.pc-where{font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
+.pc h3{font-family:var(--font-h);font-weight:700;font-size:clamp(20px,1.7vw,23px);line-height:1.25;margin:0 0 10px;}
+.pc-summary{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin:0 0 18px;font-size:15px;line-height:1.6;color:var(--ink-soft);}
+.pc-progress{margin:auto 0 16px;padding-top:2px;}
+.pc-progress-head{display:flex;justify-content:space-between;margin-bottom:7px;font-size:13px;font-weight:700;color:var(--ink-soft);}
+.pc-progress-head b{color:var(--ink-black);}
+.pc .progress-track{height:7px;}
+.pc-facts{display:grid;grid-template-columns:1fr 1fr;margin:0 0 16px;border-top:1px solid var(--line);}
+.pc-facts>div{padding:12px 0 0;}
+.pc-facts>div+div{padding-left:16px;border-left:1px solid var(--line);}
+.pc-facts dt{margin-bottom:4px;font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);}
+.pc-facts dd{margin:0;font-size:16px;font-weight:700;}
+.pc-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 10px;}
+.pc-updated{font-size:13px;color:var(--ink-mute);}
+.pl-wrap{display:block;}
+.pl{width:100%;border-collapse:collapse;font-size:15px;}
+.pl thead th{padding:12px 14px;text-align:left;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute);border-bottom:3px solid var(--ink-black);}
+.pl td,.pl .pl-main{padding:18px 14px;text-align:left;font-weight:500;vertical-align:middle;border-bottom:1px solid var(--line);}
+.pl .pl-main{padding-left:18px;box-shadow:inset 4px 0 0 var(--pc-accent,#8a919a);}
+.pl-row:hover td,.pl-row:hover .pl-main{background:#FAF9F5;}
+.pl-title{display:block;margin-bottom:4px;font-family:var(--font-h);font-weight:700;font-size:18px;line-height:1.25;}
+.pl-sub{display:block;font-size:13px;font-weight:500;color:var(--ink-soft);}
+.pl-prog{display:flex;align-items:center;gap:10px;min-width:150px;}
+.pl-prog .progress-track{flex:1;height:7px;}
+.pl-prog b{min-width:38px;text-align:right;font-size:14px;}
+.tb-view{display:inline-flex;margin-left:auto;border:1.5px solid #cfcdc4;}
+.tb-view-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:0;background:#fff;color:var(--ink-soft);font:inherit;font-size:14.5px;font-weight:600;cursor:pointer;transition:background .15s ease,color .15s ease;}
+.tb-view-btn+.tb-view-btn{border-left:1.5px solid #cfcdc4;}
+.tb-view-btn:hover{color:var(--ink-black);}
+.tb-view-btn[aria-pressed="true"]{background:var(--ink-black);color:#fff;}
+.tb-view-btn:focus-visible{outline:3px solid var(--yellow);outline-offset:-3px;}
+@media (prefers-reduced-motion: reduce){.pc{transition:none;}.pc:hover{transform:none;}}
+@media (max-width:860px){
+  .pl thead{display:none;}
+  .pl,.pl tbody,.pl tr,.pl td,.pl th{display:block;}
+  .pl-row{margin-bottom:16px;padding:18px 18px 8px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--pc-accent,#8a919a);}
+  .pl .pl-main{padding:0 0 12px;border:0;box-shadow:none;}
+  .pl td{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 0;border:0;}
+  .pl td::before{content:attr(data-label);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);}
+  .pl-prog{flex:1;max-width:62%;min-width:0;}
+  .pl-row:hover td,.pl-row:hover .pl-main{background:transparent;}
+}
+
 /* Tracker filter toolbar (tracker.html, js/tracker.js): chips (any of a group, all groups together) with live
    counts, then a bar that sticks under the header holding search, the result count, clear and sort. */
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
@@ -933,7 +990,7 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .tb-count{margin:0;font-size:14.5px;font-weight:600;color:var(--ink-soft);}
 .tb-clear,.tb-inline-clear{padding:4px 0;border:0;background:none;color:var(--red);font:inherit;font-size:14.5px;font-weight:700;text-decoration:underline;text-underline-offset:3px;cursor:pointer;}
 .tb-clear[hidden]{display:none;}
-.tb-sort{display:flex;align-items:center;gap:10px;margin-left:auto;}
+.tb-sort{display:flex;align-items:center;gap:10px;}
 .tb-sort label{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute);}
 .tb-sort select{padding:11px 14px;border:1.5px solid #cfcdc4;border-radius:0;background:#fff;font-family:var(--font-b);font-size:15px;font-weight:600;color:var(--ink-black);cursor:pointer;}
 .tb-sort select:focus{outline:none;border-color:var(--ink-black);box-shadow:0 0 0 3px rgba(255,189,18,.55);}
@@ -946,7 +1003,7 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
   .tb-chips::-webkit-scrollbar{display:none;}
   .tb-chip{flex:none;}
   .tb-search{flex:1 1 100%;max-width:none;}
-  .tb-sort{margin-left:0;}
+  .tb-view{margin-left:0;}
 }
 
 /* Tracker hero "at a glance" panel (tracker.html, js/tracker.js renderGlance): live totals on the dark band. */

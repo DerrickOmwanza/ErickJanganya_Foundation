@@ -17,8 +17,10 @@
   var WARDS = ['Imara Daima', 'Kwa Njenga', 'Kwa Reuben', 'Pipeline', 'Kware'];
   var STATUSES = ['Planned', 'Ongoing', 'Completed'];
   var SORTS = ['updated', 'progress', 'budget', 'title'];
+  var VIEWS = ['cards', 'list'];
+  var VIEW_KEY = 'ejf.tracker.view';
   var allItems = [];
-  var state = { q: '', ward: [], category: [], status: [], sort: 'updated' };
+  var state = { q: '', ward: [], category: [], status: [], sort: 'updated', view: 'cards' };
 
   function badgeClass(status) {
     if (status === 'Completed') return 'badge-complete';
@@ -34,29 +36,59 @@
     return 'source-adv';
   }
 
+  function pct(p) { return Math.max(0, Math.min(100, Number(p.progressPercent) || 0)); }
+  function startedText(p) { return U.formatMonthYear(p.startedOn) || (p.status === 'Planned' ? 'Not yet started' : 'Not recorded'); }
+  function fundingChip(p) {
+    return p.fundingSource ? '<span class="source-chip ' + sourceClass(p.fundingSource) + '">' + U.escapeHtml(p.fundingSource) + '</span>' : '';
+  }
+
+  // Cards view: a status coloured top edge, photo with the status on it, then place, title, summary, a progress
+  // line, budget and start, and the funding source with when it was last updated.
   function renderCard(p) {
     var photo = p.photoUrl
-      ? '<img class="proj-photo" src="' + U.escapeHtml(p.photoUrl) + '" alt="' + U.escapeHtml(p.title) + '">'
+      ? '<img class="proj-photo" src="' + U.escapeHtml(p.photoUrl) + '" alt="' + U.escapeHtml(p.title) + '" loading="lazy">'
       : '<i class="fa-solid fa-image"></i><span>Photo coming soon</span>';
-
-    var started = U.formatMonthYear(p.startedOn);
-    var budget = U.formatKes(p.budgetKes);
-    var metaLeft = started || (p.status === 'Planned' ? 'Not yet started' : '');
-
+    var updated = U.relativeTime(p.updatedAt);
     return (
-      '<div class="card proj-card">' +
-        '<div class="ph">' + photo + '</div>' +
-        '<div class="proj-body">' +
-          '<span class="ward">' + U.escapeHtml(p.ward) + ' &middot; ' + U.escapeHtml(p.category) + '</span>' +
-          '<h4>' + U.escapeHtml(p.title) + '</h4>' +
-          (p.summary ? '<p>' + U.escapeHtml(p.summary) + '</p>' : '') +
-          '<span class="badge ' + badgeClass(p.status) + '"><i class="fa-solid fa-circle"></i> ' + U.escapeHtml(p.status) + '</span>' +
-          '<div class="progress-track"><div class="progress-fill" data-progress="' + (p.progressPercent || 0) + '"></div></div>' +
-          '<div class="proj-meta"><span>' + U.escapeHtml(metaLeft) + '</span><span>' + U.escapeHtml(budget) + '</span></div>' +
-          (p.fundingSource ? '<span class="source-chip ' + sourceClass(p.fundingSource) + '">' + U.escapeHtml(p.fundingSource) + '</span>' : '') +
+      '<article class="pc pc--' + U.escapeHtml(String(p.status).toLowerCase()) + '" data-id="' + U.escapeHtml(String(p.id)) + '">' +
+        '<div class="pc-media"><div class="ph">' + photo + '</div>' +
+          '<span class="pc-status"><i class="fa-solid fa-circle"></i> ' + U.escapeHtml(p.status) + '</span></div>' +
+        '<div class="pc-body">' +
+          '<span class="pc-where">' + U.escapeHtml(p.ward) + ' &middot; ' + U.escapeHtml(p.category) + '</span>' +
+          '<h3>' + U.escapeHtml(p.title) + '</h3>' +
+          (p.summary ? '<p class="pc-summary">' + U.escapeHtml(p.summary) + '</p>' : '') +
+          '<div class="pc-progress"><div class="pc-progress-head"><span>Progress</span><b>' + pct(p) + '%</b></div>' +
+            '<div class="progress-track"><div class="progress-fill" data-progress="' + pct(p) + '"></div></div></div>' +
+          '<dl class="pc-facts">' +
+            '<div><dt>Budget</dt><dd>' + U.escapeHtml(U.formatKes(p.budgetKes) || 'Not published') + '</dd></div>' +
+            '<div><dt>Started</dt><dd>' + U.escapeHtml(startedText(p)) + '</dd></div>' +
+          '</dl>' +
+          '<div class="pc-foot">' + fundingChip(p) + (updated ? '<span class="pc-updated">Updated ' + U.escapeHtml(updated) + '</span>' : '') + '</div>' +
         '</div>' +
-      '</div>'
+      '</article>'
     );
+  }
+
+  // List view: one compact row per project (stacks into labelled blocks on phones).
+  function renderRow(p) {
+    var updated = U.relativeTime(p.updatedAt);
+    return (
+      '<tr class="pl-row pl-row--' + U.escapeHtml(String(p.status).toLowerCase()) + '" data-id="' + U.escapeHtml(String(p.id)) + '">' +
+        '<th scope="row" class="pl-main"><span class="pl-title">' + U.escapeHtml(p.title) + '</span>' +
+          '<span class="pl-sub">' + U.escapeHtml(p.ward) + ' &middot; ' + U.escapeHtml(p.category) + '</span></th>' +
+        '<td data-label="Status"><span class="badge ' + badgeClass(p.status) + '"><i class="fa-solid fa-circle"></i> ' + U.escapeHtml(p.status) + '</span></td>' +
+        '<td data-label="Progress"><div class="pl-prog"><div class="progress-track"><div class="progress-fill" data-progress="' + pct(p) + '"></div></div><b>' + pct(p) + '%</b></div></td>' +
+        '<td data-label="Budget">' + U.escapeHtml(U.formatKes(p.budgetKes) || 'Not published') + '</td>' +
+        '<td data-label="Funding">' + (fundingChip(p) || 'Not stated') + '</td>' +
+        '<td data-label="Updated">' + U.escapeHtml(updated || 'Not yet') + '</td>' +
+      '</tr>'
+    );
+  }
+
+  function renderList(list) {
+    return '<table class="pl"><thead><tr><th scope="col">Project</th><th scope="col">Status</th><th scope="col">Progress</th>' +
+      '<th scope="col">Budget</th><th scope="col">Funding</th><th scope="col">Updated</th></tr></thead><tbody>' +
+      list.map(renderRow).join('') + '</tbody></table>';
   }
 
   // Hero "at a glance" panel: totals across ALL projects (not just the filtered ones).
@@ -159,6 +191,7 @@
     if (state.q) params.set('q', state.q);
     ['ward', 'category', 'status'].forEach(function (g) { if (state[g].length) params.set(g, state[g].join(',')); });
     if (state.sort !== 'updated') params.set('sort', state.sort);
+    if (state.view !== 'cards') params.set('view', state.view);
     var qs = params.toString();
     try { history.replaceState(null, '', window.location.pathname + (qs ? '?' + qs : '') + window.location.hash); } catch (e) { /* ignore */ }
   }
@@ -171,6 +204,7 @@
       : total + ' project' + (total === 1 ? '' : 's');
     clearBtn.hidden = !hasFilters();
     updateChips();
+    updateViewButtons();
     syncUrl();
 
     if (!filtered.length) {
@@ -180,8 +214,15 @@
       return;
     }
     setState(null);
-    grid.innerHTML = filtered.map(renderCard).join('');
+    grid.className = state.view === 'list' ? 'pl-wrap' : 'grid grid-3 pc-grid';
+    grid.innerHTML = state.view === 'list' ? renderList(filtered) : filtered.map(renderCard).join('');
     if (window.animateProgressBars) window.animateProgressBars();
+  }
+
+  function updateViewButtons() {
+    Array.prototype.forEach.call(document.querySelectorAll('.tb-view-btn'), function (b) {
+      b.setAttribute('aria-pressed', b.getAttribute('data-view') === state.view ? 'true' : 'false');
+    });
   }
 
   function clearAll() {
@@ -225,6 +266,12 @@
     });
     var q = params.get('q');
     if (q) { state.q = q.trim().toLowerCase(); searchEl.value = q.trim(); }
+    var v = params.get('view');
+    if (v && VIEWS.indexOf(v) >= 0) {
+      state.view = v;
+    } else {
+      try { var saved = localStorage.getItem(VIEW_KEY); if (saved && VIEWS.indexOf(saved) >= 0) state.view = saved; } catch (e) { /* no saved view */ }
+    }
     var s = params.get('sort');
     if (s && SORTS.indexOf(s) >= 0) { state.sort = s; sortEl.value = s; }
   }
@@ -245,6 +292,13 @@
     });
     sortEl.addEventListener('change', function () { state.sort = sortEl.value; render(); });
     clearBtn.addEventListener('click', clearAll);
+    Array.prototype.forEach.call(document.querySelectorAll('.tb-view-btn'), function (b) {
+      b.addEventListener('click', function () {
+        state.view = b.getAttribute('data-view');
+        try { localStorage.setItem(VIEW_KEY, state.view); } catch (e) { /* ignore */ }
+        render();
+      });
+    });
     stateEl.addEventListener('click', function (e) {
       if (e.target.classList && e.target.classList.contains('tb-inline-clear')) clearAll();
     });
