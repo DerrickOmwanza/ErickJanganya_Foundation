@@ -2051,3 +2051,16 @@ a.ar-tile .ar-count i{margin-left:6px;font-size:11px;}
 .value-card-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
 .pillar-card-img{position:relative;}
 .vision-row-media{position:relative;}
+
+/* Contact page hero: a photo behind the shared dark hero, and the "Reach the team" card (.glance base). */
+.page-hero.page-hero--contact{background:linear-gradient(90deg,rgba(5,5,5,.95) 0%,rgba(5,5,5,.8) 45%,rgba(5,5,5,.38) 100%),url("../img/ground-verification.jpg") 50% 40%/cover no-repeat #050505;}
+.page-hero--contact h1{font-size:clamp(56px,7vw,100px);}
+.contact-card{background:rgba(5,5,5,.68);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);}
+.cc-list{list-style:none;margin:0;padding:0;}
+.cc-list li{display:flex;align-items:center;gap:18px;padding:20px 0;border-top:1px solid rgba(255,255,255,.16);}
+.cc-list li:first-child{border-top:0;padding-top:4px;}
+.cc-ico{flex:none;display:flex;align-items:center;justify-content:center;width:50px;height:50px;border-radius:50%;background:#fff;color:#000;font-size:19px;}
+.cc-label{display:block;margin-bottom:4px;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6);}
+.cc-list a,.cc-list b{font-family:var(--font-h);font-weight:700;font-size:clamp(17px,1.6vw,21px);line-height:1.3;color:#fff;overflow-wrap:break-word;}
+.cc-list a{border-bottom:1.5px solid rgba(255,255,255,.5);transition:border-color .2s ease;}
+.cc-list a:hover{border-bottom-color:var(--yellow);}
