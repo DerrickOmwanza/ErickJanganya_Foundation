@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="css/vendor/leaflet.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
@@ -137,15 +138,30 @@
         <div class="tb-view" role="group" aria-label="Choose a view">
           <button type="button" class="tb-view-btn" data-view="cards" aria-pressed="true"><i class="fa-solid fa-table-cells-large" aria-hidden="true"></i><span>Cards</span></button>
           <button type="button" class="tb-view-btn" data-view="list" aria-pressed="false"><i class="fa-solid fa-list" aria-hidden="true"></i><span>List</span></button>
+          <button type="button" class="tb-view-btn" data-view="ward" aria-pressed="false"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i><span>By ward</span></button>
         </div>
         <div class="tb-sort">
-          <label for="tbSort">Sort</label>
+          <label for="tbSort" class="sr-only">Sort projects</label>
           <select id="tbSort">
             <option value="updated">Recently updated</option>
             <option value="progress">Most complete</option>
             <option value="budget">Largest budget</option>
             <option value="title">Name A to Z</option>
           </select>
+        </div>
+      </div>
+
+      <!-- By ward view: the ward map shaded by project count beside a ward list (js/tracker-map.js, js/tracker.js).
+           Clicking a ward on either filters the projects below to it. -->
+      <div class="ward-view" id="wardView" hidden>
+        <div class="map-frame" data-lenis-prevent>
+          <div class="ward-map" id="trackerMap"></div>
+          <button class="map-frame-hint" type="button" hidden><i class="fa-solid fa-hand-pointer"></i> Click to explore the map</button>
+        </div>
+        <div class="wv-side">
+          <p class="wv-lead">Click a ward on the map or in the list to see only its projects below. The darker the red, the more projects.</p>
+          <ol class="wv-list" id="wardList"></ol>
+          <p class="wv-credit">Ward boundaries are from OpenStreetMap contributors and may differ slightly from the official IEBC boundaries.</p>
         </div>
       </div>
 
@@ -202,7 +218,9 @@
 </footer>
 
 <script src="js/api.js"></script>
+<script src="js/vendor/leaflet.js"></script>
 <script src="js/main.js"></script>
+<script src="js/tracker-map.js"></script>
 <script src="js/tracker.js"></script>
 </body>
 </html>

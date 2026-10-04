@@ -12,12 +12,15 @@
   var sortEl = document.getElementById('tbSort');
   var countEl = document.getElementById('tbCount');
   var clearBtn = document.getElementById('tbClear');
+  var wardView = document.getElementById('wardView');
+  var wardListEl = document.getElementById('wardList');
+  var mapEl = document.getElementById('trackerMap');
 
   var U = window.FoundationUtils;
   var WARDS = ['Imara Daima', 'Kwa Njenga', 'Kwa Reuben', 'Pipeline', 'Kware'];
   var STATUSES = ['Planned', 'Ongoing', 'Completed'];
   var SORTS = ['updated', 'progress', 'budget', 'title'];
-  var VIEWS = ['cards', 'list'];
+  var VIEWS = ['cards', 'list', 'ward'];
   var VIEW_KEY = 'ejf.tracker.view';
   var allItems = [];
   var state = { q: '', ward: [], category: [], status: [], sort: 'updated', view: 'cards' };
@@ -196,6 +199,45 @@
     try { history.replaceState(null, '', window.location.pathname + (qs ? '?' + qs : '') + window.location.hash); } catch (e) { /* ignore */ }
   }
 
+  // Per-ward numbers for the By ward view, counted over projects that match every filter EXCEPT the ward one, so
+  // the map and list stay meaningful while wards are selected.
+  function wardStats() {
+    var stats = {};
+    var list = WARDS.slice();
+    allItems.forEach(function (p) { if (p.ward && list.indexOf(p.ward) < 0) list.push(p.ward); });
+    list.forEach(function (w) { stats[w] = { n: 0, Completed: 0, Ongoing: 0, Planned: 0, budget: 0, hasBudget: false }; });
+    allItems.forEach(function (p) {
+      if (!matches(p, 'ward') || !stats[p.ward]) return;
+      var s = stats[p.ward];
+      s.n++;
+      if (s[p.status] !== undefined) s[p.status]++;
+      if (p.budgetKes !== null && p.budgetKes !== undefined) { s.budget += Number(p.budgetKes) || 0; s.hasBudget = true; }
+    });
+    return { list: list, stats: stats };
+  }
+
+  function renderWardList(ws) {
+    wardListEl.innerHTML = ws.list.map(function (w) {
+      var s = ws.stats[w];
+      var on = state.ward.indexOf(w) >= 0;
+      var bar = ['Completed', 'Ongoing', 'Planned'].map(function (k) {
+        return s.n && s[k] ? '<span class="wv-seg wv-seg--' + k.toLowerCase() + '" style="width:' + (s[k] / s.n * 100) + '%"></span>' : '';
+      }).join('');
+      return '<li><button type="button" class="wv-row' + (s.n ? '' : ' is-empty') + '" data-ward="' + U.escapeHtml(w) + '" aria-pressed="' + (on ? 'true' : 'false') + '">' +
+        '<span class="wv-name">' + U.escapeHtml(w) + '</span>' +
+        '<span class="wv-count"><b>' + s.n + '</b> project' + (s.n === 1 ? '' : 's') + '</span>' +
+        '<span class="wv-bar" aria-hidden="true">' + bar + '</span>' +
+        '<span class="wv-budget">' + (s.hasBudget ? U.escapeHtml(U.formatKes(s.budget)) + ' budget' : 'No budget published') + '</span>' +
+        '</button></li>';
+    }).join('');
+  }
+
+  function toggleWard(w) {
+    var i = state.ward.indexOf(w);
+    if (i >= 0) { state.ward.splice(i, 1); } else { state.ward.push(w); }
+    render();
+  }
+
   function render() {
     var filtered = sorted(allItems.filter(function (p) { return matches(p); }));
     var total = allItems.length;
@@ -206,6 +248,15 @@
     updateChips();
     updateViewButtons();
     syncUrl();
+
+    wardView.hidden = state.view !== 'ward';
+    if (state.view === 'ward') {
+      var ws = wardStats();
+      renderWardList(ws);
+      var counts = {};
+      ws.list.forEach(function (w) { counts[w] = ws.stats[w].n; });
+      if (window.TrackerWardMap) window.TrackerWardMap.render(mapEl, { counts: counts, selected: state.ward.slice() }, toggleWard);
+    }
 
     if (!filtered.length) {
       grid.innerHTML = '';
@@ -292,6 +343,10 @@
     });
     sortEl.addEventListener('change', function () { state.sort = sortEl.value; render(); });
     clearBtn.addEventListener('click', clearAll);
+    wardListEl.addEventListener('click', function (e) {
+      var b = e.target.closest ? e.target.closest('.wv-row') : null;
+      if (b) toggleWard(b.getAttribute('data-ward'));
+    });
     Array.prototype.forEach.call(document.querySelectorAll('.tb-view-btn'), function (b) {
       b.addEventListener('click', function () {
         state.view = b.getAttribute('data-view');

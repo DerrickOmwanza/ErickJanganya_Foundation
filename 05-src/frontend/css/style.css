@@ -951,7 +951,7 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .pl-prog .progress-track{flex:1;height:7px;}
 .pl-prog b{min-width:38px;text-align:right;font-size:14px;}
 .tb-view{display:inline-flex;margin-left:auto;border:1.5px solid #cfcdc4;}
-.tb-view-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:0;background:#fff;color:var(--ink-soft);font:inherit;font-size:14.5px;font-weight:600;cursor:pointer;transition:background .15s ease,color .15s ease;}
+.tb-view-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border:0;background:#fff;color:var(--ink-soft);font:inherit;font-size:14.5px;font-weight:600;cursor:pointer;transition:background .15s ease,color .15s ease;}
 .tb-view-btn+.tb-view-btn{border-left:1.5px solid #cfcdc4;}
 .tb-view-btn:hover{color:var(--ink-black);}
 .tb-view-btn[aria-pressed="true"]{background:var(--ink-black);color:#fff;}
@@ -968,6 +968,39 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
   .pl-row:hover td,.pl-row:hover .pl-main{background:transparent;}
 }
 
+/* Tracker "By ward" view (js/tracker-map.js + js/tracker.js): the ward map shaded by project count beside a ward
+   list; clicking either filters the projects below. */
+.ward-view{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:40px;align-items:start;margin-bottom:44px;}
+.ward-view[hidden]{display:none;}
+.ward-view .map-frame{height:520px;}
+.wv-map-error{margin:0;padding:28px;font-size:15px;color:var(--ink-soft);}
+.wv-lead{margin:0 0 18px;font-size:15.5px;line-height:1.6;color:var(--ink-soft);}
+.wv-list{list-style:none;margin:0;padding:0;border-top:3px solid var(--ink-black);}
+.wv-row{display:grid;grid-template-columns:1fr auto;grid-template-areas:"name count" "bar bar" "budget budget";gap:4px 14px;align-items:baseline;width:100%;padding:16px 16px 16px 20px;border:0;border-bottom:1px solid var(--line);background:#fff;color:var(--ink-black);font:inherit;text-align:left;cursor:pointer;position:relative;transition:background .15s ease;}
+.wv-row::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--red);transform:scaleY(0);transition:transform .2s ease;}
+.wv-row:hover{background:#FAF9F5;}
+.wv-row[aria-pressed="true"]{background:var(--ink-black);color:#fff;}
+.wv-row[aria-pressed="true"]::before{transform:scaleY(1);}
+.wv-row:focus-visible{outline:3px solid var(--yellow);outline-offset:-3px;}
+.wv-row.is-empty:not([aria-pressed="true"]) .wv-name{color:var(--ink-mute);}
+.wv-name{grid-area:name;font-family:var(--font-display);font-weight:600;font-size:22px;letter-spacing:.01em;}
+.wv-count{grid-area:count;font-size:14px;font-weight:600;}
+.wv-count b{font-family:var(--font-display);font-size:24px;font-weight:700;margin-right:3px;}
+.wv-bar{grid-area:bar;display:flex;height:6px;margin:8px 0 6px;background:var(--line);}
+.wv-row[aria-pressed="true"] .wv-bar{background:rgba(255,255,255,.2);}
+.wv-seg{display:block;height:100%;}
+.wv-seg--completed{background:#1f9d55;}
+.wv-seg--ongoing{background:var(--yellow);}
+.wv-seg--planned{background:#8a919a;}
+.wv-budget{grid-area:budget;font-size:13px;font-weight:500;color:var(--ink-soft);}
+.wv-row[aria-pressed="true"] .wv-budget{color:rgba(255,255,255,.75);}
+.wv-credit{margin:14px 0 0;font-size:12.5px;line-height:1.5;color:var(--ink-mute);}
+@media (prefers-reduced-motion: reduce){.wv-row,.wv-row::before{transition:none;}}
+@media (max-width:960px){
+  .ward-view{grid-template-columns:minmax(0,1fr);gap:28px;margin-bottom:32px;}
+  .ward-view .map-frame{height:380px;}
+}
+
 /* Tracker filter toolbar (tracker.html, js/tracker.js): chips (any of a group, all groups together) with live
    counts, then a bar that sticks under the header holding search, the result count, clear and sort. */
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
@@ -982,8 +1015,8 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
 .tb-chip:focus-visible{outline:3px solid var(--yellow);outline-offset:2px;}
 .tb-n{padding:1px 7px;background:var(--line);color:var(--ink-soft);font-size:12px;font-weight:700;}
 .tb-chip[aria-pressed="true"] .tb-n{background:rgba(255,255,255,.22);color:#fff;}
-.tb-bar{position:sticky;top:80px;z-index:30;display:flex;align-items:center;flex-wrap:wrap;gap:12px 20px;padding:14px 0;margin-bottom:32px;background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
-.tb-search{position:relative;display:block;flex:1 1 280px;max-width:420px;}
+.tb-bar{position:sticky;top:80px;z-index:30;display:flex;align-items:center;flex-wrap:wrap;gap:12px 16px;padding:14px 0;margin-bottom:32px;background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.tb-search{position:relative;display:block;flex:1 1 220px;max-width:290px;}
 .tb-search i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink-mute);pointer-events:none;}
 .tb-search input{width:100%;padding:12px 14px 12px 40px;border:1.5px solid #cfcdc4;border-radius:0;background:#fff;font-family:var(--font-b);font-size:15.5px;color:var(--ink-black);}
 .tb-search input:focus{outline:none;border-color:var(--ink-black);box-shadow:0 0 0 3px rgba(255,189,18,.55);}
