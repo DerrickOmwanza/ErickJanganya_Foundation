@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>News & Press — Erick Janganya Foundation</title>
+<title>News &amp; Media | Erick Janganya Foundation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
@@ -94,60 +94,61 @@
 </div>
 
 <main>
-  <!-- Coming-soon template shared by Events, News, Media, Community and Get Involved (css: .soon-*). Same dark hero as
-       the rebuilt pages, a preview of what the page will carry (photo slots are placeholders), and links to live pages.
-       Replace this whole <main> when the page itself is built. -->
-  <section class="page-hero soon-hero">
-    <div class="container">
-      <span class="page-hero-kicker">Coming soon</span>
-      <h1>News &amp; Press</h1>
-      <p class="page-hero-lead">Statements, updates and press coverage from the campaign trail and the Foundation's work, kept in one place.</p>
-      <div class="page-hero-actions">
-        <a class="btn btn-primary" href="index.html#stay-updated"><i class="fa-solid fa-bell"></i> Notify me when it opens</a>
-        <a class="btn btn-outline" href="tracker.html">See the live tracker</a>
+  <!-- Rebuilt 2026-10-05 from the bare "coming soon" stub. News and Media are now ONE page (media.html redirects here). Hero over a
+       real photo with a live "latest" panel (js/news.js renderGlance), then the Updates: the newest story featured, a filter
+       toolbar (type, search) and the rest as cards, all from the News API. Still to come on this page: the story reader,
+       Press and Statements emphasis, Photos and video (media API), the press kit and the closing banner. -->
+  <section class="page-hero page-hero--news">
+    <div class="container page-hero-grid">
+      <div class="page-hero-copy">
+        <span class="page-hero-kicker">Embakasi South &middot; The record</span>
+        <h1>News &amp; Media</h1>
+        <p class="page-hero-lead">Updates from the field, press coverage and official statements, kept in one place.</p>
+        <div class="page-hero-actions">
+          <a class="btn btn-primary" href="#updates">Read the latest <i class="fa-solid fa-arrow-down"></i></a>
+          <a class="btn btn-outline" href="index.html#stay-updated"><i class="fa-solid fa-bell"></i> Get notified</a>
+        </div>
       </div>
+      <aside class="glance ev-glance is-loading" id="nwGlance" aria-label="News at a glance" aria-live="polite">
+        <div class="glance-head">
+          <span class="glance-title"><span class="glance-dot" aria-hidden="true"></span>At a glance</span>
+          <span class="glance-sample" id="ngSample" hidden>Sample data</span>
+        </div>
+        <div class="glance-main"><b id="ngTotal">...</b><span id="ngTotalLabel">stories published</span></div>
+        <div class="eg-next" id="ngLatest">
+          <span class="eg-next-label">Latest</span>
+          <b id="ngLatestTitle">...</b>
+          <span id="ngLatestMeta"></span>
+        </div>
+        <dl class="glance-stats">
+          <div><dt>Foundation</dt><dd id="ngFoundation">...</dd></div>
+          <div><dt>Press</dt><dd id="ngPress">...</dd></div>
+          <div><dt>Statements</dt><dd id="ngStatement">...</dd></div>
+        </dl>
+        <p class="glance-note" id="ngNote" hidden></p>
+      </aside>
     </div>
   </section>
 
-  <section class="section soon-body">
+  <section class="section" id="updates">
     <div class="container">
-      <div class="section-rule"></div>
-      <h2 class="mega-header" style="font-size:clamp(34px,5.4vw,64px);">What will be here</h2>
-      <ul class="soon-grid">
-        <li class="soon-card">
-          <div class="soon-photo"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: a field update</span></div></div>
-          <div class="soon-card-body">
-            <span class="soon-ico" aria-hidden="true"><i class="fa-solid fa-newspaper"></i></span>
-            <h3>Foundation updates</h3>
-            <p>What was done, where, and what comes next.</p>
-          </div>
-        </li>
-        <li class="soon-card">
-          <div class="soon-photo"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: a press interview</span></div></div>
-          <div class="soon-card-body">
-            <span class="soon-ico" aria-hidden="true"><i class="fa-solid fa-microphone-lines"></i></span>
-            <h3>Press coverage</h3>
-            <p>Articles about Erick and the Foundation, linked to their source.</p>
-          </div>
-        </li>
-        <li class="soon-card">
-          <div class="soon-photo"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: a public address</span></div></div>
-          <div class="soon-card-body">
-            <span class="soon-ico" aria-hidden="true"><i class="fa-solid fa-file-lines"></i></span>
-            <h3>Statements</h3>
-            <p>Official positions, dated and archived so they can be checked.</p>
-          </div>
-        </li>
-      </ul>
-
-      <div class="soon-meanwhile">
-        <h3>In the meantime</h3>
-        <ul>
-          <li><a href="promises.html">See where each promise stands <i class="fa-solid fa-arrow-right"></i></a></li>
-          <li><a href="tracker.html">Follow the development tracker <i class="fa-solid fa-arrow-right"></i></a></li>
-          <li><a href="about.html">Meet Erick <i class="fa-solid fa-arrow-right"></i></a></li>
-        </ul>
+      <h2 class="mega-header" style="font-size:clamp(34px,5.4vw,64px);">Latest Updates</h2>
+      <p class="mega-header-dek" style="margin-bottom:36px;">What the Foundation has done, what the press has said, and what has been stated on the record.</p>
+      <!-- Filter toolbar (js/news.js): chips for the kind of story (from the Foundation, in the press, statements) with live
+           counts, plus search and the result count. Every filter is in the address, so a filtered view can be shared. -->
+      <div class="tb-filters" id="nwFilters" aria-label="Filter stories"></div>
+      <div class="tb-bar">
+        <label class="tb-search">
+          <span class="sr-only">Search stories</span>
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <input type="search" id="nwSearch" placeholder="Search stories" autocomplete="off">
+        </label>
+        <p class="tb-count" id="nwCount" role="status" aria-live="polite">Loading stories</p>
+        <button type="button" class="tb-clear" id="nwClear" hidden>Clear filters</button>
       </div>
+      <p id="nwState" class="data-state" hidden></p>
+      <div id="nwFeature" class="nw-feature-wrap"></div>
+      <div id="nwGrid" class="nw-grid"></div>
     </div>
   </section>
 </main>
@@ -199,6 +200,8 @@
   </div>
 </footer>
 
+<script src="js/api.js"></script>
 <script src="js/main.js"></script>
+<script src="js/news.js"></script>
 </body>
 </html>
