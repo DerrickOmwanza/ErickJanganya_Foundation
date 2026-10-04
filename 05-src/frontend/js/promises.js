@@ -434,6 +434,7 @@
     var gap = window.innerWidth - document.documentElement.clientWidth;
     document.body.style.paddingRight = gap > 0 ? gap + 'px' : '';
     document.body.style.overflow = 'hidden';
+    if (window.ejfScrollLock) window.ejfScrollLock(true);
     pdPanel.hidden = false;
     pdOverlay.hidden = false;
     void pdPanel.offsetWidth;
@@ -450,6 +451,7 @@
     pdOverlay.classList.remove('is-open');
     document.body.style.overflow = '';
     document.body.style.paddingRight = '';
+    if (window.ejfScrollLock) window.ejfScrollLock(false);
     function done() { pdPanel.hidden = true; pdOverlay.hidden = true; }
     if (reduceMotion) { done(); } else { pdHideTimer = setTimeout(done, 280); }
     var back = pdOpenerEl && document.contains(pdOpenerEl) ? pdOpenerEl : (pdOpenerId !== null ? list.querySelector('[data-id="' + pdOpenerId + '"] .sg-open') : null);

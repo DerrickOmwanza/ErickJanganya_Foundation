@@ -1,3 +1,10 @@
+// Pauses (true) or resumes (false) the page's smooth scrolling. Called when a drawer opens or closes, so the wheel scrolls the
+// drawer and never the page behind it. A no-op until Lenis has loaded, or for visitors who prefer reduced motion.
+window.ejfScrollLock = function (lock) {
+  if (!window.ejfLenis) return;
+  if (lock) { window.ejfLenis.stop(); } else { window.ejfLenis.start(); }
+};
+
 // Mobile menu drawer (the same markup is on every page). Opening it moves focus to the close button and marks the
 // page behind it as unreachable by assistive tech; closing returns focus to the menu button. It also closes on
 // Escape, on a tap on the dimmed area, when any link in it is tapped, and if the window grows to desktop width.
@@ -10,6 +17,7 @@ function toggleDrawer(open) {
   drawer.classList.toggle('open', willOpen);
   drawer.setAttribute('aria-hidden', willOpen ? 'false' : 'true');
   document.documentElement.classList.toggle('drawer-open', willOpen);
+  window.ejfScrollLock(willOpen);
   var toggle = document.querySelector('.nav-toggle');
   if (toggle) toggle.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
   if (willOpen) {
@@ -563,6 +571,7 @@ function initSmoothScroll() {
   s.onload = function () {
     if (!window.Lenis) return;
     var lenis = new window.Lenis({ lerp: 0.09, wheelMultiplier: 1 });
+    window.ejfLenis = lenis; // so a drawer can pause page scrolling while it is open (see ejfScrollLock)
     function raf(t) { lenis.raf(t); requestAnimationFrame(raf); }
     requestAnimationFrame(raf);
 
@@ -582,7 +591,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initSmoothScroll();
   // Lenis (smooth page scroll) intercepts every wheel event on the window, which froze the side menu
   // and search overlay's own scrolling. data-lenis-prevent tells it to leave these panels alone.
-  document.querySelectorAll('.mobile-drawer-inner, .search-overlay').forEach(function (el) {
+  document.querySelectorAll('.mobile-drawer-inner, .search-overlay, .pd, .pd-body').forEach(function (el) {
     el.setAttribute('data-lenis-prevent', '');
   });
   // mark current nav item
