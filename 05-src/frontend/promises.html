@@ -139,18 +139,32 @@
       <h2 class="mega-header" style="font-size:clamp(34px,5.4vw,64px);">All Pledges</h2>
       <p class="mega-header-dek" style="margin-bottom:28px;">Filter by area or by status. A pledge is marked Kept only once the work has been checked on site.</p>
 
-      <div class="filter-bar">
-        <select id="filterCategory" aria-label="Filter by category"><option value="">All categories</option></select>
-        <select id="filterStatus" aria-label="Filter by status">
-          <option value="">All statuses</option>
-          <option value="Kept">Kept</option>
-          <option value="In progress">In progress</option>
-          <option value="Not started">Not started</option>
-        </select>
+      <!-- Filter toolbar (js/promises.js), the same components as the Development Tracker. Chips for status and area are
+           built from the data, select as many as you like, and show live counts. The bar under them sticks below the
+           header with search, the result count, clear and sort. Every filter is reflected in the address, so a filtered
+           view can be shared. The list groups pledges by area (sort "By area") as scorecard rows. -->
+      <div class="tb-filters" id="pbFilters" aria-label="Filter pledges"></div>
+      <div class="tb-bar">
+        <label class="tb-search">
+          <span class="sr-only">Search pledges</span>
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <input type="search" id="pbSearch" placeholder="Search the pledges" autocomplete="off">
+        </label>
+        <p class="tb-count" id="pbCount" role="status" aria-live="polite">Loading pledges</p>
+        <button type="button" class="tb-clear" id="pbClear" hidden>Clear filters</button>
+        <div class="tb-sort" style="margin-left:auto;">
+          <label for="pbSort" class="sr-only">Sort pledges</label>
+          <select id="pbSort">
+            <option value="area">Group by area</option>
+            <option value="status">Status</option>
+            <option value="target">Target date</option>
+            <option value="title">Name A to Z</option>
+          </select>
+        </div>
       </div>
 
       <p id="promisesState" class="data-state" hidden></p>
-      <div class="grid grid-3" id="promisesGrid"></div>
+      <div id="promisesList"></div>
     </div>
   </section>
 </main>
