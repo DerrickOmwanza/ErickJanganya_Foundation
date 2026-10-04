@@ -2000,3 +2000,27 @@ section[id]{scroll-margin-top:84px;}
 @media (max-width:560px){
   .ar-name{font-size:17px;letter-spacing:0;overflow-wrap:anywhere;}
 }
+
+/* Vision imagery: hero portrait, Horizon photos, icons on the plan levels, a photo behind the partner invitation, and
+   photos beside the input form and the questions. Stock stand-ins are tagged "Illustrative photo" (.hw-illus). */
+.page-hero-media{position:relative;}
+.horizon-step-media{position:relative;}
+.horizon-step-media img{width:100%;height:100%;object-fit:cover;display:block;}
+.priority-media{position:relative;}
+.plan-level{align-items:flex-start;}
+.plan-ico{display:flex;align-items:center;justify-content:center;flex:none;width:48px;height:48px;margin-bottom:10px;border-radius:50%;background:#000;color:#fff;font-size:18px;}
+.partner-panel.partner-panel--photo{background:radial-gradient(70% 70% at 0% 0%,rgba(0,100,240,.3) 0%,rgba(0,100,240,0) 70%),linear-gradient(180deg,rgba(5,5,5,.7),rgba(5,5,5,.9)),url("../img/value-diaspora.jpg") 70% 40%/cover no-repeat #050505;}
+.vi-photo,.faq-photo{position:relative;margin:0;overflow:hidden;background:#111;}
+.vi-photo{margin-top:36px;max-width:440px;aspect-ratio:16/10;}
+.vi-photo img,.faq-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+.vi-photo figcaption,.faq-photo figcaption{position:absolute;left:14px;bottom:14px;padding:6px 12px;background:#000;color:#fff;font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
+.faq-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr);gap:56px;align-items:start;margin-top:44px;}
+.faq-grid .faq-list{margin-top:0;max-width:none;}
+.faq-photo{position:sticky;top:110px;aspect-ratio:4/5;}
+@media (max-width:960px){
+  .faq-grid{grid-template-columns:minmax(0,1fr);gap:32px;margin-top:32px;}
+  .faq-photo{position:relative;top:auto;aspect-ratio:16/9;}
+  .vi-photo{max-width:none;}
+  .plan-ico{width:42px;height:42px;margin:0 8px 0 0;font-size:16px;}
+  .plan-level{flex-direction:row;align-items:center;}
+}
