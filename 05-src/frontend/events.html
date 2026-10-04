@@ -137,6 +137,20 @@
     <div class="container">
       <h2 class="mega-header" style="font-size:clamp(34px,5.4vw,64px);">All Events</h2>
       <p class="mega-header-dek" style="margin-bottom:36px;">What is coming up, and what has already happened.</p>
+      <!-- Filter toolbar (js/events.js), the same components as the Development Tracker: chips for when (upcoming or past) and
+           for ward, built from the data with live counts, plus search, the result count and clear. Every filter is in the
+           address, so a filtered view can be shared. With no chip chosen, everything shows. -->
+      <div class="tb-filters" id="evFilters" aria-label="Filter events"></div>
+      <div class="tb-bar">
+        <label class="tb-search">
+          <span class="sr-only">Search events</span>
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <input type="search" id="evSearch" placeholder="Search events or places" autocomplete="off">
+        </label>
+        <p class="tb-count" id="evCount" role="status" aria-live="polite">Loading events</p>
+        <button type="button" class="tb-clear" id="evClear" hidden>Clear filters</button>
+      </div>
+
       <p id="eventsState" class="data-state" hidden></p>
       <div id="eventsList"></div>
     </div>

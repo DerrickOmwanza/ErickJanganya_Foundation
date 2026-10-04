@@ -116,19 +116,134 @@
     return '<section class="ev-group"><header class="ev-head"><h3>' + title + '</h3><span class="ev-count">' + plural(count, 'event') + '</span></header>' + (extra || '') + html + '</section>';
   }
 
+  // ----- Filtering -----
+  // Chips for "when" (Upcoming, Past) and for ward, plus search. With no chip chosen in a group, everything shows. Chip
+  // counts show what picking that chip WOULD give with the other filters on. Filters live in the address, e.g.
+  // events.html?when=upcoming&ward=Kware&q=camp, so a filtered view can be shared.
+
+  var filtersEl = document.getElementById('evFilters');
+  var searchEl = document.getElementById('evSearch');
+  var countEl = document.getElementById('evCount');
+  var clearBtn = document.getElementById('evClear');
+  var WARDS = ['Imara Daima', 'Kwa Njenga', 'Kwa Reuben', 'Pipeline', 'Kware'];
+  var WHEN = ['Upcoming', 'Past'];
+  var state = { q: '', when: [], ward: [] };
+
+  function hasFilters() { return !!(state.q || state.when.length || state.ward.length); }
+
+  function whenOf(e) { return isUpcoming(e) ? 'Upcoming' : 'Past'; }
+
+  // `skip` leaves one group out (for the chip counts).
+  function matches(e, skip) {
+    if (skip !== 'when' && state.when.length && state.when.indexOf(whenOf(e)) < 0) return false;
+    if (skip !== 'ward' && state.ward.length && state.ward.indexOf(e.ward) < 0) return false;
+    if (state.q) {
+      var hay = [e.title, e.description, e.location, e.ward].join(' ').toLowerCase();
+      if (hay.indexOf(state.q) < 0) return false;
+    }
+    return true;
+  }
+
+  function updateChips() {
+    Array.prototype.forEach.call(filtersEl.querySelectorAll('.tb-chip'), function (chip) {
+      var group = chip.getAttribute('data-group'), value = chip.getAttribute('data-value');
+      var on = state[group].indexOf(value) >= 0;
+      var n = allItems.filter(function (e) { return matches(e, group) && (group === 'when' ? whenOf(e) : e.ward) === value; }).length;
+      chip.setAttribute('aria-pressed', on ? 'true' : 'false');
+      chip.classList.toggle('is-empty', n === 0 && !on);
+      chip.querySelector('.tb-n').textContent = n;
+    });
+  }
+
+  function syncUrl() {
+    var params = new URLSearchParams();
+    if (state.q) params.set('q', state.q);
+    if (state.when.length) params.set('when', state.when.map(function (w) { return w.toLowerCase(); }).join(','));
+    if (state.ward.length) params.set('ward', state.ward.join(','));
+    var qs = params.toString();
+    try { history.replaceState(history.state, '', window.location.pathname + (qs ? '?' + qs : '') + window.location.hash); } catch (e) { /* ignore */ }
+  }
+
   function render() {
-    var upcoming = allItems.filter(isUpcoming).sort(function (a, b) { return dateStr(a) < dateStr(b) ? -1 : 1; });
-    var past = allItems.filter(function (e) { return !isUpcoming(e); }).sort(function (a, b) { return dateStr(a) < dateStr(b) ? 1 : -1; });
+    var filtered = allItems.filter(function (e) { return matches(e); });
+    var upcoming = filtered.filter(isUpcoming).sort(function (a, b) { return dateStr(a) < dateStr(b) ? -1 : 1; });
+    var past = filtered.filter(function (e) { return !isUpcoming(e); }).sort(function (a, b) { return dateStr(a) < dateStr(b) ? 1 : -1; });
+    var total = allItems.length;
+    countEl.textContent = hasFilters() ? 'Showing ' + filtered.length + ' of ' + plural(total, 'event') : plural(total, 'event');
+    clearBtn.hidden = !hasFilters();
+    updateChips();
+    syncUrl();
+
+    if (!filtered.length) {
+      list.innerHTML = '';
+      stateEl.hidden = false;
+      stateEl.innerHTML = '<i class="fa-solid fa-inbox"></i>No events match these filters. <button type="button" class="tb-inline-clear">Clear filters</button>';
+      return;
+    }
+    setState(null);
     var html = '';
     if (upcoming.length) {
       html += group('Upcoming', upcoming.length, '<div class="ev-list">' + upcoming.map(function (e) { return renderEvent(e, true); }).join('') + '</div>');
-    } else {
+    } else if (!hasFilters()) {
       html += group('Upcoming', 0, '', '<div class="ev-empty"><i class="fa-regular fa-calendar" aria-hidden="true"></i><div><b>No events are coming up right now.</b>' +
         '<p>New events appear here as soon as they are scheduled. Subscribe and we will tell you.</p>' +
         '<a class="btn btn-primary" href="index.html#stay-updated"><i class="fa-solid fa-bell"></i> Get notified</a></div></div>');
     }
     if (past.length) html += group('Past', past.length, '<div class="ev-list">' + past.map(function (e) { return renderEvent(e, false); }).join('') + '</div>');
     list.innerHTML = html;
+  }
+
+  function clearAll() {
+    state.q = ''; state.when = []; state.ward = [];
+    searchEl.value = '';
+    render();
+  }
+
+  function chip(group, value) {
+    return '<button type="button" class="tb-chip" data-group="' + group + '" data-value="' + U.escapeHtml(value) + '" aria-pressed="false">' +
+      U.escapeHtml(value) + ' <span class="tb-n">0</span></button>';
+  }
+
+  function buildChips() {
+    var wards = WARDS.slice();
+    allItems.forEach(function (e) { if (e.ward && wards.indexOf(e.ward) < 0) wards.push(e.ward); });
+    var groups = [['when', 'When', WHEN], ['ward', 'Ward', wards]];
+    filtersEl.innerHTML = groups.map(function (g) {
+      return '<div class="tb-group"><span class="tb-label" id="evl-' + g[0] + '">' + g[1] + '</span>' +
+        '<div class="tb-chips" role="group" aria-labelledby="evl-' + g[0] + '">' + g[2].map(function (v) { return chip(g[0], v); }).join('') + '</div></div>';
+    }).join('');
+  }
+
+  // Filters in the address. Comma separated values; only values that exist are applied.
+  function readUrl() {
+    var params = new URLSearchParams(window.location.search);
+    var validWard = Array.prototype.map.call(filtersEl.querySelectorAll('.tb-chip[data-group="ward"]'), function (c) { return c.getAttribute('data-value'); });
+    var w = params.get('when');
+    if (w) state.when = WHEN.filter(function (v) { return w.toLowerCase().split(',').indexOf(v.toLowerCase()) >= 0; });
+    var wd = params.get('ward');
+    if (wd) state.ward = wd.split(',').filter(function (v) { return validWard.indexOf(v) >= 0; });
+    var q = params.get('q');
+    if (q) { state.q = q.trim().toLowerCase(); searchEl.value = q.trim(); }
+  }
+
+  function bind() {
+    filtersEl.addEventListener('click', function (e) {
+      var c = e.target.closest ? e.target.closest('.tb-chip') : null;
+      if (!c) return;
+      var g = c.getAttribute('data-group'), v = c.getAttribute('data-value');
+      var i = state[g].indexOf(v);
+      if (i >= 0) { state[g].splice(i, 1); } else { state[g].push(v); }
+      render();
+    });
+    var timer = null;
+    searchEl.addEventListener('input', function () {
+      clearTimeout(timer);
+      timer = setTimeout(function () { state.q = searchEl.value.trim().toLowerCase(); render(); }, 120);
+    });
+    clearBtn.addEventListener('click', clearAll);
+    stateEl.addEventListener('click', function (e) {
+      if (e.target.classList && e.target.classList.contains('tb-inline-clear')) clearAll();
+    });
   }
 
   function setState(message, icon) {
@@ -147,18 +262,23 @@
         renderGlance(allItems, false);
         if (!allItems.length) {
           list.innerHTML = '';
+          countEl.textContent = '0 events';
           setState('No events have been published yet. Check back soon.', 'fa-inbox');
           return;
         }
+        buildChips();
+        readUrl();
         render();
       })
       .catch(function (err) {
         console.error('Failed to load events:', err);
         renderGlance([], true);
         list.innerHTML = '';
+        countEl.textContent = 'Events unavailable';
         setState('Could not load the events right now. Make sure the backend is running, then refresh.', 'fa-triangle-exclamation');
       });
   }
 
+  bind();
   document.addEventListener('DOMContentLoaded', load);
 })();
