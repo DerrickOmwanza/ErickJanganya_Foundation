@@ -9,5 +9,17 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/community.html",
+      "destination": "/events.html",
+      "permanent": true
+    },
+    {
+      "source": "/media.html",
+      "destination": "/news.html",
+      "permanent": true
+    }
   ]
 }
