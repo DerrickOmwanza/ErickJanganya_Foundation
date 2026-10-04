@@ -149,6 +149,23 @@
       btn.querySelector('.lg-label').textContent = n ? 'Show ' + n + ' project' + (n === 1 ? '' : 's') : 'None yet';
       btn.disabled = !n;
     });
+    Array.prototype.forEach.call(legend.querySelectorAll('.lg-big'), function (big) {
+      var s = big.getAttribute('data-count-status');
+      big.textContent = allItems.filter(function (p) { return p.status === s; }).length;
+    });
+  }
+
+  // Funding explorer: one source is shown at a time (tabs, with arrow key navigation).
+  function selectFund(tab) {
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.lg-tab'));
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      var panel = document.getElementById(t.getAttribute('aria-controls'));
+      if (panel) panel.hidden = !on;
+    });
+    tab.focus({ preventScroll: true });
   }
 
   function showFromLegend(btn) {
@@ -386,10 +403,23 @@
       });
     });
     var legend = document.getElementById('legend');
-    if (legend) legend.addEventListener('click', function (e) {
-      var b = e.target.closest ? e.target.closest('.lg-show') : null;
-      if (b && !b.disabled) showFromLegend(b);
-    });
+    if (legend) {
+      legend.addEventListener('click', function (e) {
+        var tab = e.target.closest ? e.target.closest('.lg-tab') : null;
+        if (tab) { selectFund(tab); return; }
+        var b = e.target.closest ? e.target.closest('.lg-show') : null;
+        if (b && !b.disabled) showFromLegend(b);
+      });
+      legend.addEventListener('keydown', function (e) {
+        var tab = e.target.closest ? e.target.closest('.lg-tab') : null;
+        if (!tab) return;
+        var tabs = Array.prototype.slice.call(legend.querySelectorAll('.lg-tab'));
+        var i = tabs.indexOf(tab), dir = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (e.key === 'Home') { e.preventDefault(); selectFund(tabs[0]); }
+        else if (e.key === 'End') { e.preventDefault(); selectFund(tabs[tabs.length - 1]); }
+        else if (dir) { e.preventDefault(); selectFund(tabs[(i + dir + tabs.length) % tabs.length]); }
+      });
+    }
     document.addEventListener('click', function (e) {
       var t = e.target;
       if (!t.closest || t.closest('#pdPanel') || t.closest('.tb-chip')) return;

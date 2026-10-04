@@ -204,61 +204,103 @@
     </div>
   </section>
 
-  <!-- Legend: what the status and funding labels mean, how to read the numbers, and how a record is verified.
-       The counts and "Show" buttons are live (js/tracker.js renderLegend): they apply that status, or search that
-       funding source, in the list above. -->
+  <!-- Legend, redesigned to be lighter on text: a three step status journey with photo slots, a funding explorer that
+       shows one source at a time (tabs), a short "reading the numbers" row, and a photo led verification band. All
+       the photo slots are placeholders for real pictures. Counts and the Show buttons are live (js/tracker.js
+       renderLegend / bindLegend): a Show button filters the list above to that status, or searches that funding source. -->
   <section class="section lg" id="legend">
     <div class="container">
       <div class="section-rule"></div>
       <h2 class="mega-header" style="font-size:clamp(34px,5.4vw,64px);">How to Read This Tracker</h2>
-      <p class="mega-header-dek">Every project carries a status, a funding source and a set of numbers. This is what each one means.</p>
+      <p class="mega-header-dek">Three things to know about any project: where it stands, who paid for it, and what the numbers mean.</p>
 
-      <div class="lg-cols">
-        <div class="lg-col">
-          <h3 class="lg-h">Status</h3>
-          <ul class="lg-list">
-            <li class="lg-item lg-item--planned">
-              <div class="lg-text"><b>Planned</b><p>Approved or announced, but no work has started on site yet.</p></div>
+      <div class="lg-block">
+        <div class="lg-bhead"><span class="lg-kicker">01</span><h3>Where a project stands</h3></div>
+        <ol class="lg-flow">
+          <li class="lg-step lg-step--planned">
+            <div class="lg-photo"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: a site before work begins</span></div></div>
+            <div class="lg-step-body">
+              <span class="lg-big" data-count-status="Planned">0</span>
+              <h4><i class="fa-solid fa-circle"></i> Planned</h4>
+              <p>Approved, but work has not started on site.</p>
               <button type="button" class="lg-show" data-status="Planned"><span class="lg-label">Show projects</span> <i class="fa-solid fa-arrow-up"></i></button>
-            </li>
-            <li class="lg-item lg-item--ongoing">
-              <div class="lg-text"><b>Ongoing</b><p>Work is under way. The progress figure is how far along it was when last checked on site.</p></div>
+            </div>
+          </li>
+          <li class="lg-step lg-step--ongoing">
+            <div class="lg-photo"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: work under way</span></div></div>
+            <div class="lg-step-body">
+              <span class="lg-big" data-count-status="Ongoing">0</span>
+              <h4><i class="fa-solid fa-circle"></i> Ongoing</h4>
+              <p>Work is under way. Progress shows how far along it is.</p>
               <button type="button" class="lg-show" data-status="Ongoing"><span class="lg-label">Show projects</span> <i class="fa-solid fa-arrow-up"></i></button>
-            </li>
-            <li class="lg-item lg-item--completed">
-              <div class="lg-text"><b>Completed</b><p>The work is finished and has been checked on site by the team.</p></div>
+            </div>
+          </li>
+          <li class="lg-step lg-step--completed">
+            <div class="lg-photo"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: the finished project</span></div></div>
+            <div class="lg-step-body">
+              <span class="lg-big" data-count-status="Completed">0</span>
+              <h4><i class="fa-solid fa-circle"></i> Completed</h4>
+              <p>Finished, and checked on site by the team.</p>
               <button type="button" class="lg-show" data-status="Completed"><span class="lg-label">Show projects</span> <i class="fa-solid fa-arrow-up"></i></button>
-            </li>
-          </ul>
-        </div>
-        <div class="lg-col">
-          <h3 class="lg-h">Funding source</h3>
-          <ul class="lg-list">
-            <li class="lg-item lg-item--fund">
-              <div class="lg-text"><span class="source-chip source-fnd">Foundation-funded</span><p>Paid for by the Erick Janganya Foundation, from the donations it has received.</p></div>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="lg-block">
+        <div class="lg-bhead"><span class="lg-kicker">02</span><h3>Who paid for it</h3></div>
+        <div class="lg-fund">
+          <div class="lg-tabs" role="tablist" aria-label="Funding source">
+            <button type="button" class="lg-tab" role="tab" id="lgTab1" aria-controls="lgPanel1" aria-selected="true" data-fund="1"><span class="source-chip source-fnd">Foundation-funded</span></button>
+            <button type="button" class="lg-tab" role="tab" id="lgTab2" aria-controls="lgPanel2" aria-selected="false" tabindex="-1" data-fund="2"><span class="source-chip source-gov">Government (NG-CDF)</span></button>
+            <button type="button" class="lg-tab" role="tab" id="lgTab3" aria-controls="lgPanel3" aria-selected="false" tabindex="-1" data-fund="3"><span class="source-chip source-partner">Partner-funded</span></button>
+          </div>
+          <div class="lg-panel" role="tabpanel" id="lgPanel1" aria-labelledby="lgTab1">
+            <div class="lg-photo"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: a Foundation-funded project</span></div></div>
+            <div class="lg-panel-text">
+              <p>Paid for by the Foundation, from donations it has received.</p>
               <button type="button" class="lg-show" data-funding="Foundation-funded"><span class="lg-label">Show projects</span> <i class="fa-solid fa-arrow-up"></i></button>
-            </li>
-            <li class="lg-item lg-item--fund">
-              <div class="lg-text"><span class="source-chip source-gov">Government (NG-CDF)</span><p>Paid for from public money, such as the National Government Constituency Development Fund. The Foundation documents it; it did not fund it.</p></div>
+            </div>
+          </div>
+          <div class="lg-panel" role="tabpanel" id="lgPanel2" aria-labelledby="lgTab2" hidden>
+            <div class="lg-photo"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: a public fund (NG-CDF) project</span></div></div>
+            <div class="lg-panel-text">
+              <p>Paid for from public funds such as the NG-CDF. We document it; we did not fund it.</p>
               <button type="button" class="lg-show" data-funding="Government (NG-CDF)"><span class="lg-label">Show projects</span> <i class="fa-solid fa-arrow-up"></i></button>
-            </li>
-            <li class="lg-item lg-item--fund">
-              <div class="lg-text"><span class="source-chip source-partner">Partner-funded</span><p>Paid for by a partner organisation or donor working alongside the Foundation.</p></div>
+            </div>
+          </div>
+          <div class="lg-panel" role="tabpanel" id="lgPanel3" aria-labelledby="lgTab3" hidden>
+            <div class="lg-photo"><div class="ph"><i class="fa-solid fa-image"></i><span>Photo: a partner-funded project</span></div></div>
+            <div class="lg-panel-text">
+              <p>Paid for by a partner or donor working alongside the Foundation.</p>
               <button type="button" class="lg-show" data-funding="Partner-funded"><span class="lg-label">Show projects</span> <i class="fa-solid fa-arrow-up"></i></button>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
       </div>
 
-      <dl class="lg-numbers">
-        <div><dt>Progress</dt><dd>The share of the project's work that is finished, as last verified on site.</dd></div>
-        <div><dt>Budget</dt><dd>The amount set aside for the whole project, not the money spent so far.</dd></div>
-        <div><dt>Updated</dt><dd>When the record last changed, so you can see how fresh the information is.</dd></div>
-      </dl>
+      <div class="lg-block">
+        <div class="lg-bhead"><span class="lg-kicker">03</span><h3>Reading the numbers</h3></div>
+        <ul class="lg-numbers">
+          <li><span class="lg-ico" aria-hidden="true"><i class="fa-solid fa-bars-progress"></i></span><div><b>Progress</b><p>How much of the work is finished.</p></div></li>
+          <li><span class="lg-ico" aria-hidden="true"><i class="fa-solid fa-coins"></i></span><div><b>Budget</b><p>The amount set aside for the whole project.</p></div></li>
+          <li><span class="lg-ico" aria-hidden="true"><i class="fa-regular fa-clock"></i></span><div><b>Updated</b><p>When the record last changed.</p></div></li>
+        </ul>
+      </div>
 
       <div class="lg-verify">
-        <p><b>Every record is checked before it is published.</b> A team member visits the site, the status is set from what is actually there, and the budget and funding source are attached.</p>
-        <a class="pd-link" href="foundation.html#verification">See how verification works <i class="fa-solid fa-arrow-right"></i></a>
+        <div class="lg-photo"><div class="ph"><i class="fa-solid fa-image"></i><span>Real photo needed: a team member checking a project on site</span></div></div>
+        <div class="lg-verify-body">
+          <span class="lg-kicker lg-kicker--red">Before anything is published</span>
+          <h3>Every record is checked on site</h3>
+          <ol class="lg-checks">
+            <li><span>1</span>Site visit</li>
+            <li><span>2</span>Status set</li>
+            <li><span>3</span>Budget attached</li>
+            <li><span><i class="fa-solid fa-check"></i></span>Published</li>
+          </ol>
+          <a class="pd-link" href="foundation.html#verification">See how verification works <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
       </div>
     </div>
   </section>
