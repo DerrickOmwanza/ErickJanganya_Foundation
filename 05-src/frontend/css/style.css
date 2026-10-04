@@ -968,6 +968,69 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
   .pl-row:hover td,.pl-row:hover .pl-main{background:transparent;}
 }
 
+/* Tracker project detail drawer (tracker.html #pdPanel, js/tracker.js). Slides in from the right over a dimmed page;
+   status sets the accent colour, as on the cards. */
+.pc-open{color:inherit;text-decoration:none;}
+.pc h3 .pc-open::after{content:"";position:absolute;inset:0;z-index:1;}
+.pc,.pl-row{cursor:pointer;}
+.pl-title.pc-open:hover{text-decoration:underline;}
+.pc-open:focus-visible{outline:3px solid var(--yellow);outline-offset:3px;}
+.pd-overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.55);opacity:0;transition:opacity .28s ease;}
+.pd-overlay.is-open{opacity:1;}
+.pd-overlay[hidden],.pd[hidden]{display:none;}
+.pd{position:fixed;top:0;right:0;bottom:0;z-index:1001;display:flex;flex-direction:column;width:min(560px,100vw);background:#fff;box-shadow:-18px 0 40px rgba(0,0,0,.2);transform:translateX(100%);transition:transform .28s ease;outline:none;}
+.pd.is-open{transform:none;}
+.pd-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);background:#fff;}
+.pd-step,.pd-actions{display:flex;align-items:center;gap:8px;}
+.pd-btn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:1.5px solid var(--ink-black);background:#fff;color:var(--ink-black);font-size:15px;cursor:pointer;transition:background .15s ease,color .15s ease;}
+.pd-btn:hover:not(:disabled){background:var(--ink-black);color:#fff;}
+.pd-btn:disabled{opacity:.3;cursor:default;}
+.pd-copy{display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 16px;border:1.5px solid var(--ink-black);background:#fff;color:var(--ink-black);font:inherit;font-size:14.5px;font-weight:700;cursor:pointer;transition:background .15s ease,color .15s ease;}
+.pd-copy:hover{background:var(--ink-black);color:#fff;}
+.pd-btn:focus-visible,.pd-copy:focus-visible,.pd-ward:focus-visible,.pd-link:focus-visible{outline:3px solid var(--yellow);outline-offset:2px;}
+.pd-body{flex:1;overflow-y:auto;overscroll-behavior:contain;}
+.pd-media{border-bottom:4px solid #8a919a;}
+.pd-media--completed{border-bottom-color:#1f9d55;}
+.pd-media--ongoing{border-bottom-color:var(--yellow);}
+.pd-media .ph{height:auto;width:100%;aspect-ratio:16/9;border:0;border-radius:0;overflow:hidden;}
+.pd-media img{width:100%;height:100%;object-fit:cover;display:block;}
+.pd-main{padding:28px 32px 40px;}
+.pd-status{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;background:#F3F1EA;font-size:12.5px;font-weight:700;letter-spacing:.05em;color:var(--ink-black);}
+.pd-status i{font-size:8px;color:#8a919a;}
+.pd-status--completed i{color:#1f9d55;}
+.pd-status--ongoing i{color:var(--yellow);}
+.pd-where{margin:18px 0 8px;font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red);}
+.pd h2{margin:0 0 14px;font-family:var(--font-h);font-weight:700;font-size:clamp(26px,3vw,32px);line-height:1.2;}
+.pd-sample{margin:0 0 18px;padding:8px 12px;border-left:3px solid var(--yellow);background:#FFF8E0;font-size:13.5px;color:var(--ink-soft);}
+.pd-progress{margin:22px 0;}
+.pd .progress-track{height:9px;}
+.pd-summary{margin:0 0 24px;font-size:16.5px;line-height:1.7;color:var(--ink-soft);}
+.pd-facts{display:grid;grid-template-columns:1fr 1fr;margin:0 0 32px;border-top:1px solid var(--line);}
+.pd-facts>div{padding:16px 0;border-bottom:1px solid var(--line);}
+.pd-facts>div:nth-child(odd){padding-right:16px;}
+.pd-facts>div:nth-child(even){padding-left:16px;border-left:1px solid var(--line);}
+.pd-facts dt{margin-bottom:5px;font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);}
+.pd-facts dd{margin:0;font-size:16px;font-weight:700;line-height:1.35;}
+.pd-pledges{margin-bottom:28px;padding:22px 24px;background:#FAF9F5;border:1px solid var(--line);}
+.pd-pledges h3{margin:0 0 10px;font-family:var(--font-h);font-weight:700;font-size:19px;}
+.pd-note{margin:0 0 14px;font-size:14.5px;line-height:1.6;color:var(--ink-soft);}
+.pd-pledge-list{list-style:none;margin:0 0 16px;padding:0;}
+.pd-pledge-list li{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-top:1px solid var(--line);}
+.pd-pledge-list .badge{flex:none;border-radius:0;padding:4px 10px;font-size:12px;}
+.pd-pledge-title{font-size:15px;font-weight:600;line-height:1.45;}
+.pd-link,.pd-ward{display:inline-flex;align-items:center;gap:10px;font:inherit;font-size:15px;font-weight:700;color:var(--ink-black);text-decoration:none;border-bottom:2px solid var(--ink-black);padding:2px 0;transition:gap .2s ease;}
+.pd-link:hover,.pd-ward:hover{gap:14px;}
+.pd-ward{background:none;border-top:0;border-left:0;border-right:0;cursor:pointer;}
+@media (max-width:600px){
+  .pd-main{padding:24px 20px 36px;}
+  .pd-copy span{display:none;}
+  .pd-copy{padding:0 14px;}
+  .pd-facts{grid-template-columns:1fr;}
+  .pd-facts>div:nth-child(even){padding-left:0;border-left:0;}
+  .pd-facts>div:nth-child(odd){padding-right:0;}
+}
+@media (prefers-reduced-motion: reduce){.pd,.pd-overlay{transition:none;}}
+
 /* Tracker "By ward" view (js/tracker-map.js + js/tracker.js): the ward map shaded by project count beside a ward
    list; clicking either filters the projects below. */
 .ward-view{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:40px;align-items:start;margin-bottom:44px;}

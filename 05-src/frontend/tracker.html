@@ -171,6 +171,22 @@
   </section>
 </main>
 
+<!-- Project detail drawer (js/tracker.js). Opens from any card or row, and from a shared link: tracker.html?project=ID -->
+<div class="pd-overlay" id="pdOverlay" hidden></div>
+<aside class="pd" id="pdPanel" role="dialog" aria-modal="true" aria-labelledby="pdTitle" hidden tabindex="-1">
+  <div class="pd-bar">
+    <div class="pd-step">
+      <button type="button" class="pd-btn" id="pdPrev" aria-label="Previous project"><i class="fa-solid fa-arrow-left"></i></button>
+      <button type="button" class="pd-btn" id="pdNext" aria-label="Next project"><i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+    <div class="pd-actions">
+      <button type="button" class="pd-copy" id="pdCopy"><i class="fa-solid fa-link"></i><span>Copy link</span></button>
+      <button type="button" class="pd-btn pd-close" id="pdClose" aria-label="Close project details"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+  </div>
+  <div class="pd-body" id="pdBody"></div>
+</aside>
+
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
