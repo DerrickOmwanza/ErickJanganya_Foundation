@@ -968,6 +968,70 @@ body:has(.hero-full) .hero.hero-full{margin-top:calc(-1 * (var(--banner-h, 122px
   .pl-row:hover td,.pl-row:hover .pl-main{background:transparent;}
 }
 
+/* Tracker Before and After (tracker.html #before-after, js/tracker-compare.js): a dark band with a draggable comparison
+   slider (before on the left), a pause button for the automatic sweep, and a list of projects to compare. */
+.ba{background:#050505 radial-gradient(55% 80% at 90% 0%, rgba(0,100,240,.2) 0%, rgba(0,100,240,0) 70%);color:#fff;padding:96px 0 104px;}
+.ba[hidden]{display:none;}
+.ba-head{max-width:760px;margin-bottom:48px;}
+.ba-kicker{display:inline-block;margin-bottom:16px;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);}
+.ba-head h2{font-family:var(--font-display);font-weight:700;text-transform:uppercase;color:#fff;font-size:clamp(40px,6vw,76px);line-height:.96;letter-spacing:-.01em;margin:0 0 18px;}
+.ba-head p{font-size:clamp(17px,1.4vw,20px);line-height:1.6;color:rgba(255,255,255,.8);max-width:620px;}
+.ba-layout{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);gap:48px;align-items:start;}
+.ba-stage{position:relative;aspect-ratio:16/10;overflow:hidden;background:#111;cursor:ew-resize;touch-action:pan-y;user-select:none;-webkit-user-select:none;isolation:isolate;}
+.ba-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;}
+.ba-before{position:absolute;inset:0;clip-path:inset(0 50% 0 0);}
+.ba-stage.is-sample .ba-img--before{filter:grayscale(.9) brightness(.6) contrast(.9) sepia(.35) blur(.7px);}
+.ba-stage.is-sample .ba-before::after{content:"";position:absolute;inset:0;background:rgba(120,90,50,.28);mix-blend-mode:multiply;}
+.ba-stage.is-fresh .ba-img{animation:baFade .5s ease;}
+@keyframes baFade{from{opacity:0;}to{opacity:1;}}
+.ba-tag{position:absolute;top:16px;z-index:2;padding:7px 14px;font-family:var(--font-display);font-weight:600;font-size:16px;letter-spacing:.08em;text-transform:uppercase;pointer-events:none;}
+.ba-tag--before{left:16px;background:#000;color:#fff;}
+.ba-tag--after{right:16px;background:#fff;color:#000;}
+.ba-sample{position:absolute;left:16px;bottom:16px;z-index:2;padding:6px 12px;background:var(--yellow);color:#000;font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;pointer-events:none;}
+.ba-sample[hidden]{display:none;}
+.ba-handle{position:absolute;top:0;bottom:0;left:50%;z-index:3;width:48px;margin-left:-24px;cursor:ew-resize;outline:none;}
+.ba-handle::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:3px;margin-left:-1.5px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.25),0 0 14px rgba(0,0,0,.45);}
+.ba-grip{position:absolute;top:50%;left:50%;display:flex;align-items:center;justify-content:center;gap:6px;width:56px;height:56px;margin:-28px 0 0 -28px;border-radius:50%;background:#fff;color:#000;font-size:13px;box-shadow:0 4px 18px rgba(0,0,0,.45);transition:transform .15s ease;}
+.ba-stage.is-dragging .ba-grip,.ba-handle:hover .ba-grip{transform:scale(1.08);}
+.ba-handle:focus-visible .ba-grip{outline:3px solid var(--yellow);outline-offset:3px;}
+.ba-bar{display:flex;align-items:center;gap:18px;margin-top:16px;}
+.ba-play{display:inline-flex;align-items:center;gap:9px;height:42px;padding:0 16px;border:1.5px solid #fff;background:transparent;color:#fff;font:inherit;font-size:14.5px;font-weight:700;cursor:pointer;transition:background .15s ease,color .15s ease;}
+.ba-play:hover{background:#fff;color:#000;}
+.ba-play:focus-visible,.ba-open:focus-visible,.ba-item:focus-visible{outline:3px solid var(--yellow);outline-offset:3px;}
+.ba-hint{font-size:14px;color:rgba(255,255,255,.6);}
+.ba-caption{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:18px 32px;margin-top:26px;padding-top:24px;border-top:1px solid rgba(255,255,255,.2);}
+.ba-cap-main{min-width:0;flex:1 1 320px;}
+.ba-cap-where{display:block;margin-bottom:8px;font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--yellow);}
+.ba-caption h3{margin:0 0 8px;font-family:var(--font-h);font-weight:700;font-size:clamp(24px,2.4vw,32px);line-height:1.2;color:#fff;}
+.ba-cap-meta{margin:0;font-size:15.5px;font-weight:600;color:rgba(255,255,255,.85);}
+.ba-cap-note{margin:10px 0 0;font-size:13.5px;line-height:1.5;color:rgba(255,255,255,.6);}
+.ba-open{display:inline-flex;align-items:center;gap:10px;padding:13px 20px;border:1.5px solid #fff;background:transparent;color:#fff;font:inherit;font-size:15px;font-weight:700;cursor:pointer;transition:background .15s ease,color .15s ease,gap .2s ease;}
+.ba-open:hover{background:#fff;color:#000;gap:14px;}
+.ba-list{list-style:none;margin:0;padding:0;border-top:1px solid rgba(255,255,255,.2);}
+.ba-item{display:flex;align-items:center;gap:16px;width:100%;padding:16px 14px 16px 18px;border:0;border-bottom:1px solid rgba(255,255,255,.2);border-left:4px solid transparent;background:transparent;color:rgba(255,255,255,.7);font:inherit;text-align:left;cursor:pointer;transition:background .2s ease,color .2s ease,border-color .2s ease;}
+.ba-item:hover{background:rgba(255,255,255,.06);color:#fff;}
+.ba-item[aria-current="true"]{background:rgba(255,255,255,.1);border-left-color:var(--yellow);color:#fff;}
+.ba-thumb{flex:none;width:92px;aspect-ratio:3/2;overflow:hidden;background:#222;}
+.ba-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.ba-item-text{display:flex;flex-direction:column;gap:5px;min-width:0;}
+.ba-item-text b{font-family:var(--font-h);font-size:17px;line-height:1.3;color:inherit;}
+.ba-item-text span{font-size:13.5px;color:rgba(255,255,255,.6);}
+@media (max-width:960px){
+  .ba{padding:72px 0 80px;}
+  .ba-layout{grid-template-columns:1fr;gap:32px;}
+  .ba-list{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;border-top:0;gap:12px;padding-bottom:8px;}
+  .ba-list li{flex:0 0 min(78%,300px);scroll-snap-align:start;}
+  .ba-item{height:100%;border:1px solid rgba(255,255,255,.25);border-left-width:4px;}
+}
+@media (max-width:520px){
+  .ba-stage{aspect-ratio:4/3;}
+  .ba-tag{top:10px;font-size:14px;padding:5px 10px;}
+  .ba-tag--before{left:10px;}.ba-tag--after{right:10px;}
+  .ba-hint{display:none;}
+  .ba-thumb{width:72px;}
+}
+@media (prefers-reduced-motion: reduce){.ba-stage.is-fresh .ba-img{animation:none;}.ba-grip{transition:none;}}
+
 /* Tracker legend (tracker.html #legend): status and funding definitions with live counts, then what the numbers
    mean and a link to the verification steps. */
 .lg{background:#FAF9F5;}

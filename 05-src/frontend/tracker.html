@@ -170,6 +170,40 @@
     </div>
   </section>
 
+  <!-- Before and After (js/tracker-compare.js): a dark band with a draggable comparison slider. A project qualifies when
+       it is Ongoing or Completed and has a before photo plus an after (or its main) photo. It sweeps by itself while
+       in view until a visitor touches it, with a Pause button; keyboard users get the arrow keys. Shows clearly
+       labelled sample images while only placeholder records exist, and hides itself when there is nothing to show. -->
+  <section class="ba" id="before-after" hidden>
+    <div class="container">
+      <div class="ba-head">
+        <span class="ba-kicker">The difference</span>
+        <h2>Before and After</h2>
+        <p>The same place, photographed before work started and again as it stands now. Drag the handle to compare.</p>
+      </div>
+      <div class="ba-layout">
+        <div class="ba-main">
+          <div class="ba-stage" id="baStage">
+            <img class="ba-img ba-img--after" id="baAfter" alt="" draggable="false">
+            <div class="ba-before" id="baBefore"><img class="ba-img ba-img--before" id="baBeforeImg" alt="" draggable="false"></div>
+            <span class="ba-tag ba-tag--before">Before</span>
+            <span class="ba-tag ba-tag--after" id="baAfterTag">After</span>
+            <span class="ba-sample" id="baSample" hidden>Sample images</span>
+            <div class="ba-handle" id="baHandle" role="slider" tabindex="0" aria-orientation="horizontal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-label="Compare before and after">
+              <span class="ba-grip" aria-hidden="true"><i class="fa-solid fa-chevron-left"></i><i class="fa-solid fa-chevron-right"></i></span>
+            </div>
+          </div>
+          <div class="ba-bar">
+            <button type="button" class="ba-play" id="baPlay" aria-pressed="false"><i class="fa-solid fa-pause"></i><span>Pause</span></button>
+            <span class="ba-hint">Drag, click, or use the arrow keys</span>
+          </div>
+          <div class="ba-caption" id="baCaption" aria-live="polite"></div>
+        </div>
+        <ol class="ba-list" id="baList" aria-label="Choose a project to compare"></ol>
+      </div>
+    </div>
+  </section>
+
   <!-- Legend: what the status and funding labels mean, how to read the numbers, and how a record is verified.
        The counts and "Show" buttons are live (js/tracker.js renderLegend): they apply that status, or search that
        funding source, in the list above. -->
@@ -310,6 +344,7 @@
 <script src="js/vendor/leaflet.js"></script>
 <script src="js/main.js"></script>
 <script src="js/tracker-map.js"></script>
+<script src="js/tracker-compare.js"></script>
 <script src="js/tracker.js"></script>
 </body>
 </html>

@@ -414,7 +414,7 @@
   var pdNext = document.getElementById('pdNext');
   var pdCopy = document.getElementById('pdCopy');
   var pdClose = document.getElementById('pdClose');
-  var pdOpen = false, pdHideTimer = null, pdCopyTimer = null, pdOpenerId = null, pledgesP = null;
+  var pdOpen = false, pdHideTimer = null, pdCopyTimer = null, pdOpenerId = null, pdOpenerEl = null, pledgesP = null;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function findProject(id) {
@@ -526,6 +526,7 @@
     var wasOpen = pdOpen;
     state.project = String(p.id);
     pdOpenerId = opts.opener ? p.id : (wasOpen ? pdOpenerId : p.id);
+    if (!wasOpen) pdOpenerEl = opts.opener && opts.opener.closest && !opts.opener.closest('#projects') ? opts.opener : null;
     fillPanel(p);
     updateStepButtons();
     if (!opts.fromUrl) {
@@ -556,7 +557,7 @@
     document.body.style.paddingRight = '';
     function done() { pdPanel.hidden = true; pdOverlay.hidden = true; }
     if (reduceMotion) { done(); } else { pdHideTimer = setTimeout(done, 280); }
-    var back = pdOpenerId !== null ? grid.querySelector('[data-id="' + pdOpenerId + '"] .pc-open') : null;
+    var back = pdOpenerEl && document.contains(pdOpenerEl) ? pdOpenerEl : (pdOpenerId !== null ? grid.querySelector('[data-id="' + pdOpenerId + '"] .pc-open') : null);
     if (back) back.focus({ preventScroll: true });
   }
 
@@ -644,6 +645,7 @@
         }
         buildChips();
         renderLegend();
+        if (window.TrackerCompare) window.TrackerCompare.render(allItems, function (id, opener) { openPanel(id, { opener: opener }); });
         readUrl();
         render();
         if (state.project) openPanel(state.project, { fromUrl: true });
